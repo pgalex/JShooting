@@ -13,6 +13,7 @@ public class MainFrame extends javax.swing.JFrame
 	public MainFrame()
 	{
 		initComponents();
+		setTitle("JShooting");
 	}
 
 	/**
@@ -25,17 +26,105 @@ public class MainFrame extends javax.swing.JFrame
   private void initComponents()
   {
 
+    jPanelWorkingControls = new javax.swing.JPanel();
+    jButtonSportsmans = new javax.swing.JButton();
+    jButtonTeams = new javax.swing.JButton();
+    jButtonPlaces = new javax.swing.JButton();
+    jButtonAddTraining = new javax.swing.JButton();
+    jButtonReports = new javax.swing.JButton();
+    jPanelChooseDatabaseControls = new javax.swing.JPanel();
+    jLabelDatabaseFileName = new javax.swing.JLabel();
+    jTextFieldDatabaseFileName = new javax.swing.JTextField();
+    jButtonOpenDatabase = new javax.swing.JButton();
+
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setResizable(false);
+
+    jButtonSportsmans.setText("Спортсмены");
+
+    jButtonTeams.setText("Команды");
+
+    jButtonPlaces.setText("УТС");
+
+    jButtonAddTraining.setText("Добавить тренировку ...");
+
+    jButtonReports.setText("Отчеты ...");
+
+    org.jdesktop.layout.GroupLayout jPanelWorkingControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelWorkingControls);
+    jPanelWorkingControls.setLayout(jPanelWorkingControlsLayout);
+    jPanelWorkingControlsLayout.setHorizontalGroup(
+      jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanelWorkingControlsLayout.createSequentialGroup()
+        .addContainerGap()
+        .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanelWorkingControlsLayout.createSequentialGroup()
+            .add(jButtonTeams)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jButtonSportsmans)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jButtonPlaces))
+          .add(jButtonAddTraining)
+          .add(jButtonReports))
+        .addContainerGap(161, Short.MAX_VALUE))
+    );
+    jPanelWorkingControlsLayout.setVerticalGroup(
+      jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanelWorkingControlsLayout.createSequentialGroup()
+        .addContainerGap()
+        .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(jButtonSportsmans)
+          .add(jButtonTeams)
+          .add(jButtonPlaces))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jButtonAddTraining)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jButtonReports)
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+
+    jLabelDatabaseFileName.setText("База данных:");
+
+    jTextFieldDatabaseFileName.setEditable(false);
+
+    jButtonOpenDatabase.setText("Открыть ...");
+
+    org.jdesktop.layout.GroupLayout jPanelChooseDatabaseControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelChooseDatabaseControls);
+    jPanelChooseDatabaseControls.setLayout(jPanelChooseDatabaseControlsLayout);
+    jPanelChooseDatabaseControlsLayout.setHorizontalGroup(
+      jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanelChooseDatabaseControlsLayout.createSequentialGroup()
+        .addContainerGap()
+        .add(jLabelDatabaseFileName)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jTextFieldDatabaseFileName)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jButtonOpenDatabase)
+        .addContainerGap())
+    );
+    jPanelChooseDatabaseControlsLayout.setVerticalGroup(
+      jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanelChooseDatabaseControlsLayout.createSequentialGroup()
+        .addContainerGap()
+        .add(jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(jLabelDatabaseFileName)
+          .add(jTextFieldDatabaseFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jButtonOpenDatabase))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
 
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(0, 400, Short.MAX_VALUE)
+      .add(jPanelChooseDatabaseControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .add(jPanelWorkingControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(0, 300, Short.MAX_VALUE)
+      .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+        .add(jPanelChooseDatabaseControls, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jPanelWorkingControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     pack();
@@ -93,5 +182,15 @@ public class MainFrame extends javax.swing.JFrame
 		});
 	}
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton jButtonAddTraining;
+  private javax.swing.JButton jButtonOpenDatabase;
+  private javax.swing.JButton jButtonPlaces;
+  private javax.swing.JButton jButtonReports;
+  private javax.swing.JButton jButtonSportsmans;
+  private javax.swing.JButton jButtonTeams;
+  private javax.swing.JLabel jLabelDatabaseFileName;
+  private javax.swing.JPanel jPanelChooseDatabaseControls;
+  private javax.swing.JPanel jPanelWorkingControls;
+  private javax.swing.JTextField jTextFieldDatabaseFileName;
   // End of variables declaration//GEN-END:variables
 }
