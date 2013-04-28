@@ -62,10 +62,16 @@ public class UserSettings
 	 * Read settings from file
 	 *
 	 * @param file file to read settings from
+	 * @throws IllegalArgumentException file is null
 	 * @throws IOException error while reading
 	 */
-	public void readFromFile(File file) throws IOException
+	public void readFromFile(File file) throws IllegalArgumentException, IOException
 	{
+		if (file == null)
+		{
+			throw new IllegalArgumentException("file is null");
+		}
+
 		try
 		{
 			DataInputStream intput = new DataInputStream(new FileInputStream(file));
@@ -83,10 +89,16 @@ public class UserSettings
 	 * Write settings to file
 	 *
 	 * @param file file to write setting to
+	 * @throws IllegalArgumentException file is null
 	 * @throws IOException error while writing
 	 */
-	public void writeToFile(File file) throws IOException
+	public void writeToFile(File file) throws IllegalArgumentException, IOException
 	{
+		if (file == null)
+		{
+			throw new IllegalArgumentException("file is null");
+		}
+
 		try
 		{
 			DataOutputStream output = new DataOutputStream(new FileOutputStream(file));

@@ -3,6 +3,8 @@ package formsTests;
 import com.jshooting.forms.UserSettings;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -73,5 +75,47 @@ public class UserSettingsTest
 		UserSettings.getInstance().setDatabaseFileName("123");
 		UserSettings.setAsDefault();
 		assertNotSame("123", UserSettings.getInstance().getDatabaseFileName());
+	}
+
+	/**
+	 * Test read from null file
+	 */
+	@Test
+	public void readFromNullFileTest()
+	{
+		try
+		{
+			UserSettings.getInstance().readFromFile(null);
+			fail();
+		}
+		catch (IllegalArgumentException ex)
+		{
+			// ok
+		}
+		catch (IOException ex)
+		{
+			fail();
+		}
+	}
+
+	/**
+	 * Test write to null file
+	 */
+	@Test
+	public void writeToNullFileTest()
+	{
+		try
+		{
+			UserSettings.getInstance().writeToFile(null);
+			fail();
+		}
+		catch (IllegalArgumentException ex)
+		{
+			// ok
+		}
+		catch (IOException ex)
+		{
+			fail();
+		}
 	}
 }
