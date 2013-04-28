@@ -1,5 +1,10 @@
 package com.jshooting.forms;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Main frame
  *
@@ -8,12 +13,34 @@ package com.jshooting.forms;
 public class MainFrame extends javax.swing.JFrame
 {
 	/**
+	 * Name of user settings file
+	 */
+	private static final String USER_SETTINGS_FILE_NAME = "userSettings.dat";
+
+	/**
 	 * Creates new form MainFrame
 	 */
 	public MainFrame()
 	{
 		initComponents();
 		setTitle("JShooting");
+
+		readUserSettings();
+	}
+
+	/**
+	 * Read user settings from file
+	 */
+	private void readUserSettings()
+	{
+		try
+		{
+			UserSettings.getInstance().readFromFile(new File(USER_SETTINGS_FILE_NAME));
+		}
+		catch (IOException ex)
+		{
+			UserSettings.setAsDefault();
+		}
 	}
 
 	/**
@@ -26,19 +53,66 @@ public class MainFrame extends javax.swing.JFrame
   private void initComponents()
   {
 
+    jPanelChooseDatabaseControls = new javax.swing.JPanel();
+    jLabelDatabaseFileName = new javax.swing.JLabel();
+    jTextFieldDatabaseFileName = new javax.swing.JTextField();
+    jButtonOpenDatabase = new javax.swing.JButton();
+    jButtonCreateDatabase = new javax.swing.JButton();
     jPanelWorkingControls = new javax.swing.JPanel();
     jButtonSportsmans = new javax.swing.JButton();
     jButtonTeams = new javax.swing.JButton();
     jButtonPlaces = new javax.swing.JButton();
     jButtonAddTraining = new javax.swing.JButton();
     jButtonReports = new javax.swing.JButton();
-    jPanelChooseDatabaseControls = new javax.swing.JPanel();
-    jLabelDatabaseFileName = new javax.swing.JLabel();
-    jTextFieldDatabaseFileName = new javax.swing.JTextField();
-    jButtonOpenDatabase = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setResizable(false);
+    addWindowListener(new java.awt.event.WindowAdapter()
+    {
+      public void windowClosing(java.awt.event.WindowEvent evt)
+      {
+        formWindowClosing(evt);
+      }
+    });
+
+    jLabelDatabaseFileName.setText("База данных:");
+
+    jTextFieldDatabaseFileName.setEditable(false);
+
+    jButtonOpenDatabase.setText("Открыть ...");
+
+    jButtonCreateDatabase.setText("Создать ...");
+
+    org.jdesktop.layout.GroupLayout jPanelChooseDatabaseControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelChooseDatabaseControls);
+    jPanelChooseDatabaseControls.setLayout(jPanelChooseDatabaseControlsLayout);
+    jPanelChooseDatabaseControlsLayout.setHorizontalGroup(
+      jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanelChooseDatabaseControlsLayout.createSequentialGroup()
+        .addContainerGap()
+        .add(jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanelChooseDatabaseControlsLayout.createSequentialGroup()
+            .add(jLabelDatabaseFileName)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jTextFieldDatabaseFileName))
+          .add(jPanelChooseDatabaseControlsLayout.createSequentialGroup()
+            .add(jButtonOpenDatabase)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jButtonCreateDatabase)
+            .add(0, 0, Short.MAX_VALUE)))
+        .addContainerGap())
+    );
+    jPanelChooseDatabaseControlsLayout.setVerticalGroup(
+      jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanelChooseDatabaseControlsLayout.createSequentialGroup()
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(jLabelDatabaseFileName)
+          .add(jTextFieldDatabaseFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(jButtonOpenDatabase)
+          .add(jButtonCreateDatabase)))
+    );
 
     jButtonSportsmans.setText("Спортсмены");
 
@@ -65,7 +139,7 @@ public class MainFrame extends javax.swing.JFrame
             .add(jButtonPlaces))
           .add(jButtonAddTraining)
           .add(jButtonReports))
-        .addContainerGap(161, Short.MAX_VALUE))
+        .addContainerGap(215, Short.MAX_VALUE))
     );
     jPanelWorkingControlsLayout.setVerticalGroup(
       jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -82,53 +156,35 @@ public class MainFrame extends javax.swing.JFrame
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
-    jLabelDatabaseFileName.setText("База данных:");
-
-    jTextFieldDatabaseFileName.setEditable(false);
-
-    jButtonOpenDatabase.setText("Открыть ...");
-
-    org.jdesktop.layout.GroupLayout jPanelChooseDatabaseControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelChooseDatabaseControls);
-    jPanelChooseDatabaseControls.setLayout(jPanelChooseDatabaseControlsLayout);
-    jPanelChooseDatabaseControlsLayout.setHorizontalGroup(
-      jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jPanelChooseDatabaseControlsLayout.createSequentialGroup()
-        .addContainerGap()
-        .add(jLabelDatabaseFileName)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jTextFieldDatabaseFileName)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jButtonOpenDatabase)
-        .addContainerGap())
-    );
-    jPanelChooseDatabaseControlsLayout.setVerticalGroup(
-      jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jPanelChooseDatabaseControlsLayout.createSequentialGroup()
-        .addContainerGap()
-        .add(jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jLabelDatabaseFileName)
-          .add(jTextFieldDatabaseFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jButtonOpenDatabase))
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
-
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelWorkingControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       .add(jPanelChooseDatabaseControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      .add(jPanelWorkingControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
         .add(jPanelChooseDatabaseControls, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jPanelWorkingControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .add(18, 18, 18)
+        .add(jPanelWorkingControls, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
+
+  private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+  {//GEN-HEADEREND:event_formWindowClosing
+		try
+		{
+			UserSettings.getInstance().writeToFile(new File(USER_SETTINGS_FILE_NAME));
+		}
+		catch (IOException ex)
+		{
+			Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+		}
+  }//GEN-LAST:event_formWindowClosing
 
 	/**
 	 * @param args the command line arguments
@@ -183,6 +239,7 @@ public class MainFrame extends javax.swing.JFrame
 	}
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTraining;
+  private javax.swing.JButton jButtonCreateDatabase;
   private javax.swing.JButton jButtonOpenDatabase;
   private javax.swing.JButton jButtonPlaces;
   private javax.swing.JButton jButtonReports;
