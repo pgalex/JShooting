@@ -38,7 +38,7 @@ public class ShootingDatabaseFactoryTest
 	{
 		try
 		{
-			ShootingDatabaseFactory.openDatabaseFromFile(null);
+			ShootingDatabaseFactory.openDatabaseFromFile("");
 			fail();
 		}
 		catch (IllegalArgumentException ex)
@@ -53,7 +53,8 @@ public class ShootingDatabaseFactoryTest
 	@Test
 	public void openingNormalWork()
 	{
-		ShootingDatabase openDatabase = ShootingDatabaseFactory.openDatabaseFromFile(IOTesting.TEST_FILE_NAME);
-		assertNotNull(openDatabase);
+		ShootingDatabase database = ShootingDatabaseFactory.openDatabaseFromFile(IOTesting.TEST_FILE_NAME);
+		assertNotNull(database);
+		database.close();
 	}
 }

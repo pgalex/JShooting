@@ -1,9 +1,13 @@
 package com.jshooting.forms;
 
+import com.jshooting.shootingDatabase.ShootingDatabase;
+import com.jshooting.shootingDatabase.ShootingDatabaseFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  * Main frame
@@ -16,6 +20,10 @@ public class MainFrame extends javax.swing.JFrame
 	 * Name of user settings file
 	 */
 	private static final String USER_SETTINGS_FILE_NAME = "userSettings.dat";
+	/**
+	 * Connection to database. If null there is no database choosed
+	 */
+	private ShootingDatabase shootingDatabase;
 
 	/**
 	 * Creates new form MainFrame
@@ -25,7 +33,37 @@ public class MainFrame extends javax.swing.JFrame
 		initComponents();
 		setTitle("JShooting");
 
+		shootingDatabase = null;
+
 		readUserSettings();
+		File previousDatabaseFile = new File(UserSettings.getInstance().getDatabaseFileName());
+		if (previousDatabaseFile.exists())
+		{
+			connectToPreviousDatabase();
+		}
+		else
+		{
+			shootingDatabase = null;
+		}
+
+		updateWorkingControlsEnable();
+		updateDatabaseFileNameControls();
+	}
+
+	/**
+	 * Connect to database, by file name saved in user settings
+	 */
+	private void connectToPreviousDatabase()
+	{
+		try
+		{
+			shootingDatabase = ShootingDatabaseFactory.openDatabaseFromFile(UserSettings.getInstance().getDatabaseFileName());
+		}
+		catch (Exception ex)
+		{
+			JOptionPane.showMessageDialog(null, "Невозможно подключится к базе данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+			shootingDatabase = null;
+		}
 	}
 
 	/**
@@ -40,6 +78,29 @@ public class MainFrame extends javax.swing.JFrame
 		catch (IOException ex)
 		{
 			UserSettings.setAsDefault();
+		}
+	}
+
+	/**
+	 * Set working controls enable by shooting database state(choosed or no)
+	 */
+	private void updateWorkingControlsEnable()
+	{
+		jPanelWorkingControls.setVisible(shootingDatabase != null);
+	}
+
+	/**
+	 * Set database file name to controls
+	 */
+	private void updateDatabaseFileNameControls()
+	{
+		if (shootingDatabase != null)
+		{
+			jTextFieldDatabaseFileName.setText(shootingDatabase.getFileName());
+		}
+		else
+		{
+			jTextFieldDatabaseFileName.setText("");
 		}
 	}
 
@@ -80,8 +141,22 @@ public class MainFrame extends javax.swing.JFrame
     jTextFieldDatabaseFileName.setEditable(false);
 
     jButtonOpenDatabase.setText("Открыть ...");
+    jButtonOpenDatabase.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonOpenDatabaseActionPerformed(evt);
+      }
+    });
 
     jButtonCreateDatabase.setText("Создать ...");
+    jButtonCreateDatabase.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonCreateDatabaseActionPerformed(evt);
+      }
+    });
 
     org.jdesktop.layout.GroupLayout jPanelChooseDatabaseControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelChooseDatabaseControls);
     jPanelChooseDatabaseControls.setLayout(jPanelChooseDatabaseControlsLayout);
@@ -185,6 +260,34 @@ public class MainFrame extends javax.swing.JFrame
 			Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
 		}
   }//GEN-LAST:event_formWindowClosing
+
+  private void jButtonCreateDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCreateDatabaseActionPerformed
+  {//GEN-HEADEREND:event_jButtonCreateDatabaseActionPerformed
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+		int showDialogResult = fileChooser.showSaveDialog(this);
+		if (showDialogResult == JFileChooser.APPROVE_OPTION)
+		{
+			try
+			{
+				shootingDatabase = ShootingDatabaseFactory.openDatabaseFromFile(fileChooser.getSelectedFile().getPath());
+			}
+			catch (Exception ex)
+			{
+				JOptionPane.showMessageDialog(null, "Невозможно создать базу данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+				shootingDatabase = null;
+			}
+
+			updateDatabaseFileNameControls();
+			updateWorkingControlsEnable();
+		}
+  }//GEN-LAST:event_jButtonCreateDatabaseActionPerformed
+
+  private void jButtonOpenDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOpenDatabaseActionPerformed
+  {//GEN-HEADEREND:event_jButtonOpenDatabaseActionPerformed
+		// TODO add your handling code here:
+  }//GEN-LAST:event_jButtonOpenDatabaseActionPerformed
 
 	/**
 	 * @param args the command line arguments

@@ -28,6 +28,6 @@ public class ShootingDatabaseFactory
 			throw new IllegalArgumentException("fileName is empty");
 		}
 
-		return new HibernateShootingDatabase();
+		return new HibernateShootingDatabase(fileName);
 	}
 }
