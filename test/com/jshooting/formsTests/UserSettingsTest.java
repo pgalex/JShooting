@@ -1,12 +1,11 @@
-package formsTests;
+package com.jshooting.formsTests;
 
 import com.jshooting.forms.UserSettings;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import com.jshooting.testUtils.IOTesting;
 
 /**
  * Tests of UserSettings class
@@ -15,8 +14,6 @@ import static org.junit.Assert.*;
  */
 public class UserSettingsTest
 {
-	public static String TEST_FILE_NAME = "testFile.txt";
-
 	/**
 	 * Test saving given data
 	 */
@@ -26,9 +23,9 @@ public class UserSettingsTest
 		try
 		{
 			UserSettings.getInstance().setDatabaseFileName("testDatabaseFile");
-			UserSettings.getInstance().writeToFile(new File(TEST_FILE_NAME));
+			UserSettings.getInstance().writeToFile(new File(IOTesting.TEST_FILE_NAME));
 			UserSettings.getInstance().setDatabaseFileName("");
-			UserSettings.getInstance().readFromFile(new File(TEST_FILE_NAME));
+			UserSettings.getInstance().readFromFile(new File(IOTesting.TEST_FILE_NAME));
 
 			assertEquals("testDatabaseFile", UserSettings.getInstance().getDatabaseFileName());
 		}
