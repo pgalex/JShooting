@@ -130,7 +130,7 @@
                       <Component id="jButtonAddTraining" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonReports" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="215" max="32767" attributes="0"/>
+                  <EmptySpace pref="173" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -155,17 +155,17 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonSportsmans">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x421;&#x43f;&#x43e;&#x440;&#x442;&#x441;&#x43c;&#x435;&#x43d;&#x44b;"/>
+            <Property name="text" type="java.lang.String" value="&#x421;&#x43f;&#x43e;&#x440;&#x442;&#x441;&#x43c;&#x435;&#x43d;&#x44b; ..."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonTeams">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x41a;&#x43e;&#x43c;&#x430;&#x43d;&#x434;&#x44b;"/>
+            <Property name="text" type="java.lang.String" value="&#x41a;&#x43e;&#x43c;&#x430;&#x43d;&#x434;&#x44b; ..."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonPlaces">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x423;&#x422;&#x421;"/>
+            <Property name="text" type="java.lang.String" value="&#x423;&#x422;&#x421; ..."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAddTraining">
