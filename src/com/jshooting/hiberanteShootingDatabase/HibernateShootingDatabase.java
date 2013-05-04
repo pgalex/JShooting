@@ -1,7 +1,6 @@
 package com.jshooting.hiberanteShootingDatabase;
 
 import com.jshooting.shootingDatabase.ShootingDatabase;
-import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import org.hibernate.SessionFactory;
@@ -85,7 +84,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	@Override
 	public TeamsTable getTeamsTable()
 	{
-		return null;
+		return teamsTable;
 	}
 
 	/**

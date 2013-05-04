@@ -66,6 +66,7 @@ public class HiberanteShootingDatabaseTest
 			IOTesting.deleteTestFile();
 			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
 			assertEquals(IOTesting.TEST_FILE_NAME, database.getFileName());
+			assertNotNull(database.getTeamsTable());
 			database.close();
 		}
 		catch (DatabaseErrorException ex)
@@ -83,7 +84,7 @@ public class HiberanteShootingDatabaseTest
 		try
 		{
 			IOTesting.writeSomeDataToTestFile();
-
+			
 			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
 			fail();
 		}
