@@ -3,7 +3,6 @@ package com.jshooting.hiberanteShootingDatabase;
 import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
-import java.util.Collection;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -33,7 +32,7 @@ public class HiberanteTeamsTable implements TeamsTable
 		{
 			throw new IllegalArgumentException("hibernateSessionFactory is null");
 		}
-		
+
 		sessionFactory = hibernateSessionFactory;
 	}
 
@@ -44,7 +43,7 @@ public class HiberanteTeamsTable implements TeamsTable
 	 * @throws DatabaseErrorException error while getting teams from database
 	 */
 	@Override
-	public Collection<Team> getAllTeams() throws DatabaseErrorException
+	public List<Team> getAllTeams() throws DatabaseErrorException
 	{
 		Session session = null;
 		try
@@ -80,13 +79,49 @@ public class HiberanteTeamsTable implements TeamsTable
 		{
 			throw new IllegalArgumentException("teamToAdd is null");
 		}
-		
+
 		Session session = null;
 		try
 		{
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			session.save(teamToAdd);
+			session.getTransaction().commit();
+		}
+		catch (Exception ex)
+		{
+			throw new DatabaseErrorException(ex);
+		}
+		finally
+		{
+			if (session != null)
+			{
+				session.close();
+			}
+		}
+	}
+
+	/**
+	 * Update team
+	 *
+	 * @param teamToUpdate updating team
+	 * @throws IllegalArgumentException teamToUpdate is null
+	 * @throws DatabaseErrorException error while updating
+	 */
+	@Override
+	public void updateTeam(Team teamToUpdate) throws IllegalArgumentException, DatabaseErrorException
+	{
+		if (teamToUpdate == null)
+		{
+			throw new IllegalArgumentException("teamToUpdate is null");
+		}
+
+		Session session = null;
+		try
+		{
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.update(teamToUpdate);
 			session.getTransaction().commit();
 		}
 		catch (Exception ex)
@@ -119,11 +154,11 @@ public class HiberanteTeamsTable implements TeamsTable
 			session.save(testTeam);
 			session.getTransaction().commit();
 			session.flush();
-			
+
 			session.beginTransaction();
 			session.delete(testTeam);
 			session.getTransaction().commit();
-			
+
 			return true;
 		}
 		catch (Exception ex)

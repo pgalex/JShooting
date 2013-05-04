@@ -2,6 +2,7 @@ package com.jshooting.forms;
 
 import com.jshooting.shootingDatabase.ShootingDatabase;
 import com.jshooting.shootingDatabase.ShootingDatabaseFactory;
+import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -32,9 +33,9 @@ public class MainFrame extends javax.swing.JFrame
 	{
 		initComponents();
 		setTitle("JShooting");
-
+		
 		shootingDatabase = null;
-
+		
 		readUserSettings();
 		File previousDatabaseFile = new File(UserSettings.getInstance().getDatabaseFileName());
 		if (previousDatabaseFile.exists())
@@ -45,7 +46,7 @@ public class MainFrame extends javax.swing.JFrame
 		{
 			shootingDatabase = null;
 		}
-
+		
 		updateWorkingControlsEnable();
 		updateDatabaseFileNameControls();
 	}
@@ -192,6 +193,13 @@ public class MainFrame extends javax.swing.JFrame
     jButtonSportsmans.setText("Спортсмены ...");
 
     jButtonTeams.setText("Команды ...");
+    jButtonTeams.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonTeamsActionPerformed(evt);
+      }
+    });
 
     jButtonPlaces.setText("УТС ...");
 
@@ -268,12 +276,12 @@ public class MainFrame extends javax.swing.JFrame
 			Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
 		}
   }//GEN-LAST:event_formWindowClosing
-
+	
   private void jButtonCreateDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCreateDatabaseActionPerformed
   {//GEN-HEADEREND:event_jButtonCreateDatabaseActionPerformed
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
+		
 		int showDialogResult = fileChooser.showSaveDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
@@ -290,17 +298,17 @@ public class MainFrame extends javax.swing.JFrame
 				JOptionPane.showMessageDialog(null, "Невозможно создать базу данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 				shootingDatabase = null;
 			}
-
+			
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
 		}
   }//GEN-LAST:event_jButtonCreateDatabaseActionPerformed
-
+	
   private void jButtonOpenDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOpenDatabaseActionPerformed
   {//GEN-HEADEREND:event_jButtonOpenDatabaseActionPerformed
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
+		
 		int showDialogResult = fileChooser.showOpenDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
@@ -313,11 +321,19 @@ public class MainFrame extends javax.swing.JFrame
 				JOptionPane.showMessageDialog(null, "Невозможно открыть базу данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 				shootingDatabase = null;
 			}
-
+			
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
 		}
   }//GEN-LAST:event_jButtonOpenDatabaseActionPerformed
+	
+  private void jButtonTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTeamsActionPerformed
+  {//GEN-HEADEREND:event_jButtonTeamsActionPerformed
+		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+						shootingDatabase.getTeamsTable());
+		editTeamsDialog.setLocationRelativeTo(this);
+		editTeamsDialog.setVisible(true);
+  }//GEN-LAST:event_jButtonTeamsActionPerformed
 
 	/**
 	 * @param args the command line arguments

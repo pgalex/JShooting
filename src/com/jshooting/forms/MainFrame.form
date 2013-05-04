@@ -162,6 +162,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x41a;&#x43e;&#x43c;&#x430;&#x43d;&#x434;&#x44b; ..."/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTeamsActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonPlaces">
           <Properties>
