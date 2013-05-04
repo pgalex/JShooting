@@ -298,7 +298,25 @@ public class MainFrame extends javax.swing.JFrame
 
   private void jButtonOpenDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOpenDatabaseActionPerformed
   {//GEN-HEADEREND:event_jButtonOpenDatabaseActionPerformed
-		// TODO add your handling code here:
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+		int showDialogResult = fileChooser.showOpenDialog(this);
+		if (showDialogResult == JFileChooser.APPROVE_OPTION)
+		{
+			try
+			{
+				shootingDatabase = ShootingDatabaseFactory.openDatabaseFromFile(fileChooser.getSelectedFile().getPath());
+			}
+			catch (Exception ex)
+			{
+				JOptionPane.showMessageDialog(null, "Невозможно открыть базу данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+				shootingDatabase = null;
+			}
+
+			updateDatabaseFileNameControls();
+			updateWorkingControlsEnable();
+		}
   }//GEN-LAST:event_jButtonOpenDatabaseActionPerformed
 
 	/**
