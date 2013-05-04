@@ -1,8 +1,9 @@
 package com.jshooting.hiberanteShootingDatabase;
 
 import com.jshooting.shootingDatabase.ShootingDatabase;
+import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
-import org.hibernate.Session;
+import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -18,21 +19,22 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	 */
 	private SessionFactory sessionFactory;
 	/**
-	 * Hiberanate session for shooting database
-	 */
-	private Session session;
-	/**
 	 * File name of database
 	 */
 	private String fileName;
+	/**
+	 * Teams table
+	 */
+	private HiberanteTeamsTable teamsTable;
 
 	/**
 	 * Create connection to database with file name
 	 *
 	 * @param databaseFileName name of database file. Must be not null, not empty
 	 * @throws IllegalArgumentException databaseFileName is null or empty
+	 * @throws DatabaseErrorException error while getting access to database
 	 */
-	public HibernateShootingDatabase(String databaseFileName) throws IllegalArgumentException
+	public HibernateShootingDatabase(String databaseFileName) throws IllegalArgumentException, DatabaseErrorException
 	{
 		if (databaseFileName == null)
 		{
@@ -43,14 +45,36 @@ public class HibernateShootingDatabase implements ShootingDatabase
 			throw new IllegalArgumentException("databaseFileName is empty");
 		}
 
-		fileName = databaseFileName;
+		try
+		{
+			fileName = databaseFileName;
 
-		Configuration hibernateConfiguration = new Configuration();
-		hibernateConfiguration.configure();
-		hibernateConfiguration.setProperty("hibernate.connection.url", "jdbc:sqlite:" + databaseFileName);
-		sessionFactory = hibernateConfiguration.buildSessionFactory();
+			Configuration hibernateConfiguration = new Configuration();
+			hibernateConfiguration.configure();
+			hibernateConfiguration.setProperty("hibernate.connection.url", "jdbc:sqlite:" + databaseFileName);
+			sessionFactory = hibernateConfiguration.buildSessionFactory();
 
-		session = sessionFactory.openSession();
+			teamsTable = new HiberanteTeamsTable(sessionFactory);
+		}
+		catch (Exception ex)
+		{
+			throw new DatabaseErrorException(ex);
+		}
+
+		if (!isDatabaseCorrect())
+		{
+			throw new DatabaseErrorException("incorrect database");
+		}
+	}
+
+	/**
+	 * Test opened database for correction
+	 *
+	 * @return is database correct
+	 */
+	private boolean isDatabaseCorrect()
+	{
+		return teamsTable.testTableCorrection();
 	}
 
 	/**
@@ -70,7 +94,6 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	@Override
 	public void close()
 	{
-		session.close();
 		sessionFactory.close();
 	}
 

@@ -2,6 +2,7 @@ package com.jshooting.shootingDatabaseTests;
 
 import com.jshooting.shootingDatabase.ShootingDatabase;
 import com.jshooting.shootingDatabase.ShootingDatabaseFactory;
+import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import com.jshooting.testUtils.IOTesting;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -28,6 +29,10 @@ public class ShootingDatabaseFactoryTest
 		{
 			// ok
 		}
+		catch (DatabaseErrorException ex)
+		{
+			fail();
+		}
 	}
 
 	/**
@@ -45,6 +50,10 @@ public class ShootingDatabaseFactoryTest
 		{
 			// ok
 		}
+		catch (DatabaseErrorException ex)
+		{
+			fail();
+		}
 	}
 
 	/**
@@ -53,8 +62,16 @@ public class ShootingDatabaseFactoryTest
 	@Test
 	public void openingNormalWork()
 	{
-		ShootingDatabase database = ShootingDatabaseFactory.openDatabaseFromFile(IOTesting.TEST_FILE_NAME);
-		assertNotNull(database);
-		database.close();
+		try
+		{
+			IOTesting.deleteTestFile();
+			ShootingDatabase database = ShootingDatabaseFactory.openDatabaseFromFile(IOTesting.TEST_FILE_NAME);
+			assertNotNull(database);
+			database.close();
+		}
+		catch (DatabaseErrorException ex)
+		{
+			fail();
+		}
 	}
 }
