@@ -29,6 +29,10 @@ public class HibernateSportsmansTable implements SportsmansTable
 	 */
 	public HibernateSportsmansTable(SessionFactory hibernateSessionFactory) throws IllegalArgumentException
 	{
+		if (hibernateSessionFactory == null)
+		{
+			throw new IllegalArgumentException("hibernateSessionFactory is null");
+		}
 
 		sessionFactory = hibernateSessionFactory;
 	}
@@ -72,6 +76,11 @@ public class HibernateSportsmansTable implements SportsmansTable
 	@Override
 	public void addSportsman(Sportsman sportsmanToAdd) throws IllegalArgumentException, DatabaseErrorException
 	{
+		if (sportsmanToAdd == null)
+		{
+			throw new IllegalArgumentException("sportsmanToAdd is null");
+		}
+
 		Session session = null;
 		try
 		{

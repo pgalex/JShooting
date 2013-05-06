@@ -1,6 +1,7 @@
 package com.jshooting.hibernateShootingDatabaseTests;
 
 import com.jshooting.hiberanteShootingDatabase.HibernateShootingDatabase;
+import com.jshooting.hiberanteShootingDatabase.HibernateSportsmansTable;
 import com.jshooting.shootingDatabase.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.shootingDatabase.Team;
@@ -8,8 +9,6 @@ import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import com.jshooting.testUtils.IOTesting;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -20,9 +19,48 @@ import static org.junit.Assert.*;
  */
 public class HibernateSportsmansTableTest
 {
-	// creating with null factory
-	// adding null sportsman
-	// adding and getting normal work
+	/**
+	 * Test creating with null session factory
+	 */
+	@Test
+	public void creatingWithNullFactory()
+	{
+		try
+		{
+			IOTesting.deleteTestFile();
+			HibernateSportsmansTable sportsmansTable = new HibernateSportsmansTable(null);
+			fail();
+		}
+		catch (IllegalArgumentException ex)
+		{
+			// ok
+		}
+	}
+
+	/**
+	 * Test adding null sportsman
+	 */
+	@Test
+	public void addingNullSportsman()
+	{
+		try
+		{
+			IOTesting.deleteTestFile();
+			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
+			SportsmansTable sportsmansTable = database.getSportsmansTable();
+			sportsmansTable.addSportsman(null);
+			fail();
+		}
+		catch (IllegalArgumentException ex)
+		{
+			// ok
+		}
+		catch (DatabaseErrorException ex)
+		{
+			fail();
+		}
+	}
+
 	/**
 	 * Test adding and getting normal work
 	 */
