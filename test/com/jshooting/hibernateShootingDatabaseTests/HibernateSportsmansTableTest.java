@@ -62,6 +62,32 @@ public class HibernateSportsmansTableTest
 	}
 
 	/**
+	 * Test adding sportsman with null team
+	 */
+	@Test
+	public void addingWithNullTeam()
+	{
+		try
+		{
+			IOTesting.deleteTestFile();
+			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
+			SportsmansTable sportsmansTable = database.getSportsmansTable();
+			Sportsman sportsman = new Sportsman();
+			sportsman.setTeam(null);
+			sportsmansTable.addSportsman(sportsman);
+			fail();
+		}
+		catch (IllegalArgumentException ex)
+		{
+			// ok
+		}
+		catch (DatabaseErrorException ex)
+		{
+			fail();
+		}
+	}
+
+	/**
 	 * Test adding and getting normal work
 	 */
 	@Test

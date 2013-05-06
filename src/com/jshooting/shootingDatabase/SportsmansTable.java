@@ -21,8 +21,9 @@ public interface SportsmansTable
 	/**
 	 * Add new sportsman to database
 	 *
-	 * @param sportsmanToAdd adding sportsman
-	 * @throws IllegalArgumentException sportsmanToAdd is null
+	 * @param sportsmanToAdd adding sportsman. Must be not null, team must be not
+	 * null
+	 * @throws IllegalArgumentException sportsmanToAdd is null or its team is null
 	 * @throws DatabaseErrorException error while adding
 	 */
 	public void addSportsman(Sportsman sportsmanToAdd) throws IllegalArgumentException, DatabaseErrorException;

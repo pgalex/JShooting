@@ -69,9 +69,9 @@ public class HibernateSportsmansTable implements SportsmansTable
 	/**
 	 * Add new sportsman to database
 	 *
-	 * @param sportsmanToAdd adding sportsman
-	 * @throws IllegalArgumentException sportsmanToAdd is null
-	 * @throws DatabaseErrorException error while adding
+	 * @param sportsmanToAdd adding sportsman. Must be not null, team must be not
+	 * null
+	 * @throws IllegalArgumentException sportsmanToAdd is null or its team is null
 	 */
 	@Override
 	public void addSportsman(Sportsman sportsmanToAdd) throws IllegalArgumentException, DatabaseErrorException
@@ -79,6 +79,10 @@ public class HibernateSportsmansTable implements SportsmansTable
 		if (sportsmanToAdd == null)
 		{
 			throw new IllegalArgumentException("sportsmanToAdd is null");
+		}
+		if (sportsmanToAdd.getTeam() == null)
+		{
+			throw new IllegalArgumentException("sportsmanToAdd team is null");
 		}
 
 		Session session = null;
