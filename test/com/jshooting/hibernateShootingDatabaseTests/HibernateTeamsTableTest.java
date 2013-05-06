@@ -1,15 +1,10 @@
 package com.jshooting.hibernateShootingDatabaseTests;
 
 import com.jshooting.hiberanteShootingDatabase.HibernateShootingDatabase;
-import com.jshooting.shootingDatabase.ShootingDatabase;
-import com.jshooting.shootingDatabase.ShootingDatabaseFactory;
 import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import com.jshooting.testUtils.IOTesting;
-import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -20,6 +15,39 @@ import static org.junit.Assert.*;
  */
 public class HibernateTeamsTableTest
 {
+	/**
+	 * Test updating team
+	 */
+	@Test
+	public void updatingTest()
+	{
+		try
+		{
+			IOTesting.deleteTestFile();
+			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
+
+			TeamsTable teamsTable = database.getTeamsTable();
+
+			Team team1 = new Team();
+			team1.setName("team1");
+			teamsTable.addTeam(team1);
+			
+			team1.setName("someTeam");
+			teamsTable.updateTeam(team1);
+
+			Team[] allTeams = new Team[0];
+			allTeams = teamsTable.getAllTeams().toArray(allTeams);
+			assertEquals(1, allTeams.length);
+			assertEquals("someTeam", allTeams[0].getName());
+
+			database.close();
+		}
+		catch (Exception ex)
+		{
+			fail();
+		}
+	}
+
 	/**
 	 * Test adding and getting teams normal work
 	 */
@@ -54,7 +82,7 @@ public class HibernateTeamsTableTest
 			fail();
 		}
 	}
-	
+
 	/**
 	 * Test adding null team
 	 */
@@ -65,13 +93,13 @@ public class HibernateTeamsTableTest
 		{
 			IOTesting.deleteTestFile();
 			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
-			
+
 			TeamsTable teamsTable = database.getTeamsTable();
 			teamsTable.addTeam(null);
-			
+
 			database.close();
 		}
-		catch(IllegalArgumentException ex)
+		catch (IllegalArgumentException ex)
 		{
 			// ok
 		}
