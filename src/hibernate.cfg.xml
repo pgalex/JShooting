@@ -9,5 +9,6 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         
         <mapping resource="Team.hbm.xml"/>
+        <mapping resource="Sportsman.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

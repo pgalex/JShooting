@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  *
  * @author pgalex
  */
-public class HiberanteShootingDatabaseTest
+public class HibernateShootingDatabaseTest
 {
 	/**
 	 * Test creating with null database file name
@@ -67,6 +67,7 @@ public class HiberanteShootingDatabaseTest
 			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
 			assertEquals(IOTesting.TEST_FILE_NAME, database.getFileName());
 			assertNotNull(database.getTeamsTable());
+			assertNotNull(database.getSportsmansTable());
 			database.close();
 		}
 		catch (DatabaseErrorException ex)
