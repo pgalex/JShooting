@@ -3,8 +3,6 @@ package com.jshooting.forms;
 import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**

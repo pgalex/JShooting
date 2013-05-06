@@ -42,12 +42,14 @@ public class EditTeamsDialog extends javax.swing.JDialog
   private void initComponents()
   {
 
-    jPanelControls = new javax.swing.JPanel();
-    jButtonAddTeam = new javax.swing.JButton();
     jScrollPane1 = new javax.swing.JScrollPane();
     jTableTeams = new javax.swing.JTable();
+    jButtonAddTeam = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+    jTableTeams.setModel(teamsTableModel);
+    jScrollPane1.setViewportView(jTableTeams);
 
     jButtonAddTeam.setText("Добавить");
     jButtonAddTeam.addActionListener(new java.awt.event.ActionListener()
@@ -58,39 +60,23 @@ public class EditTeamsDialog extends javax.swing.JDialog
       }
     });
 
-    org.jdesktop.layout.GroupLayout jPanelControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelControls);
-    jPanelControls.setLayout(jPanelControlsLayout);
-    jPanelControlsLayout.setHorizontalGroup(
-      jPanelControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jPanelControlsLayout.createSequentialGroup()
-        .addContainerGap()
-        .add(jButtonAddTeam)
-        .addContainerGap(206, Short.MAX_VALUE))
-    );
-    jPanelControlsLayout.setVerticalGroup(
-      jPanelControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jPanelControlsLayout.createSequentialGroup()
-        .addContainerGap()
-        .add(jButtonAddTeam)
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
-
-    jTableTeams.setModel(teamsTableModel);
-    jScrollPane1.setViewportView(jTableTeams);
-
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jPanelControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+      .add(layout.createSequentialGroup()
+        .addContainerGap()
+        .add(jButtonAddTeam)
+        .addContainerGap(206, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .add(jPanelControls, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+        .addContainerGap()
+        .add(jButtonAddTeam)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
     );
 
     pack();
@@ -102,7 +88,6 @@ public class EditTeamsDialog extends javax.swing.JDialog
   }//GEN-LAST:event_jButtonAddTeamActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTeam;
-  private javax.swing.JPanel jPanelControls;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JTable jTableTeams;
   // End of variables declaration//GEN-END:variables
