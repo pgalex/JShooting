@@ -59,6 +59,8 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 
 		initComponents();
 		setTitle("Спортсмены");
+
+		fillSportsmansTableBySelectedTeam();
 	}
 
 	/**
@@ -73,6 +75,19 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		catch (DatabaseErrorException ex)
 		{
 			teamsComboBoxModel = new DefaultComboBoxModel();
+		}
+	}
+
+	/**
+	 * Fill sportsmans table with sportsmans filtered by selected team in combo
+	 * box
+	 */
+	private void fillSportsmansTableBySelectedTeam()
+	{
+		if (jComboBoxTeams.getSelectedItem() != null)
+		{
+			Team selectedTeam = (Team) jComboBoxTeams.getSelectedItem();
+			sportsmansTableModel.setFilteringTeam(selectedTeam);
 		}
 	}
 
@@ -99,6 +114,13 @@ public class EditSportsmansDialog extends javax.swing.JDialog
     jScrollPane1.setViewportView(jTableSportsmans);
 
     jComboBoxTeams.setModel(teamsComboBoxModel);
+    jComboBoxTeams.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jComboBoxTeamsActionPerformed(evt);
+      }
+    });
 
     jLabelTeam.setText("Команда");
 
@@ -158,9 +180,9 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 
   private void jButtonAddSportsmanActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddSportsmanActionPerformed
   {//GEN-HEADEREND:event_jButtonAddSportsmanActionPerformed
-		if (jComboBoxTeams.getSelectedIndex() >= 0 && jComboBoxTeams.getSelectedIndex() < jComboBoxTeams.getItemCount())
+		if (jComboBoxTeams.getSelectedItem() != null)
 		{
-			Team selectedTeam = (Team) teamsComboBoxModel.getElementAt(jComboBoxTeams.getSelectedIndex());
+			Team selectedTeam = (Team) jComboBoxTeams.getSelectedItem();
 			Sportsman newSportsman = new Sportsman();
 			newSportsman.setName("Новый спортсмен");
 			newSportsman.setTeam(selectedTeam);
@@ -174,10 +196,21 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 						teamsTable);
 		editTeamsDialog.setLocationRelativeTo(this);
 		editTeamsDialog.setVisible(true);
-		
+
+		int previousSelectedItemIndex = jComboBoxTeams.getSelectedIndex();
 		initializeTeamsComboBoxModelByTeamsTable();
 		jComboBoxTeams.setModel(teamsComboBoxModel);
+		if (previousSelectedItemIndex >= 0 && previousSelectedItemIndex < jComboBoxTeams.getItemCount())
+		{
+			jComboBoxTeams.setSelectedIndex(previousSelectedItemIndex);
+		}
+		fillSportsmansTableBySelectedTeam();
   }//GEN-LAST:event_jButtonEditTeamsActionPerformed
+
+  private void jComboBoxTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxTeamsActionPerformed
+  {//GEN-HEADEREND:event_jComboBoxTeamsActionPerformed
+		fillSportsmansTableBySelectedTeam();
+  }//GEN-LAST:event_jComboBoxTeamsActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddSportsman;
   private javax.swing.JButton jButtonEditTeams;

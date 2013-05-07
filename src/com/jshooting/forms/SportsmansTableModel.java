@@ -2,7 +2,10 @@ package com.jshooting.forms;
 
 import com.jshooting.shootingDatabase.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
+import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -16,9 +19,13 @@ public class SportsmansTableModel extends AbstractTableModel
 	 * Sportsman table using to fill model
 	 */
 	private SportsmansTable sportsmansTable;
+	/**
+	 * Team which sportsmans need to show. If null - show all sportsmans
+	 */
+	private Team filteringTeam;
 
 	/**
-	 * Create by sportsmans table
+	 * Create by sportsmans table with not filtering by team
 	 *
 	 * @param sportsmansTable Sportsman table using to fill model
 	 * @throws IllegalArgumentException sportsmansTable is null
@@ -31,19 +38,56 @@ public class SportsmansTableModel extends AbstractTableModel
 		}
 
 		this.sportsmansTable = sportsmansTable;
+		filteringTeam = null;
+	}
+
+	/**
+	 * Set team which sportsmans need to get from table
+	 *
+	 * @param filteringTeamToSet team which sportsmans need to get from sportsmans
+	 * table
+	 * @throws IllegalArgumentException filteringTeam is null
+	 */
+	public void setFilteringTeam(Team filteringTeamToSet) throws IllegalArgumentException
+	{
+		if (filteringTeamToSet == null)
+		{
+			throw new IllegalArgumentException("filteringTeam is null");
+		}
+
+		filteringTeam = filteringTeamToSet;
+		fireTableDataChanged();
+	}
+
+	/**
+	 * Get sportsmans from sportsmans table using filtering team
+	 *
+	 * @return sportsmans get using filtering team. Empty if there is no
+	 * sportsmans
+	 */
+	private List<Sportsman> getSportsmansByTeamFilter()
+	{
+		try
+		{
+			if (filteringTeam != null)
+			{
+				return sportsmansTable.getSportsmansInTeam(filteringTeam);
+			}
+			else
+			{
+				return sportsmansTable.getAllSportsmans();
+			}
+		}
+		catch (DatabaseErrorException ex)
+		{
+			return new ArrayList<Sportsman>();
+		}
 	}
 
 	@Override
 	public int getRowCount()
 	{
-		try
-		{
-			return sportsmansTable.getAllSportsmans().size();
-		}
-		catch (DatabaseErrorException ex)
-		{
-			return 0;
-		}
+		return getSportsmansByTeamFilter().size();
 	}
 
 	@Override
@@ -61,11 +105,12 @@ public class SportsmansTableModel extends AbstractTableModel
 	@Override
 	public Object getValueAt(int i, int i1)
 	{
-		try
+		List<Sportsman> sportsmans = getSportsmansByTeamFilter();
+		if (sportsmans.size() > 0)
 		{
-			return sportsmansTable.getAllSportsmans().get(i);
+			return sportsmans.get(i);
 		}
-		catch (DatabaseErrorException ex)
+		else
 		{
 			return null;
 		}
@@ -82,9 +127,17 @@ public class SportsmansTableModel extends AbstractTableModel
 	{
 		try
 		{
-			Sportsman updatingSportsman = sportsmansTable.getAllSportsmans().get(i);
-			updatingSportsman.setName((String) o);
-			sportsmansTable.updateSportsman(updatingSportsman);
+			List<Sportsman> sportsmans = getSportsmansByTeamFilter();
+			if (i < sportsmans.size())
+			{
+				Sportsman updatingSportsman = sportsmans.get(i);
+				updatingSportsman.setName((String) o);
+				sportsmansTable.updateSportsman(updatingSportsman);
+			}
+			else
+			{
+				// do nothing
+			}
 		}
 		catch (DatabaseErrorException ex)
 		{
