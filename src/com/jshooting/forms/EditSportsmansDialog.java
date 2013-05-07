@@ -5,8 +5,10 @@ import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import java.awt.Color;
 import java.awt.Window;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.UIManager;
 
 /**
  * Sportsmans editing dialog
@@ -43,7 +45,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 					SportsmansTable editingSportsmansTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-
+		
 		if (teamsTable == null)
 		{
 			throw new IllegalArgumentException("teamsTable is null");
@@ -52,15 +54,35 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("editingSportsmansTable is null");
 		}
-
+		
 		this.teamsTable = teamsTable;
 		sportsmansTableModel = new SportsmansTableModel(editingSportsmansTable);
 		initializeTeamsComboBoxModelByTeamsTable();
-
+		
 		initComponents();
 		setTitle("Спортсмены");
-
+		
 		fillSportsmansTableBySelectedTeam();
+		updateControlsStateByTeams();
+	}
+
+	/**
+	 * Update dialog controls state by "is any teams exists"
+	 */
+	private void updateControlsStateByTeams()
+	{
+		if (jComboBoxTeams.getItemCount() > 0)
+		{
+			jButtonAddSportsman.setEnabled(true);
+			jComboBoxTeams.setEnabled(true);
+			jButtonEditTeams.setBackground(UIManager.getColor("Button.background"));
+		}
+		else
+		{
+			jButtonAddSportsman.setEnabled(false);
+			jComboBoxTeams.setEnabled(false);
+			jButtonEditTeams.setBackground(new Color(0, 185, 0, 255));
+		}
 	}
 
 	/**
@@ -189,14 +211,14 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 			sportsmansTableModel.addSportsman(newSportsman);
 		}
   }//GEN-LAST:event_jButtonAddSportsmanActionPerformed
-
+	
   private void jButtonEditTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTeamsActionPerformed
   {//GEN-HEADEREND:event_jButtonEditTeamsActionPerformed
 		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, ModalityType.APPLICATION_MODAL,
 						teamsTable);
 		editTeamsDialog.setLocationRelativeTo(this);
 		editTeamsDialog.setVisible(true);
-
+		
 		int previousSelectedItemIndex = jComboBoxTeams.getSelectedIndex();
 		initializeTeamsComboBoxModelByTeamsTable();
 		jComboBoxTeams.setModel(teamsComboBoxModel);
@@ -205,8 +227,9 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 			jComboBoxTeams.setSelectedIndex(previousSelectedItemIndex);
 		}
 		fillSportsmansTableBySelectedTeam();
+		updateControlsStateByTeams();
   }//GEN-LAST:event_jButtonEditTeamsActionPerformed
-
+	
   private void jComboBoxTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxTeamsActionPerformed
   {//GEN-HEADEREND:event_jComboBoxTeamsActionPerformed
 		fillSportsmansTableBySelectedTeam();
