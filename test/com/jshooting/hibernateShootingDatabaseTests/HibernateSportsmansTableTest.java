@@ -126,6 +126,53 @@ public class HibernateSportsmansTableTest
 		{
 			fail();
 		}
+	}
 
+	/**
+	 * Test getting sportsmans in team
+	 */
+	@Test
+	public void gettingInTeam()
+	{
+		try
+		{
+			IOTesting.deleteTestFile();
+			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
+
+			TeamsTable teamsTable = database.getTeamsTable();
+			Team team1 = new Team();
+			team1.setName("team1");
+			teamsTable.addTeam(team1);
+
+			Team team2 = new Team();
+			team2.setName("team2");
+			teamsTable.addTeam(team2);
+
+
+			SportsmansTable sportsmansTable = database.getSportsmansTable();
+			Sportsman sportsman1 = new Sportsman();
+			sportsman1.setName("1");
+			sportsman1.setTeam(team1);
+			sportsmansTable.addSportsman(sportsman1);
+
+			Sportsman sportsman2 = new Sportsman();
+			sportsman2.setName("2");
+			sportsman2.setTeam(team2);
+			sportsmansTable.addSportsman(sportsman2);
+
+			List<Sportsman> team1Sportsmans = sportsmansTable.getSportsmansInTeam(team1);
+			assertEquals(1, team1Sportsmans.size());
+			assertNotNull(team1Sportsmans.get(0).getTeam());
+			assertEquals("1", team1Sportsmans.get(0).getName());
+
+			List<Sportsman> team2Sportsmans = sportsmansTable.getSportsmansInTeam(team2);
+			assertEquals(1, team2Sportsmans.size());
+			assertNotNull(team2Sportsmans.get(0).getTeam());
+			assertEquals("2", team2Sportsmans.get(0).getName());
+		}
+		catch (Exception ex)
+		{
+			fail();
+		}
 	}
 }

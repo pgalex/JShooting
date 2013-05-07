@@ -36,4 +36,14 @@ public interface SportsmansTable
 	 * @throws DatabaseErrorException error while updating
 	 */
 	public void updateSportsman(Sportsman sportsmanToUpdate) throws IllegalArgumentException, DatabaseErrorException;
+
+	/**
+	 * Get all sportsmans of team
+	 *
+	 * @param team team using to filter sportsmans
+	 * @return sportsmans in given team
+	 * @throws IllegalArgumentException team is null
+	 * @throws DatabaseErrorException error while getting sportsmans
+	 */
+	public List<Sportsman> getSportsmansInTeam(Team team) throws IllegalArgumentException, DatabaseErrorException;
 }

@@ -2,10 +2,14 @@ package com.jshooting.hiberanteShootingDatabase;
 
 import com.jshooting.shootingDatabase.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
+import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * Hibernate realization of sportsmans table
@@ -51,6 +55,39 @@ public class HibernateSportsmansTable implements SportsmansTable
 			session = sessionFactory.openSession();
 			List<Sportsman> sportsmans = session.createCriteria(Sportsman.class).list();
 			return sportsmans;
+		}
+		catch (Exception ex)
+		{
+			throw new DatabaseErrorException(ex);
+		}
+		finally
+		{
+			if (session != null)
+			{
+				session.close();
+			}
+		}
+	}
+
+	/**
+	 * Get all sportsmans of team
+	 *
+	 * @param team team using to filter sportsmans
+	 * @return sportsmans in given team
+	 * @throws IllegalArgumentException team is null
+	 * @throws DatabaseErrorException error while getting sportsmans
+	 */
+	@Override
+	public List<Sportsman> getSportsmansInTeam(Team team) throws IllegalArgumentException, DatabaseErrorException
+	{
+		Session session = null;
+		try
+		{
+			session = sessionFactory.openSession();
+			Criteria getCriteria = session.createCriteria(Sportsman.class);
+			getCriteria.add(Restrictions.like("team", team));
+			List<Sportsman> sportsmansInTeam = getCriteria.list();
+			return sportsmansInTeam;
 		}
 		catch (Exception ex)
 		{

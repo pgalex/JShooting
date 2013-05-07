@@ -43,7 +43,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 					SportsmansTable editingSportsmansTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-		
+
 		if (teamsTable == null)
 		{
 			throw new IllegalArgumentException("teamsTable is null");
@@ -52,15 +52,18 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("editingSportsmansTable is null");
 		}
-		
+
 		this.teamsTable = teamsTable;
 		sportsmansTableModel = new SportsmansTableModel(editingSportsmansTable);
 		initializeTeamsComboBoxModelByTeamsTable();
-		
+
 		initComponents();
 		setTitle("Спортсмены");
 	}
-	
+
+	/**
+	 * Initialize teams combo box model by getting all teams from teams table
+	 */
 	private void initializeTeamsComboBoxModelByTeamsTable()
 	{
 		try
@@ -165,13 +168,14 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 			sportsmansTableModel.addSportsman(newSportsman);
 		}
   }//GEN-LAST:event_jButtonAddSportsmanActionPerformed
-	
+
   private void jButtonEditTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTeamsActionPerformed
   {//GEN-HEADEREND:event_jButtonEditTeamsActionPerformed
 		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, ModalityType.APPLICATION_MODAL,
 						teamsTable);
 		editTeamsDialog.setLocationRelativeTo(this);
 		editTeamsDialog.setVisible(true);
+		
 		initializeTeamsComboBoxModelByTeamsTable();
 		jComboBoxTeams.setModel(teamsComboBoxModel);
   }//GEN-LAST:event_jButtonEditTeamsActionPerformed
