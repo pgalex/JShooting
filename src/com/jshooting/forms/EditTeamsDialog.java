@@ -71,19 +71,19 @@ public class EditTeamsDialog extends javax.swing.JDialog
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
       .add(layout.createSequentialGroup()
         .addContainerGap()
         .add(jButtonAddTeam)
-        .addContainerGap(206, Short.MAX_VALUE))
+        .addContainerGap(221, Short.MAX_VALUE))
+      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .addContainerGap()
-        .add(jButtonAddTeam)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+        .add(jButtonAddTeam)
+        .addContainerGap())
     );
 
     pack();
