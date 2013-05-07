@@ -2,7 +2,6 @@ package com.jshooting.forms;
 
 import com.jshooting.shootingDatabase.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
-import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import javax.swing.table.AbstractTableModel;
 

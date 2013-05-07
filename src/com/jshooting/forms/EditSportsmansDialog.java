@@ -23,6 +23,10 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 	 * Table model for sportsmans table
 	 */
 	private SportsmansTableModel sportsmansTableModel;
+	/**
+	 * Table of teams
+	 */
+	private TeamsTable teamsTable;
 
 	/**
 	 * Create new dialog
@@ -49,6 +53,16 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 			throw new IllegalArgumentException("editingSportsmansTable is null");
 		}
 		
+		this.teamsTable = teamsTable;
+		sportsmansTableModel = new SportsmansTableModel(editingSportsmansTable);
+		initializeTeamsComboBoxModelByTeamsTable();
+		
+		initComponents();
+		setTitle("Спортсмены");
+	}
+	
+	private void initializeTeamsComboBoxModelByTeamsTable()
+	{
 		try
 		{
 			teamsComboBoxModel = new DefaultComboBoxModel(teamsTable.getAllTeams().toArray());
@@ -56,15 +70,6 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		catch (DatabaseErrorException ex)
 		{
 			teamsComboBoxModel = new DefaultComboBoxModel();
-		}
-		sportsmansTableModel = new SportsmansTableModel(editingSportsmansTable);
-		
-		initComponents();
-		setTitle("Спортсмены");
-		
-		if (jComboBoxTeams.getItemCount() > 0)
-		{
-			jComboBoxTeams.setSelectedIndex(0);
 		}
 	}
 
@@ -83,6 +88,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
     jComboBoxTeams = new javax.swing.JComboBox();
     jLabelTeam = new javax.swing.JLabel();
     jButtonAddSportsman = new javax.swing.JButton();
+    jButtonEditTeams = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -102,21 +108,34 @@ public class EditSportsmansDialog extends javax.swing.JDialog
       }
     });
 
+    jButtonEditTeams.setText("Команды ...");
+    jButtonEditTeams.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonEditTeamsActionPerformed(evt);
+      }
+    });
+
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
-      .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-        .add(14, 14, 14)
-        .add(jLabelTeam)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jComboBoxTeams, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addContainerGap())
+      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
       .add(layout.createSequentialGroup()
-        .addContainerGap()
-        .add(jButtonAddSportsman)
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(layout.createSequentialGroup()
+            .add(14, 14, 14)
+            .add(jLabelTeam)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jComboBoxTeams, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 232, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jButtonEditTeams))
+          .add(layout.createSequentialGroup()
+            .addContainerGap()
+            .add(jButtonAddSportsman)
+            .add(0, 0, Short.MAX_VALUE)))
+        .addContainerGap())
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -126,9 +145,10 @@ public class EditSportsmansDialog extends javax.swing.JDialog
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jComboBoxTeams, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jLabelTeam))
+          .add(jLabelTeam)
+          .add(jButtonEditTeams))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
     );
 
     pack();
@@ -145,8 +165,19 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 			sportsmansTableModel.addSportsman(newSportsman);
 		}
   }//GEN-LAST:event_jButtonAddSportsmanActionPerformed
+	
+  private void jButtonEditTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTeamsActionPerformed
+  {//GEN-HEADEREND:event_jButtonEditTeamsActionPerformed
+		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, ModalityType.APPLICATION_MODAL,
+						teamsTable);
+		editTeamsDialog.setLocationRelativeTo(this);
+		editTeamsDialog.setVisible(true);
+		initializeTeamsComboBoxModelByTeamsTable();
+		jComboBoxTeams.setModel(teamsComboBoxModel);
+  }//GEN-LAST:event_jButtonEditTeamsActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddSportsman;
+  private javax.swing.JButton jButtonEditTeams;
   private javax.swing.JComboBox jComboBoxTeams;
   private javax.swing.JLabel jLabelTeam;
   private javax.swing.JScrollPane jScrollPane1;
