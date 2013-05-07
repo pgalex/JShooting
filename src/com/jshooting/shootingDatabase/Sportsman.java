@@ -67,4 +67,10 @@ public class Sportsman
 	{
 		this.team = team;
 	}
+
+	@Override
+	public String toString()
+	{
+		return name;
+	}
 }

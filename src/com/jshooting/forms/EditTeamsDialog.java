@@ -21,10 +21,17 @@ public class EditTeamsDialog extends javax.swing.JDialog
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
 	 * @param editingTeamsTable teams table using to edit teams
+	 * @throws IllegalArgumentException editingTeamsTable is null
 	 */
-	public EditTeamsDialog(Window parentWindow, ModalityType modalityType, TeamsTable editingTeamsTable)
+	public EditTeamsDialog(Window parentWindow, ModalityType modalityType,
+					TeamsTable editingTeamsTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
+
+		if (editingTeamsTable == null)
+		{
+			throw new IllegalArgumentException("editingTeamsTable is null");
+		}
 
 		teamsTableModel = new TeamsTableModel(editingTeamsTable);
 

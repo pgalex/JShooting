@@ -191,6 +191,13 @@ public class MainFrame extends javax.swing.JFrame
     );
 
     jButtonSportsmans.setText("Спортсмены ...");
+    jButtonSportsmans.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonSportsmansActionPerformed(evt);
+      }
+    });
 
     jButtonTeams.setText("Команды ...");
     jButtonTeams.addActionListener(new java.awt.event.ActionListener()
@@ -334,6 +341,14 @@ public class MainFrame extends javax.swing.JFrame
 		editTeamsDialog.setLocationRelativeTo(this);
 		editTeamsDialog.setVisible(true);
   }//GEN-LAST:event_jButtonTeamsActionPerformed
+	
+  private void jButtonSportsmansActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSportsmansActionPerformed
+  {//GEN-HEADEREND:event_jButtonSportsmansActionPerformed
+		EditSportsmansDialog editSportsmansDialog = new EditSportsmansDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable());
+		editSportsmansDialog.setLocationRelativeTo(this);
+		editSportsmansDialog.setVisible(true);
+  }//GEN-LAST:event_jButtonSportsmansActionPerformed
 
 	/**
 	 * @param args the command line arguments

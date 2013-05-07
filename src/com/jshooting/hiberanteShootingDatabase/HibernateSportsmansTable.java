@@ -2,7 +2,6 @@ package com.jshooting.hiberanteShootingDatabase;
 
 import com.jshooting.shootingDatabase.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
-import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 import org.hibernate.Session;
@@ -91,6 +90,47 @@ public class HibernateSportsmansTable implements SportsmansTable
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			session.save(sportsmanToAdd);
+			session.getTransaction().commit();
+		}
+		catch (Exception ex)
+		{
+			throw new DatabaseErrorException(ex);
+		}
+		finally
+		{
+			if (session != null)
+			{
+				session.close();
+			}
+		}
+	}
+
+	/**
+	 * Update sportsman
+	 *
+	 * @param sportsmanToUpdate updating sportsman
+	 * @throws IllegalArgumentException sportsmanToUpdate is null or its team is
+	 * null
+	 * @throws DatabaseErrorException error while updating
+	 */
+	@Override
+	public void updateSportsman(Sportsman sportsmanToUpdate) throws IllegalArgumentException, DatabaseErrorException
+	{
+		if (sportsmanToUpdate == null)
+		{
+			throw new IllegalArgumentException("sportsmanToUpdate is null");
+		}
+		if (sportsmanToUpdate.getTeam() == null)
+		{
+			throw new IllegalArgumentException("sportsmanToUpdate team is null");
+		}
+
+		Session session = null;
+		try
+		{
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.update(sportsmanToUpdate);
 			session.getTransaction().commit();
 		}
 		catch (Exception ex)

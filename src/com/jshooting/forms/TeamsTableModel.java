@@ -69,7 +69,7 @@ public class TeamsTableModel extends AbstractTableModel
 		}
 		catch (DatabaseErrorException ex)
 		{
-			return "";
+			return null;
 		}
 	}
 
@@ -104,7 +104,7 @@ public class TeamsTableModel extends AbstractTableModel
 			Team newTeam = new Team();
 			newTeam.setName("Новая команда");
 			teamsTable.addTeam(newTeam);
-			fireTableRowsInserted(teamsTable.getAllTeams().size() - 1, 0);
+			fireTableRowsInserted(teamsTable.getAllTeams().size() - 1, teamsTable.getAllTeams().size() - 1);
 		}
 		catch (DatabaseErrorException ex)
 		{

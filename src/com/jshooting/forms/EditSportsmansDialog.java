@@ -1,22 +1,71 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.jshooting.forms;
 
+import com.jshooting.shootingDatabase.Sportsman;
+import com.jshooting.shootingDatabase.SportsmansTable;
+import com.jshooting.shootingDatabase.Team;
+import com.jshooting.shootingDatabase.TeamsTable;
+import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import java.awt.Window;
+import javax.swing.DefaultComboBoxModel;
+
 /**
+ * Sportsmans editing dialog
  *
  * @author pgalex
  */
 public class EditSportsmansDialog extends javax.swing.JDialog
 {
 	/**
-	 * Creates new form EditSportsmansDialog
+	 * Model of team selecting combo box
 	 */
-	public EditSportsmansDialog(java.awt.Frame parent, boolean modal)
+	private DefaultComboBoxModel teamsComboBoxModel;
+	/**
+	 * Table model for sportsmans table
+	 */
+	private SportsmansTableModel sportsmansTableModel;
+
+	/**
+	 * Create new dialog
+	 *
+	 * @param parentWindow parent window
+	 * @param modalityType modality type of dialog
+	 * @param teamsTable teams table
+	 * @param editingSportsmansTable editing sportsmans table
+	 * @throws IllegalArgumentException teamsTable or editingSportsmansTable is
+	 * null
+	 *
+	 */
+	public EditSportsmansDialog(Window parentWindow, ModalityType modalityType, TeamsTable teamsTable,
+					SportsmansTable editingSportsmansTable) throws IllegalArgumentException
 	{
-		super(parent, modal);
+		super(parentWindow, modalityType);
+		
+		if (teamsTable == null)
+		{
+			throw new IllegalArgumentException("teamsTable is null");
+		}
+		if (editingSportsmansTable == null)
+		{
+			throw new IllegalArgumentException("editingSportsmansTable is null");
+		}
+		
+		try
+		{
+			teamsComboBoxModel = new DefaultComboBoxModel(teamsTable.getAllTeams().toArray());
+		}
+		catch (DatabaseErrorException ex)
+		{
+			teamsComboBoxModel = new DefaultComboBoxModel();
+		}
+		sportsmansTableModel = new SportsmansTableModel(editingSportsmansTable);
+		
 		initComponents();
+		setTitle("Спортсмены");
+		
+		if (jComboBoxTeams.getItemCount() > 0)
+		{
+			jComboBoxTeams.setSelectedIndex(0);
+		}
 	}
 
 	/**
@@ -31,25 +80,16 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 
     jScrollPane1 = new javax.swing.JScrollPane();
     jTableSportsmans = new javax.swing.JTable();
-    jComboBoxTeam = new javax.swing.JComboBox();
+    jComboBoxTeams = new javax.swing.JComboBox();
     jLabelTeam = new javax.swing.JLabel();
     jButtonAddSportsman = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-    jTableSportsmans.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-
-      },
-      new String []
-      {
-
-      }
-    ));
+    jTableSportsmans.setModel(sportsmansTableModel);
     jScrollPane1.setViewportView(jTableSportsmans);
 
-    jComboBoxTeam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    jComboBoxTeams.setModel(teamsComboBoxModel);
 
     jLabelTeam.setText("Команда");
 
@@ -71,7 +111,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
         .add(14, 14, 14)
         .add(jLabelTeam)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jComboBoxTeam, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(jComboBoxTeams, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addContainerGap())
       .add(layout.createSequentialGroup()
         .addContainerGap()
@@ -85,7 +125,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
         .add(jButtonAddSportsman)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jComboBoxTeam, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jComboBoxTeams, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jLabelTeam))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
@@ -96,10 +136,18 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 
   private void jButtonAddSportsmanActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddSportsmanActionPerformed
   {//GEN-HEADEREND:event_jButtonAddSportsmanActionPerformed
+		if (jComboBoxTeams.getSelectedIndex() >= 0 && jComboBoxTeams.getSelectedIndex() < jComboBoxTeams.getItemCount())
+		{
+			Team selectedTeam = (Team) teamsComboBoxModel.getElementAt(jComboBoxTeams.getSelectedIndex());
+			Sportsman newSportsman = new Sportsman();
+			newSportsman.setName("Новый спортсмен");
+			newSportsman.setTeam(selectedTeam);
+			sportsmansTableModel.addSportsman(newSportsman);
+		}
   }//GEN-LAST:event_jButtonAddSportsmanActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddSportsman;
-  private javax.swing.JComboBox jComboBoxTeam;
+  private javax.swing.JComboBox jComboBoxTeams;
   private javax.swing.JLabel jLabelTeam;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JTable jTableSportsmans;

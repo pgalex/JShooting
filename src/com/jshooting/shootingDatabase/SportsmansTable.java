@@ -27,4 +27,13 @@ public interface SportsmansTable
 	 * @throws DatabaseErrorException error while adding
 	 */
 	public void addSportsman(Sportsman sportsmanToAdd) throws IllegalArgumentException, DatabaseErrorException;
+
+	/**
+	 * Update sportsman
+	 *
+	 * @param sportsmanToUpdate updating sportsman
+	 * @throws IllegalArgumentException sportsmanToUpdate is null
+	 * @throws DatabaseErrorException error while updating
+	 */
+	public void updateSportsman(Sportsman sportsmanToUpdate) throws IllegalArgumentException, DatabaseErrorException;
 }
