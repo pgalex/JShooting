@@ -12,7 +12,7 @@ import org.hibernate.SessionFactory;
  *
  * @author pgalex
  */
-public class HiberanteTeamsTable implements TeamsTable
+public class HibernateTeamsTable implements TeamsTable
 {
 	/**
 	 * Hiberbate session factory using to get access to teams
@@ -26,7 +26,7 @@ public class HiberanteTeamsTable implements TeamsTable
 	 * access to teams. Must be not null
 	 * @throws IllegalArgumentException hibernateSession is null
 	 */
-	public HiberanteTeamsTable(SessionFactory hibernateSessionFactory) throws IllegalArgumentException
+	public HibernateTeamsTable(SessionFactory hibernateSessionFactory) throws IllegalArgumentException
 	{
 		if (hibernateSessionFactory == null)
 		{

@@ -6,7 +6,6 @@ import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;

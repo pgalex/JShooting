@@ -1,14 +1,14 @@
 package com.jshooting.hibernateShootingDatabaseTests;
 
-import com.jshooting.hiberanteShootingDatabase.HibernateShootingDatabase;
+import com.jshooting.hiberanteShootingDatabase.HibernateTeamsTable;
 import com.jshooting.hiberanteShootingDatabase.HibernateSportsmansTable;
 import com.jshooting.shootingDatabase.Sportsman;
-import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.shootingDatabase.Team;
-import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import com.jshooting.testUtils.HibernateTesting;
 import com.jshooting.testUtils.IOTesting;
 import java.util.List;
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -39,15 +39,18 @@ public class HibernateSportsmansTableTest
 
 	/**
 	 * Test adding null sportsman
+	 *
+	 * @throws DatabaseErrorException
 	 */
 	@Test
-	public void addingNullSportsman()
+	public void addingNullSportsman() throws DatabaseErrorException
 	{
+		IOTesting.deleteTestFile();
+		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+
 		try
 		{
-			IOTesting.deleteTestFile();
-			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
-			SportsmansTable sportsmansTable = database.getSportsmansTable();
+			HibernateSportsmansTable sportsmansTable = new HibernateSportsmansTable(sessionFactory);
 			sportsmansTable.addSportsman(null);
 			fail();
 		}
@@ -55,23 +58,24 @@ public class HibernateSportsmansTableTest
 		{
 			// ok
 		}
-		catch (DatabaseErrorException ex)
-		{
-			fail();
-		}
+
+		sessionFactory.close();
 	}
 
 	/**
 	 * Test adding sportsman with null team
+	 *
+	 * @throws DatabaseErrorException
 	 */
 	@Test
-	public void addingWithNullTeam()
+	public void addingWithNullTeam() throws DatabaseErrorException
 	{
+		IOTesting.deleteTestFile();
+		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+
 		try
 		{
-			IOTesting.deleteTestFile();
-			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
-			SportsmansTable sportsmansTable = database.getSportsmansTable();
+			HibernateSportsmansTable sportsmansTable = new HibernateSportsmansTable(sessionFactory);
 			Sportsman sportsman = new Sportsman();
 			sportsman.setTeam(null);
 			sportsmansTable.addSportsman(sportsman);
@@ -81,10 +85,8 @@ public class HibernateSportsmansTableTest
 		{
 			// ok
 		}
-		catch (DatabaseErrorException ex)
-		{
-			fail();
-		}
+
+		sessionFactory.close();
 	}
 
 	/**
@@ -96,14 +98,14 @@ public class HibernateSportsmansTableTest
 		try
 		{
 			IOTesting.deleteTestFile();
-			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
+			SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
 
-			TeamsTable teamsTable = database.getTeamsTable();
+			HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
 			Team team1 = new Team();
 			team1.setName("team1");
 			teamsTable.addTeam(team1);
 
-			SportsmansTable sportsmansTable = database.getSportsmansTable();
+			HibernateSportsmansTable sportsmansTable = new HibernateSportsmansTable(sessionFactory);
 			Sportsman sportsman1 = new Sportsman();
 			sportsman1.setName("1");
 			sportsman1.setTeam(team1);
@@ -121,6 +123,8 @@ public class HibernateSportsmansTableTest
 			assertEquals("1", allSportsmans.get(0).getName());
 			assertNotNull(allSportsmans.get(1).getTeam());
 			assertEquals("2", allSportsmans.get(1).getName());
+
+			sessionFactory.close();
 		}
 		catch (Exception ex)
 		{
@@ -137,9 +141,9 @@ public class HibernateSportsmansTableTest
 		try
 		{
 			IOTesting.deleteTestFile();
-			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
+			SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
 
-			TeamsTable teamsTable = database.getTeamsTable();
+			HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
 			Team team1 = new Team();
 			team1.setName("team1");
 			teamsTable.addTeam(team1);
@@ -148,8 +152,7 @@ public class HibernateSportsmansTableTest
 			team2.setName("team2");
 			teamsTable.addTeam(team2);
 
-
-			SportsmansTable sportsmansTable = database.getSportsmansTable();
+			HibernateSportsmansTable sportsmansTable = new HibernateSportsmansTable(sessionFactory);
 			Sportsman sportsman1 = new Sportsman();
 			sportsman1.setName("1");
 			sportsman1.setTeam(team1);
@@ -169,6 +172,8 @@ public class HibernateSportsmansTableTest
 			assertEquals(1, team2Sportsmans.size());
 			assertNotNull(team2Sportsmans.get(0).getTeam());
 			assertEquals("2", team2Sportsmans.get(0).getName());
+
+			sessionFactory.close();
 		}
 		catch (Exception ex)
 		{

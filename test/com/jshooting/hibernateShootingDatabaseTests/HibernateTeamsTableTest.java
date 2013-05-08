@@ -1,10 +1,11 @@
 package com.jshooting.hibernateShootingDatabaseTests;
 
-import com.jshooting.hiberanteShootingDatabase.HibernateShootingDatabase;
+import com.jshooting.hiberanteShootingDatabase.HibernateTeamsTable;
 import com.jshooting.shootingDatabase.Team;
-import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import com.jshooting.testUtils.HibernateTesting;
 import com.jshooting.testUtils.IOTesting;
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -24,14 +25,13 @@ public class HibernateTeamsTableTest
 		try
 		{
 			IOTesting.deleteTestFile();
-			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
-
-			TeamsTable teamsTable = database.getTeamsTable();
+			SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+			HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
 
 			Team team1 = new Team();
 			team1.setName("team1");
 			teamsTable.addTeam(team1);
-			
+
 			team1.setName("someTeam");
 			teamsTable.updateTeam(team1);
 
@@ -40,7 +40,7 @@ public class HibernateTeamsTableTest
 			assertEquals(1, allTeams.length);
 			assertEquals("someTeam", allTeams[0].getName());
 
-			database.close();
+			sessionFactory.close();
 		}
 		catch (Exception ex)
 		{
@@ -57,9 +57,8 @@ public class HibernateTeamsTableTest
 		try
 		{
 			IOTesting.deleteTestFile();
-			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
-
-			TeamsTable teamsTable = database.getTeamsTable();
+			SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+			HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
 
 			Team team1 = new Team();
 			team1.setName("team1");
@@ -75,7 +74,7 @@ public class HibernateTeamsTableTest
 			assertEquals("team1", allTeams[0].getName());
 			assertEquals("team2", allTeams[1].getName());
 
-			database.close();
+			sessionFactory.close();
 		}
 		catch (Exception ex)
 		{
@@ -85,27 +84,27 @@ public class HibernateTeamsTableTest
 
 	/**
 	 * Test adding null team
+	 *
+	 * @throws DatabaseErrorException
 	 */
 	@Test
-	public void addingNullTeamTest()
+	public void addingNullTeamTest() throws DatabaseErrorException
 	{
+		IOTesting.deleteTestFile();
+		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+		
 		try
 		{
-			IOTesting.deleteTestFile();
-			HibernateShootingDatabase database = new HibernateShootingDatabase(IOTesting.TEST_FILE_NAME);
-
-			TeamsTable teamsTable = database.getTeamsTable();
+			HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
 			teamsTable.addTeam(null);
-
-			database.close();
+			sessionFactory.close();
+			fail();
 		}
 		catch (IllegalArgumentException ex)
 		{
 			// ok
 		}
-		catch (DatabaseErrorException ex)
-		{
-			fail();
-		}
+
+		sessionFactory.close();
 	}
 }

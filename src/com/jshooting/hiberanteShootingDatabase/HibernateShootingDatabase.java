@@ -25,7 +25,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	/**
 	 * Teams table
 	 */
-	private HiberanteTeamsTable teamsTable;
+	private HibernateTeamsTable teamsTable;
 	/**
 	 * Sportsmans table
 	 */
@@ -58,7 +58,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 			hibernateConfiguration.setProperty("hibernate.connection.url", "jdbc:sqlite:" + databaseFileName);
 			sessionFactory = hibernateConfiguration.buildSessionFactory();
 
-			teamsTable = new HiberanteTeamsTable(sessionFactory);
+			teamsTable = new HibernateTeamsTable(sessionFactory);
 			sportsmansTable = new HibernateSportsmansTable(sessionFactory);
 		}
 		catch (Exception ex)
