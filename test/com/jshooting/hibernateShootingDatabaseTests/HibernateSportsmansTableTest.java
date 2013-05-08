@@ -133,6 +133,49 @@ public class HibernateSportsmansTableTest
 	}
 
 	/**
+	 * Test updating sportsman
+	 */
+	@Test
+	public void updatingSportsman()
+	{
+		try
+		{
+			IOTesting.deleteTestFile();
+			SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+
+			HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
+			Team team1 = new Team();
+			team1.setName("team1");
+			teamsTable.addTeam(team1);
+
+			Team team2 = new Team();
+			team2.setName("team2");
+			teamsTable.addTeam(team2);
+
+			HibernateSportsmansTable sportsmansTable = new HibernateSportsmansTable(sessionFactory);
+			Sportsman sportsman1 = new Sportsman();
+			sportsman1.setName("1");
+			sportsman1.setTeam(team1);
+			sportsmansTable.addSportsman(sportsman1);
+
+			sportsman1.setName("someSportsman");
+			sportsman1.setTeam(team2);
+
+			sportsmansTable.updateSportsman(sportsman1);
+
+			List<Sportsman> team2Sportsmans = sportsmansTable.getSportsmansInTeam(team2);
+			assertEquals(1, team2Sportsmans.size());
+			assertEquals("someSportsman", team2Sportsmans.get(0).getName());
+			
+			sessionFactory.close();
+		}
+		catch (DatabaseErrorException ex)
+		{
+			fail();
+		}
+	}
+
+	/**
 	 * Test getting sportsmans in team
 	 */
 	@Test
