@@ -16,7 +16,7 @@ public class Sportsman
 	 */
 	private String name;
 	/**
-	 * Sportsman's team
+	 * Sportsman's team. Not null
 	 */
 	private Team team;
 

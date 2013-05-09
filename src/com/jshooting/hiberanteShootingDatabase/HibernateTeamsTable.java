@@ -8,22 +8,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 /**
- * Hibernate powered teams table
+ *
+ * Teams table Hibernate realization
  *
  * @author pgalex
  */
 public class HibernateTeamsTable implements TeamsTable
 {
 	/**
-	 * Hiberbate session factory using to get access to teams
+	 * Hiberbate session factory using to get access to teams table
 	 */
 	private SessionFactory sessionFactory;
 
 	/**
-	 * Create with session
+	 * Create by session factory
 	 *
 	 * @param hibernateSessionFactory hiberbate session factory using to get
-	 * access to teams. Must be not null
+	 * access to teams table. Must be not null
 	 * @throws IllegalArgumentException hibernateSession is null
 	 */
 	public HibernateTeamsTable(SessionFactory hibernateSessionFactory) throws IllegalArgumentException
@@ -37,10 +38,10 @@ public class HibernateTeamsTable implements TeamsTable
 	}
 
 	/**
-	 * Get all teams from table
+	 * Get all teams
 	 *
-	 * @return all teams
-	 * @throws DatabaseErrorException error while getting teams from database
+	 * @return all teams in table. Empty if there is no teams
+	 * @throws DatabaseErrorException error while getting teams
 	 */
 	@Override
 	public List<Team> getAllTeams() throws DatabaseErrorException
@@ -66,9 +67,9 @@ public class HibernateTeamsTable implements TeamsTable
 	}
 
 	/**
-	 * Add team to database
+	 * Add new team
 	 *
-	 * @param teamToAdd adding team
+	 * @param teamToAdd adding team. Must be not null
 	 * @throws IllegalArgumentException teamToAdd is null
 	 * @throws DatabaseErrorException error while adding
 	 */
@@ -104,7 +105,7 @@ public class HibernateTeamsTable implements TeamsTable
 	/**
 	 * Update team
 	 *
-	 * @param teamToUpdate updating team
+	 * @param teamToUpdate updating team. Must be not null
 	 * @throws IllegalArgumentException teamToUpdate is null
 	 * @throws DatabaseErrorException error while updating
 	 */
@@ -142,7 +143,7 @@ public class HibernateTeamsTable implements TeamsTable
 	 *
 	 * @return is table correct
 	 */
-	public boolean testTableCorrection()
+	public boolean testTableForCorrection()
 	{
 		Session session = null;
 		try

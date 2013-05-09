@@ -1,7 +1,7 @@
 package com.jshooting.shootingDatabase.exceptions;
 
 /**
- * Error while performing database operation
+ * Error while performing operation with database
  *
  * @author pgalex
  */

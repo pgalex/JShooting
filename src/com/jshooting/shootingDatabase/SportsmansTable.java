@@ -4,7 +4,7 @@ import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 
 /**
- * Database table of sportsmans
+ * Table of sportsmans
  *
  * @author pgalex
  */
@@ -13,13 +13,13 @@ public interface SportsmansTable
 	/**
 	 * Get all sportsmans
 	 *
-	 * @return list all sportsmans
-	 * @throws DatabaseErrorException error while getting sportsmans from database
+	 * @return list of all sportsmans. Empty of there is no sportsmans
+	 * @throws DatabaseErrorException error while getting sportsmans
 	 */
 	public List<Sportsman> getAllSportsmans() throws DatabaseErrorException;
 
 	/**
-	 * Add new sportsman to database
+	 * Add new sportsman
 	 *
 	 * @param sportsmanToAdd adding sportsman. Must be not null, team must be not
 	 * null
@@ -31,8 +31,10 @@ public interface SportsmansTable
 	/**
 	 * Update sportsman
 	 *
-	 * @param sportsmanToUpdate updating sportsman
-	 * @throws IllegalArgumentException sportsmanToUpdate is null
+	 * @param sportsmanToUpdate updating sportsman. Must be not null team must be
+	 * not null
+	 * @throws IllegalArgumentException sportsmanToUpdate is null or its teams is
+	 * null
 	 * @throws DatabaseErrorException error while updating
 	 */
 	public void updateSportsman(Sportsman sportsmanToUpdate) throws IllegalArgumentException, DatabaseErrorException;
@@ -40,8 +42,9 @@ public interface SportsmansTable
 	/**
 	 * Get all sportsmans of team
 	 *
-	 * @param team team using to filter sportsmans
-	 * @return sportsmans in given team
+	 * @param team team using to filter sportsmans. Must be not null
+	 * @return sportsmans in given team. Empty if there is no sportsmans in given
+	 * team
 	 * @throws IllegalArgumentException team is null
 	 * @throws DatabaseErrorException error while getting sportsmans
 	 */

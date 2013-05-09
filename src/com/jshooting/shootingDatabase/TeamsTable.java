@@ -4,24 +4,24 @@ import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 
 /**
- * Shooting database teams table
+ * Table of teams
  *
  * @author pgalex
  */
 public interface TeamsTable
 {
 	/**
-	 * Get all teams from table
+	 * Get all teams
 	 *
-	 * @return all teams
-	 * @throws DatabaseErrorException error while getting teams from database
+	 * @return all teams in table. Empty if there is no teams
+	 * @throws DatabaseErrorException error while getting teams
 	 */
 	public List<Team> getAllTeams() throws DatabaseErrorException;
 
 	/**
-	 * Add team to database
+	 * Add new team
 	 *
-	 * @param teamToAdd adding team
+	 * @param teamToAdd adding team. Must be not null
 	 * @throws IllegalArgumentException teamToAdd is null
 	 * @throws DatabaseErrorException error while adding
 	 */
@@ -30,7 +30,7 @@ public interface TeamsTable
 	/**
 	 * Update team
 	 *
-	 * @param teamToUpdate updating team
+	 * @param teamToUpdate updating team. Must be not null
 	 * @throws IllegalArgumentException teamToUpdate is null
 	 * @throws DatabaseErrorException error while updating
 	 */

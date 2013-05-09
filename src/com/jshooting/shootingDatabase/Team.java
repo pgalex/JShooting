@@ -14,7 +14,7 @@ public class Team implements Serializable
 	 */
 	private long id;
 	/**
-	 * Name of team
+	 * Name
 	 */
 	private String name;
 

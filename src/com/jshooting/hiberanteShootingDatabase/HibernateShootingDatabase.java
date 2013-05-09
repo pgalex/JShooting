@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * Hibernate powered shooting database
+ * Shooting database Hibernate realization
  *
  * @author pgalex
  */
@@ -19,7 +19,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	 */
 	private SessionFactory sessionFactory;
 	/**
-	 * File name of database
+	 * Name of database file
 	 */
 	private String fileName;
 	/**
@@ -32,7 +32,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	private HibernateSportsmansTable sportsmansTable;
 
 	/**
-	 * Create connection to database with file name
+	 * Create connection to database by file name
 	 *
 	 * @param databaseFileName name of database file. Must be not null, not empty
 	 * @throws IllegalArgumentException databaseFileName is null or empty
@@ -79,7 +79,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	 */
 	private boolean isDatabaseCorrect()
 	{
-		return teamsTable.testTableCorrection();
+		return teamsTable.testTableForCorrection();
 	}
 
 	/**

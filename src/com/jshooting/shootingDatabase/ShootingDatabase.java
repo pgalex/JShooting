@@ -1,7 +1,7 @@
 package com.jshooting.shootingDatabase;
 
 /**
- * Shooting database
+ * Shooting trainings database
  *
  * @author pgalex
  */
