@@ -3,6 +3,7 @@ package com.jshooting.hiberanteShootingDatabase;
 import com.jshooting.shootingDatabase.ShootingDatabase;
 import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.shootingDatabase.TeamsTable;
+import com.jshooting.shootingDatabase.TrainingMethodsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -30,6 +31,10 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	 * Sportsmans table
 	 */
 	private HibernateSportsmansTable sportsmansTable;
+	/**
+	 * Training methods table
+	 */
+	private TrainingMethodsTable trainingMethodsTable;
 
 	/**
 	 * Create connection to database by file name
@@ -60,6 +65,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 
 			teamsTable = new HibernateTeamsTable(sessionFactory);
 			sportsmansTable = new HibernateSportsmansTable(sessionFactory);
+			trainingMethodsTable = new HibernateTrainingMethodsTable(sessionFactory);
 		}
 		catch (Exception ex)
 		{
@@ -102,6 +108,17 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	public SportsmansTable getSportsmansTable()
 	{
 		return sportsmansTable;
+	}
+
+	/**
+	 * Get training methods table
+	 *
+	 * @return database's table of training methods
+	 */
+	@Override
+	public TrainingMethodsTable getTrainingMethodsTable()
+	{
+		return trainingMethodsTable;
 	}
 
 	/**

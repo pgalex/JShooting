@@ -22,6 +22,13 @@ public interface ShootingDatabase
 	public SportsmansTable getSportsmansTable();
 
 	/**
+	 * Get training methods table
+	 *
+	 * @return database's table of training methods
+	 */
+	public TrainingMethodsTable getTrainingMethodsTable();
+
+	/**
 	 * Close connection to database
 	 */
 	public void close();
