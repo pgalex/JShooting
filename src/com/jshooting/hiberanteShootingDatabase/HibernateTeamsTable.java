@@ -25,7 +25,7 @@ public class HibernateTeamsTable implements TeamsTable
 	 *
 	 * @param hibernateSessionFactory hiberbate session factory using to get
 	 * access to teams table. Must be not null
-	 * @throws IllegalArgumentException hibernateSession is null
+	 * @throws IllegalArgumentException hibernateSessionFactory is null
 	 */
 	public HibernateTeamsTable(SessionFactory hibernateSessionFactory) throws IllegalArgumentException
 	{

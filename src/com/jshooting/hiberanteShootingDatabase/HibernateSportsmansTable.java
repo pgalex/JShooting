@@ -27,7 +27,7 @@ public class HibernateSportsmansTable implements SportsmansTable
 	 *
 	 * @param hibernateSessionFactory hiberbate session factory using to get
 	 * access to sportsmans table. Must be not null
-	 * @throws IllegalArgumentException hibernateSession is null
+	 * @throws IllegalArgumentException hibernateSessionFactory is null
 	 */
 	public HibernateSportsmansTable(SessionFactory hibernateSessionFactory) throws IllegalArgumentException
 	{

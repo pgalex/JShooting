@@ -10,5 +10,6 @@
         
         <mapping resource="Team.hbm.xml"/>
         <mapping resource="Sportsman.hbm.xml"/>
+        <mapping resource="TrainingMethod.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
