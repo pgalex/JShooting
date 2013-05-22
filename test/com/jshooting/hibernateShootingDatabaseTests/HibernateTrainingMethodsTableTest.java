@@ -42,15 +42,13 @@ public class HibernateTrainingMethodsTableTest
 	@Test
 	public void addingNullMethod() throws DatabaseErrorException
 	{
+		IOTesting.deleteTestFile();
+		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+
 		try
 		{
-			IOTesting.deleteTestFile();
-			SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
-
 			HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(null);
 			trainingMethodsTable.addTrainingMethod(null);
-
-			sessionFactory.close();
 
 			fail();
 		}
@@ -58,6 +56,8 @@ public class HibernateTrainingMethodsTableTest
 		{
 			// ok
 		}
+
+		sessionFactory.close();
 	}
 
 	/**
@@ -68,15 +68,13 @@ public class HibernateTrainingMethodsTableTest
 	@Test
 	public void updatingNullMethod() throws DatabaseErrorException
 	{
+		IOTesting.deleteTestFile();
+		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+
 		try
 		{
-			IOTesting.deleteTestFile();
-			SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
-
 			HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(null);
 			trainingMethodsTable.updateTrainingMethod(null);
-
-			sessionFactory.close();
 
 			fail();
 		}
@@ -84,6 +82,8 @@ public class HibernateTrainingMethodsTableTest
 		{
 			// ok
 		}
+
+		sessionFactory.close();
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class HibernateTrainingMethodsTableTest
 		assertEquals(2, allMethods.size());
 		assertEquals("method1", allMethods.get(0).getName());
 		assertEquals("method2", allMethods.get(1).getName());
-		
+
 		sessionFactory.close();
 	}
 
@@ -139,7 +139,7 @@ public class HibernateTrainingMethodsTableTest
 		List<TrainingMethod> allMethods = trainingMethodsTable.getAllTrainingMethods();
 		assertEquals(1, allMethods.size());
 		assertEquals("someMethod", allMethods.get(0).getName());
-		
+
 		sessionFactory.close();
 	}
 }
