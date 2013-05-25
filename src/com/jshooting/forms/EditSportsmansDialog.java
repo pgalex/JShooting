@@ -57,7 +57,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		
 		this.teamsTable = teamsTable;
 		sportsmansTableModel = new SportsmansTableModel(editingSportsmansTable);
-		initializeTeamsComboBoxModelByTeamsTable();
+		initializeTeamsComboBoxModel();
 		
 		initComponents();
 		setTitle("Спортсмены");
@@ -88,7 +88,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 	/**
 	 * Initialize teams combo box model by getting all teams from teams table
 	 */
-	private void initializeTeamsComboBoxModelByTeamsTable()
+	private void initializeTeamsComboBoxModel()
 	{
 		try
 		{
@@ -220,7 +220,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		editTeamsDialog.setVisible(true);
 		
 		int previousSelectedItemIndex = jComboBoxTeams.getSelectedIndex();
-		initializeTeamsComboBoxModelByTeamsTable();
+		initializeTeamsComboBoxModel();
 		jComboBoxTeams.setModel(teamsComboBoxModel);
 		if (previousSelectedItemIndex >= 0 && previousSelectedItemIndex < jComboBoxTeams.getItemCount())
 		{
