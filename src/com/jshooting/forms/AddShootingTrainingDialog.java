@@ -1,9 +1,12 @@
 package com.jshooting.forms;
 
+import com.jshooting.shootingDatabase.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
+import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.awt.Window;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -23,7 +26,11 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	 * Model for sportsmans combo box
 	 */
 	private DefaultComboBoxModel sportsmansComboBoxModel;
+	/**
+	 * Table of sportsmans. Using to refill sportsmans combo by selected team
+	 */
 	private SportsmansTable sportsmansTable;
+	private TeamsTable teamsTable;
 
 	/**
 	 * Create new dialog
@@ -48,45 +55,68 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 			throw new IllegalArgumentException("sportsmansTable is null");
 		}
 
+		this.teamsTable = teamsTable;
 		this.sportsmansTable = sportsmansTable;
 
-		try
-		{
-			initializeTeamsComboBoxModelWithTable(teamsTable);
-		}
-		catch (DatabaseErrorException ex)
-		{
-			initializeEmptyTeamsComboBoxModel();
-			Logger.getLogger(AddShootingTrainingDialog.class.getName()).log(Level.SEVERE, null, ex);
-		}
+
+		teamsComboBoxModel = new DefaultComboBoxModel();
+		sportsmansComboBoxModel = new DefaultComboBoxModel();
 
 		initComponents();
 		setTitle("Добавить тренировку");
+
+		fillTeamsComboBox();
+		fillSportmansComboBoxBySelectedTeam();
 	}
 
 	/**
-	 * Initialize teams combo box model by teams table
+	 * Fill teams combo box model by teams table. Model will be empty if can no
+	 * get access to table
 	 *
 	 * @param teamsTable table of teams
-	 * @throws IllegalArgumentException teamsTable is null
-	 * @throws DatabaseErrorException error while accessing to teams in database
 	 */
-	private void initializeTeamsComboBoxModelWithTable(TeamsTable teamsTable) throws IllegalArgumentException, DatabaseErrorException
+	private void fillTeamsComboBox()
 	{
-		if (teamsTable == null)
+		try
 		{
-			throw new IllegalArgumentException("teamsTable is null");
+			teamsComboBoxModel.removeAllElements();
+			List<Team> allTeams = teamsTable.getAllTeams();
+			for (Team team : allTeams)
+			{
+				teamsComboBoxModel.addElement(team);
+			}
 		}
-
-		teamsComboBoxModel = new DefaultComboBoxModel(teamsTable.getAllTeams().toArray());
+		catch (DatabaseErrorException ex)
+		{
+			teamsComboBoxModel.removeAllElements();
+		}
 	}
 
 	/**
-	 * Initialize teams combo box model as empty list
+	 * Fill sportmans combo box model by sportmans in team, selected in teams
+	 * combo box. Empty if team not selected or can not get access to sportmans
+	 * table
 	 */
-	private void initializeEmptyTeamsComboBoxModel()
+	private void fillSportmansComboBoxBySelectedTeam()
 	{
-		teamsComboBoxModel = new DefaultComboBoxModel();
+		try
+		{
+			sportsmansComboBoxModel.removeAllElements();
+			Object selectedItem = jComboBoxTeam.getSelectedItem();
+			if (selectedItem instanceof Team)
+			{
+				Team selectedTeam = (Team) selectedItem;
+				List<Sportsman> sportsmansInSelectedTeam = sportsmansTable.getSportsmansInTeam(selectedTeam);
+				for (Sportsman sportsman : sportsmansInSelectedTeam)
+				{
+					sportsmansComboBoxModel.addElement(sportsman);
+				}
+			}
+		}
+		catch (DatabaseErrorException ex)
+		{
+			sportsmansComboBoxModel.removeAllElements();
+		}
 	}
 
 	/**
@@ -121,6 +151,13 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     jLabel2.setText("Команда");
 
     jComboBoxTeam.setModel(teamsComboBoxModel);
+    jComboBoxTeam.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jComboBoxTeamActionPerformed(evt);
+      }
+    });
 
     jLabel3.setText("Дата");
 
@@ -203,6 +240,11 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
+
+  private void jComboBoxTeamActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxTeamActionPerformed
+  {//GEN-HEADEREND:event_jComboBoxTeamActionPerformed
+		fillSportmansComboBoxBySelectedTeam();
+  }//GEN-LAST:event_jComboBoxTeamActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JComboBox jComboBoxSportsman;
   private javax.swing.JComboBox jComboBoxTeam;

@@ -33,9 +33,9 @@ public class MainFrame extends javax.swing.JFrame
 	{
 		initComponents();
 		setTitle("JShooting");
-
+		
 		shootingDatabase = null;
-
+		
 		readUserSettings();
 		File previousDatabaseFile = new File(UserSettings.getInstance().getDatabaseFileName());
 		if (previousDatabaseFile.exists())
@@ -46,7 +46,7 @@ public class MainFrame extends javax.swing.JFrame
 		{
 			shootingDatabase = null;
 		}
-
+		
 		updateWorkingControlsEnable();
 		updateDatabaseFileNameControls();
 	}
@@ -126,6 +126,7 @@ public class MainFrame extends javax.swing.JFrame
     jButtonAddTraining = new javax.swing.JButton();
     jButtonReports = new javax.swing.JButton();
     jButton1 = new javax.swing.JButton();
+    jButtonTeams = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setResizable(false);
@@ -221,6 +222,15 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
+    jButtonTeams.setText("Команды ...");
+    jButtonTeams.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonTeamsActionPerformed(evt);
+      }
+    });
+
     org.jdesktop.layout.GroupLayout jPanelWorkingControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelWorkingControls);
     jPanelWorkingControls.setLayout(jPanelWorkingControlsLayout);
     jPanelWorkingControlsLayout.setHorizontalGroup(
@@ -229,14 +239,19 @@ public class MainFrame extends javax.swing.JFrame
         .addContainerGap()
         .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(jPanelWorkingControlsLayout.createSequentialGroup()
+            .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(jButtonAddTraining)
+              .add(jButtonReports))
+            .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .add(jPanelWorkingControlsLayout.createSequentialGroup()
+            .add(jButtonTeams)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .add(jButtonSportsmans)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jButtonPlaces)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jButton1))
-          .add(jButtonAddTraining)
-          .add(jButtonReports))
-        .addContainerGap(171, Short.MAX_VALUE))
+            .add(jButton1)
+            .add(60, 60, 60))))
     );
     jPanelWorkingControlsLayout.setVerticalGroup(
       jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -245,7 +260,8 @@ public class MainFrame extends javax.swing.JFrame
         .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jButtonSportsmans)
           .add(jButtonPlaces)
-          .add(jButton1))
+          .add(jButton1)
+          .add(jButtonTeams))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonAddTraining)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -290,12 +306,12 @@ public class MainFrame extends javax.swing.JFrame
 			Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
 		}
   }//GEN-LAST:event_formWindowClosing
-
+	
   private void jButtonCreateDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCreateDatabaseActionPerformed
   {//GEN-HEADEREND:event_jButtonCreateDatabaseActionPerformed
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
+		
 		int showDialogResult = fileChooser.showSaveDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
@@ -312,17 +328,17 @@ public class MainFrame extends javax.swing.JFrame
 				JOptionPane.showMessageDialog(null, "Невозможно создать базу данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 				shootingDatabase = null;
 			}
-
+			
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
 		}
   }//GEN-LAST:event_jButtonCreateDatabaseActionPerformed
-
+	
   private void jButtonOpenDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOpenDatabaseActionPerformed
   {//GEN-HEADEREND:event_jButtonOpenDatabaseActionPerformed
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
+		
 		int showDialogResult = fileChooser.showOpenDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
@@ -335,12 +351,12 @@ public class MainFrame extends javax.swing.JFrame
 				JOptionPane.showMessageDialog(null, "Невозможно открыть базу данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 				shootingDatabase = null;
 			}
-
+			
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
 		}
   }//GEN-LAST:event_jButtonOpenDatabaseActionPerformed
-
+	
   private void jButtonSportsmansActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSportsmansActionPerformed
   {//GEN-HEADEREND:event_jButtonSportsmansActionPerformed
 		EditSportsmansDialog editSportsmansDialog = new EditSportsmansDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
@@ -348,7 +364,7 @@ public class MainFrame extends javax.swing.JFrame
 		editSportsmansDialog.setLocationRelativeTo(this);
 		editSportsmansDialog.setVisible(true);
   }//GEN-LAST:event_jButtonSportsmansActionPerformed
-
+	
   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
   {//GEN-HEADEREND:event_jButton1ActionPerformed
 		EditTrainingMethodsDialog editTrainingMethodsDialog = new EditTrainingMethodsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
@@ -356,7 +372,7 @@ public class MainFrame extends javax.swing.JFrame
 		editTrainingMethodsDialog.setLocationRelativeTo(this);
 		editTrainingMethodsDialog.setVisible(true);
   }//GEN-LAST:event_jButton1ActionPerformed
-
+	
   private void jButtonAddTrainingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingActionPerformed
 		AddShootingTrainingDialog addShootingTrainingDialog = new AddShootingTrainingDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
@@ -364,6 +380,14 @@ public class MainFrame extends javax.swing.JFrame
 		addShootingTrainingDialog.setLocationRelativeTo(this);
 		addShootingTrainingDialog.setVisible(true);
   }//GEN-LAST:event_jButtonAddTrainingActionPerformed
+	
+  private void jButtonTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTeamsActionPerformed
+  {//GEN-HEADEREND:event_jButtonTeamsActionPerformed
+		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+						shootingDatabase.getTeamsTable());
+		editTeamsDialog.setLocationRelativeTo(this);
+		editTeamsDialog.setVisible(true);
+  }//GEN-LAST:event_jButtonTeamsActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -424,6 +448,7 @@ public class MainFrame extends javax.swing.JFrame
   private javax.swing.JButton jButtonPlaces;
   private javax.swing.JButton jButtonReports;
   private javax.swing.JButton jButtonSportsmans;
+  private javax.swing.JButton jButtonTeams;
   private javax.swing.JLabel jLabelDatabaseFileName;
   private javax.swing.JPanel jPanelChooseDatabaseControls;
   private javax.swing.JPanel jPanelWorkingControls;
