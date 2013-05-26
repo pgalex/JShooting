@@ -33,9 +33,9 @@ public class MainFrame extends javax.swing.JFrame
 	{
 		initComponents();
 		setTitle("JShooting");
-		
+
 		shootingDatabase = null;
-		
+
 		readUserSettings();
 		File previousDatabaseFile = new File(UserSettings.getInstance().getDatabaseFileName());
 		if (previousDatabaseFile.exists())
@@ -46,7 +46,7 @@ public class MainFrame extends javax.swing.JFrame
 		{
 			shootingDatabase = null;
 		}
-		
+
 		updateWorkingControlsEnable();
 		updateDatabaseFileNameControls();
 	}
@@ -306,12 +306,12 @@ public class MainFrame extends javax.swing.JFrame
 			Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
 		}
   }//GEN-LAST:event_formWindowClosing
-	
+
   private void jButtonCreateDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCreateDatabaseActionPerformed
   {//GEN-HEADEREND:event_jButtonCreateDatabaseActionPerformed
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		
+
 		int showDialogResult = fileChooser.showSaveDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
@@ -328,17 +328,17 @@ public class MainFrame extends javax.swing.JFrame
 				JOptionPane.showMessageDialog(null, "Невозможно создать базу данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 				shootingDatabase = null;
 			}
-			
+
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
 		}
   }//GEN-LAST:event_jButtonCreateDatabaseActionPerformed
-	
+
   private void jButtonOpenDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOpenDatabaseActionPerformed
   {//GEN-HEADEREND:event_jButtonOpenDatabaseActionPerformed
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		
+
 		int showDialogResult = fileChooser.showOpenDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
@@ -351,12 +351,12 @@ public class MainFrame extends javax.swing.JFrame
 				JOptionPane.showMessageDialog(null, "Невозможно открыть базу данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 				shootingDatabase = null;
 			}
-			
+
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
 		}
   }//GEN-LAST:event_jButtonOpenDatabaseActionPerformed
-	
+
   private void jButtonSportsmansActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSportsmansActionPerformed
   {//GEN-HEADEREND:event_jButtonSportsmansActionPerformed
 		EditSportsmansDialog editSportsmansDialog = new EditSportsmansDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
@@ -364,7 +364,7 @@ public class MainFrame extends javax.swing.JFrame
 		editSportsmansDialog.setLocationRelativeTo(this);
 		editSportsmansDialog.setVisible(true);
   }//GEN-LAST:event_jButtonSportsmansActionPerformed
-	
+
   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
   {//GEN-HEADEREND:event_jButton1ActionPerformed
 		EditTrainingMethodsDialog editTrainingMethodsDialog = new EditTrainingMethodsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
@@ -372,15 +372,16 @@ public class MainFrame extends javax.swing.JFrame
 		editTrainingMethodsDialog.setLocationRelativeTo(this);
 		editTrainingMethodsDialog.setVisible(true);
   }//GEN-LAST:event_jButton1ActionPerformed
-	
+
   private void jButtonAddTrainingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingActionPerformed
 		AddShootingTrainingDialog addShootingTrainingDialog = new AddShootingTrainingDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
-						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable());
+						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable(),
+						shootingDatabase.getTrainingMethodsTable());
 		addShootingTrainingDialog.setLocationRelativeTo(this);
 		addShootingTrainingDialog.setVisible(true);
   }//GEN-LAST:event_jButtonAddTrainingActionPerformed
-	
+
   private void jButtonTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTeamsActionPerformed
   {//GEN-HEADEREND:event_jButtonTeamsActionPerformed
 		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,

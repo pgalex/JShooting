@@ -4,6 +4,8 @@ import com.jshooting.shootingDatabase.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
+import com.jshooting.shootingDatabase.TrainingMethod;
+import com.jshooting.shootingDatabase.TrainingMethodsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.awt.Window;
 import java.util.List;
@@ -27,10 +29,21 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	 */
 	private DefaultComboBoxModel sportsmansComboBoxModel;
 	/**
+	 * Model for training methods combo box
+	 */
+	private DefaultComboBoxModel trainingMethodsComboBoxModel;
+	/**
 	 * Table of sportsmans. Using to refill sportsmans combo by selected team
 	 */
 	private SportsmansTable sportsmansTable;
+	/**
+	 * Table of teams
+	 */
 	private TeamsTable teamsTable;
+	/**
+	 * Table of training methods
+	 */
+	private TrainingMethodsTable trainingMethodsTable;
 
 	/**
 	 * Create new dialog
@@ -39,10 +52,13 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	 * @param modalityType modality type of dialog
 	 * @param teamsTable table of teams
 	 * @param sportsmansTable table of sportsmans
-	 * @throws IllegalArgumentException teamsTable or sportsmansTable is null
+	 * @param trainingMethodsTable table of training methods
+	 * @throws IllegalArgumentException teamsTable, sportsmansTable or
+	 * trainingMethodsTable is null
 	 */
 	public AddShootingTrainingDialog(Window parentWindow, ModalityType modalityType,
-					TeamsTable teamsTable, SportsmansTable sportsmansTable) throws IllegalArgumentException
+					TeamsTable teamsTable, SportsmansTable sportsmansTable,
+					TrainingMethodsTable trainingMethodsTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
@@ -54,19 +70,47 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("sportsmansTable is null");
 		}
+		if (trainingMethodsTable == null)
+		{
+			throw new IllegalArgumentException("trainingMethodsTable is null");
+		}
 
 		this.teamsTable = teamsTable;
 		this.sportsmansTable = sportsmansTable;
-
+		this.trainingMethodsTable = trainingMethodsTable;
 
 		teamsComboBoxModel = new DefaultComboBoxModel();
 		sportsmansComboBoxModel = new DefaultComboBoxModel();
+		trainingMethodsComboBoxModel = new DefaultComboBoxModel();
 
 		initComponents();
 		setTitle("Добавить тренировку");
 
 		fillTeamsComboBox();
 		fillSportmansComboBoxBySelectedTeam();
+		fillTrainingMethodsComboBox();
+	}
+
+	/**
+	 * Fill training methods combo box with training methods table. Model will be
+	 * empty can not get access to table data
+	 */
+	private void fillTrainingMethodsComboBox()
+	{
+		try
+		{
+			trainingMethodsComboBoxModel.removeAllElements();
+			List<TrainingMethod> allMethods = trainingMethodsTable.getAllTrainingMethods();
+			for (TrainingMethod trainingMethod : allMethods)
+			{
+				trainingMethodsComboBoxModel.addElement(trainingMethod);
+			}
+		}
+		catch (DatabaseErrorException ex)
+		{
+			trainingMethodsComboBoxModel.removeAllElements();
+		}
+
 	}
 
 	/**
@@ -163,7 +207,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 
     jTextField1.setText("jTextField1");
 
-    jComboBoxTrainingMethod.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    jComboBoxTrainingMethod.setModel(trainingMethodsComboBoxModel);
 
     jLabel4.setText("Средство");
 
@@ -179,34 +223,42 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+        .add(jLabel6)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 52, Short.MAX_VALUE)
+        .add(jTextFieldComments, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jTextFieldWeather, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(79, 79, 79))
       .add(layout.createSequentialGroup()
-        .addContainerGap()
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
           .add(layout.createSequentialGroup()
-            .add(jLabel6)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jTextFieldComments, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(27, 27, 27)
+            .add(jLabel3))
           .add(layout.createSequentialGroup()
-            .add(jLabel5)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jTextFieldWeather, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .addContainerGap()
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+              .add(layout.createSequentialGroup()
+                .add(jLabel2)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jComboBoxTeam, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 211, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+              .add(layout.createSequentialGroup()
+                .add(jLabel1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jComboBoxSportsman, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 197, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+              .add(layout.createSequentialGroup()
+                .add(13, 13, 13)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                  .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                    .add(0, 0, Short.MAX_VALUE)
+                    .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                  .add(jLabel5)))))
           .add(layout.createSequentialGroup()
+            .addContainerGap()
             .add(jLabel4)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jComboBoxTrainingMethod, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-          .add(layout.createSequentialGroup()
-            .add(jLabel3)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-          .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
-            .add(jLabel2)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-            .add(jComboBoxTeam, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-          .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
-            .add(jLabel1)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-            .add(jComboBoxSportsman, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 197, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-        .addContainerGap(311, Short.MAX_VALUE))
+            .add(jComboBoxTrainingMethod, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -221,21 +273,25 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
           .add(jLabel1))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jLabel3))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jComboBoxTrainingMethod, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jLabel4))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jTextFieldWeather, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jLabel5))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jTextFieldComments, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jLabel6))
-        .addContainerGap(99, Short.MAX_VALUE))
+        .add(24, 24, 24)
+        .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(layout.createSequentialGroup()
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jLabel3)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(jLabel5)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+              .add(jLabel6)
+              .add(jTextFieldComments, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .addContainerGap(62, Short.MAX_VALUE))
+          .add(layout.createSequentialGroup()
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jTextFieldWeather, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())))
     );
 
     pack();
