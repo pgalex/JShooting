@@ -8,7 +8,7 @@
         </id>
         <many-to-one name="sportsman" class="com.jshooting.shootingDatabase.Sportsman" column="trainingSportsman" not-null="true"/>
         <property name="date" type="date" column="trainingDate" not-null="true"/>
-        <property name="type">
+        <property name="type" not-null="true">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">com.jshooting.shootingDatabase.ShootingTrainingType</param>
             </type>

@@ -377,7 +377,8 @@ public class MainFrame extends javax.swing.JFrame
   {//GEN-HEADEREND:event_jButtonAddTrainingActionPerformed
 		AddShootingTrainingDialog addShootingTrainingDialog = new AddShootingTrainingDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
 						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable(),
-						shootingDatabase.getTrainingMethodsTable());
+						shootingDatabase.getTrainingMethodsTable(),
+						shootingDatabase.getShootingTrainingTable());
 		addShootingTrainingDialog.setLocationRelativeTo(this);
 		addShootingTrainingDialog.setVisible(true);
   }//GEN-LAST:event_jButtonAddTrainingActionPerformed
