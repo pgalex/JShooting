@@ -30,7 +30,7 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 		{
 			throw new IllegalArgumentException("editingTable is null");
 		}
-		
+
 		trainingMethodsTable = editingTable;
 	}
 
@@ -117,7 +117,7 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 		try
 		{
 			TrainingMethod newMethod = new TrainingMethod();
-			newMethod.setName("Новый метод");
+			newMethod.setName("Новое средство");
 			trainingMethodsTable.addTrainingMethod(newMethod);
 			fireTableRowsInserted(trainingMethodsTable.getAllTrainingMethods().size() - 1,
 							trainingMethodsTable.getAllTrainingMethods().size() - 1);

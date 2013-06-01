@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.jshooting.shootingDatabase.ShootingTraining" table="Trainings">
-        <id name="id" column="trainingId" type="long">
-            <generator class="native"></generator>
-        </id>
-        <many-to-one name="sportsman" class="com.jshooting.shootingDatabase.Sportsman" column="trainingSportsman" not-null="true"/>
-        <property name="date" type="date" column="trainingDate" not-null="true"/>
-        <property name="type" not-null="true">
-            <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">com.jshooting.shootingDatabase.ShootingTrainingType</param>
-            </type>
-        </property>
-        <many-to-one name="trainingMethod" class="com.jshooting.shootingDatabase.TrainingMethod" column="trainingMethod" not-null="true"/>
-        <property name="weather" column="trainingWeather" type="string"></property>
-        <property name="comments" column="trainingComments" type="string"></property>
-        <property name="numLyingInRest" column="trainingNumLyingInRest" type="int"></property>
-        <property name="missLyingInRest" column="trainingMissLyingInRest" type="int"></property>
-        <property name="numLyingLoading" column="trainingNumLyingLoading" type="int"></property>
-        <property name="missLyingLoading" column="trainingMissLyingLoading" type="int"></property>
-        <property name="numLyingCompetition" column="trainingNumLyingCompetition" type="int"></property>
-        <property name="missLyingCompotition" column="trainingMissLyingCompotition" type="int"></property>
-        <property name="numStandingInRest" column="trainingNumStandingInRest" type="int"></property>
-        <property name="missStandingInRest" column="trainingMissStandingInRest" type="int"></property>
-        <property name="numStandingLoading" column="trainingNumStandingLoading" type="int"></property>
-        <property name="missStandingLoading" column="trainingMissStandingLoading" type="int"></property>
-        <property name="numStandingCompetition" column="trainingNumStandingCompetition" type="int"></property>
-        <property name="missStandingCompotition" column="trainingMissStandingCompotition" type="int"></property>
-        <property name="firstLyingLoading" column="trainingFirstLyingLoading" type="int"></property>
-        <property name="firstLyingCompetition" column="trainingFirstLyingCompetition" type="int"></property>
-        <property name="delayLyingLoading" column="trainingDelayLyingLoading" type="int"></property>
-        <property name="delayLyingCompetition" column="trainingDelayLyingCompetition" type="int"></property>
-        <property name="firstStandingLoading" column="trainingFirstStandingLoading" type="int"></property>
-        <property name="firstStandingCompetition" column="trainingFirstStandingCompetition" type="int"></property>
-        <property name="delayStandingLoading" column="trainingDelayStandingLoading" type="int"></property>
-        <property name="delayStandingCompetition" column="trainingDelayStandingCompetition" type="int"></property>
-        <property name="zeroingIn" column="trainingZeroingIn" type="int"></property>
-        <property name="trail" column="trainingTrail" type="int"></property>
-        <property name="scatt" column="trainingScatt" type="int"></property>
-        <property name="missMarksLying" column="trainingMissMarksLying" type="binary"></property>
-        <property name="missMarksStanding" column="trainingMissMarksStanding" type="binary"></property>
-    </class>
+  <class name="com.jshooting.shootingDatabase.ShootingTraining" table="Trainings">
+    <id column="trainingId" name="id" type="long">
+      <generator class="native"/>
+    </id>
+    <many-to-one class="com.jshooting.shootingDatabase.Sportsman" column="trainingSportsman" name="sportsman" not-null="true"/>
+    <property column="trainingDate" name="date" not-null="true" type="date"/>
+    <property name="type" not-null="true">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.jshooting.shootingDatabase.ShootingTrainingType</param>
+      </type>
+    </property>
+    <many-to-one class="com.jshooting.shootingDatabase.TrainingMethod" column="trainingMethod" name="trainingMethod" not-null="true"/>
+    <property column="trainingWeather" name="weather" type="string"/>
+    <property column="trainingComments" name="comments" type="string"/>
+    <property column="trainingNumLyingInRest" name="numLyingInRest" type="int"/>
+    <property column="trainingMissLyingInRest" name="missLyingInRest" type="int"/>
+    <property column="trainingNumLyingLoading" name="numLyingLoading" type="int"/>
+    <property column="trainingMissLyingLoading" name="missLyingLoading" type="int"/>
+    <property column="trainingNumLyingCompetition" name="numLyingCompetition" type="int"/>
+    <property column="trainingMissLyingCompetition" name="missLyingCompetition" type="int"/>
+    <property column="trainingNumStandingInRest" name="numStandingInRest" type="int"/>
+    <property column="trainingMissStandingInRest" name="missStandingInRest" type="int"/>
+    <property column="trainingNumStandingLoading" name="numStandingLoading" type="int"/>
+    <property column="trainingMissStandingLoading" name="missStandingLoading" type="int"/>
+    <property column="trainingNumStandingCompetition" name="numStandingCompetition" type="int"/>
+    <property column="trainingMissStandingCompetition" name="missStandingCompetition" type="int"/>
+    <property column="trainingFirstLyingLoading" name="firstLyingLoading" type="int"/>
+    <property column="trainingFirstLyingCompetition" name="firstLyingCompetition" type="int"/>
+    <property column="trainingDelayLyingLoading" name="delayLyingLoading" type="int"/>
+    <property column="trainingDelayLyingCompetition" name="delayLyingCompetition" type="int"/>
+    <property column="trainingFirstStandingLoading" name="firstStandingLoading" type="int"/>
+    <property column="trainingFirstStandingCompetition" name="firstStandingCompetition" type="int"/>
+    <property column="trainingDelayStandingLoading" name="delayStandingLoading" type="int"/>
+    <property column="trainingDelayStandingCompetition" name="delayStandingCompetition" type="int"/>
+    <property column="trainingZeroingIn" name="zeroingIn" type="int"/>
+    <property column="trainingTrail" name="trail" type="int"/>
+    <property column="trainingScatt" name="scatt" type="int"/>
+    <property column="trainingMissMarksLying" name="missMarksLying" type="binary"/>
+    <property column="trainingMissMarksStanding" name="missMarksStanding" type="binary"/>
+  </class>
 </hibernate-mapping>

@@ -197,10 +197,10 @@ public class HibernateShootingTrainingsTableTest
 		shootingTraining.setFirstLyingLoading(6);
 		shootingTraining.setFirstStandingCompetition(7);
 		shootingTraining.setFirstStandingLoading(8);
-		shootingTraining.setMissLyingCompotition(9);
+		shootingTraining.setMissLyingCompetition(9);
 		shootingTraining.setMissLyingInRest(10);
 		shootingTraining.setMissLyingLoading(11);
-		shootingTraining.setMissStandingCompotition(12);
+		shootingTraining.setMissStandingCompetition(12);
 		shootingTraining.setMissStandingInRest(13);
 		shootingTraining.setMissStandingLoading(14);
 		shootingTraining.setNumLyingInRest(15);
@@ -238,10 +238,10 @@ public class HibernateShootingTrainingsTableTest
 		assertEquals(6, allTrainings.get(0).getFirstLyingLoading());
 		assertEquals(7, allTrainings.get(0).getFirstStandingCompetition());
 		assertEquals(8, allTrainings.get(0).getFirstStandingLoading());
-		assertEquals(9, allTrainings.get(0).getMissLyingCompotition());
+		assertEquals(9, allTrainings.get(0).getMissLyingCompetition());
 		assertEquals(10, allTrainings.get(0).getMissLyingInRest());
 		assertEquals(11, allTrainings.get(0).getMissLyingLoading());
-		assertEquals(12, allTrainings.get(0).getMissStandingCompotition());
+		assertEquals(12, allTrainings.get(0).getMissStandingCompetition());
 		assertEquals(13, allTrainings.get(0).getMissStandingInRest());
 		assertEquals(14, allTrainings.get(0).getMissStandingLoading());
 		assertEquals(15, allTrainings.get(0).getNumLyingInRest());

@@ -280,13 +280,13 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jSpinnerNumLyingInRest1" pref="45" max="32767" attributes="0"/>
+                                              <Component id="jSpinnerNumStandingInRest" pref="45" max="32767" attributes="0"/>
                                               <Component id="jLabel15" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel16" max="32767" attributes="0"/>
-                                              <Component id="jSpinnerMissLyingInRest1" max="32767" attributes="0"/>
+                                              <Component id="jSpinnerMissStandingInRest" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Component id="jLabel17" max="32767" attributes="0"/>
@@ -296,24 +296,23 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jSpinnerNumLyingCompetition" min="-2" pref="45" max="-2" attributes="0"/>
                                       <Component id="jSpinnerNumLyingLoading" min="-2" pref="45" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerNumLyingCompetition3" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerNumLyingCompetition2" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerZeroingIn" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jSpinnerMissLyingLoading" min="-2" pref="45" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jSpinnerNumLyingLoading2" min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerNumStandingLoading" min="-2" pref="45" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jSpinnerMissLyingLoading1" min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMissStandingLoading" min="-2" pref="45" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jSpinnerMissLyingCompotition" min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMissLyingCompetition" min="-2" pref="45" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jSpinnerNumLyingCompetition1" min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerNumStandingCompetition" min="-2" pref="45" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jSpinnerMissLyingCompotition1" min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerMissStandingCompetition" min="-2" pref="45" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -340,29 +339,32 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jSpinnerNumLyingLoading3" min="-2" pref="45" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerNumLyingLoading4" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerFirstLyingLoading" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerFirstLyingCompetition" min="-2" pref="45" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jSpinnerNumLyingLoading1" min="-2" pref="45" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerNumLyingLoading5" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerDelayLyingLoading" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerDelayLyingCompetition" min="-2" pref="45" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jSpinnerNumLyingLoading6" min="-2" pref="45" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerNumLyingLoading7" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerFirstStandingLoading" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerFirstStandingCompetition" min="-2" pref="45" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jSpinnerNumLyingLoading8" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerNumLyingLoading9" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerDelayStandingLoading" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerDelayStandingCompetition" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jSpinnerNumLyingCompetition4" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jSpinnerScatt" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="jSpinnerTrail" min="-2" pref="45" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -406,53 +408,53 @@
                       <Component id="jLabel9" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jSpinnerNumLyingInRest" min="-2" max="-2" attributes="0"/>
                       <Component id="jSpinnerMissLyingInRest" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jSpinnerNumLyingInRest1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jSpinnerMissLyingInRest1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSpinnerNumStandingInRest" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSpinnerMissStandingInRest" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jSpinnerNumLyingLoading3" max="32767" attributes="0"/>
-                          <Component id="jSpinnerNumLyingLoading2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSpinnerMissLyingLoading1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerFirstLyingLoading" max="32767" attributes="0"/>
+                          <Component id="jSpinnerNumStandingLoading" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerMissStandingLoading" alignment="0" max="32767" attributes="0"/>
                           <Component id="jSpinnerMissLyingLoading" alignment="1" max="32767" attributes="0"/>
                           <Component id="jSpinnerNumLyingLoading" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jSpinnerNumLyingLoading1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSpinnerNumLyingLoading6" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerDelayLyingLoading" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerFirstStandingLoading" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jSpinnerNumLyingLoading8" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="jSpinnerDelayStandingLoading" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jSpinnerNumLyingLoading9" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSpinnerNumLyingLoading5" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSpinnerMissLyingCompotition" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerDelayStandingCompetition" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerDelayLyingCompetition" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerMissLyingCompetition" alignment="0" max="32767" attributes="0"/>
                           <Component id="jSpinnerNumLyingCompetition" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSpinnerNumLyingCompetition1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSpinnerMissLyingCompotition1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSpinnerNumLyingLoading4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSpinnerNumLyingLoading7" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerNumStandingCompetition" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerMissStandingCompetition" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerFirstLyingCompetition" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jSpinnerFirstStandingCompetition" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jLabel11" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel25" max="32767" attributes="0"/>
-                      <Component id="jSpinnerNumLyingCompetition3" max="32767" attributes="0"/>
+                      <Component id="jSpinnerZeroingIn" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel27" max="32767" attributes="0"/>
-                      <Component id="jSpinnerNumLyingCompetition2" max="32767" attributes="0"/>
+                      <Component id="jSpinnerTrail" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel26" max="32767" attributes="0"/>
-                      <Component id="jSpinnerNumLyingCompetition4" max="32767" attributes="0"/>
+                      <Component id="jSpinnerScatt" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               </Group>
@@ -461,14 +463,39 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingInRest">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinnerMissLyingInRest">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingLoading">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinnerMissLyingLoading">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingCompetition">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
@@ -518,19 +545,54 @@
             <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x43e;&#x43c;&#x430;&#x445;&#x438;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerMissLyingCompotition">
+        <Component class="javax.swing.JSpinner" name="jSpinnerMissLyingCompetition">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingInRest1">
+        <Component class="javax.swing.JSpinner" name="jSpinnerNumStandingInRest">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerMissLyingInRest1">
+        <Component class="javax.swing.JSpinner" name="jSpinnerMissStandingInRest">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingLoading1">
+        <Component class="javax.swing.JSpinner" name="jSpinnerDelayLyingLoading">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerMissLyingLoading1">
+        <Component class="javax.swing.JSpinner" name="jSpinnerMissStandingLoading">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingCompetition1">
+        <Component class="javax.swing.JSpinner" name="jSpinnerNumStandingCompetition">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerMissLyingCompotition1">
+        <Component class="javax.swing.JSpinner" name="jSpinnerMissStandingCompetition">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel15">
           <Properties>
@@ -559,21 +621,61 @@
             <Property name="text" type="java.lang.String" value="&#x421;&#x442;&#x43e;&#x44f;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingLoading2">
+        <Component class="javax.swing.JSpinner" name="jSpinnerNumStandingLoading">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingLoading3">
+        <Component class="javax.swing.JSpinner" name="jSpinnerFirstLyingLoading">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingLoading4">
+        <Component class="javax.swing.JSpinner" name="jSpinnerFirstLyingCompetition">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingLoading5">
+        <Component class="javax.swing.JSpinner" name="jSpinnerDelayLyingCompetition">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingLoading6">
+        <Component class="javax.swing.JSpinner" name="jSpinnerFirstStandingLoading">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingLoading7">
+        <Component class="javax.swing.JSpinner" name="jSpinnerFirstStandingCompetition">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingLoading8">
+        <Component class="javax.swing.JSpinner" name="jSpinnerDelayStandingLoading">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingLoading9">
+        <Component class="javax.swing.JSpinner" name="jSpinnerDelayStandingCompetition">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
@@ -640,7 +742,12 @@
             <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x438;&#x441;&#x442;&#x440;&#x435;&#x43b;&#x43a;&#x430;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingCompetition2">
+        <Component class="javax.swing.JSpinner" name="jSpinnerTrail">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel27">
           <Properties>
@@ -652,9 +759,19 @@
             <Property name="text" type="java.lang.String" value="&#x421;&#x43a;&#x430;&#x442;&#x442;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingCompetition3">
+        <Component class="javax.swing.JSpinner" name="jSpinnerZeroingIn">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerNumLyingCompetition4">
+        <Component class="javax.swing.JSpinner" name="jSpinnerScatt">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

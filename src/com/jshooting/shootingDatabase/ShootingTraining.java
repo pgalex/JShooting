@@ -60,7 +60,7 @@ public class ShootingTraining
 	/**
 	 * Промахов лежа соревновательно
 	 */
-	private int missLyingCompotition;
+	private int missLyingCompetition;
 	/**
 	 * Кол-во строя в покое
 	 */
@@ -84,7 +84,7 @@ public class ShootingTraining
 	/**
 	 * Промахов стоя соревновательно
 	 */
-	private int missStandingCompotition;
+	private int missStandingCompetition;
 	/**
 	 * Время до первого выстрела лежа с нагрузки (секунд)
 	 */
@@ -381,21 +381,22 @@ public class ShootingTraining
 	/**
 	 * Промахов лежа соревновательно
 	 *
-	 * @return the missLyingCompotition
+	 * @return the missLyingCompetition
 	 */
-	public int getMissLyingCompotition()
+	public int getMissLyingCompetition()
 	{
-		return missLyingCompotition;
+		return missLyingCompetition;
 	}
 
 	/**
 	 * Промахов лежа соревновательно
 	 *
-	 * @param missLyingCompotition the missLyingCompotition to set
+	 *
+	 * @param missLyingCompetition missLyingCompetition to set
 	 */
-	public void setMissLyingCompotition(int missLyingCompotition)
+	public void setMissLyingCompetition(int missLyingCompetition)
 	{
-		this.missLyingCompotition = missLyingCompotition;
+		this.missLyingCompetition = missLyingCompetition;
 	}
 
 	/**
@@ -501,21 +502,21 @@ public class ShootingTraining
 	/**
 	 * Промахов стоя соревновательно
 	 *
-	 * @return the missStandingCompotition
+	 * @return the missStandingCompetition
 	 */
-	public int getMissStandingCompotition()
+	public int getMissStandingCompetition()
 	{
-		return missStandingCompotition;
+		return missStandingCompetition;
 	}
 
 	/**
 	 * Промахов стоя соревновательно
 	 *
-	 * @param missStandingCompotition the missStandingCompotition to set
+	 * @param missStandingCompetition the missStandingCompetition to set
 	 */
-	public void setMissStandingCompotition(int missStandingCompotition)
+	public void setMissStandingCompetition(int missStandingCompetition)
 	{
-		this.missStandingCompotition = missStandingCompotition;
+		this.missStandingCompetition = missStandingCompetition;
 	}
 
 	/**

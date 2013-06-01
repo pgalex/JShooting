@@ -67,7 +67,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 					ShootingTrainingTable shootingTrainingTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-
+		
 		if (teamsTable == null)
 		{
 			throw new IllegalArgumentException("teamsTable is null");
@@ -84,19 +84,19 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("shootingTrainingTable is null");
 		}
-
+		
 		this.teamsTable = teamsTable;
 		this.sportsmansTable = sportsmansTable;
 		this.trainingMethodsTable = trainingMethodsTable;
 		this.shootingTrainingTable = shootingTrainingTable;
-
+		
 		teamsComboBoxModel = new DefaultComboBoxModel();
 		sportsmansComboBoxModel = new DefaultComboBoxModel();
 		trainingMethodsComboBoxModel = new DefaultComboBoxModel();
-
+		
 		initComponents();
 		setTitle("Добавить тренировку");
-
+		
 		fillTeamsComboBox();
 		fillSportmanComboBoxBySelectedTeam();
 		fillTrainingMethodComboBox();
@@ -214,24 +214,24 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     jLabel12 = new javax.swing.JLabel();
     jLabel13 = new javax.swing.JLabel();
     jLabel14 = new javax.swing.JLabel();
-    jSpinnerMissLyingCompotition = new javax.swing.JSpinner();
-    jSpinnerNumLyingInRest1 = new javax.swing.JSpinner();
-    jSpinnerMissLyingInRest1 = new javax.swing.JSpinner();
-    jSpinnerNumLyingLoading1 = new javax.swing.JSpinner();
-    jSpinnerMissLyingLoading1 = new javax.swing.JSpinner();
-    jSpinnerNumLyingCompetition1 = new javax.swing.JSpinner();
-    jSpinnerMissLyingCompotition1 = new javax.swing.JSpinner();
+    jSpinnerMissLyingCompetition = new javax.swing.JSpinner();
+    jSpinnerNumStandingInRest = new javax.swing.JSpinner();
+    jSpinnerMissStandingInRest = new javax.swing.JSpinner();
+    jSpinnerDelayLyingLoading = new javax.swing.JSpinner();
+    jSpinnerMissStandingLoading = new javax.swing.JSpinner();
+    jSpinnerNumStandingCompetition = new javax.swing.JSpinner();
+    jSpinnerMissStandingCompetition = new javax.swing.JSpinner();
     jLabel15 = new javax.swing.JLabel();
     jLabel16 = new javax.swing.JLabel();
     jLabel17 = new javax.swing.JLabel();
-    jSpinnerNumLyingLoading2 = new javax.swing.JSpinner();
-    jSpinnerNumLyingLoading3 = new javax.swing.JSpinner();
-    jSpinnerNumLyingLoading4 = new javax.swing.JSpinner();
-    jSpinnerNumLyingLoading5 = new javax.swing.JSpinner();
-    jSpinnerNumLyingLoading6 = new javax.swing.JSpinner();
-    jSpinnerNumLyingLoading7 = new javax.swing.JSpinner();
-    jSpinnerNumLyingLoading8 = new javax.swing.JSpinner();
-    jSpinnerNumLyingLoading9 = new javax.swing.JSpinner();
+    jSpinnerNumStandingLoading = new javax.swing.JSpinner();
+    jSpinnerFirstLyingLoading = new javax.swing.JSpinner();
+    jSpinnerFirstLyingCompetition = new javax.swing.JSpinner();
+    jSpinnerDelayLyingCompetition = new javax.swing.JSpinner();
+    jSpinnerFirstStandingLoading = new javax.swing.JSpinner();
+    jSpinnerFirstStandingCompetition = new javax.swing.JSpinner();
+    jSpinnerDelayStandingLoading = new javax.swing.JSpinner();
+    jSpinnerDelayStandingCompetition = new javax.swing.JSpinner();
     jLabel18 = new javax.swing.JLabel();
     jLabel19 = new javax.swing.JLabel();
     jLabel20 = new javax.swing.JLabel();
@@ -240,11 +240,11 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     jLabel23 = new javax.swing.JLabel();
     jLabel24 = new javax.swing.JLabel();
     jLabel25 = new javax.swing.JLabel();
-    jSpinnerNumLyingCompetition2 = new javax.swing.JSpinner();
+    jSpinnerTrail = new javax.swing.JSpinner();
     jLabel27 = new javax.swing.JLabel();
     jLabel26 = new javax.swing.JLabel();
-    jSpinnerNumLyingCompetition3 = new javax.swing.JSpinner();
-    jSpinnerNumLyingCompetition4 = new javax.swing.JSpinner();
+    jSpinnerZeroingIn = new javax.swing.JSpinner();
+    jSpinnerScatt = new javax.swing.JSpinner();
 
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][]
@@ -304,6 +304,16 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 
     jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+    jSpinnerNumLyingInRest.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerMissLyingInRest.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerNumLyingLoading.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerMissLyingLoading.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerNumLyingCompetition.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
     jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel8.setText("Количество выстрелов");
 
@@ -325,6 +335,20 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel14.setText("Промахи");
 
+    jSpinnerMissLyingCompetition.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerNumStandingInRest.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerMissStandingInRest.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerDelayLyingLoading.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerMissStandingLoading.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerNumStandingCompetition.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerMissStandingCompetition.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
     jLabel15.setFont(new java.awt.Font("Lucida Grande", 0, 8)); // NOI18N
     jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel15.setText("Кол-во");
@@ -336,6 +360,22 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     jLabel17.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
     jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel17.setText("Стоя");
+
+    jSpinnerNumStandingLoading.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerFirstLyingLoading.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerFirstLyingCompetition.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerDelayLyingCompetition.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerFirstStandingLoading.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerFirstStandingCompetition.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerDelayStandingLoading.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerDelayStandingCompetition.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
     jLabel18.setFont(new java.awt.Font("Lucida Grande", 0, 8)); // NOI18N
     jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -366,9 +406,15 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 
     jLabel25.setText("Пристрелка");
 
+    jSpinnerTrail.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
     jLabel27.setText("Тренаж");
 
     jLabel26.setText("Скатт");
+
+    jSpinnerZeroingIn.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+    jSpinnerScatt.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
     org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
@@ -404,33 +450,32 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                   .add(jPanel1Layout.createSequentialGroup()
                     .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                      .add(jSpinnerNumLyingInRest1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                      .add(jSpinnerNumStandingInRest, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                       .add(jLabel15, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                       .add(jLabel16, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                      .add(jSpinnerMissLyingInRest1)))
+                      .add(jSpinnerMissStandingInRest)))
                   .add(jLabel17, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
               .add(jPanel1Layout.createSequentialGroup()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                   .add(jSpinnerNumLyingCompetition, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                   .add(jSpinnerNumLyingLoading, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .add(jSpinnerNumLyingCompetition3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .add(jSpinnerNumLyingCompetition2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                  .add(jSpinnerZeroingIn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                   .add(jPanel1Layout.createSequentialGroup()
                     .add(jSpinnerMissLyingLoading, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(jSpinnerNumLyingLoading2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jSpinnerNumStandingLoading, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(jSpinnerMissLyingLoading1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jSpinnerMissStandingLoading, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                   .add(jPanel1Layout.createSequentialGroup()
-                    .add(jSpinnerMissLyingCompotition, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jSpinnerMissLyingCompetition, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(jSpinnerNumLyingCompetition1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jSpinnerNumStandingCompetition, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(jSpinnerMissLyingCompotition1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(jSpinnerMissStandingCompetition, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .add(0, 0, Short.MAX_VALUE)))
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -450,22 +495,24 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
                   .add(jLabel21, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
               .add(jPanel1Layout.createSequentialGroup()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                  .add(jSpinnerNumLyingLoading3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .add(jSpinnerNumLyingLoading4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                  .add(jSpinnerFirstLyingLoading, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                  .add(jSpinnerFirstLyingCompetition, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                  .add(jSpinnerNumLyingLoading1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .add(jSpinnerNumLyingLoading5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                  .add(jSpinnerDelayLyingLoading, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                  .add(jSpinnerDelayLyingCompetition, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                  .add(jSpinnerNumLyingLoading6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .add(jSpinnerNumLyingLoading7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                  .add(jSpinnerFirstStandingLoading, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                  .add(jSpinnerFirstStandingCompetition, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                  .add(jSpinnerNumLyingLoading8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .add(jSpinnerNumLyingLoading9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
+                  .add(jSpinnerDelayStandingLoading, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                  .add(jSpinnerDelayStandingCompetition, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
           .add(jPanel1Layout.createSequentialGroup()
-            .add(jSpinnerNumLyingCompetition4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(jSpinnerScatt, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .add(jSpinnerTrail, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
             .add(0, 0, Short.MAX_VALUE)))
         .addContainerGap())
     );
@@ -499,45 +546,45 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
           .add(jLabel9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jSpinnerNumLyingInRest, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jSpinnerMissLyingInRest, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jSpinnerNumLyingInRest1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jSpinnerMissLyingInRest1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+          .add(jSpinnerNumStandingInRest, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jSpinnerMissStandingInRest, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-            .add(jSpinnerNumLyingLoading3)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumLyingLoading2)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerMissLyingLoading1)
+            .add(jSpinnerFirstLyingLoading)
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumStandingLoading)
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerMissStandingLoading)
             .add(jSpinnerMissLyingLoading)
             .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumLyingLoading)
             .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
           .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumLyingLoading1)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumLyingLoading6))
-          .add(jSpinnerNumLyingLoading8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerDelayLyingLoading)
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerFirstStandingLoading))
+          .add(jSpinnerDelayStandingLoading, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumLyingLoading9)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumLyingLoading5)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerMissLyingCompotition)
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerDelayStandingCompetition)
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerDelayLyingCompetition)
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerMissLyingCompetition)
             .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumLyingCompetition)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumLyingCompetition1)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerMissLyingCompotition1)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumLyingLoading4)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumLyingLoading7))
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerNumStandingCompetition)
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerMissStandingCompetition)
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerFirstLyingCompetition)
+            .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerFirstStandingCompetition))
           .add(jLabel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
           .add(jLabel25, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jSpinnerNumLyingCompetition3))
+          .add(jSpinnerZeroingIn))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
           .add(jLabel27, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jSpinnerNumLyingCompetition2))
+          .add(jSpinnerTrail))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(jLabel26, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jSpinnerNumLyingCompetition4))
+          .add(jSpinnerScatt))
         .add(12, 12, 12))
     );
 
@@ -628,11 +675,12 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
   {//GEN-HEADEREND:event_jComboBoxTeamActionPerformed
 		fillSportmanComboBoxBySelectedTeam();
   }//GEN-LAST:event_jComboBoxTeamActionPerformed
-
+	
   private void jButtonAddTrainingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingActionPerformed
 		Object selectedSportsmanItem = jComboBoxSportsman.getSelectedItem();
 		Object selectedMethodItem = jComboBoxTrainingMethod.getSelectedItem();
+		
 		if (selectedSportsmanItem instanceof Sportsman
 						&& selectedMethodItem instanceof TrainingMethod)
 		{
@@ -646,12 +694,44 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 				newTraining.setWeather(jTextFieldWeather.getText());
 				newTraining.setComments(jTextFieldComments.getText());
 				
+				newTraining.setNumLyingInRest((Integer) jSpinnerNumLyingInRest.getValue());
+				newTraining.setMissLyingInRest((Integer) jSpinnerMissLyingInRest.getValue());
+				newTraining.setNumLyingLoading((Integer) jSpinnerNumLyingLoading.getValue());
+				newTraining.setMissLyingLoading((Integer) jSpinnerMissLyingLoading.getValue());
+				newTraining.setNumLyingCompetition((Integer) jSpinnerNumLyingCompetition.getValue());
+				newTraining.setMissLyingCompetition((Integer) jSpinnerMissLyingCompetition.getValue());
+				
+				newTraining.setNumStandingInRest((Integer) jSpinnerNumStandingInRest.getValue());
+				newTraining.setMissStandingInRest(((Integer) jSpinnerMissStandingInRest.getValue()));
+				newTraining.setNumStandingLoading((Integer) jSpinnerNumStandingLoading.getValue());
+				newTraining.setMissStandingLoading((Integer) jSpinnerMissStandingLoading.getValue());
+				newTraining.setNumStandingCompetition((Integer) jSpinnerNumStandingCompetition.getValue());
+				newTraining.setMissStandingCompetition((Integer) jSpinnerMissStandingCompetition.getValue());
+				
+				newTraining.setFirstLyingLoading((Integer) jSpinnerFirstLyingLoading.getValue());
+				newTraining.setFirstLyingCompetition((Integer) jSpinnerFirstLyingCompetition.getValue());
+				newTraining.setDelayLyingLoading((Integer) jSpinnerDelayLyingLoading.getValue());
+				newTraining.setDelayLyingCompetition((Integer) jSpinnerDelayLyingCompetition.getValue());
+				
+				newTraining.setFirstStandingLoading((Integer) jSpinnerFirstStandingLoading.getValue());
+				newTraining.setFirstStandingCompetition((Integer) jSpinnerFirstStandingCompetition.getValue());
+				newTraining.setDelayStandingLoading((Integer) jSpinnerDelayStandingLoading.getValue());
+				newTraining.setDelayStandingCompetition((Integer) jSpinnerDelayStandingCompetition.getValue());
+				
+				newTraining.setZeroingIn((Integer) jSpinnerZeroingIn.getValue());
+				newTraining.setTrail((Integer) jSpinnerTrail.getValue());
+				newTraining.setScatt((Integer) jSpinnerScatt.getValue());
+				
 				shootingTrainingTable.addTraining(newTraining);
 			}
 			catch (DatabaseErrorException ex)
 			{
 				JOptionPane.showMessageDialog(null, "Невозможно добавить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Необходимо выбрать спортсмена и средство", "Ошибка", JOptionPane.ERROR_MESSAGE);
 		}
   }//GEN-LAST:event_jButtonAddTrainingActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -690,29 +770,29 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
   private javax.swing.JLabel jLabel9;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JSpinner jSpinnerMissLyingCompotition;
-  private javax.swing.JSpinner jSpinnerMissLyingCompotition1;
+  private javax.swing.JSpinner jSpinnerDelayLyingCompetition;
+  private javax.swing.JSpinner jSpinnerDelayLyingLoading;
+  private javax.swing.JSpinner jSpinnerDelayStandingCompetition;
+  private javax.swing.JSpinner jSpinnerDelayStandingLoading;
+  private javax.swing.JSpinner jSpinnerFirstLyingCompetition;
+  private javax.swing.JSpinner jSpinnerFirstLyingLoading;
+  private javax.swing.JSpinner jSpinnerFirstStandingCompetition;
+  private javax.swing.JSpinner jSpinnerFirstStandingLoading;
+  private javax.swing.JSpinner jSpinnerMissLyingCompetition;
   private javax.swing.JSpinner jSpinnerMissLyingInRest;
-  private javax.swing.JSpinner jSpinnerMissLyingInRest1;
   private javax.swing.JSpinner jSpinnerMissLyingLoading;
-  private javax.swing.JSpinner jSpinnerMissLyingLoading1;
+  private javax.swing.JSpinner jSpinnerMissStandingCompetition;
+  private javax.swing.JSpinner jSpinnerMissStandingInRest;
+  private javax.swing.JSpinner jSpinnerMissStandingLoading;
   private javax.swing.JSpinner jSpinnerNumLyingCompetition;
-  private javax.swing.JSpinner jSpinnerNumLyingCompetition1;
-  private javax.swing.JSpinner jSpinnerNumLyingCompetition2;
-  private javax.swing.JSpinner jSpinnerNumLyingCompetition3;
-  private javax.swing.JSpinner jSpinnerNumLyingCompetition4;
   private javax.swing.JSpinner jSpinnerNumLyingInRest;
-  private javax.swing.JSpinner jSpinnerNumLyingInRest1;
   private javax.swing.JSpinner jSpinnerNumLyingLoading;
-  private javax.swing.JSpinner jSpinnerNumLyingLoading1;
-  private javax.swing.JSpinner jSpinnerNumLyingLoading2;
-  private javax.swing.JSpinner jSpinnerNumLyingLoading3;
-  private javax.swing.JSpinner jSpinnerNumLyingLoading4;
-  private javax.swing.JSpinner jSpinnerNumLyingLoading5;
-  private javax.swing.JSpinner jSpinnerNumLyingLoading6;
-  private javax.swing.JSpinner jSpinnerNumLyingLoading7;
-  private javax.swing.JSpinner jSpinnerNumLyingLoading8;
-  private javax.swing.JSpinner jSpinnerNumLyingLoading9;
+  private javax.swing.JSpinner jSpinnerNumStandingCompetition;
+  private javax.swing.JSpinner jSpinnerNumStandingInRest;
+  private javax.swing.JSpinner jSpinnerNumStandingLoading;
+  private javax.swing.JSpinner jSpinnerScatt;
+  private javax.swing.JSpinner jSpinnerTrail;
+  private javax.swing.JSpinner jSpinnerZeroingIn;
   private javax.swing.JTable jTable1;
   private javax.swing.JTextField jTextFieldComments;
   private javax.swing.JTextField jTextFieldWeather;
