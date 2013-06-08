@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sportsmansReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8438a197-b802-4af9-8b31-304eaf8570fa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="sportsmanName" class="java.lang.String"/>
+	<field name="teamName" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="3c387f5f-2161-474b-ae42-6ca5d1cb1641" x="347" y="31" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Спортсмены]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6d2ba296-0283-4123-b9f7-0602ee514059" x="80" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[sportsmanName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="194a2051-d42b-4fb3-bd77-327d2582c245" x="262" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[teamName]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="5da84197-8b3a-4ff1-b16c-4bae3dc258bf" x="80" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{sportsmanName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7c5f48ec-d3c5-4f5c-af1f-f25e60a3be6b" x="262" y="23" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teamName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
