@@ -109,7 +109,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
           .add(jPanelSportsmansLayout.createSequentialGroup()
             .add(jLabelTeam)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jComboBoxTeams, 0, 156, Short.MAX_VALUE)))
+            .add(jComboBoxTeams, 0, 172, Short.MAX_VALUE)))
         .addContainerGap())
     );
     jPanelSportsmansLayout.setVerticalGroup(
@@ -119,7 +119,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
           .add(jComboBoxTeams, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jLabelTeam))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
         .addContainerGap())
     );
 
@@ -140,8 +140,8 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
           .add(jLabel2))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(jDateChooserDateFrom, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-          .add(jDateChooserDateTo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .add(jDateChooserDateTo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+          .add(jDateChooserDateFrom, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
     );
     jPanelPeriodLayout.setVerticalGroup(
@@ -221,6 +221,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
+        .addContainerGap()
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(layout.createSequentialGroup()
             .add(jPanelSportsmans, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -229,7 +230,6 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jPanelTrainingsType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
           .add(layout.createSequentialGroup()
-            .addContainerGap()
             .add(jButtonOK)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jButtonCancel)))
@@ -238,10 +238,11 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-          .add(org.jdesktop.layout.GroupLayout.LEADING, jPanelPeriod, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jPanelSportsmans, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jPanelTrainingsType, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap()
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanelTrainingsType, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelPeriod, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .add(jPanelSportsmans, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jButtonOK)

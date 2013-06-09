@@ -25,6 +25,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jPanelSportsmans" min="-2" max="-2" attributes="0"/>
@@ -33,8 +34,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelTrainingsType" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="jButtonOK" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
@@ -47,10 +47,11 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jPanelPeriod" alignment="0" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanelTrainingsType" max="32767" attributes="0"/>
+                  <Component id="jPanelPeriod" alignment="1" max="32767" attributes="0"/>
                   <Component id="jPanelSportsmans" max="32767" attributes="0"/>
-                  <Component id="jPanelTrainingsType" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -82,7 +83,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabelTeam" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBoxTeams" pref="156" max="32767" attributes="0"/>
+                          <Component id="jComboBoxTeams" pref="172" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -97,7 +98,7 @@
                       <Component id="jLabelTeam" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="175" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="169" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -165,8 +166,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jDateChooserDateFrom" pref="167" max="32767" attributes="0"/>
-                      <Component id="jDateChooserDateTo" max="32767" attributes="0"/>
+                      <Component id="jDateChooserDateTo" pref="145" max="32767" attributes="0"/>
+                      <Component id="jDateChooserDateFrom" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
