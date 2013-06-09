@@ -27,7 +27,12 @@ public interface ShootingDatabase
 	 * @return database's table of training methods
 	 */
 	public TrainingMethodsTable getTrainingMethodsTable();
-	
+
+	/**
+	 * Get shooting trainigs table
+	 *
+	 * @return database's table of shooting trainigs
+	 */
 	public ShootingTrainingTable getShootingTrainingTable();
 
 	/**
