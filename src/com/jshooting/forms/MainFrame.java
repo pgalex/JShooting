@@ -400,10 +400,11 @@ public class MainFrame extends javax.swing.JFrame
 
   private void jButtonReportsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonReportsActionPerformed
   {//GEN-HEADEREND:event_jButtonReportsActionPerformed
-		ShootingTrainingsFilterDialog filterDialog = new ShootingTrainingsFilterDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
+		ShootingTrainingsFilterDialog filterDialog = new ShootingTrainingsFilterDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable());
 		filterDialog.setLocationRelativeTo(this);
 		filterDialog.setVisible(true);
-		
+
 		if (filterDialog.isOKButtonPressed())
 		{
 		}

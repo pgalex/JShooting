@@ -47,6 +47,9 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	 * Table of training methods
 	 */
 	private TrainingMethodsTable trainingMethodsTable;
+	/**
+	 * Table of shooting trainings
+	 */
 	private ShootingTrainingTable shootingTrainingTable;
 
 	/**
@@ -67,7 +70,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 					ShootingTrainingTable shootingTrainingTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-		
+
 		if (teamsTable == null)
 		{
 			throw new IllegalArgumentException("teamsTable is null");
@@ -84,19 +87,19 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("shootingTrainingTable is null");
 		}
-		
+
 		this.teamsTable = teamsTable;
 		this.sportsmansTable = sportsmansTable;
 		this.trainingMethodsTable = trainingMethodsTable;
 		this.shootingTrainingTable = shootingTrainingTable;
-		
+
 		teamsComboBoxModel = new DefaultComboBoxModel();
 		sportsmansComboBoxModel = new DefaultComboBoxModel();
 		trainingMethodsComboBoxModel = new DefaultComboBoxModel();
-		
+
 		initComponents();
 		setTitle("Добавить тренировку");
-		
+
 		fillTeamsComboBox();
 		fillSportmanComboBoxBySelectedTeam();
 		fillTrainingMethodComboBox();
@@ -675,12 +678,12 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
   {//GEN-HEADEREND:event_jComboBoxTeamActionPerformed
 		fillSportmanComboBoxBySelectedTeam();
   }//GEN-LAST:event_jComboBoxTeamActionPerformed
-	
+
   private void jButtonAddTrainingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingActionPerformed
 		Object selectedSportsmanItem = jComboBoxSportsman.getSelectedItem();
 		Object selectedMethodItem = jComboBoxTrainingMethod.getSelectedItem();
-		
+
 		if (selectedSportsmanItem instanceof Sportsman
 						&& selectedMethodItem instanceof TrainingMethod)
 		{
@@ -693,35 +696,35 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 				newTraining.setTrainingMethod((TrainingMethod) selectedMethodItem);
 				newTraining.setWeather(jTextFieldWeather.getText());
 				newTraining.setComments(jTextFieldComments.getText());
-				
+
 				newTraining.setNumLyingInRest((Integer) jSpinnerNumLyingInRest.getValue());
 				newTraining.setMissLyingInRest((Integer) jSpinnerMissLyingInRest.getValue());
 				newTraining.setNumLyingLoading((Integer) jSpinnerNumLyingLoading.getValue());
 				newTraining.setMissLyingLoading((Integer) jSpinnerMissLyingLoading.getValue());
 				newTraining.setNumLyingCompetition((Integer) jSpinnerNumLyingCompetition.getValue());
 				newTraining.setMissLyingCompetition((Integer) jSpinnerMissLyingCompetition.getValue());
-				
+
 				newTraining.setNumStandingInRest((Integer) jSpinnerNumStandingInRest.getValue());
 				newTraining.setMissStandingInRest(((Integer) jSpinnerMissStandingInRest.getValue()));
 				newTraining.setNumStandingLoading((Integer) jSpinnerNumStandingLoading.getValue());
 				newTraining.setMissStandingLoading((Integer) jSpinnerMissStandingLoading.getValue());
 				newTraining.setNumStandingCompetition((Integer) jSpinnerNumStandingCompetition.getValue());
 				newTraining.setMissStandingCompetition((Integer) jSpinnerMissStandingCompetition.getValue());
-				
+
 				newTraining.setFirstLyingLoading((Integer) jSpinnerFirstLyingLoading.getValue());
 				newTraining.setFirstLyingCompetition((Integer) jSpinnerFirstLyingCompetition.getValue());
 				newTraining.setDelayLyingLoading((Integer) jSpinnerDelayLyingLoading.getValue());
 				newTraining.setDelayLyingCompetition((Integer) jSpinnerDelayLyingCompetition.getValue());
-				
+
 				newTraining.setFirstStandingLoading((Integer) jSpinnerFirstStandingLoading.getValue());
 				newTraining.setFirstStandingCompetition((Integer) jSpinnerFirstStandingCompetition.getValue());
 				newTraining.setDelayStandingLoading((Integer) jSpinnerDelayStandingLoading.getValue());
 				newTraining.setDelayStandingCompetition((Integer) jSpinnerDelayStandingCompetition.getValue());
-				
+
 				newTraining.setZeroingIn((Integer) jSpinnerZeroingIn.getValue());
 				newTraining.setTrail((Integer) jSpinnerTrail.getValue());
 				newTraining.setScatt((Integer) jSpinnerScatt.getValue());
-				
+
 				shootingTrainingTable.addTraining(newTraining);
 			}
 			catch (DatabaseErrorException ex)

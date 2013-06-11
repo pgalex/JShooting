@@ -1,11 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.jshooting.forms;
 
+import com.jshooting.shootingDatabase.Sportsman;
+import com.jshooting.shootingDatabase.SportsmansTable;
+import com.jshooting.shootingDatabase.Team;
+import com.jshooting.shootingDatabase.TeamsTable;
+import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.awt.Window;
 import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 
 /**
  * Shooting trainings filter setup dialog. Using to find which trainings need to
@@ -16,6 +20,22 @@ import java.util.Date;
 public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 {
 	/**
+	 * Model for teams combo box
+	 */
+	private DefaultComboBoxModel teamsComboBoxModel;
+	/**
+	 * Model for sportsmans list
+	 */
+	private DefaultListModel sportsmansListModel;
+	/**
+	 * Table of sportsmans
+	 */
+	private SportsmansTable sportsmansTable;
+	/**
+	 * Table of teams
+	 */
+	private TeamsTable teamsTable;
+	/**
 	 * Is OK button was pressed
 	 */
 	private boolean okButtonPressed;
@@ -25,17 +45,87 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 	 *
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
+	 * @param teamsTable table of teams
+	 * @param sportsmansTable table of sportsmans
 	 */
-	public ShootingTrainingsFilterDialog(Window parentWindow, ModalityType modalityType)
+	public ShootingTrainingsFilterDialog(Window parentWindow, ModalityType modalityType,
+					TeamsTable teamsTable, SportsmansTable sportsmansTable)
 	{
 		super(parentWindow, modalityType);
 
+		if (teamsTable == null)
+		{
+			throw new IllegalArgumentException("teamsTable is null");
+		}
+		if (sportsmansTable == null)
+		{
+			throw new IllegalArgumentException("sportsmansTable is null");
+		}
+
 		okButtonPressed = false;
+		this.teamsTable = teamsTable;
+		this.sportsmansTable = sportsmansTable;
+
+		teamsComboBoxModel = new DefaultComboBoxModel();
+		sportsmansListModel = new DefaultListModel();
 
 		initComponents();
 		jDateChooserDateFrom.setDate(new Date());
 		jDateChooserDateTo.setDate(new Date());
 		setTitle("Фильтр");
+
+		fillTeamsComboBox();
+		fillSportmansListBySelectedTeam();
+	}
+
+	/**
+	 * Fill teams combo box model by teams table. Model will be empty if can no
+	 * get access to table
+	 *
+	 * @param teamsTable table of teams
+	 */
+	private void fillTeamsComboBox()
+	{
+		try
+		{
+			teamsComboBoxModel.removeAllElements();
+			List<Team> allTeams = teamsTable.getAllTeams();
+			for (Team team : allTeams)
+			{
+				teamsComboBoxModel.addElement(team);
+			}
+		}
+		catch (DatabaseErrorException ex)
+		{
+			teamsComboBoxModel.removeAllElements();
+		}
+	}
+
+	/**
+	 * Fill sportmans list model by sportmans in team, selected in teams
+	 * combo box. Empty if team not selected or can not get access to sportmans
+	 * table
+	 */
+	private void fillSportmansListBySelectedTeam()
+	{
+		try
+		{
+			sportsmansListModel.removeAllElements();
+			Object selectedItem = jComboBoxTeams.getSelectedItem();
+			if (selectedItem instanceof Team)
+			{
+				Team selectedTeam = (Team) selectedItem;
+				List<Sportsman> sportsmansInSelectedTeam = sportsmansTable.getSportsmansInTeam(selectedTeam);
+				for (Sportsman sportsman : sportsmansInSelectedTeam)
+				{
+					sportsmansListModel.addElement(sportsman);
+				}
+			}
+		}
+		catch (DatabaseErrorException ex)
+		{
+			sportsmansListModel.removeAllElements();
+		}
 	}
 
 	/**
@@ -82,6 +172,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 
     jLabelTeam.setText("Команда");
 
+    jComboBoxTeams.setModel(teamsComboBoxModel);
     jComboBoxTeams.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -90,12 +181,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
       }
     });
 
-    jListSportsmans.setModel(new javax.swing.AbstractListModel()
-    {
-      String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "6", "7", "8", "9", "10", "11", "12" };
-      public int getSize() { return strings.length; }
-      public Object getElementAt(int i) { return strings[i]; }
-    });
+    jListSportsmans.setModel(sportsmansListModel);
     jScrollPane1.setViewportView(jListSportsmans);
 
     org.jdesktop.layout.GroupLayout jPanelSportsmansLayout = new org.jdesktop.layout.GroupLayout(jPanelSportsmans);
@@ -109,7 +195,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
           .add(jPanelSportsmansLayout.createSequentialGroup()
             .add(jLabelTeam)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jComboBoxTeams, 0, 172, Short.MAX_VALUE)))
+            .add(jComboBoxTeams, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         .addContainerGap())
     );
     jPanelSportsmansLayout.setVerticalGroup(
@@ -187,12 +273,11 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
     jPanelTrainingsTypeLayout.setHorizontalGroup(
       jPanelTrainingsTypeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanelTrainingsTypeLayout.createSequentialGroup()
-        .addContainerGap()
         .add(jPanelTrainingsTypeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(jCheckBoxComplex)
-          .add(jCheckBoxShooting)
-          .add(jCheckBoxCompetition))
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .add(jCheckBoxComplex, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .add(jCheckBoxShooting, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .add(jCheckBoxCompetition, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+        .addContainerGap())
     );
     jPanelTrainingsTypeLayout.setVerticalGroup(
       jPanelTrainingsTypeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -202,7 +287,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
         .add(jCheckBoxShooting)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jCheckBoxCompetition)
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap(127, Short.MAX_VALUE))
     );
 
     jButtonOK.setText("OK");
@@ -228,12 +313,13 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jPanelPeriod, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jPanelTrainingsType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(jPanelTrainingsType, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
           .add(layout.createSequentialGroup()
             .add(jButtonOK)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jButtonCancel)))
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(jButtonCancel)
+            .add(0, 0, Short.MAX_VALUE)))
+        .addContainerGap())
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -255,6 +341,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 
   private void jComboBoxTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxTeamsActionPerformed
   {//GEN-HEADEREND:event_jComboBoxTeamsActionPerformed
+		fillSportmansListBySelectedTeam();
   }//GEN-LAST:event_jComboBoxTeamsActionPerformed
 
   private void jCheckBoxComplexActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBoxComplexActionPerformed
