@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.reports.CombinedReportJRDataSource;
 import com.jshooting.shootingDatabase.ShootingDatabase;
 import com.jshooting.shootingDatabase.ShootingDatabaseFactory;
 import java.awt.Dialog;
@@ -9,6 +10,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * Main frame
@@ -407,22 +416,20 @@ public class MainFrame extends javax.swing.JFrame
 
 		if (filterDialog.isOKButtonPressed())
 		{
-			// получить тренировки по фильтру из диалога
-			// создать источник данных отчета с данным фильтром
-				// источник данных будет использовать calculator для посчета параметров отчета
-		}
+			CombinedReportJRDataSource reportDataSource = new CombinedReportJRDataSource(filterDialog.getFilter());
 
-		/*try
-		 {
-		 JasperDesign desing = JRXmlLoader.load("sportsmansReport.jrxml");
-		 JasperReport report = JasperCompileManager.compileReport(desing);
-		 JasperPrint jasperPrint = JasperFillManager.fillReport(report, null, new TestSportsmansJRDataSource(shootingDatabase));
-		 JasperViewer.viewReport(jasperPrint);
-		 }
-		 catch (JRException ex)
-		 {
-		 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-		 }*/
+			try
+			{
+				JasperDesign desing = JRXmlLoader.load("reports/combinedReport.jrxml");
+				JasperReport report = JasperCompileManager.compileReport(desing);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(report, null, reportDataSource);
+				JasperViewer.viewReport(jasperPrint);
+			}
+			catch (JRException ex)
+			{
+				Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
   }//GEN-LAST:event_jButtonReportsActionPerformed
 
 	/**

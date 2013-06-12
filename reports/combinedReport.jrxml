@@ -258,7 +258,7 @@
 			<textField>
 				<reportElement uuid="ff0eae03-4522-42d8-92c0-62624b92989e" x="673" y="0" width="43" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{averageTimeToFirstStanding}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{averageFirstStanding}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="f1ae9511-6388-492b-8050-57030c1aaf66" x="716" y="0" width="43" height="20"/>
@@ -275,7 +275,7 @@
 			<textField>
 				<reportElement uuid="c73b447c-9eb6-4480-ab73-f840359352b1" x="630" y="0" width="43" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{averageTimeToFirstLying}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{averageFirstLying}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="40738be3-d6a3-47aa-b859-a14274a81cc9" x="759" y="0" width="43" height="20"/>

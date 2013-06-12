@@ -2,4 +2,9 @@
 <project name="JShooting" default="default" basedir=".">
     <description>Builds, tests, and runs the project JShooting.</description>
     <import file="nbproject/build-impl.xml"/>
+
+    <target name="-post-jar">
+     <copy file="reports/combinedReport.jrxml" tofile="dist/reports/combinedReport.jrxml" />
+     <copy file="reports/individualReport.jrxml" tofile="dist/reports/individualReport.jrxml" />
+   </target>
  </project>
