@@ -407,7 +407,9 @@ public class MainFrame extends javax.swing.JFrame
 
 		if (filterDialog.isOKButtonPressed())
 		{
-			System.out.println("ok");
+			// получить тренировки по фильтру из диалога
+			// создать источник данных отчета с данным фильтром
+				// источник данных будет использовать calculator для посчета параметров отчета
 		}
 
 		/*try
