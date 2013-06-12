@@ -407,6 +407,7 @@ public class MainFrame extends javax.swing.JFrame
 
 		if (filterDialog.isOKButtonPressed())
 		{
+			System.out.println("ok");
 		}
 
 		/*try

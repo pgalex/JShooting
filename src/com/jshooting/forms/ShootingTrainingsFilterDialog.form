@@ -9,6 +9,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -216,7 +219,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jCheckBoxComplex" alignment="0" max="32767" attributes="0"/>
                       <Component id="jCheckBoxShooting" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jCheckBoxCompetition" alignment="0" pref="144" max="32767" attributes="0"/>
+                      <Component id="jCheckBoxCompetition" alignment="0" pref="132" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -274,6 +277,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x43c;&#x435;&#x43d;&#x430;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
