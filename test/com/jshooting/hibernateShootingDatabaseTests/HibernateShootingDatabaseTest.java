@@ -69,7 +69,7 @@ public class HibernateShootingDatabaseTest
 			assertNotNull(database.getTeamsTable());
 			assertNotNull(database.getSportsmansTable());
 			assertNotNull(database.getTrainingMethodsTable());
-			assertNotNull(database.getShootingTrainingTable());
+			assertNotNull(database.getShootingTrainingsTable());
 			database.close();
 		}
 		catch (DatabaseErrorException ex)

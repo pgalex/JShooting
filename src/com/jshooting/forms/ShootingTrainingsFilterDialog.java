@@ -9,8 +9,7 @@ import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.awt.Window;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -75,8 +74,12 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 		sportsmansListModel = new DefaultListModel();
 
 		initComponents();
-		jDateChooserDateFrom.setDate(new Date());
-		jDateChooserDateTo.setDate(new Date());
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		jDateChooserDateFrom.setDate(calendar.getTime());
+		jDateChooserDateTo.setDate(calendar.getTime());
 		setTitle("Фильтр");
 
 		fillTeamsComboBox();

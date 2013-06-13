@@ -145,7 +145,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	}
 
 	@Override
-	public ShootingTrainingsTable getShootingTrainingTable()
+	public ShootingTrainingsTable getShootingTrainingsTable()
 	{
 		return shootingTrainingTable;
 	}

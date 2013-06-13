@@ -180,6 +180,8 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		Criteria criteriaByFilter = session.createCriteria(ShootingTraining.class);
 		criteriaByFilter.add(Restrictions.in("sportsman", filter.getSportsmans()));
 		criteriaByFilter.add(Restrictions.between("date", filter.getDateFrom(), filter.getDateTo()));
+		criteriaByFilter.add(Restrictions.ge("date", filter.getDateFrom()));
+		criteriaByFilter.add(Restrictions.le("date", filter.getDateTo()));
 		criteriaByFilter.add(Restrictions.in("type", filter.getTrainingTypes()));
 		return criteriaByFilter;
 	}
