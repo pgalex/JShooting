@@ -6,12 +6,14 @@ import com.jshooting.hiberanteShootingDatabase.HibernateTeamsTable;
 import com.jshooting.hiberanteShootingDatabase.HibernateTrainingMethodsTable;
 import com.jshooting.shootingDatabase.ShootingTraining;
 import com.jshooting.shootingDatabase.ShootingTrainingType;
+import com.jshooting.shootingDatabase.ShootingTrainingsFilter;
 import com.jshooting.shootingDatabase.Sportsman;
 import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.TrainingMethod;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import com.jshooting.testUtils.HibernateTesting;
 import com.jshooting.testUtils.IOTesting;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.SessionFactory;
@@ -26,6 +28,75 @@ import static org.junit.Assert.*;
 public class HibernateShootingTrainingsTableTest
 {
 	/**
+	 * Test getting trainings by filter
+	 *
+	 * @throws DatabaseErrorException
+	 */
+	@Test
+	public void gettingWithFilter() throws DatabaseErrorException
+	{
+		IOTesting.deleteTestFile();
+		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+
+		TrainingMethod trainingMethod = new TrainingMethod();
+		trainingMethod.setName("method");
+		HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(sessionFactory);
+		trainingMethodsTable.addTrainingMethod(trainingMethod);
+
+		Team team = new Team();
+		team.setName("team");
+		HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
+		teamsTable.addTeam(team);
+
+		Sportsman sportsman1 = new Sportsman();
+		sportsman1.setName("sportsman1");
+		sportsman1.setTeam(team);
+
+		Sportsman sportsman2 = new Sportsman();
+		sportsman2.setName("sportsman2");
+		sportsman2.setTeam(team);
+
+		Sportsman sportsman3 = new Sportsman();
+		sportsman3.setName("sportsman3");
+		sportsman3.setTeam(team);
+
+		HibernateSportsmansTable sportsmansTable = new HibernateSportsmansTable(sessionFactory);
+		sportsmansTable.addSportsman(sportsman1);
+		sportsmansTable.addSportsman(sportsman2);
+		sportsmansTable.addSportsman(sportsman3);
+
+		ShootingTraining shootingTraining1 = new ShootingTraining();
+		shootingTraining1.setComments("comment");
+		shootingTraining1.setDate(new Date(1000));
+		shootingTraining1.setSportsman(sportsman1);
+		shootingTraining1.setTrainingMethod(trainingMethod);
+		shootingTraining1.setType(ShootingTrainingType.COMPLEX);
+
+		ShootingTraining shootingTraining2 = new ShootingTraining();
+		shootingTraining2.setComments("comment");
+		shootingTraining2.setDate(new Date(2000));
+		shootingTraining2.setSportsman(sportsman2);
+		shootingTraining2.setTrainingMethod(trainingMethod);
+		shootingTraining2.setType(ShootingTrainingType.SHOOTING);
+
+		HibernateShootingTrainingsTable shootingTrainingsTable = new HibernateShootingTrainingsTable(sessionFactory);
+		shootingTrainingsTable.addTraining(shootingTraining1);
+		shootingTrainingsTable.addTraining(shootingTraining2);
+		
+		List<Sportsman> filterSportsmans = new ArrayList<Sportsman>();
+		filterSportsmans.add(sportsman1);
+		filterSportsmans.add(sportsman3);
+		List<ShootingTrainingType> filterTrainingTypes = new ArrayList<ShootingTrainingType>();
+		filterTrainingTypes.add(ShootingTrainingType.COMPETITION);
+		filterTrainingTypes.add(ShootingTrainingType.COMPLEX);
+		ShootingTrainingsFilter filter = new ShootingTrainingsFilter(filterSportsmans,
+						new Date(1000), new Date(2000), filterTrainingTypes);
+
+		List<ShootingTraining> trainingsByFilter = shootingTrainingsTable.getTrainingsWithFilter(filter);
+		assertEquals(1, trainingsByFilter.size());
+	}
+
+	/**
 	 * Test adding null training
 	 *
 	 * @throws DatabaseErrorException
@@ -39,14 +110,14 @@ public class HibernateShootingTrainingsTableTest
 		{
 			HibernateShootingTrainingsTable shootingTrainingsTable = new HibernateShootingTrainingsTable(factory);
 			shootingTrainingsTable.addTraining(null);
-			
+
 			fail();
 		}
 		catch (IllegalArgumentException ex)
 		{
 			// ok
 		}
-		
+
 		factory.close();
 	}
 
@@ -68,14 +139,14 @@ public class HibernateShootingTrainingsTableTest
 			training.setTrainingMethod(new TrainingMethod());
 			training.setSportsman(null);
 			shootingTrainingsTable.addTraining(training);
-			
+
 			fail();
 		}
 		catch (IllegalArgumentException ex)
 		{
 			// ok
 		}
-		
+
 		factory.close();
 	}
 
@@ -97,14 +168,14 @@ public class HibernateShootingTrainingsTableTest
 			training.setTrainingMethod(null);
 			training.setSportsman(new Sportsman());
 			shootingTrainingsTable.addTraining(training);
-			
+
 			fail();
 		}
 		catch (IllegalArgumentException ex)
 		{
 			// ok
 		}
-		
+
 		factory.close();
 	}
 
@@ -126,14 +197,14 @@ public class HibernateShootingTrainingsTableTest
 			training.setTrainingMethod(new TrainingMethod());
 			training.setSportsman(new Sportsman());
 			shootingTrainingsTable.addTraining(training);
-			
+
 			fail();
 		}
 		catch (IllegalArgumentException ex)
 		{
 			// ok
 		}
-		
+
 		factory.close();
 	}
 
@@ -164,23 +235,23 @@ public class HibernateShootingTrainingsTableTest
 	{
 		IOTesting.deleteTestFile();
 		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
-		
+
 		TrainingMethod trainingMethod = new TrainingMethod();
 		trainingMethod.setName("method");
 		HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(sessionFactory);
 		trainingMethodsTable.addTrainingMethod(trainingMethod);
-		
+
 		Team team = new Team();
 		team.setName("team");
 		HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
 		teamsTable.addTeam(team);
-		
+
 		Sportsman sportsman = new Sportsman();
 		sportsman.setName("sportsman");
 		sportsman.setTeam(team);
 		HibernateSportsmansTable sportsmansTable = new HibernateSportsmansTable(sessionFactory);
 		sportsmansTable.addSportsman(sportsman);
-		
+
 		ShootingTraining shootingTraining = new ShootingTraining();
 		HibernateShootingTrainingsTable shootingTrainingsTable = new HibernateShootingTrainingsTable(sessionFactory);
 		shootingTraining.setComments("comment");
@@ -211,7 +282,7 @@ public class HibernateShootingTrainingsTableTest
 		shootingTraining.setScatt(20);
 		shootingTraining.setTrail(21);
 		shootingTraining.setZeroingIn(22);
-		
+
 		shootingTraining.setMissMarksLying(new byte[]
 		{
 			1, 2, 3
@@ -220,16 +291,16 @@ public class HibernateShootingTrainingsTableTest
 		{
 			3, 4, 5
 		});
-		
+
 		shootingTrainingsTable.addTraining(shootingTraining);
-		
+
 		List<ShootingTraining> allTrainings = shootingTrainingsTable.getAllTrainings();
 		assertEquals(1, allTrainings.size());
 		assertEquals("waether", allTrainings.get(0).getWeather());
 		assertEquals("comment", allTrainings.get(0).getComments());
 		assertEquals(new Date(1000), allTrainings.get(0).getDate());
 		assertEquals(ShootingTrainingType.COMPLEX, allTrainings.get(0).getType());
-		
+
 		assertEquals(1, allTrainings.get(0).getDelayLyingCompetition());
 		assertEquals(2, allTrainings.get(0).getDelayLyingLoading());
 		assertEquals(3, allTrainings.get(0).getDelayStandingCompetition());
@@ -252,9 +323,15 @@ public class HibernateShootingTrainingsTableTest
 		assertEquals(20, allTrainings.get(0).getScatt());
 		assertEquals(21, allTrainings.get(0).getTrail());
 		assertEquals(22, allTrainings.get(0).getZeroingIn());
-		assertArrayEquals(new byte[]{1,2,3}, allTrainings.get(0).getMissMarksLying());
-		assertArrayEquals(new byte[]{3,4,5}, allTrainings.get(0).getMissMarksStanding());
-		
+		assertArrayEquals(new byte[]
+		{
+			1, 2, 3
+		}, allTrainings.get(0).getMissMarksLying());
+		assertArrayEquals(new byte[]
+		{
+			3, 4, 5
+		}, allTrainings.get(0).getMissMarksStanding());
+
 		sessionFactory.close();
 	}
 }

@@ -1,11 +1,14 @@
 package com.jshooting.hiberanteShootingDatabase;
 
 import com.jshooting.shootingDatabase.ShootingTraining;
+import com.jshooting.shootingDatabase.ShootingTrainingsFilter;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * Hibernate realization of shooting trainings table
@@ -114,5 +117,70 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 				session.close();
 			}
 		}
+	}
+
+	/**
+	 * Get shooting trainings accepted by given filter
+	 *
+	 * @param filter filter which using to determine which trainings need to get.
+	 * Must be not null
+	 * @return list of trainings get with filter. Empty if there is no accepted
+	 * trainings
+	 * @throws IllegalArgumentException filter is null
+	 * @throws DatabaseErrorException error while getting trainings
+	 */
+	@Override
+	public List<ShootingTraining> getTrainingsWithFilter(ShootingTrainingsFilter filter) throws IllegalArgumentException, DatabaseErrorException
+	{
+		if (filter == null)
+		{
+			throw new IllegalArgumentException("filter is null");
+		}
+
+		Session session = null;
+		try
+		{
+			session = sessionFactory.openSession();
+			Criteria criteria = createCriteriaByFilter(filter, session);
+			List<ShootingTraining> trainingsByFilter = criteria.list();
+			return trainingsByFilter;
+		}
+		catch (Exception ex)
+		{
+			throw new DatabaseErrorException(ex);
+		}
+		finally
+		{
+			if (session != null)
+			{
+				session.close();
+			}
+		}
+	}
+
+	/**
+	 * Create Criteria for trainings table by given filter
+	 *
+	 * @param filter filter of trainings create Criteria by
+	 * @param session hibernate session
+	 * @return Criteria created by filter
+	 * @throws IllegalArgumentException filter or session is null
+	 */
+	private Criteria createCriteriaByFilter(ShootingTrainingsFilter filter, Session session) throws IllegalArgumentException
+	{
+		if (filter == null)
+		{
+			throw new IllegalArgumentException("filter is null");
+		}
+		if (session == null)
+		{
+			throw new IllegalArgumentException("session is null");
+		}
+
+		Criteria criteriaByFilter = session.createCriteria(ShootingTraining.class);
+		criteriaByFilter.add(Restrictions.in("sportsman", filter.getSportsmans()));
+		criteriaByFilter.add(Restrictions.between("date", filter.getDateFrom(), filter.getDateTo()));
+		criteriaByFilter.add(Restrictions.in("type", filter.getTrainingTypes()));
+		return criteriaByFilter;
 	}
 }

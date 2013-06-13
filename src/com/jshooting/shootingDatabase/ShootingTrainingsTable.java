@@ -29,4 +29,16 @@ public interface ShootingTrainingsTable
 	 * @throws DatabaseErrorException error while adding
 	 */
 	public void addTraining(ShootingTraining trainingToAdd) throws IllegalArgumentException, DatabaseErrorException;
+
+	/**
+	 * Get shooting trainings accepted by given filter
+	 *
+	 * @param filter filter which using to determine which trainings need to get.
+	 * Must be not null
+	 * @return list of trainings get with filter. Empty if there is no accepted
+	 * trainings
+	 * @throws IllegalArgumentException filter is null
+	 * @throws DatabaseErrorException error while getting trainings
+	 */
+	public List<ShootingTraining> getTrainingsWithFilter(ShootingTrainingsFilter filter) throws IllegalArgumentException, DatabaseErrorException;
 }
