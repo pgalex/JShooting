@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author pgalex
  */
-public interface ShootingTrainingTable
+public interface ShootingTrainingsTable
 {
 	/**
 	 * Get all shoting trainings

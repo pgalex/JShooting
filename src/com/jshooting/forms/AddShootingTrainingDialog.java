@@ -1,7 +1,7 @@
 package com.jshooting.forms;
 
 import com.jshooting.shootingDatabase.ShootingTraining;
-import com.jshooting.shootingDatabase.ShootingTrainingTable;
+import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import com.jshooting.shootingDatabase.ShootingTrainingType;
 import com.jshooting.shootingDatabase.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
@@ -50,7 +50,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	/**
 	 * Table of shooting trainings
 	 */
-	private ShootingTrainingTable shootingTrainingTable;
+	private ShootingTrainingsTable shootingTrainingTable;
 
 	/**
 	 * Create new dialog
@@ -67,7 +67,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	public AddShootingTrainingDialog(Window parentWindow, ModalityType modalityType,
 					TeamsTable teamsTable, SportsmansTable sportsmansTable,
 					TrainingMethodsTable trainingMethodsTable,
-					ShootingTrainingTable shootingTrainingTable) throws IllegalArgumentException
+					ShootingTrainingsTable shootingTrainingTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 

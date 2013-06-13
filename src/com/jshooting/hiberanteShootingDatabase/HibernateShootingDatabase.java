@@ -1,7 +1,7 @@
 package com.jshooting.hiberanteShootingDatabase;
 
 import com.jshooting.shootingDatabase.ShootingDatabase;
-import com.jshooting.shootingDatabase.ShootingTrainingTable;
+import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.TrainingMethodsTable;
@@ -36,7 +36,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	 * Training methods table
 	 */
 	private TrainingMethodsTable trainingMethodsTable;
-	private ShootingTrainingTable shootingTrainingTable;
+	private ShootingTrainingsTable shootingTrainingTable;
 
 	/**
 	 * Create connection to database by file name
@@ -145,7 +145,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	}
 
 	@Override
-	public ShootingTrainingTable getShootingTrainingTable()
+	public ShootingTrainingsTable getShootingTrainingTable()
 	{
 		return shootingTrainingTable;
 	}

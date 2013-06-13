@@ -1,7 +1,7 @@
 package com.jshooting.hiberanteShootingDatabase;
 
 import com.jshooting.shootingDatabase.ShootingTraining;
-import com.jshooting.shootingDatabase.ShootingTrainingTable;
+import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 import org.hibernate.Session;
@@ -12,7 +12,7 @@ import org.hibernate.SessionFactory;
  *
  * @author pgalex
  */
-public class HibernateShootingTrainingsTable implements ShootingTrainingTable
+public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 {
 	/**
 	 * Hiberbate session factory using to get access to trainings table

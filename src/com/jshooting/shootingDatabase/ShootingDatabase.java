@@ -33,7 +33,7 @@ public interface ShootingDatabase
 	 *
 	 * @return database's table of shooting trainigs
 	 */
-	public ShootingTrainingTable getShootingTrainingTable();
+	public ShootingTrainingsTable getShootingTrainingTable();
 
 	/**
 	 * Close connection to database
