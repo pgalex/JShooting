@@ -75,10 +75,14 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 
 		initComponents();
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		jDateChooserDateFrom.setDate(calendar.getTime());
+		
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
 		jDateChooserDateTo.setDate(calendar.getTime());
 		setTitle("Фильтр");
 
