@@ -122,11 +122,11 @@ public class ShootingTraining
 	 */
 	private int zeroingIn;
 	/**
-	 * Тренаж (часов)
+	 * Тренаж (минут)
 	 */
 	private int trail;
 	/**
-	 * Скатт (часов)
+	 * Скатт (минут)
 	 */
 	private int scatt;
 	/**
@@ -700,7 +700,7 @@ public class ShootingTraining
 	}
 
 	/**
-	 * Тренаж (часов)
+	 * Тренаж (минут)
 	 *
 	 * @return the trail
 	 */
@@ -710,7 +710,7 @@ public class ShootingTraining
 	}
 
 	/**
-	 * Тренаж (часов)
+	 * Тренаж (минут)
 	 *
 	 * @param trail the trail to set
 	 */
@@ -720,7 +720,7 @@ public class ShootingTraining
 	}
 
 	/**
-	 * Скатт (часов)
+	 * Скатт (минут)
 	 *
 	 * @return the scatt
 	 */
@@ -730,7 +730,7 @@ public class ShootingTraining
 	}
 
 	/**
-	 * Скатт (часов)
+	 * Скатт (минут)
 	 *
 	 * @param scatt the scatt to set
 	 */

@@ -112,14 +112,14 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Тренаж, час]]></text>
+				<text><![CDATA[Тренаж, минут]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="d76412c3-443b-430d-8b44-d0d883d8785e" x="458" y="1" width="37" height="39"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Скатт, час]]></text>
+				<text><![CDATA[Скатт, минут]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="9d4639ef-fef9-41ac-ac3d-e8ef578570cb" x="495" y="1" width="135" height="20"/>
