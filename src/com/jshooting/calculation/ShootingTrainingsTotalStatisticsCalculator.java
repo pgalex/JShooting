@@ -62,11 +62,13 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalLoading = 0;
 		totalCompetition = 0;
 		totalTrail = 0;
+
 		for (ShootingTraining shootingTraining : trainings)
 		{
 			totalShoots += shootingTraining.getNumLyingInRest() + shootingTraining.getNumLyingLoading()
 							+ shootingTraining.getNumLyingCompetition() + shootingTraining.getNumStandingInRest()
-							+ shootingTraining.getNumStandingLoading() + shootingTraining.getNumStandingCompetition();
+							+ shootingTraining.getNumStandingLoading() + shootingTraining.getNumStandingCompetition()
+							+ shootingTraining.getZeroingIn();
 
 			totalInRest += shootingTraining.getNumLyingInRest() + shootingTraining.getNumStandingInRest();
 

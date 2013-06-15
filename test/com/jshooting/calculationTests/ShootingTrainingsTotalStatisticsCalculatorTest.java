@@ -30,6 +30,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		training1.setNumStandingCompetition(30);
 
 		training1.setTrail(10);
+		training1.setZeroingIn(15);
 
 		ShootingTraining training2 = new ShootingTraining();
 		training2.setNumLyingInRest(35);
@@ -37,6 +38,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		training2.setNumLyingCompetition(45);
 
 		training2.setTrail(20);
+		training2.setZeroingIn(5);
 
 		training2.setNumStandingInRest(50);
 		training2.setNumStandingLoading(55);
@@ -49,11 +51,10 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		ShootingTrainingsTotalStatisticsCalculator calculator = new ShootingTrainingsTotalStatisticsCalculator();
 		calculator.calculateFor(trainingsList);
 
-		assertEquals(390, calculator.getTotalShoots());
+		assertEquals(390 + 20/*zeroingin*/, calculator.getTotalShoots());
 		assertEquals(110, calculator.getTotalInRest());
 		assertEquals(130, calculator.getTotalLoading());
 		assertEquals(150, calculator.getTotalCompetition());
-		assertEquals(calculator.getTotalShoots(), calculator.getTotalInRest() + calculator.getTotalLoading() + calculator.getTotalCompetition());
 		assertEquals(30, calculator.getTotalTrail());
 	}
 }
