@@ -48,7 +48,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	 *
 	 * @param trainings shooting trainings which statistics need to calculate.
 	 * Must be not null, not contains null
-	 * @throws IllegalArgumentException trainings is or contains null
+	 * @throws IllegalArgumentException trainings is null or contains null
 	 */
 	public void calculateFor(List<ShootingTraining> trainings) throws IllegalArgumentException
 	{

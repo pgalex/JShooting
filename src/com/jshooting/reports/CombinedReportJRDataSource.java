@@ -115,7 +115,7 @@ public class CombinedReportJRDataSource implements JRDataSource
 	{
 		if ("number".equals(jrf.getName()))
 		{
-			return new Integer(currentSportsmansIndex + 1);
+			return currentSportsmansIndex + 1;
 		}
 		else if ("sportsmanName".equals(jrf.getName()))
 		{
