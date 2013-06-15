@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="combinedReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33573a3a-7df7-4327-b1c8-afb9bda94a84">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="76"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="DATE_FROM" class="java.lang.String"/>
 	<parameter name="DATE_TO" class="java.lang.String"/>
@@ -226,21 +226,21 @@
 			<textField>
 				<reportElement uuid="2f964794-e233-4259-85c8-6e3638428fae" x="203" y="0" width="49" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isUnderline="true"/>
+					<font isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{totalShoots}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="dc7e4e59-e47d-4144-a857-64c3fb92600c" x="252" y="0" width="47" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isUnderline="true"/>
+					<font isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{totalInRest}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="52e23c73-48c8-4215-adc3-df7d16db5eaf" x="363" y="0" width="47" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isUnderline="true"/>
+					<font isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{totalCompetition}]]></textFieldExpression>
 			</textField>
@@ -284,7 +284,7 @@
 			<textField>
 				<reportElement uuid="4cf573bb-eb1c-42cd-851e-cc6e140dfab0" x="299" y="0" width="64" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isUnderline="true"/>
+					<font isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{totalLoading}]]></textFieldExpression>
 			</textField>
