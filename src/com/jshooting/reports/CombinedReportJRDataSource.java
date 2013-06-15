@@ -59,8 +59,8 @@ public class CombinedReportJRDataSource implements JRDataSource
 		}
 
 		this.trainingsFilter = trainingsFilter;
-		statisticsCalculator = new ShootingTrainingsTotalStatisticsCalculator();
-		currentSportsmansIndex = -1;
+		this.statisticsCalculator = new ShootingTrainingsTotalStatisticsCalculator();
+		this.currentSportsmansIndex = -1;
 		this.shootingTrainingsTable = shootingTrainingsTable;
 	}
 
@@ -80,15 +80,21 @@ public class CombinedReportJRDataSource implements JRDataSource
 		}
 	}
 
+	/**
+	 * Recalculate statistics for sportsman
+	 *
+	 * @param sportsman sportsman calculate statistis for
+	 * @throws IllegalArgumentException sportsman is null
+	 */
 	private void calculateStatisticsForSportsmans(Sportsman sportsman) throws IllegalArgumentException
 	{
 		if (sportsman == null)
 		{
 			throw new IllegalArgumentException("sportsman is null");
 		}
+
 		List<Sportsman> filterSportsmans = new ArrayList<Sportsman>();
 		filterSportsmans.add(sportsman);
-
 		ShootingTrainingsFilter filterForCurrentSportsman = new ShootingTrainingsFilter(filterSportsmans,
 						trainingsFilter.getDateFrom(), trainingsFilter.getDateTo(), trainingsFilter.getTrainingTypes());
 
@@ -130,6 +136,10 @@ public class CombinedReportJRDataSource implements JRDataSource
 		else if ("totalCompetition".equals(jrf.getName()))
 		{
 			return statisticsCalculator.getTotalCompetition();
+		}
+		else if ("totalTrial".equals(jrf.getName()))
+		{
+			return statisticsCalculator.getTotalTrail();
 		}
 		else
 		{

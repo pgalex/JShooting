@@ -26,6 +26,10 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	 * Total number of shoots - competition
 	 */
 	private int totalCompetition;
+	/**
+	 * Total sum of trail minutes
+	 */
+	private int totalTrail;
 
 	/**
 	 * Create with zero values
@@ -33,6 +37,10 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	public ShootingTrainingsTotalStatisticsCalculator()
 	{
 		totalShoots = 0;
+		totalInRest = 0;
+		totalLoading = 0;
+		totalCompetition = 0;
+		totalTrail = 0;
 	}
 
 	/**
@@ -53,6 +61,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalInRest = 0;
 		totalLoading = 0;
 		totalCompetition = 0;
+		totalTrail = 0;
 		for (ShootingTraining shootingTraining : trainings)
 		{
 			totalShoots += shootingTraining.getNumLyingInRest() + shootingTraining.getNumLyingLoading()
@@ -64,6 +73,8 @@ public class ShootingTrainingsTotalStatisticsCalculator
 			totalLoading += shootingTraining.getNumLyingLoading() + shootingTraining.getNumStandingLoading();
 
 			totalCompetition += shootingTraining.getNumLyingCompetition() + shootingTraining.getNumStandingCompetition();
+
+			totalTrail += shootingTraining.getTrail();
 		}
 	}
 
@@ -127,5 +138,15 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	public int getTotalCompetition()
 	{
 		return totalCompetition;
+	}
+
+	/**
+	 * Get total sum of trial minutes
+	 *
+	 * @return total sum of trial minutes
+	 */
+	public int getTotalTrail()
+	{
+		return totalTrail;
 	}
 }
