@@ -34,6 +34,10 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	 * Total scatt in minutes
 	 */
 	private int totalScatt;
+	/**
+	 * Average of time to first lying
+	 */
+	private double averageFirstLying;
 
 	/**
 	 * Create with zero values
@@ -46,6 +50,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalCompetition = 0;
 		totalTrail = 0;
 		totalScatt = 0;
+		averageFirstLying = 0;
 	}
 
 	/**
@@ -68,6 +73,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalCompetition = 0;
 		totalTrail = 0;
 		totalScatt = 0;
+		averageFirstLying = 0;
 
 		for (ShootingTraining shootingTraining : trainings)
 		{
@@ -85,6 +91,13 @@ public class ShootingTrainingsTotalStatisticsCalculator
 			totalTrail += shootingTraining.getTrail();
 
 			totalScatt += shootingTraining.getScatt();
+
+			averageFirstLying += shootingTraining.getFirstLyingLoading() + shootingTraining.getFirstLyingCompetition();
+		}
+
+		if (trainings.size() > 0)
+		{
+			averageFirstLying /= trainings.size() * 2; // loading and competition
 		}
 	}
 
@@ -168,5 +181,15 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	public int getTotalScatt()
 	{
 		return totalScatt;
+	}
+
+	/**
+	 * Average of time to first lying
+	 *
+	 * @return the averageFirstLying
+	 */
+	public double getAverageFirstLying()
+	{
+		return averageFirstLying;
 	}
 }
