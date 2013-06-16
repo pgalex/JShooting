@@ -141,6 +141,10 @@ public class CombinedReportJRDataSource implements JRDataSource
 		{
 			return statisticsCalculator.getTotalTrail();
 		}
+		else if ("totalScatt".equals(jrf.getName()))
+		{
+			return statisticsCalculator.getTotalScatt();
+		}
 		else
 		{
 			return 0;

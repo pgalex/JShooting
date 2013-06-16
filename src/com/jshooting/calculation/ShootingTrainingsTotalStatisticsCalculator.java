@@ -30,6 +30,10 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	 * Total sum of trail minutes
 	 */
 	private int totalTrail;
+	/**
+	 * Total scatt in minutes
+	 */
+	private int totalScatt;
 
 	/**
 	 * Create with zero values
@@ -41,6 +45,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalLoading = 0;
 		totalCompetition = 0;
 		totalTrail = 0;
+		totalScatt = 0;
 	}
 
 	/**
@@ -62,6 +67,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalLoading = 0;
 		totalCompetition = 0;
 		totalTrail = 0;
+		totalScatt = 0;
 
 		for (ShootingTraining shootingTraining : trainings)
 		{
@@ -77,6 +83,8 @@ public class ShootingTrainingsTotalStatisticsCalculator
 			totalCompetition += shootingTraining.getNumLyingCompetition() + shootingTraining.getNumStandingCompetition();
 
 			totalTrail += shootingTraining.getTrail();
+
+			totalScatt += shootingTraining.getScatt();
 		}
 	}
 
@@ -150,5 +158,15 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	public int getTotalTrail()
 	{
 		return totalTrail;
+	}
+
+	/**
+	 * Total scatt in minutes
+	 *
+	 * @return the totalScatt
+	 */
+	public int getTotalScatt()
+	{
+		return totalScatt;
 	}
 }
