@@ -35,6 +35,8 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 
 		training1.setFirstLyingLoading(20);
 		training1.setFirstLyingCompetition(10);
+		training1.setFirstStandingLoading(5);
+		training1.setFirstStandingCompetition(15);
 
 		ShootingTraining training2 = new ShootingTraining();
 		training2.setNumLyingInRest(35);
@@ -51,6 +53,8 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 
 		training2.setFirstLyingLoading(5);
 		training2.setFirstLyingCompetition(5);
+		training2.setFirstStandingLoading(15);
+		training2.setFirstStandingCompetition(5);
 
 		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
 		trainingsList.add(training1);
@@ -66,5 +70,6 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		assertEquals(30, calculator.getTotalTrail());
 		assertEquals(10, calculator.getTotalScatt());
 		assertEquals(40 / 4, calculator.getAverageFirstLying(), 0.0001);
+		assertEquals(10, calculator.getAverageFirstStanding(), 0.0001);
 	}
 }
