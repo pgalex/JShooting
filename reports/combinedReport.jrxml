@@ -18,8 +18,8 @@
 	<field name="effectivenessAverage" class="java.lang.Float"/>
 	<field name="averageFirstLying" class="java.lang.Float"/>
 	<field name="averageFirstStanding" class="java.lang.Float"/>
-	<field name="averageTimeLying" class="java.lang.Float"/>
-	<field name="averageTimeStanding" class="java.lang.Float"/>
+	<field name="averageDelayLying" class="java.lang.Float"/>
+	<field name="averageDelayStanding" class="java.lang.Float"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -279,7 +279,7 @@
 			<textField>
 				<reportElement uuid="f1ae9511-6388-492b-8050-57030c1aaf66" x="716" y="0" width="43" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{averageTimeLying}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{averageDelayLying}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="4cf573bb-eb1c-42cd-851e-cc6e140dfab0" x="299" y="0" width="64" height="20"/>
@@ -296,7 +296,7 @@
 			<textField>
 				<reportElement uuid="40738be3-d6a3-47aa-b859-a14274a81cc9" x="759" y="0" width="43" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{averageTimeStanding}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{averageDelayStanding}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -153,6 +153,14 @@ public class CombinedReportJRDataSource implements JRDataSource
 		{
 			return Math.round(statisticsCalculator.getAverageFirstStanding() * 10.0) / 10.0;
 		}
+		else if ("averageDelayLying".equals(jrf.getName()))
+		{
+			return Math.round(statisticsCalculator.getAverageDelayLying() * 10.0) / 10.0;
+		}
+		else if ("averageDelayStanding".equals(jrf.getName()))
+		{
+			return Math.round(statisticsCalculator.getAverageDelayStanding() * 10.0) / 10.0;
+		}
 		else
 		{
 			return 0;

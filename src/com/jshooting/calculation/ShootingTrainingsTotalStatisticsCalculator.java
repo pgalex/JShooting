@@ -42,6 +42,14 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	 * Average of time to first - standing
 	 */
 	private double averageFirstStanding;
+	/**
+	 * Average time of shooting (delay)- lying
+	 */
+	private double averageDelayLying;
+	/**
+	 * Average time of shooting (delay)- standing
+	 */
+	private double averageDelayStanding;
 
 	/**
 	 * Create with zero values
@@ -56,6 +64,8 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalScatt = 0;
 		averageFirstLying = 0;
 		averageFirstStanding = 0;
+		averageDelayLying = 0;
+		averageDelayStanding = 0;
 	}
 
 	/**
@@ -79,6 +89,8 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalTrail = 0;
 		totalScatt = 0;
 		averageFirstLying = 0;
+		averageDelayLying = 0;
+		averageDelayStanding = 0;
 
 		for (ShootingTraining shootingTraining : trainings)
 		{
@@ -99,12 +111,17 @@ public class ShootingTrainingsTotalStatisticsCalculator
 
 			averageFirstLying += shootingTraining.getFirstLyingLoading() + shootingTraining.getFirstLyingCompetition();
 			averageFirstStanding += shootingTraining.getFirstStandingLoading() + shootingTraining.getFirstStandingCompetition();
+
+			averageDelayLying += shootingTraining.getDelayLyingLoading() + shootingTraining.getDelayLyingCompetition();
+			averageDelayStanding += shootingTraining.getDelayStandingLoading() + shootingTraining.getDelayStandingCompetition();
 		}
 
 		if (trainings.size() > 0)
 		{
 			averageFirstLying /= trainings.size() * 2; // loading and competition
 			averageFirstStanding /= trainings.size() * 2;
+			averageDelayLying /= trainings.size() * 2;
+			averageDelayStanding /= trainings.size() * 2;
 		}
 	}
 
@@ -208,5 +225,25 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	public double getAverageFirstStanding()
 	{
 		return averageFirstStanding;
+	}
+
+	/**
+	 * Average time of shooting - lying
+	 *
+	 * @return the averageDelayLying
+	 */
+	public double getAverageDelayLying()
+	{
+		return averageDelayLying;
+	}
+
+	/**
+	 * Average time of shooting - standing
+	 *
+	 * @return the averageDelayStanding
+	 */
+	public double getAverageDelayStanding()
+	{
+		return averageDelayStanding;
 	}
 }
