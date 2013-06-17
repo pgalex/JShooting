@@ -147,11 +147,11 @@ public class CombinedReportJRDataSource implements JRDataSource
 		}
 		else if ("averageFirstLying".equals(jrf.getName()))
 		{
-			return statisticsCalculator.getAverageFirstLying();
+			return Math.round(statisticsCalculator.getAverageFirstLying() * 10.0) / 10.0;
 		}
 		else if ("averageFirstStanding".equals(jrf.getName()))
 		{
-			return statisticsCalculator.getAverageFirstStanding();
+			return Math.round(statisticsCalculator.getAverageFirstStanding() * 10.0) / 10.0;
 		}
 		else
 		{
