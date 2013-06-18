@@ -54,6 +54,10 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	 * Effectiveness of all shoots - lying in percent
 	 */
 	private double effectivenessLying;
+	/**
+	 * Effectiveness of all shoots - standing in percent
+	 */
+	private double effectivenessStanding;
 
 	/**
 	 * Create with zero values
@@ -71,6 +75,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		averageDelayLying = 0;
 		averageDelayStanding = 0;
 		effectivenessLying = 0;
+		effectivenessStanding = 0;
 	}
 
 	/**
@@ -94,6 +99,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalTrail = 0;
 		totalScatt = 0;
 		effectivenessLying = 0;
+		effectivenessStanding = 0;
 
 		averageFirstLying = 0;
 		int averageFirstLyingNum = 0;
@@ -109,6 +115,9 @@ public class ShootingTrainingsTotalStatisticsCalculator
 
 		int totalShootsLying = 0;
 		int totalMissLying = 0;
+		int totalShootsStanding = 0;
+		int totalMissStanding = 0;
+
 		for (ShootingTraining shootingTraining : trainings)
 		{
 			totalShoots += shootingTraining.getNumLyingInRest() + shootingTraining.getNumLyingLoading()
@@ -171,6 +180,11 @@ public class ShootingTrainingsTotalStatisticsCalculator
 							+ shootingTraining.getNumLyingCompetition();
 			totalMissLying += shootingTraining.getMissLyingInRest() + shootingTraining.getMissLyingLoading()
 							+ shootingTraining.getMissLyingCompetition();
+
+			totalShootsStanding += shootingTraining.getNumStandingInRest() + shootingTraining.getNumStandingLoading()
+							+ shootingTraining.getNumStandingCompetition();
+			totalMissStanding += shootingTraining.getMissStandingInRest() + shootingTraining.getMissStandingLoading()
+							+ shootingTraining.getMissStandingCompetition();
 		}
 
 		if (averageFirstLyingNum > 0)
@@ -187,6 +201,9 @@ public class ShootingTrainingsTotalStatisticsCalculator
 
 		if (totalShootsLying > 0)
 			effectivenessLying = 100.0 / totalShootsLying * totalMissLying;
+
+		if (totalShootsStanding > 0)
+			effectivenessStanding = 100.0 / totalShootsStanding * totalMissStanding;
 	}
 
 	/**
@@ -319,5 +336,15 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	public double getEffectivenessLying()
 	{
 		return effectivenessLying;
+	}
+
+	/**
+	 * Effectiveness of all shoots - standing in percent
+	 *
+	 * @return the effectivenessStanding
+	 */
+	public double getEffectivenessStanding()
+	{
+		return effectivenessStanding;
 	}
 }

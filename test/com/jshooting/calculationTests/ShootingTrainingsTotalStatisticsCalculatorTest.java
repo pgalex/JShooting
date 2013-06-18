@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class ShootingTrainingsTotalStatisticsCalculatorTest
 {
 	@Test
-	public void calculationEffectivenessTest()
+	public void calculationEffectivenessLyingTest()
 	{
 		ShootingTraining training1 = new ShootingTraining();
 		training1.setNumLyingInRest(0);
@@ -50,7 +50,44 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		calculator.calculateFor(trainingsList);
 
 		assertEquals(50, calculator.getEffectivenessLying(), 0.0001);
-		
+	}
+
+	@Test
+	public void calculationEffectivenessStandingTest()
+	{
+		ShootingTraining training1 = new ShootingTraining();
+		training1.setNumStandingInRest(0);
+		training1.setNumStandingLoading(30);
+		training1.setNumStandingCompetition(30);
+		training1.setMissStandingInRest(0);
+		training1.setMissStandingLoading(3);
+		training1.setMissStandingCompetition(3);
+
+		ShootingTraining training2 = new ShootingTraining();
+		training2.setNumStandingInRest(30);
+		training2.setNumStandingLoading(0);
+		training2.setNumStandingCompetition(30);
+		training2.setMissStandingInRest(3);
+		training2.setMissStandingLoading(0);
+		training2.setMissStandingCompetition(3);
+
+		ShootingTraining training3 = new ShootingTraining();
+		training3.setNumStandingInRest(30);
+		training3.setNumStandingLoading(30);
+		training3.setNumStandingCompetition(0);
+		training3.setMissStandingInRest(3);
+		training3.setMissStandingLoading(3);
+		training3.setMissStandingCompetition(0);
+
+		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
+		trainingsList.add(training1);
+		trainingsList.add(training2);
+		trainingsList.add(training3);
+
+		ShootingTrainingsTotalStatisticsCalculator calculator = new ShootingTrainingsTotalStatisticsCalculator();
+		calculator.calculateFor(trainingsList);
+
+		assertEquals(10, calculator.getEffectivenessStanding(), 0.0001);
 	}
 
 	@Test
