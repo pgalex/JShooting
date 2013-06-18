@@ -161,6 +161,10 @@ public class CombinedReportJRDataSource implements JRDataSource
 		{
 			return Math.round(statisticsCalculator.getAverageDelayStanding() * 10.0) / 10.0;
 		}
+		else if ("effectivenessLying".equals(jrf.getName()))
+		{
+			return Math.round(statisticsCalculator.getEffectivenessLying() * 10.0) / 10.0;
+		}
 		else
 		{
 			return 0;

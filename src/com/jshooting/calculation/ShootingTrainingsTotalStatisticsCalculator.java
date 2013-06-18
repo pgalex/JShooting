@@ -50,6 +50,10 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	 * Average time of shooting (delay)- standing
 	 */
 	private double averageDelayStanding;
+	/**
+	 * Effectiveness of all shoots - lying in percent
+	 */
+	private double effectivenessLying;
 
 	/**
 	 * Create with zero values
@@ -66,6 +70,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		averageFirstStanding = 0;
 		averageDelayLying = 0;
 		averageDelayStanding = 0;
+		effectivenessLying = 0;
 	}
 
 	/**
@@ -88,6 +93,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalCompetition = 0;
 		totalTrail = 0;
 		totalScatt = 0;
+		effectivenessLying = 0;
 
 		averageFirstLying = 0;
 		int averageFirstLyingNum = 0;
@@ -101,6 +107,8 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		averageDelayStanding = 0;
 		int averageDelayStandingNum = 0;
 
+		int totalShootsLying = 0;
+		int totalMissLying = 0;
 		for (ShootingTraining shootingTraining : trainings)
 		{
 			totalShoots += shootingTraining.getNumLyingInRest() + shootingTraining.getNumLyingLoading()
@@ -112,6 +120,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 			totalCompetition += shootingTraining.getNumLyingCompetition() + shootingTraining.getNumStandingCompetition();
 			totalTrail += shootingTraining.getTrail();
 			totalScatt += shootingTraining.getScatt();
+
 
 			if (shootingTraining.getFirstLyingLoading() > 0)
 			{
@@ -157,6 +166,11 @@ public class ShootingTrainingsTotalStatisticsCalculator
 				averageDelayStanding += shootingTraining.getDelayStandingCompetition();
 				averageDelayStandingNum++;
 			}
+
+			totalShootsLying += shootingTraining.getNumLyingInRest() + shootingTraining.getNumLyingLoading()
+							+ shootingTraining.getNumLyingCompetition();
+			totalMissLying += shootingTraining.getMissLyingInRest() + shootingTraining.getMissLyingLoading()
+							+ shootingTraining.getMissLyingCompetition();
 		}
 
 		if (averageFirstLyingNum > 0)
@@ -170,6 +184,9 @@ public class ShootingTrainingsTotalStatisticsCalculator
 
 		if (averageDelayStandingNum > 0)
 			averageDelayStanding /= averageDelayStandingNum;
+
+		if (totalShootsLying > 0)
+			effectivenessLying = 100.0 / totalShootsLying * totalMissLying;
 	}
 
 	/**
@@ -292,5 +309,15 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	public double getAverageDelayStanding()
 	{
 		return averageDelayStanding;
+	}
+
+	/**
+	 * Effectiveness of all shoots - lying
+	 *
+	 * @return the effectivenessLying
+	 */
+	public double getEffectivenessLying()
+	{
+		return effectivenessLying;
 	}
 }
