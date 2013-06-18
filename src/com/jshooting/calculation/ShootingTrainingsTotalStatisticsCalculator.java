@@ -88,9 +88,18 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalCompetition = 0;
 		totalTrail = 0;
 		totalScatt = 0;
+
 		averageFirstLying = 0;
+		int averageFirstLyingNum = 0;
+
+		averageFirstStanding = 0;
+		int averageFirstStandingNum = 0;
+
 		averageDelayLying = 0;
+		int averageDelayLyingNum = 0;
+
 		averageDelayStanding = 0;
+		int averageDelayStandingNum = 0;
 
 		for (ShootingTraining shootingTraining : trainings)
 		{
@@ -98,46 +107,84 @@ public class ShootingTrainingsTotalStatisticsCalculator
 							+ shootingTraining.getNumLyingCompetition() + shootingTraining.getNumStandingInRest()
 							+ shootingTraining.getNumStandingLoading() + shootingTraining.getNumStandingCompetition()
 							+ shootingTraining.getZeroingIn();
-
 			totalInRest += shootingTraining.getNumLyingInRest() + shootingTraining.getNumStandingInRest();
-
 			totalLoading += shootingTraining.getNumLyingLoading() + shootingTraining.getNumStandingLoading();
-
 			totalCompetition += shootingTraining.getNumLyingCompetition() + shootingTraining.getNumStandingCompetition();
-
 			totalTrail += shootingTraining.getTrail();
-
 			totalScatt += shootingTraining.getScatt();
 
-			averageFirstLying += shootingTraining.getFirstLyingLoading() + shootingTraining.getFirstLyingCompetition();
-			averageFirstStanding += shootingTraining.getFirstStandingLoading() + shootingTraining.getFirstStandingCompetition();
+			if (shootingTraining.getFirstLyingLoading() > 0)
+			{
+				averageFirstLying += shootingTraining.getFirstLyingLoading();
+				averageFirstLyingNum++;
+			}
+			if (shootingTraining.getFirstLyingCompetition() > 0)
+			{
+				averageFirstLying += shootingTraining.getFirstLyingCompetition();
+				averageFirstLyingNum++;
+			}
 
-			averageDelayLying += shootingTraining.getDelayLyingLoading() + shootingTraining.getDelayLyingCompetition();
-			averageDelayStanding += shootingTraining.getDelayStandingLoading() + shootingTraining.getDelayStandingCompetition();
+			if (shootingTraining.getFirstStandingLoading() > 0)
+			{
+				averageFirstStanding += shootingTraining.getFirstStandingLoading();
+				averageFirstStandingNum++;
+			}
+			if (shootingTraining.getFirstStandingCompetition() > 0)
+			{
+				averageFirstStanding += shootingTraining.getFirstStandingCompetition();
+				averageFirstStandingNum++;
+			}
+
+			if (shootingTraining.getDelayLyingLoading() > 0)
+			{
+				averageDelayLying += shootingTraining.getDelayLyingLoading();
+				averageDelayLyingNum++;
+			}
+			if (shootingTraining.getDelayLyingCompetition() > 0)
+			{
+				averageDelayLying += shootingTraining.getDelayLyingCompetition();
+				averageDelayLyingNum++;
+			}
+
+			if (shootingTraining.getDelayStandingLoading() > 0)
+			{
+				averageDelayStanding += shootingTraining.getDelayStandingLoading();
+				averageDelayStandingNum++;
+			}
+
+			if (shootingTraining.getDelayStandingCompetition() > 0)
+			{
+				averageDelayStanding += shootingTraining.getDelayStandingCompetition();
+				averageDelayStandingNum++;
+			}
 		}
 
-		if (trainings.size() > 0)
-		{
-			averageFirstLying /= trainings.size() * 2; // loading and competition
-			averageFirstStanding /= trainings.size() * 2;
-			averageDelayLying /= trainings.size() * 2;
-			averageDelayStanding /= trainings.size() * 2;
-		}
+		if (averageFirstLyingNum > 0)
+			averageFirstLying /= averageFirstLyingNum;
+
+		if (averageFirstStandingNum > 0)
+			averageFirstStanding /= averageFirstStandingNum;
+
+		if (averageDelayLyingNum > 0)
+			averageDelayLying /= averageDelayLyingNum;
+
+		if (averageDelayStandingNum > 0)
+			averageDelayStanding /= averageDelayStandingNum;
 	}
 
 	/**
 	 * Is trainings list correct for calculation
 	 *
-	 * @param trainingListToTest testing list of shooting trainings
+	 * @param trainingsListToTest testing list of shooting trainings
 	 * @return is trainings list correct
 	 */
-	private boolean isTrainingsListCorrect(List<ShootingTraining> trainingListToTest)
+	private boolean isTrainingsListCorrect(List<ShootingTraining> trainingsListToTest)
 	{
-		if (trainingListToTest == null)
+		if (trainingsListToTest == null)
 		{
 			return false;
 		}
-		for (ShootingTraining shootingTraining : trainingListToTest)
+		for (ShootingTraining shootingTraining : trainingsListToTest)
 		{
 			if (shootingTraining == null)
 			{
