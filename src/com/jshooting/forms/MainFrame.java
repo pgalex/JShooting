@@ -138,8 +138,9 @@ public class MainFrame extends javax.swing.JFrame
     jButtonPlaces = new javax.swing.JButton();
     jButtonAddTraining = new javax.swing.JButton();
     jButtonReports = new javax.swing.JButton();
-    jButton1 = new javax.swing.JButton();
+    jButtonTrainingMethods = new javax.swing.JButton();
     jButtonTeams = new javax.swing.JButton();
+    jButtonEditTrainings = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setResizable(false);
@@ -233,12 +234,12 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButton1.setText("Средства ...");
-    jButton1.addActionListener(new java.awt.event.ActionListener()
+    jButtonTrainingMethods.setText("Средства ...");
+    jButtonTrainingMethods.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        jButton1ActionPerformed(evt);
+        jButtonTrainingMethodsActionPerformed(evt);
       }
     });
 
@@ -251,6 +252,15 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
+    jButtonEditTrainings.setText("Просмотр и редактирование тренировок ...");
+    jButtonEditTrainings.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonEditTrainingsActionPerformed(evt);
+      }
+    });
+
     org.jdesktop.layout.GroupLayout jPanelWorkingControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelWorkingControls);
     jPanelWorkingControls.setLayout(jPanelWorkingControlsLayout);
     jPanelWorkingControlsLayout.setHorizontalGroup(
@@ -260,7 +270,10 @@ public class MainFrame extends javax.swing.JFrame
         .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(jPanelWorkingControlsLayout.createSequentialGroup()
             .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-              .add(jButtonAddTraining)
+              .add(jPanelWorkingControlsLayout.createSequentialGroup()
+                .add(jButtonAddTraining)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButtonEditTrainings))
               .add(jButtonReports))
             .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
           .add(jPanelWorkingControlsLayout.createSequentialGroup()
@@ -270,7 +283,7 @@ public class MainFrame extends javax.swing.JFrame
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jButtonPlaces)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jButton1)
+            .add(jButtonTrainingMethods)
             .add(60, 60, 60))))
     );
     jPanelWorkingControlsLayout.setVerticalGroup(
@@ -280,10 +293,12 @@ public class MainFrame extends javax.swing.JFrame
         .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jButtonSportsmans)
           .add(jButtonPlaces)
-          .add(jButton1)
+          .add(jButtonTrainingMethods)
           .add(jButtonTeams))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jButtonAddTraining)
+        .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(jButtonAddTraining)
+          .add(jButtonEditTrainings))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonReports)
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -385,13 +400,13 @@ public class MainFrame extends javax.swing.JFrame
 		editSportsmansDialog.setVisible(true);
   }//GEN-LAST:event_jButtonSportsmansActionPerformed
 
-  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-  {//GEN-HEADEREND:event_jButton1ActionPerformed
+  private void jButtonTrainingMethodsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTrainingMethodsActionPerformed
+  {//GEN-HEADEREND:event_jButtonTrainingMethodsActionPerformed
 		EditTrainingMethodsDialog editTrainingMethodsDialog = new EditTrainingMethodsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
 						shootingDatabase.getTrainingMethodsTable());
 		editTrainingMethodsDialog.setLocationRelativeTo(this);
 		editTrainingMethodsDialog.setVisible(true);
-  }//GEN-LAST:event_jButton1ActionPerformed
+  }//GEN-LAST:event_jButtonTrainingMethodsActionPerformed
 
   private void jButtonAddTrainingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingActionPerformed
@@ -442,6 +457,11 @@ public class MainFrame extends javax.swing.JFrame
 			}
 		}
   }//GEN-LAST:event_jButtonReportsActionPerformed
+
+  private void jButtonEditTrainingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTrainingsActionPerformed
+  {//GEN-HEADEREND:event_jButtonEditTrainingsActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButtonEditTrainingsActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -495,14 +515,15 @@ public class MainFrame extends javax.swing.JFrame
 		});
 	}
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton jButton1;
   private javax.swing.JButton jButtonAddTraining;
   private javax.swing.JButton jButtonCreateDatabase;
+  private javax.swing.JButton jButtonEditTrainings;
   private javax.swing.JButton jButtonOpenDatabase;
   private javax.swing.JButton jButtonPlaces;
   private javax.swing.JButton jButtonReports;
   private javax.swing.JButton jButtonSportsmans;
   private javax.swing.JButton jButtonTeams;
+  private javax.swing.JButton jButtonTrainingMethods;
   private javax.swing.JLabel jLabelDatabaseFileName;
   private javax.swing.JPanel jPanelChooseDatabaseControls;
   private javax.swing.JPanel jPanelWorkingControls;

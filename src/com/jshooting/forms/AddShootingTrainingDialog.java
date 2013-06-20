@@ -13,8 +13,12 @@ import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.awt.Window;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.apache.tools.ant.taskdefs.Sleep;
 
 /**
  * Dialog for adding shooting training
@@ -99,6 +103,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 
 		initComponents();
 		setTitle("Добавить тренировку");
+		jLabelAddingToDatabaseAnimation.setVisible(false);
 
 		fillTeamsComboBox();
 		fillSportmanComboBoxBySelectedTeam();
@@ -248,6 +253,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     jLabel26 = new javax.swing.JLabel();
     jSpinnerZeroingIn = new javax.swing.JSpinner();
     jSpinnerScatt = new javax.swing.JSpinner();
+    jLabelAddingToDatabaseAnimation = new javax.swing.JLabel();
 
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][]
@@ -598,6 +604,8 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
+    jLabelAddingToDatabaseAnimation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/ajax-loader.gif"))); // NOI18N
+
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -627,11 +635,15 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
                   .add(jDateChooserTrainingDate, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-          .add(jButtonAddTraining)
+          .add(layout.createSequentialGroup()
+            .add(jButtonAddTraining)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jLabelAddingToDatabaseAnimation, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(0, 0, Short.MAX_VALUE))
           .add(layout.createSequentialGroup()
             .add(jLabel6)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 121, Short.MAX_VALUE)
-            .add(jTextFieldComments, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 707, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 23, Short.MAX_VALUE)
+            .add(jTextFieldComments, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 803, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -668,8 +680,10 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jTextFieldComments, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jLabel6))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jButtonAddTraining, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(28, 28, 28)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+          .add(jButtonAddTraining, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .add(jLabelAddingToDatabaseAnimation, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -728,6 +742,26 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 				newTraining.setScatt((Integer) jSpinnerScatt.getValue());
 
 				shootingTrainingTable.addTraining(newTraining);
+
+				jLabelAddingToDatabaseAnimation.setVisible(true);
+				Thread hidingAnimationThread = new Thread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						try
+						{
+							Thread.sleep(1500);
+						}
+						catch (InterruptedException ex)
+						{
+							// do nothing
+						}
+						jLabelAddingToDatabaseAnimation.setVisible(false);
+					}
+				});
+				hidingAnimationThread.start();
+
 			}
 			catch (DatabaseErrorException ex)
 			{
@@ -773,6 +807,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
   private javax.swing.JLabel jLabel7;
   private javax.swing.JLabel jLabel8;
   private javax.swing.JLabel jLabel9;
+  private javax.swing.JLabel jLabelAddingToDatabaseAnimation;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JSpinner jSpinnerDelayLyingCompetition;
