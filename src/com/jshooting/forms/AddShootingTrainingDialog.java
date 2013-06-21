@@ -13,12 +13,8 @@ import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.awt.Window;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import org.apache.tools.ant.taskdefs.Sleep;
 
 /**
  * Dialog for adding shooting training
