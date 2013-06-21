@@ -157,6 +157,7 @@ public class MainFrame extends javax.swing.JFrame
     jTextFieldDatabaseFileName.setEditable(false);
 
     jButtonOpenDatabase.setText("Открыть ...");
+    jButtonOpenDatabase.setToolTipText("Открыть существующую базу данных");
     jButtonOpenDatabase.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -166,6 +167,7 @@ public class MainFrame extends javax.swing.JFrame
     });
 
     jButtonCreateDatabase.setText("Создать ...");
+    jButtonCreateDatabase.setToolTipText("Создать новую базу данных");
     jButtonCreateDatabase.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -216,7 +218,7 @@ public class MainFrame extends javax.swing.JFrame
 
     jButtonPlaces.setText("УТС ...");
 
-    jButtonAddTraining.setText("Добавить тренировку ...");
+    jButtonAddTraining.setText("Добавить тренировки ...");
     jButtonAddTraining.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)

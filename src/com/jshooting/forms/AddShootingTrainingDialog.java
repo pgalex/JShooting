@@ -299,6 +299,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     jLabel6.setText("Комментарий");
 
     jButtonAddTraining.setText("Добавить тренировку");
+    jButtonAddTraining.setToolTipText("Добавить тренировку для выбранного спортсмена");
     jButtonAddTraining.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
