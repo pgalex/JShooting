@@ -7,7 +7,6 @@ import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -18,25 +17,25 @@ import org.hibernate.criterion.Restrictions;
 public class HibernateSportsmansTable implements SportsmansTable
 {
 	/**
-	 * Hiberbate session factory using to get access to sportsmans table
+	 * Hiberbate session using to get access to sportsmans table
 	 */
-	private SessionFactory sessionFactory;
+	private Session session;
 
 	/**
 	 * Create with session
 	 *
-	 * @param hibernateSessionFactory hiberbate session factory using to get
-	 * access to sportsmans table. Must be not null
-	 * @throws IllegalArgumentException hibernateSessionFactory is null
+	 * @param session hiberbate session using to get access to sportsmans table.
+	 * Must be not null
+	 * @throws IllegalArgumentException session is null
 	 */
-	public HibernateSportsmansTable(SessionFactory hibernateSessionFactory) throws IllegalArgumentException
+	public HibernateSportsmansTable(Session session) throws IllegalArgumentException
 	{
-		if (hibernateSessionFactory == null)
+		if (session == null)
 		{
-			throw new IllegalArgumentException("hibernateSessionFactory is null");
+			throw new IllegalArgumentException("session is null");
 		}
 
-		sessionFactory = hibernateSessionFactory;
+		this.session = session;
 	}
 
 	/**
@@ -48,24 +47,8 @@ public class HibernateSportsmansTable implements SportsmansTable
 	@Override
 	public List<Sportsman> getAllSportsmans() throws DatabaseErrorException
 	{
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			List<Sportsman> sportsmans = session.createCriteria(Sportsman.class).list();
-			return sportsmans;
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		List<Sportsman> sportsmans = session.createCriteria(Sportsman.class).list();
+		return sportsmans;
 	}
 
 	/**
@@ -88,25 +71,9 @@ public class HibernateSportsmansTable implements SportsmansTable
 			throw new IllegalArgumentException("sportsmanToAdd team is null");
 		}
 
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			session.save(sportsmanToAdd);
-			session.getTransaction().commit();
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		session.beginTransaction();
+		session.save(sportsmanToAdd);
+		session.getTransaction().commit();
 	}
 
 	/**
@@ -130,25 +97,9 @@ public class HibernateSportsmansTable implements SportsmansTable
 			throw new IllegalArgumentException("sportsmanToUpdate team is null");
 		}
 
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			session.update(sportsmanToUpdate);
-			session.getTransaction().commit();
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		session.beginTransaction();
+		session.update(sportsmanToUpdate);
+		session.getTransaction().commit();
 	}
 
 	/**
@@ -163,25 +114,9 @@ public class HibernateSportsmansTable implements SportsmansTable
 	@Override
 	public List<Sportsman> getSportsmansInTeam(Team team) throws IllegalArgumentException, DatabaseErrorException
 	{
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			Criteria getCriteria = session.createCriteria(Sportsman.class);
-			getCriteria.add(Restrictions.like("team", team));
-			List<Sportsman> sportsmansInTeam = getCriteria.list();
-			return sportsmansInTeam;
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		Criteria getCriteria = session.createCriteria(Sportsman.class);
+		getCriteria.add(Restrictions.like("team", team));
+		List<Sportsman> sportsmansInTeam = getCriteria.list();
+		return sportsmansInTeam;
 	}
 }

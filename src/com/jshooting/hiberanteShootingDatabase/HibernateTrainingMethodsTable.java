@@ -15,25 +15,25 @@ import org.hibernate.SessionFactory;
 public class HibernateTrainingMethodsTable implements TrainingMethodsTable
 {
 	/**
-	 * Hiberbate session factory using to get access to training methods table
+	 * Hiberbate session using to get access to training methods table
 	 */
-	private SessionFactory sessionFactory;
+	private Session session;
 
 	/**
 	 * Create with session
 	 *
-	 * @param hibernateSessionFactory hiberbate session factory using to get
-	 * access to training methods table. Must be not null
-	 * @throws IllegalArgumentException hibernateSessionFactory is null
+	 * @param session hiberbate session factory using to get access to training
+	 * methods table. Must be not null
+	 * @throws IllegalArgumentException session is null
 	 */
-	public HibernateTrainingMethodsTable(SessionFactory hibernateSessionFactory) throws IllegalArgumentException
+	public HibernateTrainingMethodsTable(Session session) throws IllegalArgumentException
 	{
-		if (hibernateSessionFactory == null)
+		if (session == null)
 		{
-			throw new IllegalArgumentException("hibernateSessionFactory is null");
+			throw new IllegalArgumentException("session is null");
 		}
 
-		sessionFactory = hibernateSessionFactory;
+		this.session = session;
 	}
 
 	/**
@@ -45,24 +45,8 @@ public class HibernateTrainingMethodsTable implements TrainingMethodsTable
 	@Override
 	public List<TrainingMethod> getAllTrainingMethods() throws DatabaseErrorException
 	{
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			List<TrainingMethod> methodsList = session.createCriteria(TrainingMethod.class).list();
-			return methodsList;
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		List<TrainingMethod> methodsList = session.createCriteria(TrainingMethod.class).list();
+		return methodsList;
 	}
 
 	/**
@@ -80,25 +64,10 @@ public class HibernateTrainingMethodsTable implements TrainingMethodsTable
 			throw new IllegalArgumentException("trainingMethodToAdd is null");
 		}
 
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			session.save(trainingMethodToAdd);
-			session.getTransaction().commit();
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+
+		session.beginTransaction();
+		session.save(trainingMethodToAdd);
+		session.getTransaction().commit();
 	}
 
 	/**
@@ -116,24 +85,8 @@ public class HibernateTrainingMethodsTable implements TrainingMethodsTable
 			throw new IllegalArgumentException("trainingMethodToUpdate is null");
 		}
 
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			session.update(trainingMethodToUpdate);
-			session.getTransaction().commit();
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		session.beginTransaction();
+		session.update(trainingMethodToUpdate);
+		session.getTransaction().commit();
 	}
 }

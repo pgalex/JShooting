@@ -5,6 +5,7 @@ import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import com.jshooting.testUtils.HibernateTesting;
 import com.jshooting.testUtils.IOTesting;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -26,7 +27,9 @@ public class HibernateTeamsTableTest
 		{
 			IOTesting.deleteTestFile();
 			SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
-			HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
+			Session session = sessionFactory.openSession();
+
+			HibernateTeamsTable teamsTable = new HibernateTeamsTable(session);
 
 			Team team1 = new Team();
 			team1.setName("team1");
@@ -40,6 +43,7 @@ public class HibernateTeamsTableTest
 			assertEquals(1, allTeams.length);
 			assertEquals("someTeam", allTeams[0].getName());
 
+			session.close();
 			sessionFactory.close();
 		}
 		catch (Exception ex)
@@ -58,7 +62,9 @@ public class HibernateTeamsTableTest
 		{
 			IOTesting.deleteTestFile();
 			SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
-			HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
+			Session session = sessionFactory.openSession();
+
+			HibernateTeamsTable teamsTable = new HibernateTeamsTable(session);
 
 			Team team1 = new Team();
 			team1.setName("team1");
@@ -74,6 +80,7 @@ public class HibernateTeamsTableTest
 			assertEquals("team1", allTeams[0].getName());
 			assertEquals("team2", allTeams[1].getName());
 
+			session.close();
 			sessionFactory.close();
 		}
 		catch (Exception ex)
@@ -92,10 +99,10 @@ public class HibernateTeamsTableTest
 	{
 		IOTesting.deleteTestFile();
 		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
-		
+		Session session = sessionFactory.openSession();
 		try
 		{
-			HibernateTeamsTable teamsTable = new HibernateTeamsTable(sessionFactory);
+			HibernateTeamsTable teamsTable = new HibernateTeamsTable(session);
 			teamsTable.addTeam(null);
 			sessionFactory.close();
 			fail();
@@ -105,6 +112,7 @@ public class HibernateTeamsTableTest
 			// ok
 		}
 
+		session.close();
 		sessionFactory.close();
 	}
 }

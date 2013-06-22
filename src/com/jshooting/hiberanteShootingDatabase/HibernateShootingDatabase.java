@@ -6,6 +6,7 @@ import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.TrainingMethodsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -20,6 +21,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	 * Hiberanate session factory
 	 */
 	private SessionFactory sessionFactory;
+	private Session session;
 	/**
 	 * Name of database file
 	 */
@@ -36,6 +38,9 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	 * Training methods table
 	 */
 	private TrainingMethodsTable trainingMethodsTable;
+	/**
+	 * Shootings trainings table
+	 */
 	private ShootingTrainingsTable shootingTrainingTable;
 
 	/**
@@ -64,11 +69,12 @@ public class HibernateShootingDatabase implements ShootingDatabase
 			hibernateConfiguration.configure();
 			hibernateConfiguration.setProperty("hibernate.connection.url", "jdbc:sqlite:" + databaseFileName);
 			sessionFactory = hibernateConfiguration.buildSessionFactory();
+			session = sessionFactory.openSession();
 
-			teamsTable = new HibernateTeamsTable(sessionFactory);
-			sportsmansTable = new HibernateSportsmansTable(sessionFactory);
-			trainingMethodsTable = new HibernateTrainingMethodsTable(sessionFactory);
-			shootingTrainingTable = new HibernateShootingTrainingsTable(sessionFactory);
+			teamsTable = new HibernateTeamsTable(session);
+			sportsmansTable = new HibernateSportsmansTable(session);
+			trainingMethodsTable = new HibernateTrainingMethodsTable(session);
+			shootingTrainingTable = new HibernateShootingTrainingsTable(session);
 		}
 		catch (Exception ex)
 		{
@@ -130,6 +136,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	@Override
 	public void close()
 	{
+		session.close();
 		sessionFactory.close();
 	}
 

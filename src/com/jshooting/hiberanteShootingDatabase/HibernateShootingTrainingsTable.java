@@ -7,7 +7,6 @@ import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -18,25 +17,25 @@ import org.hibernate.criterion.Restrictions;
 public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 {
 	/**
-	 * Hiberbate session factory using to get access to trainings table
+	 * Hiberbate session using to get access to trainings table
 	 */
-	private SessionFactory sessionFactory;
+	private Session session;
 
 	/**
 	 * Create with session
 	 *
-	 * @param hibernateSessionFactory hiberbate session factory using to get
-	 * access to trainings table. Must be not null
-	 * @throws IllegalArgumentException hibernateSessionFactory is null
+	 * @param session hiberbate session using to get access to trainings table.
+	 * Must be not null
+	 * @throws IllegalArgumentException session is null
 	 */
-	public HibernateShootingTrainingsTable(SessionFactory hibernateSessionFactory) throws IllegalArgumentException
+	public HibernateShootingTrainingsTable(Session session) throws IllegalArgumentException
 	{
-		if (hibernateSessionFactory == null)
+		if (session == null)
 		{
-			throw new IllegalArgumentException("hibernateSessionFactory is null");
+			throw new IllegalArgumentException("session is null");
 		}
 
-		sessionFactory = hibernateSessionFactory;
+		this.session = session;
 	}
 
 	/**
@@ -49,24 +48,8 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 	@Override
 	public List<ShootingTraining> getAllTrainings() throws DatabaseErrorException
 	{
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			List<ShootingTraining> trainings = session.createCriteria(ShootingTraining.class).list();
-			return trainings;
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		List<ShootingTraining> trainings = session.createCriteria(ShootingTraining.class).list();
+		return trainings;
 	}
 
 	/**
@@ -98,25 +81,9 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 			throw new IllegalArgumentException("trainingToAdd training method is null");
 		}
 
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			session.save(trainingToAdd);
-			session.getTransaction().commit();
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		session.beginTransaction();
+		session.save(trainingToAdd);
+		session.getTransaction().commit();
 	}
 
 	/**
@@ -137,25 +104,9 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 			throw new IllegalArgumentException("filter is null");
 		}
 
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			Criteria criteria = createCriteriaByFilter(filter, session);
-			List<ShootingTraining> trainingsByFilter = criteria.list();
-			return trainingsByFilter;
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		Criteria criteria = createCriteriaByFilter(filter, session);
+		List<ShootingTraining> trainingsByFilter = criteria.list();
+		return trainingsByFilter;
 	}
 
 	/**

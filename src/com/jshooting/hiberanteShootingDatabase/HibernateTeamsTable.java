@@ -5,7 +5,6 @@ import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  *
@@ -16,25 +15,25 @@ import org.hibernate.SessionFactory;
 public class HibernateTeamsTable implements TeamsTable
 {
 	/**
-	 * Hiberbate session factory using to get access to teams table
+	 * Hiberbate session using to get access to teams table
 	 */
-	private SessionFactory sessionFactory;
+	private Session session;
 
 	/**
-	 * Create by session factory
+	 * Create with session
 	 *
-	 * @param hibernateSessionFactory hiberbate session factory using to get
-	 * access to teams table. Must be not null
-	 * @throws IllegalArgumentException hibernateSessionFactory is null
+	 * @param session hiberbate session factory using to get access to teams
+	 * table. Must be not null
+	 * @throws IllegalArgumentException session is null
 	 */
-	public HibernateTeamsTable(SessionFactory hibernateSessionFactory) throws IllegalArgumentException
+	public HibernateTeamsTable(Session session) throws IllegalArgumentException
 	{
-		if (hibernateSessionFactory == null)
+		if (session == null)
 		{
-			throw new IllegalArgumentException("hibernateSessionFactory is null");
+			throw new IllegalArgumentException("session is null");
 		}
 
-		sessionFactory = hibernateSessionFactory;
+		this.session = session;
 	}
 
 	/**
@@ -46,24 +45,8 @@ public class HibernateTeamsTable implements TeamsTable
 	@Override
 	public List<Team> getAllTeams() throws DatabaseErrorException
 	{
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			List<Team> teams = session.createCriteria(Team.class).list();
-			return teams;
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		List<Team> teams = session.createCriteria(Team.class).list();
+		return teams;
 	}
 
 	/**
@@ -81,25 +64,9 @@ public class HibernateTeamsTable implements TeamsTable
 			throw new IllegalArgumentException("teamToAdd is null");
 		}
 
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			session.save(teamToAdd);
-			session.getTransaction().commit();
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		session.beginTransaction();
+		session.save(teamToAdd);
+		session.getTransaction().commit();
 	}
 
 	/**
@@ -117,25 +84,9 @@ public class HibernateTeamsTable implements TeamsTable
 			throw new IllegalArgumentException("teamToUpdate is null");
 		}
 
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			session.update(teamToUpdate);
-			session.getTransaction().commit();
-		}
-		catch (Exception ex)
-		{
-			throw new DatabaseErrorException(ex);
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
+		session.beginTransaction();
+		session.update(teamToUpdate);
+		session.getTransaction().commit();
 	}
 
 	/**
@@ -145,10 +96,8 @@ public class HibernateTeamsTable implements TeamsTable
 	 */
 	public boolean testTableForCorrection()
 	{
-		Session session = null;
 		try
 		{
-			session = sessionFactory.openSession();
 			session.beginTransaction();
 			Team testTeam = new Team();
 			testTeam.setName("testTeam");
@@ -165,13 +114,6 @@ public class HibernateTeamsTable implements TeamsTable
 		catch (Exception ex)
 		{
 			return false;
-		}
-		finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
 		}
 	}
 }

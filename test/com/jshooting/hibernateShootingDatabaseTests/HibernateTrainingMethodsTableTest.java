@@ -6,6 +6,7 @@ import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import com.jshooting.testUtils.HibernateTesting;
 import com.jshooting.testUtils.IOTesting;
 import java.util.List;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -96,8 +97,9 @@ public class HibernateTrainingMethodsTableTest
 	{
 		IOTesting.deleteTestFile();
 		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+		Session session = sessionFactory.openSession();
 
-		HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(sessionFactory);
+		HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(session);
 
 		TrainingMethod trainingMethod1 = new TrainingMethod();
 		trainingMethod1.setName("method1");
@@ -113,6 +115,7 @@ public class HibernateTrainingMethodsTableTest
 		assertEquals("method1", allMethods.get(0).getName());
 		assertEquals("method2", allMethods.get(1).getName());
 
+		session.close();
 		sessionFactory.close();
 	}
 
@@ -126,8 +129,9 @@ public class HibernateTrainingMethodsTableTest
 	{
 		IOTesting.deleteTestFile();
 		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+		Session session = sessionFactory.openSession();
 
-		HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(sessionFactory);
+		HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(session);
 
 		TrainingMethod trainingMethod1 = new TrainingMethod();
 		trainingMethod1.setName("method1");
@@ -140,6 +144,7 @@ public class HibernateTrainingMethodsTableTest
 		assertEquals(1, allMethods.size());
 		assertEquals("someMethod", allMethods.get(0).getName());
 
+		session.close();
 		sessionFactory.close();
 	}
 }
