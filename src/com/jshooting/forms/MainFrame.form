@@ -125,7 +125,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jButtonAddTraining" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonAddTrainings" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButtonEditTrainings" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -159,7 +159,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonAddTraining" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonAddTrainings" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonEditTrainings" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -183,12 +183,12 @@
             <Property name="text" type="java.lang.String" value="&#x423;&#x422;&#x421; ..."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonAddTraining">
+        <Component class="javax.swing.JButton" name="jButtonAddTrainings">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x414;&#x43e;&#x431;&#x430;&#x432;&#x438;&#x442;&#x44c; &#x442;&#x440;&#x435;&#x43d;&#x438;&#x440;&#x43e;&#x432;&#x43a;&#x438; ..."/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddTrainingActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddTrainingsActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonReports">

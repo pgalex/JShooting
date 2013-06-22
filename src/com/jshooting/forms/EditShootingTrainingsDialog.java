@@ -1,6 +1,7 @@
 package com.jshooting.forms;
 
 import java.awt.Window;
+import java.util.Calendar;
 
 /**
  * Dialog for viewing and editing exists shooting trainins
@@ -18,9 +19,20 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
 	public EditShootingTrainingsDialog(Window parentWindow, ModalityType modalityType)
 	{
 		super(parentWindow, modalityType);
-		
+
 		initComponents();
 		setTitle("Тренировки");
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		jDateChooserDateFrom.setDate(calendar.getTime());
+
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
+		jDateChooserDateTo.setDate(calendar.getTime());
 	}
 
 	/**
@@ -36,9 +48,9 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
     jScrollPane1 = new javax.swing.JScrollPane();
     jTableTrainings = new javax.swing.JTable();
     jPanelEditControls = new javax.swing.JPanel();
-    jButton1 = new javax.swing.JButton();
-    jButton2 = new javax.swing.JButton();
-    jButton3 = new javax.swing.JButton();
+    jButtonAddTrainings = new javax.swing.JButton();
+    jButtonEditSelected = new javax.swing.JButton();
+    jButtonDeleteSelected = new javax.swing.JButton();
     jPanelFilter = new javax.swing.JPanel();
     jLabel1 = new javax.swing.JLabel();
     jDateChooserDateFrom = new com.toedter.calendar.JDateChooser();
@@ -64,18 +76,18 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
     ));
     jScrollPane1.setViewportView(jTableTrainings);
 
-    jButton1.setText("Добавить тренировки ...");
-    jButton1.addActionListener(new java.awt.event.ActionListener()
+    jButtonAddTrainings.setText("Добавить тренировки ...");
+    jButtonAddTrainings.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        jButton1ActionPerformed(evt);
+        jButtonAddTrainingsActionPerformed(evt);
       }
     });
 
-    jButton2.setText("Редактировать выделенную");
+    jButtonEditSelected.setText("Редактировать выделенную");
 
-    jButton3.setText("Удалить выделенную");
+    jButtonDeleteSelected.setText("Удалить выделенную");
 
     org.jdesktop.layout.GroupLayout jPanelEditControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelEditControls);
     jPanelEditControls.setLayout(jPanelEditControlsLayout);
@@ -83,11 +95,11 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
       jPanelEditControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanelEditControlsLayout.createSequentialGroup()
         .addContainerGap()
-        .add(jButton1)
+        .add(jButtonAddTrainings)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jButton2)
+        .add(jButtonEditSelected)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jButton3)
+        .add(jButtonDeleteSelected)
         .addContainerGap(34, Short.MAX_VALUE))
     );
     jPanelEditControlsLayout.setVerticalGroup(
@@ -95,9 +107,9 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
       .add(jPanelEditControlsLayout.createSequentialGroup()
         .addContainerGap()
         .add(jPanelEditControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jButton1)
-          .add(jButton2)
-          .add(jButton3))
+          .add(jButtonAddTrainings)
+          .add(jButtonEditSelected)
+          .add(jButtonDeleteSelected))
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -117,11 +129,11 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
         .add(jLabel2)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jDateChooserDateFrom, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(jDateChooserDateFrom, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jLabel3)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jDateChooserDateTo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(jDateChooserDateTo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanelFilterLayout.setVerticalGroup(
@@ -159,15 +171,14 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
-  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-  {//GEN-HEADEREND:event_jButton1ActionPerformed
-    // TODO add your handling code here:
-  }//GEN-LAST:event_jButton1ActionPerformed
-
+  private void jButtonAddTrainingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingsActionPerformed
+  {//GEN-HEADEREND:event_jButtonAddTrainingsActionPerformed
+		// TODO add your handling code here:
+  }//GEN-LAST:event_jButtonAddTrainingsActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton jButton1;
-  private javax.swing.JButton jButton2;
-  private javax.swing.JButton jButton3;
+  private javax.swing.JButton jButtonAddTrainings;
+  private javax.swing.JButton jButtonDeleteSelected;
+  private javax.swing.JButton jButtonEditSelected;
   private com.toedter.calendar.JDateChooser jDateChooserDateFrom;
   private com.toedter.calendar.JDateChooser jDateChooserDateTo;
   private javax.swing.JLabel jLabel1;

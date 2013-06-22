@@ -136,7 +136,7 @@ public class MainFrame extends javax.swing.JFrame
     jPanelWorkingControls = new javax.swing.JPanel();
     jButtonSportsmans = new javax.swing.JButton();
     jButtonPlaces = new javax.swing.JButton();
-    jButtonAddTraining = new javax.swing.JButton();
+    jButtonAddTrainings = new javax.swing.JButton();
     jButtonReports = new javax.swing.JButton();
     jButtonTrainingMethods = new javax.swing.JButton();
     jButtonTeams = new javax.swing.JButton();
@@ -218,12 +218,12 @@ public class MainFrame extends javax.swing.JFrame
 
     jButtonPlaces.setText("УТС ...");
 
-    jButtonAddTraining.setText("Добавить тренировки ...");
-    jButtonAddTraining.addActionListener(new java.awt.event.ActionListener()
+    jButtonAddTrainings.setText("Добавить тренировки ...");
+    jButtonAddTrainings.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        jButtonAddTrainingActionPerformed(evt);
+        jButtonAddTrainingsActionPerformed(evt);
       }
     });
 
@@ -273,7 +273,7 @@ public class MainFrame extends javax.swing.JFrame
           .add(jPanelWorkingControlsLayout.createSequentialGroup()
             .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
               .add(jPanelWorkingControlsLayout.createSequentialGroup()
-                .add(jButtonAddTraining)
+                .add(jButtonAddTrainings)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButtonEditTrainings))
               .add(jButtonReports))
@@ -299,7 +299,7 @@ public class MainFrame extends javax.swing.JFrame
           .add(jButtonTeams))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jButtonAddTraining)
+          .add(jButtonAddTrainings)
           .add(jButtonEditTrainings))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonReports)
@@ -410,15 +410,15 @@ public class MainFrame extends javax.swing.JFrame
 		editTrainingMethodsDialog.setVisible(true);
   }//GEN-LAST:event_jButtonTrainingMethodsActionPerformed
 
-  private void jButtonAddTrainingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingActionPerformed
-  {//GEN-HEADEREND:event_jButtonAddTrainingActionPerformed
+  private void jButtonAddTrainingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingsActionPerformed
+  {//GEN-HEADEREND:event_jButtonAddTrainingsActionPerformed
 		AddShootingTrainingDialog addShootingTrainingDialog = new AddShootingTrainingDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
 						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable(),
 						shootingDatabase.getTrainingMethodsTable(),
 						shootingDatabase.getShootingTrainingsTable());
 		addShootingTrainingDialog.setLocationRelativeTo(this);
 		addShootingTrainingDialog.setVisible(true);
-  }//GEN-LAST:event_jButtonAddTrainingActionPerformed
+  }//GEN-LAST:event_jButtonAddTrainingsActionPerformed
 
   private void jButtonTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTeamsActionPerformed
   {//GEN-HEADEREND:event_jButtonTeamsActionPerformed
@@ -462,7 +462,9 @@ public class MainFrame extends javax.swing.JFrame
 
   private void jButtonEditTrainingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTrainingsActionPerformed
   {//GEN-HEADEREND:event_jButtonEditTrainingsActionPerformed
-    // TODO add your handling code here:
+		EditShootingTrainingsDialog editShootingTrainingsDialog = new EditShootingTrainingsDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
+		editShootingTrainingsDialog.setLocationRelativeTo(this);
+		editShootingTrainingsDialog.setVisible(true);
   }//GEN-LAST:event_jButtonEditTrainingsActionPerformed
 
 	/**
@@ -517,7 +519,7 @@ public class MainFrame extends javax.swing.JFrame
 		});
 	}
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton jButtonAddTraining;
+  private javax.swing.JButton jButtonAddTrainings;
   private javax.swing.JButton jButtonCreateDatabase;
   private javax.swing.JButton jButtonEditTrainings;
   private javax.swing.JButton jButtonOpenDatabase;
