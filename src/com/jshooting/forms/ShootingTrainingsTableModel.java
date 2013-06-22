@@ -3,6 +3,10 @@ package com.jshooting.forms;
 import com.jshooting.shootingDatabase.ShootingTraining;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -12,11 +16,18 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ShootingTrainingsTableModel extends AbstractTableModel
 {
+	/**
+	 * Index of sportsman column
+	 */
 	public static final int SPORTSMAN_COLUMN_INDEX = 0;
 	/**
 	 * Table of shooting trainings using to fill table model
 	 */
 	private ShootingTrainingsTable shootingTrainingsTable;
+	/**
+	 * List of trainings that model currently working with
+	 */
+	private List<ShootingTraining> trainings;
 
 	/**
 	 * Create model filling with trainings table
@@ -33,19 +44,21 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 		}
 
 		this.shootingTrainingsTable = shootingTrainingsTable;
+
+		try
+		{
+			trainings = shootingTrainingsTable.getAllTrainings();
+		}
+		catch (DatabaseErrorException ex)
+		{
+			trainings = new ArrayList<ShootingTraining>();
+		}
 	}
 
 	@Override
 	public int getRowCount()
 	{
-		try
-		{
-			return shootingTrainingsTable.getAllTrainings().size();
-		}
-		catch (DatabaseErrorException ex)
-		{
-			return 0;
-		}
+		return trainings.size();
 	}
 
 	@Override
@@ -69,22 +82,15 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex)
 	{
-		try
-		{
-			// rowIndex always must be in range
-			ShootingTraining trainingAtRow = shootingTrainingsTable.getAllTrainings().get(rowIndex);
+		// rowIndex always must be in range
+		ShootingTraining trainingAtRow = trainings.get(rowIndex);
 
-			switch (columnIndex)
-			{
-				case SPORTSMAN_COLUMN_INDEX:
-					return trainingAtRow.getSportsman().getName();
-				default:
-					return null;
-			}
-		}
-		catch (DatabaseErrorException ex)
+		switch (columnIndex)
 		{
-			return null;
+			case SPORTSMAN_COLUMN_INDEX:
+				return trainingAtRow.getSportsman().getName();
+			default:
+				return null;
 		}
 	}
 }

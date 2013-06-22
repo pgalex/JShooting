@@ -29,27 +29,31 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
 					ShootingTrainingsTable shootingTrainingsTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-
+		
 		if (shootingTrainingsTable == null)
 		{
 			throw new IllegalArgumentException("shootingTrainingsTable is null");
 		}
-
+		
 		shootingTrainingsTableModel = new ShootingTrainingsTableModel(shootingTrainingsTable);
-
+		
 		initComponents();
 		setTitle("Тренировки");
-
+		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		jDateChooserDateFrom.setDate(calendar.getTime());
-
+		
 		calendar.set(Calendar.HOUR_OF_DAY, 23);
 		calendar.set(Calendar.MINUTE, 59);
 		calendar.set(Calendar.SECOND, 59);
 		jDateChooserDateTo.setDate(calendar.getTime());
+
+		//
+		jPanelFilter.setVisible(false);
+		//
 	}
 
 	/**
