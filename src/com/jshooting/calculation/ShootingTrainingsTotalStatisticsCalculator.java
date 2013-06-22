@@ -347,4 +347,14 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	{
 		return effectivenessStanding;
 	}
+
+	/**
+	 * Get average standing and lying effectiveness
+	 *
+	 * @return average of standing and lying effectiveness
+	 */
+	public double getAverageEffectiveness()
+	{
+		return (effectivenessStanding + effectivenessLying) / 2.0;
+	}
 }

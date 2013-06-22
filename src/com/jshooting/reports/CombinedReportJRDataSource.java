@@ -169,6 +169,10 @@ public class CombinedReportJRDataSource implements JRDataSource
 		{
 			return Math.round(statisticsCalculator.getEffectivenessStanding() * 10.0) / 10.0;
 		}
+		else if ("effectivenessAverage".equals(jrf.getName()))
+		{
+			return Math.round(statisticsCalculator.getAverageEffectiveness() * 10.0) / 10.0;
+		}
 		else
 		{
 			return 0;
