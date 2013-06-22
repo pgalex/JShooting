@@ -11,6 +11,14 @@ import java.util.List;
 public interface ShootingTrainingsTable
 {
 	/**
+	 * Delete given shooting training from table
+	 *
+	 * @param trainingToDelete deleting training
+	 * @throws IllegalArgumentException trainingToDelete is null
+	 */
+	public void deleteTraining(ShootingTraining trainingToDelete) throws IllegalArgumentException;
+
+	/**
 	 * Get all shoting trainings
 	 *
 	 * @return list of all shoting trainings. Empty if there is no trainings in

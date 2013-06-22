@@ -110,6 +110,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x423;&#x434;&#x430;&#x43b;&#x438;&#x442;&#x44c; &#x432;&#x44b;&#x434;&#x435;&#x43b;&#x435;&#x43d;&#x43d;&#x443;&#x44e;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDeleteSelectedActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -28,6 +28,48 @@ import static org.junit.Assert.*;
  */
 public class HibernateShootingTrainingsTableTest
 {
+	@Test
+	public void deletingTest() throws DatabaseErrorException
+	{
+		IOTesting.deleteTestFile();
+		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
+		Session session = sessionFactory.openSession();
+
+		TrainingMethod trainingMethod = new TrainingMethod();
+		trainingMethod.setName("method");
+		HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(session);
+		trainingMethodsTable.addTrainingMethod(trainingMethod);
+
+		Team team = new Team();
+		team.setName("team");
+		HibernateTeamsTable teamsTable = new HibernateTeamsTable(session);
+		teamsTable.addTeam(team);
+
+		Sportsman sportsman = new Sportsman();
+		sportsman.setName("sportsman");
+		sportsman.setTeam(team);
+		HibernateSportsmansTable sportsmansTable = new HibernateSportsmansTable(session);
+		sportsmansTable.addSportsman(sportsman);
+
+		ShootingTraining shootingTraining = new ShootingTraining();
+		HibernateShootingTrainingsTable shootingTrainingsTable = new HibernateShootingTrainingsTable(session);
+		shootingTraining.setComments("comment");
+		shootingTraining.setDate(new Date(1000));
+		shootingTraining.setSportsman(sportsman);
+		shootingTraining.setTrainingMethod(trainingMethod);
+		shootingTraining.setType(ShootingTrainingType.COMPLEX);
+		shootingTraining.setWeather("waether");
+		
+		shootingTrainingsTable.addTraining(shootingTraining);
+		assertEquals(1, shootingTrainingsTable.getAllTrainings().size());
+		ShootingTraining deletingTraining = shootingTrainingsTable.getAllTrainings().get(0);
+		shootingTrainingsTable.deleteTraining(deletingTraining);
+		assertEquals(0, shootingTrainingsTable.getAllTrainings().size());
+
+		session.close();
+		sessionFactory.close();
+	}
+
 	/**
 	 * Test getting trainings by filter
 	 *
@@ -39,7 +81,7 @@ public class HibernateShootingTrainingsTableTest
 		IOTesting.deleteTestFile();
 		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
 		Session session = sessionFactory.openSession();
-		
+
 		TrainingMethod trainingMethod = new TrainingMethod();
 		trainingMethod.setName("method");
 		HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(session);
@@ -84,7 +126,7 @@ public class HibernateShootingTrainingsTableTest
 		HibernateShootingTrainingsTable shootingTrainingsTable = new HibernateShootingTrainingsTable(session);
 		shootingTrainingsTable.addTraining(shootingTraining1);
 		shootingTrainingsTable.addTraining(shootingTraining2);
-		
+
 		List<Sportsman> filterSportsmans = new ArrayList<Sportsman>();
 		filterSportsmans.add(sportsman1);
 		filterSportsmans.add(sportsman3);
@@ -96,7 +138,7 @@ public class HibernateShootingTrainingsTableTest
 
 		List<ShootingTraining> trainingsByFilter = shootingTrainingsTable.getTrainingsWithFilter(filter);
 		assertEquals(1, trainingsByFilter.size());
-		
+
 		session.close();
 		sessionFactory.close();
 	}
@@ -249,7 +291,7 @@ public class HibernateShootingTrainingsTableTest
 		IOTesting.deleteTestFile();
 		SessionFactory sessionFactory = HibernateTesting.createSessionFactoryByFile(IOTesting.TEST_FILE_NAME);
 		Session session = sessionFactory.openSession();
-		
+
 		TrainingMethod trainingMethod = new TrainingMethod();
 		trainingMethod.setName("method");
 		HibernateTrainingMethodsTable trainingMethodsTable = new HibernateTrainingMethodsTable(session);

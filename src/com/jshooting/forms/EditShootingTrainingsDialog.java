@@ -30,28 +30,28 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
 					ShootingTrainingsTable shootingTrainingsTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-		
+
 		if (shootingTrainingsTable == null)
 		{
 			throw new IllegalArgumentException("shootingTrainingsTable is null");
 		}
-		
+
 		shootingTrainingsTableModel = new ShootingTrainingsTableModel(shootingTrainingsTable);
-		
+
 		initComponents();
 		setTitle("Тренировки");
-		
+
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		jDateChooserDateFrom.setDate(calendar.getTime());
-		
+
 		calendar.set(Calendar.HOUR_OF_DAY, 23);
 		calendar.set(Calendar.MINUTE, 59);
 		calendar.set(Calendar.SECOND, 59);
 		jDateChooserDateTo.setDate(calendar.getTime());
-		
+
 		jTableTrainings.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		//
@@ -102,6 +102,13 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
     jButtonEditSelected.setEnabled(false);
 
     jButtonDeleteSelected.setText("Удалить выделенную");
+    jButtonDeleteSelected.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonDeleteSelectedActionPerformed(evt);
+      }
+    });
 
     org.jdesktop.layout.GroupLayout jPanelEditControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelEditControls);
     jPanelEditControls.setLayout(jPanelEditControlsLayout);
@@ -189,6 +196,14 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
   {//GEN-HEADEREND:event_jButtonAddTrainingsActionPerformed
 		// TODO add your handling code here:
   }//GEN-LAST:event_jButtonAddTrainingsActionPerformed
+
+  private void jButtonDeleteSelectedActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonDeleteSelectedActionPerformed
+  {//GEN-HEADEREND:event_jButtonDeleteSelectedActionPerformed
+		if (jTableTrainings.getSelectedRowCount() > 0)
+		{
+			shootingTrainingsTableModel.removeRowAndTraining(jTableTrainings.getSelectedRow());
+		}
+  }//GEN-LAST:event_jButtonDeleteSelectedActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTrainings;
   private javax.swing.JButton jButtonDeleteSelected;

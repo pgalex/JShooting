@@ -34,8 +34,27 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		{
 			throw new IllegalArgumentException("session is null");
 		}
-
+		
 		this.session = session;
+	}
+
+	/**
+	 * Delete given shooting training from table
+	 *
+	 * @param trainingToDelete deleting training
+	 * @throws IllegalArgumentException trainingToDelete is null
+	 */
+	@Override
+	public void deleteTraining(ShootingTraining trainingToDelete) throws IllegalArgumentException
+	{
+		if (trainingToDelete == null)
+		{
+			throw new IllegalArgumentException("trainingToDelete is null");
+		}
+		
+		session.beginTransaction();
+		session.delete(trainingToDelete);
+		session.getTransaction().commit();
 	}
 
 	/**
@@ -80,7 +99,7 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		{
 			throw new IllegalArgumentException("trainingToAdd training method is null");
 		}
-
+		
 		session.beginTransaction();
 		session.save(trainingToAdd);
 		session.getTransaction().commit();
@@ -103,7 +122,7 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		{
 			throw new IllegalArgumentException("filter is null");
 		}
-
+		
 		Criteria criteria = createCriteriaByFilter(filter, session);
 		List<ShootingTraining> trainingsByFilter = criteria.list();
 		return trainingsByFilter;
@@ -127,7 +146,7 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		{
 			throw new IllegalArgumentException("session is null");
 		}
-
+		
 		Criteria criteriaByFilter = session.createCriteria(ShootingTraining.class);
 		criteriaByFilter.add(Restrictions.in("sportsman", filter.getSportsmans()));
 		criteriaByFilter.add(Restrictions.between("date", filter.getDateFrom(), filter.getDateTo()));

@@ -29,9 +29,14 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 	 */
 	public static final int TYPE_COLUMN_INDEX = 2;
 	/**
-	 * List of trainings that model currently working with
+	 * List of trainings that model currently working with. Using for optimization
+	 * accessing to database
 	 */
 	private List<ShootingTraining> trainings;
+	/**
+	 * Shooting trainings table that model works with
+	 */
+	private ShootingTrainingsTable shootingTrainingsTable;
 
 	/**
 	 * Create model filling with trainings table
@@ -47,6 +52,16 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 			throw new IllegalArgumentException("shootingTrainingsTable is null");
 		}
 
+		this.shootingTrainingsTable = shootingTrainingsTable;
+
+		fillTrainingsArrayFromDatabase();
+	}
+
+	/**
+	 * Fill currently working trainings array from database's trainings table
+	 */
+	private void fillTrainingsArrayFromDatabase()
+	{
 		try
 		{
 			trainings = shootingTrainingsTable.getAllTrainings();
@@ -55,6 +70,25 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 		{
 			trainings = new ArrayList<ShootingTraining>();
 		}
+	}
+
+	/**
+	 * Remove row and training from database by row index
+	 *
+	 * @param rowIndex index of row to remove
+	 * @throws IllegalArgumentException rowIndex is less than zero or more than
+	 * rows count
+	 */
+	public void removeRowAndTraining(int rowIndex) throws IllegalArgumentException
+	{
+		if (rowIndex < 0 || rowIndex >= trainings.size())
+		{
+			throw new IllegalArgumentException("rowIndex is out of range");
+		}
+
+		shootingTrainingsTable.deleteTraining(trainings.get(rowIndex));
+		trainings.remove(rowIndex);
+		fireTableRowsDeleted(rowIndex, rowIndex);
 	}
 
 	@Override
