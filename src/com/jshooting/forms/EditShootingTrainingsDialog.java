@@ -3,6 +3,7 @@ package com.jshooting.forms;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import java.awt.Window;
 import java.util.Calendar;
+import javax.swing.ListSelectionModel;
 
 /**
  * Dialog for viewing and editing exists shooting trainins
@@ -50,6 +51,8 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
 		calendar.set(Calendar.MINUTE, 59);
 		calendar.set(Calendar.SECOND, 59);
 		jDateChooserDateTo.setDate(calendar.getTime());
+		
+		jTableTrainings.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		//
 		jPanelFilter.setVisible(false);
@@ -86,6 +89,7 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
     jScrollPane1.setViewportView(jTableTrainings);
 
     jButtonAddTrainings.setText("Добавить тренировки ...");
+    jButtonAddTrainings.setEnabled(false);
     jButtonAddTrainings.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -95,6 +99,7 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
     });
 
     jButtonEditSelected.setText("Редактировать выделенную");
+    jButtonEditSelected.setEnabled(false);
 
     jButtonDeleteSelected.setText("Удалить выделенную");
 
@@ -109,7 +114,7 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
         .add(jButtonEditSelected)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonDeleteSelected)
-        .addContainerGap(34, Short.MAX_VALUE))
+        .addContainerGap(167, Short.MAX_VALUE))
     );
     jPanelEditControlsLayout.setVerticalGroup(
       jPanelEditControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -172,7 +177,7 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
       .add(layout.createSequentialGroup()
         .add(jPanelFilter, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanelEditControls, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
     );

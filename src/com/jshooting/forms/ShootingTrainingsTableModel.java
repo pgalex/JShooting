@@ -1,12 +1,12 @@
 package com.jshooting.forms;
 
 import com.jshooting.shootingDatabase.ShootingTraining;
+import com.jshooting.shootingDatabase.ShootingTrainingType;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -21,9 +21,13 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 	 */
 	public static final int SPORTSMAN_COLUMN_INDEX = 0;
 	/**
-	 * Table of shooting trainings using to fill table model
+	 * Index of date column
 	 */
-	private ShootingTrainingsTable shootingTrainingsTable;
+	public static final int DATE_COLUMN_INDEX = 1;
+	/**
+	 * Index of type column
+	 */
+	public static final int TYPE_COLUMN_INDEX = 2;
 	/**
 	 * List of trainings that model currently working with
 	 */
@@ -42,8 +46,6 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 		{
 			throw new IllegalArgumentException("shootingTrainingsTable is null");
 		}
-
-		this.shootingTrainingsTable = shootingTrainingsTable;
 
 		try
 		{
@@ -64,7 +66,7 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 	@Override
 	public int getColumnCount()
 	{
-		return 1;
+		return 3;
 	}
 
 	@Override
@@ -74,6 +76,10 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 		{
 			case SPORTSMAN_COLUMN_INDEX:
 				return "Спортсмен";
+			case DATE_COLUMN_INDEX:
+				return "Дата";
+			case TYPE_COLUMN_INDEX:
+				return "Тип тренировки";
 			default:
 				return "<>";
 		}
@@ -89,8 +95,18 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 		{
 			case SPORTSMAN_COLUMN_INDEX:
 				return trainingAtRow.getSportsman().getName();
+			case DATE_COLUMN_INDEX:
+				return (new SimpleDateFormat("dd.MM.yyyy")).format(trainingAtRow.getDate());
+			case TYPE_COLUMN_INDEX:
+				return ShootingTrainingType.toString(trainingAtRow.getType());
 			default:
 				return null;
 		}
+	}
+
+	@Override
+	public boolean isCellEditable(int i, int i1)
+	{
+		return false;
 	}
 }
