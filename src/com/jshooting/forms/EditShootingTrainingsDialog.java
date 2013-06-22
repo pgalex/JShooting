@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import java.awt.Window;
 import java.util.Calendar;
 
@@ -11,14 +12,30 @@ import java.util.Calendar;
 public class EditShootingTrainingsDialog extends javax.swing.JDialog
 {
 	/**
+	 * Table model of trainings table
+	 */
+	private ShootingTrainingsTableModel shootingTrainingsTableModel;
+
+	/**
 	 * Create new dialog
 	 *
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
+	 * @param shootingTrainingsTable editing table of shooting trainings. Must be
+	 * not null
+	 * @throws IllegalArgumentException shootingTrainingsTable is null
 	 */
-	public EditShootingTrainingsDialog(Window parentWindow, ModalityType modalityType)
+	public EditShootingTrainingsDialog(Window parentWindow, ModalityType modalityType,
+					ShootingTrainingsTable shootingTrainingsTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
+
+		if (shootingTrainingsTable == null)
+		{
+			throw new IllegalArgumentException("shootingTrainingsTable is null");
+		}
+
+		shootingTrainingsTableModel = new ShootingTrainingsTableModel(shootingTrainingsTable);
 
 		initComponents();
 		setTitle("Тренировки");
@@ -61,19 +78,7 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setMinimumSize(new java.awt.Dimension(629, 158));
 
-    jTableTrainings.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null}
-      },
-      new String []
-      {
-        "Title 1", "Title 2", "Title 3", "Title 4"
-      }
-    ));
+    jTableTrainings.setModel(shootingTrainingsTableModel);
     jScrollPane1.setViewportView(jTableTrainings);
 
     jButtonAddTrainings.setText("Добавить тренировки ...");
