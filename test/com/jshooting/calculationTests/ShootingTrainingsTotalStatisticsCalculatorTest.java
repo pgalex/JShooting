@@ -1,6 +1,6 @@
 package com.jshooting.calculationTests;
 
-import com.jshooting.calculation.ShootingTrainingsTotalStatisticsCalculator;
+import com.jshooting.calculation.ShootingTrainingsStatisticsCalculator;
 import com.jshooting.shootingDatabase.ShootingTraining;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Tests of ShootingTrainingsTotalStatisticsCalculator
+ * Tests of ShootingTrainingsStatisticsCalculator
  *
  * @author pgalex
  */
@@ -46,7 +46,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		trainingsList.add(training2);
 		trainingsList.add(training3);
 
-		ShootingTrainingsTotalStatisticsCalculator calculator = new ShootingTrainingsTotalStatisticsCalculator();
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
 		calculator.calculateFor(trainingsList);
 
 		assertEquals(50, calculator.getEffectivenessLying(), 0.0001);
@@ -84,7 +84,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		trainingsList.add(training2);
 		trainingsList.add(training3);
 
-		ShootingTrainingsTotalStatisticsCalculator calculator = new ShootingTrainingsTotalStatisticsCalculator();
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
 		calculator.calculateFor(trainingsList);
 
 		assertEquals(10, calculator.getEffectivenessStanding(), 0.0001);
@@ -111,7 +111,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		trainingsList.add(training1);
 		trainingsList.add(training2);
 
-		ShootingTrainingsTotalStatisticsCalculator calculator = new ShootingTrainingsTotalStatisticsCalculator();
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
 		calculator.calculateFor(trainingsList);
 
 		assertEquals(25, calculator.getAverageDelayLying(), 0.0001);
@@ -148,7 +148,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		trainingsList.add(training1);
 		trainingsList.add(training2);
 
-		ShootingTrainingsTotalStatisticsCalculator calculator = new ShootingTrainingsTotalStatisticsCalculator();
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
 		calculator.calculateFor(trainingsList);
 
 		assertEquals(10, calculator.getAverageFirstLying(), 0.0001);
@@ -197,7 +197,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		trainingsList.add(training1);
 		trainingsList.add(training2);
 
-		ShootingTrainingsTotalStatisticsCalculator calculator = new ShootingTrainingsTotalStatisticsCalculator();
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
 		calculator.calculateFor(trainingsList);
 
 		assertEquals(390 + 20/*zeroingin*/, calculator.getTotalShoots());

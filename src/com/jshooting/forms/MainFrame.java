@@ -137,10 +137,11 @@ public class MainFrame extends javax.swing.JFrame
     jButtonSportsmans = new javax.swing.JButton();
     jButtonPlaces = new javax.swing.JButton();
     jButtonAddTrainings = new javax.swing.JButton();
-    jButtonReports = new javax.swing.JButton();
+    jButtonCombined = new javax.swing.JButton();
     jButtonTrainingMethods = new javax.swing.JButton();
     jButtonTeams = new javax.swing.JButton();
     jButtonEditTrainings = new javax.swing.JButton();
+    jButtonIndividualReport = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setResizable(false);
@@ -227,12 +228,12 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButtonReports.setText("Отчет ...");
-    jButtonReports.addActionListener(new java.awt.event.ActionListener()
+    jButtonCombined.setText("Групповой отчет ...");
+    jButtonCombined.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        jButtonReportsActionPerformed(evt);
+        jButtonCombinedActionPerformed(evt);
       }
     });
 
@@ -263,6 +264,8 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
+    jButtonIndividualReport.setText("Индивидуальный отчет ...");
+
     org.jdesktop.layout.GroupLayout jPanelWorkingControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelWorkingControls);
     jPanelWorkingControls.setLayout(jPanelWorkingControlsLayout);
     jPanelWorkingControlsLayout.setHorizontalGroup(
@@ -276,7 +279,10 @@ public class MainFrame extends javax.swing.JFrame
                 .add(jButtonAddTrainings)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButtonEditTrainings))
-              .add(jButtonReports))
+              .add(jPanelWorkingControlsLayout.createSequentialGroup()
+                .add(jButtonCombined)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButtonIndividualReport)))
             .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
           .add(jPanelWorkingControlsLayout.createSequentialGroup()
             .add(jButtonTeams)
@@ -302,7 +308,9 @@ public class MainFrame extends javax.swing.JFrame
           .add(jButtonAddTrainings)
           .add(jButtonEditTrainings))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jButtonReports)
+        .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(jButtonCombined)
+          .add(jButtonIndividualReport))
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -428,8 +436,8 @@ public class MainFrame extends javax.swing.JFrame
 		editTeamsDialog.setVisible(true);
   }//GEN-LAST:event_jButtonTeamsActionPerformed
 
-  private void jButtonReportsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonReportsActionPerformed
-  {//GEN-HEADEREND:event_jButtonReportsActionPerformed
+  private void jButtonCombinedActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCombinedActionPerformed
+  {//GEN-HEADEREND:event_jButtonCombinedActionPerformed
 		ShootingTrainingsFilterDialog filterDialog = new ShootingTrainingsFilterDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
 						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable());
 		filterDialog.setLocationRelativeTo(this);
@@ -458,7 +466,7 @@ public class MainFrame extends javax.swing.JFrame
 				Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-  }//GEN-LAST:event_jButtonReportsActionPerformed
+  }//GEN-LAST:event_jButtonCombinedActionPerformed
 
   private void jButtonEditTrainingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTrainingsActionPerformed
   {//GEN-HEADEREND:event_jButtonEditTrainingsActionPerformed
@@ -521,11 +529,12 @@ public class MainFrame extends javax.swing.JFrame
 	}
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTrainings;
+  private javax.swing.JButton jButtonCombined;
   private javax.swing.JButton jButtonCreateDatabase;
   private javax.swing.JButton jButtonEditTrainings;
+  private javax.swing.JButton jButtonIndividualReport;
   private javax.swing.JButton jButtonOpenDatabase;
   private javax.swing.JButton jButtonPlaces;
-  private javax.swing.JButton jButtonReports;
   private javax.swing.JButton jButtonSportsmans;
   private javax.swing.JButton jButtonTeams;
   private javax.swing.JButton jButtonTrainingMethods;

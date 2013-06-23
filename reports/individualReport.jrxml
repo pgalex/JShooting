@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="individualReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33573a3a-7df7-4327-b1c8-afb9bda94a84">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="combinedReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33573a3a-7df7-4327-b1c8-afb9bda94a84">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="2"/>
 	<property name="ireport.y" value="0"/>
-	<field name="number" class="java.lang.String"/>
-	<field name="sportsmanName" class="java.lang.String"/>
-	<field name="field1" class="java.lang.String"/>
+	<parameter name="DATE_FROM" class="java.lang.String"/>
+	<parameter name="DATE_TO" class="java.lang.String"/>
+	<parameter name="SPORTSMAN_NAME" class="java.lang.String"/>
+	<field name="totalShoots" class="java.lang.Integer"/>
+	<field name="totalInRest" class="java.lang.Integer"/>
+	<field name="totalLoading" class="java.lang.Integer"/>
+	<field name="totalCompetition" class="java.lang.Integer"/>
+	<field name="totalTrial" class="java.lang.Integer"/>
+	<field name="totalScatt" class="java.lang.Integer"/>
+	<field name="effectivenessLying" class="java.lang.Float"/>
+	<field name="effectivenessStanding" class="java.lang.Float"/>
+	<field name="effectivenessAverage" class="java.lang.Float"/>
+	<field name="averageFirstLying" class="java.lang.Float"/>
+	<field name="averageFirstStanding" class="java.lang.Float"/>
+	<field name="averageDelayLying" class="java.lang.Float"/>
+	<field name="averageDelayStanding" class="java.lang.Float"/>
+	<field name="trainingDate" class="java.lang.String"/>
+	<field name="trainingType" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="59" splitType="Stretch">
+		<band height="99" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="26978346-eceb-421d-ab20-9968cbfef018" x="0" y="0" width="802" height="28"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -19,90 +34,292 @@
 				<text><![CDATA[Отчет по стрелковой подготовке]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="88c2016d-37ce-41fc-90c7-b06db22b9154" x="0" y="41" width="100" height="18"/>
-				<textElement>
+				<reportElement uuid="88c2016d-37ce-41fc-90c7-b06db22b9154" x="0" y="69" width="97" height="18"/>
+				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Период]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="71cf3f63-4991-4f8e-9226-39667af779ef" x="100" y="41" width="18" height="18"/>
-				<textElement>
+				<reportElement uuid="71cf3f63-4991-4f8e-9226-39667af779ef" x="97" y="69" width="21" height="18"/>
+				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[с]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="481a17d0-2874-4516-9646-3ebf87e2431c" x="214" y="41" width="21" height="18"/>
-				<textElement>
+				<reportElement uuid="481a17d0-2874-4516-9646-3ebf87e2431c" x="203" y="69" width="29" height="18"/>
+				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[по]]></text>
 			</staticText>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="72" splitType="Stretch">
-			<staticText>
-				<reportElement uuid="e1eeef5a-4394-4cba-9426-a01c3032e817" x="0" y="52" width="40" height="20"/>
+			<textField>
+				<reportElement uuid="b48771ad-94e1-4187-b4fe-1726406e7aea" x="118" y="69" width="85" height="18"/>
 				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="12"/>
 				</textElement>
-				<text><![CDATA[№]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="8ae6e708-7880-435a-8c28-5eaf9d97d45f" x="40" y="52" width="174" height="20"/>
+				<textFieldExpression><![CDATA[$P{DATE_FROM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b888aab0-e526-4c70-89c8-572e7a588f3c" x="232" y="69" width="100" height="18"/>
 				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DATE_TO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="205e0606-c435-4366-8d62-f36ecc94d297" x="0" y="40" width="97" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Спортсмен]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="2f221727-840e-42c0-9219-8a90b4beb2db" x="97" y="40" width="398" height="18"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SPORTSMAN_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="45754b93-36b6-48cd-82f2-5c9efda4ce04" x="235" y="0" width="167" height="19"/>
-				<textElement>
+				<reportElement uuid="45754b93-36b6-48cd-82f2-5c9efda4ce04" x="203" y="0" width="207" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Количество выстрелов]]></text>
 			</staticText>
+			<staticText>
+				<reportElement uuid="2dbb9402-e4f3-498a-89d0-e668212c9ad2" x="203" y="20" width="49" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Всего]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="61d8892c-243f-497b-ac06-b00e94bf0e5e" x="252" y="20" width="47" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[В покое]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5feda0f2-638e-4771-b932-287c7b710e26" x="299" y="20" width="64" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[С нагрузки]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="89e09518-bc61-4a7b-a64d-9e93974ff6ca" x="363" y="20" width="47" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Соревн.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="07b93a34-a124-449d-9d21-e0a0cac9a177" x="410" y="1" width="48" height="39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Тренаж, минут]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d76412c3-443b-430d-8b44-d0d883d8785e" x="458" y="1" width="37" height="39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Скатт, минут]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9d4639ef-fef9-41ac-ac3d-e8ef578570cb" x="495" y="1" width="135" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Результативность, %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ec06f025-7b6d-4b61-8268-b256574fda84" x="495" y="20" width="42" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[лежа]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6dbd9261-d4f6-4b16-b675-1cef46a26b73" x="537" y="20" width="42" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[стоя]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="641ddcf0-45d8-43dd-8535-6d413ac9c9df" x="579" y="20" width="51" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[среднее]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0f8dbcae-1a2a-433b-b7ad-e89fbc84d754" x="630" y="20" width="43" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[лежа]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e77270c1-849f-4b69-9c8f-fda4fbd11d25" x="716" y="20" width="43" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[лежа]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="70d8cecb-d132-40f2-b14d-43b33383ca88" x="759" y="20" width="43" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[стоя]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92835bc3-20e4-4486-bfd9-baa63f901e54" x="673" y="20" width="43" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[стоя]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f433898a-415d-4294-8d2b-4a147c04af2d" x="630" y="1" width="86" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Время 1 выст.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9e1451ff-9cc8-4796-911c-a36031bbea6c" x="716" y="1" width="86" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Время стрельбы]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="79f09525-6504-4fe0-952d-187409409852" x="0" y="20" width="73" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Дата]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="35074dd1-9866-48c1-a537-2131782965d6" x="73" y="20" width="130" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Тип тренировки]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="40" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement uuid="da7effb7-0a4d-4cf6-b1b8-0acec957ff20" x="0" y="0" width="40" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+				<reportElement uuid="2f964794-e233-4259-85c8-6e3638428fae" x="203" y="0" width="49" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalShoots}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="6ac1352a-156b-4cfe-b241-cdb866e156aa" x="40" y="0" width="174" height="20"/>
-				<textElement>
-					<font isItalic="true"/>
+				<reportElement uuid="dc7e4e59-e47d-4144-a857-64c3fb92600c" x="252" y="0" width="47" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sportsmanName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{totalInRest}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="52e23c73-48c8-4215-adc3-df7d16db5eaf" x="363" y="0" width="47" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalCompetition}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c72e317c-bd52-45e5-a82d-3b51ddbdc1e2" x="410" y="0" width="48" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{totalTrial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f6d36032-d983-4861-9798-6fb3142b24f0" x="458" y="0" width="37" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{totalScatt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="07790a38-30e9-4df5-9d20-b3611461c381" x="495" y="0" width="42" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{effectivenessLying}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d007c4f5-e5c1-4924-a42e-4bba7a48d7b0" x="537" y="0" width="42" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{effectivenessStanding}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8be60454-e054-4f33-ae13-0281fe7eecbb" x="579" y="0" width="51" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{effectivenessAverage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ff0eae03-4522-42d8-92c0-62624b92989e" x="673" y="0" width="43" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{averageFirstStanding}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f1ae9511-6388-492b-8050-57030c1aaf66" x="716" y="0" width="43" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{averageDelayLying}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4cf573bb-eb1c-42cd-851e-cc6e140dfab0" x="299" y="0" width="64" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalLoading}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c73b447c-9eb6-4480-ab73-f840359352b1" x="630" y="0" width="43" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{averageFirstLying}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="40738be3-d6a3-47aa-b859-a14274a81cc9" x="759" y="0" width="43" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{averageDelayStanding}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4f990352-6dc2-4068-9947-2ef4aaee56c7" x="0" y="0" width="73" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{trainingDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f6c2d1ef-18d9-4a12-8ac8-010e68f49d64" x="73" y="0" width="130" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{trainingType}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="48" splitType="Stretch"/>
+		<band height="1" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="36" splitType="Stretch">
-			<textField>
-				<reportElement uuid="0ae48c06-4a68-4444-b60c-71420f657b24" x="682" y="0" width="80" height="20"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement uuid="e9a8078c-06ca-4b0a-b70d-529700e69f57" x="762" y="0" width="40" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="23" splitType="Stretch"/>
+		<band height="1" splitType="Stretch"/>
 	</summary>
 </jasperReport>

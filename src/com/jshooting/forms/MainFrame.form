@@ -129,7 +129,11 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButtonEditTrainings" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jButtonReports" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jButtonCombined" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jButtonIndividualReport" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -163,7 +167,10 @@
                       <Component id="jButtonEditTrainings" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButtonReports" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButtonCombined" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonIndividualReport" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -191,12 +198,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddTrainingsActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonReports">
+        <Component class="javax.swing.JButton" name="jButtonCombined">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x447;&#x435;&#x442; ..."/>
+            <Property name="text" type="java.lang.String" value="&#x413;&#x440;&#x443;&#x43f;&#x43f;&#x43e;&#x432;&#x43e;&#x439; &#x43e;&#x442;&#x447;&#x435;&#x442; ..."/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReportsActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCombinedActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonTrainingMethods">
@@ -222,6 +229,11 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditTrainingsActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonIndividualReport">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x418;&#x43d;&#x434;&#x438;&#x432;&#x438;&#x434;&#x443;&#x430;&#x43b;&#x44c;&#x43d;&#x44b;&#x439; &#x43e;&#x442;&#x447;&#x435;&#x442; ..."/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

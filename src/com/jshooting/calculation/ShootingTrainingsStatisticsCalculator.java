@@ -1,14 +1,15 @@
 package com.jshooting.calculation;
 
 import com.jshooting.shootingDatabase.ShootingTraining;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Calculates total statistics values for list of trainings
+ * Calculates statistics values for shooting trainings
  *
  * @author pgalex
  */
-public class ShootingTrainingsTotalStatisticsCalculator
+public class ShootingTrainingsStatisticsCalculator
 {
 	/**
 	 * Total number(sum) of shoots
@@ -62,7 +63,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	/**
 	 * Create with zero values
 	 */
-	public ShootingTrainingsTotalStatisticsCalculator()
+	public ShootingTrainingsStatisticsCalculator()
 	{
 		totalShoots = 0;
 		totalInRest = 0;
@@ -79,7 +80,26 @@ public class ShootingTrainingsTotalStatisticsCalculator
 	}
 
 	/**
-	 * Calculate statistics for given trainings
+	 * Calculate statistics for given training
+	 *
+	 * @param training shooting training which statistics need to calculate. Must
+	 * be not null
+	 * @throws IllegalArgumentException training is null
+	 */
+	public void calculateFor(ShootingTraining training) throws IllegalArgumentException
+	{
+		if (training == null)
+		{
+			throw new IllegalArgumentException("training is null");
+		}
+		
+		ArrayList<ShootingTraining> listOfTrainings = new ArrayList<ShootingTraining>();
+		listOfTrainings.add(training);
+		calculateFor(listOfTrainings);
+	}
+
+	/**
+	 * Calculate statistics for given list of trainings
 	 *
 	 * @param trainings shooting trainings which statistics need to calculate.
 	 * Must be not null, not contains null
@@ -91,7 +111,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		{
 			throw new IllegalArgumentException("trainings incorrect");
 		}
-
+		
 		totalShoots = 0;
 		totalInRest = 0;
 		totalLoading = 0;
@@ -100,24 +120,24 @@ public class ShootingTrainingsTotalStatisticsCalculator
 		totalScatt = 0;
 		effectivenessLying = 0;
 		effectivenessStanding = 0;
-
+		
 		averageFirstLying = 0;
 		int averageFirstLyingNum = 0;
-
+		
 		averageFirstStanding = 0;
 		int averageFirstStandingNum = 0;
-
+		
 		averageDelayLying = 0;
 		int averageDelayLyingNum = 0;
-
+		
 		averageDelayStanding = 0;
 		int averageDelayStandingNum = 0;
-
+		
 		int totalShootsLying = 0;
 		int totalMissLying = 0;
 		int totalShootsStanding = 0;
 		int totalMissStanding = 0;
-
+		
 		for (ShootingTraining shootingTraining : trainings)
 		{
 			totalShoots += shootingTraining.getNumLyingInRest() + shootingTraining.getNumLyingLoading()
@@ -129,8 +149,8 @@ public class ShootingTrainingsTotalStatisticsCalculator
 			totalCompetition += shootingTraining.getNumLyingCompetition() + shootingTraining.getNumStandingCompetition();
 			totalTrail += shootingTraining.getTrail();
 			totalScatt += shootingTraining.getScatt();
-
-
+			
+			
 			if (shootingTraining.getFirstLyingLoading() > 0)
 			{
 				averageFirstLying += shootingTraining.getFirstLyingLoading();
@@ -141,7 +161,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 				averageFirstLying += shootingTraining.getFirstLyingCompetition();
 				averageFirstLyingNum++;
 			}
-
+			
 			if (shootingTraining.getFirstStandingLoading() > 0)
 			{
 				averageFirstStanding += shootingTraining.getFirstStandingLoading();
@@ -152,7 +172,7 @@ public class ShootingTrainingsTotalStatisticsCalculator
 				averageFirstStanding += shootingTraining.getFirstStandingCompetition();
 				averageFirstStandingNum++;
 			}
-
+			
 			if (shootingTraining.getDelayLyingLoading() > 0)
 			{
 				averageDelayLying += shootingTraining.getDelayLyingLoading();
@@ -163,45 +183,45 @@ public class ShootingTrainingsTotalStatisticsCalculator
 				averageDelayLying += shootingTraining.getDelayLyingCompetition();
 				averageDelayLyingNum++;
 			}
-
+			
 			if (shootingTraining.getDelayStandingLoading() > 0)
 			{
 				averageDelayStanding += shootingTraining.getDelayStandingLoading();
 				averageDelayStandingNum++;
 			}
-
+			
 			if (shootingTraining.getDelayStandingCompetition() > 0)
 			{
 				averageDelayStanding += shootingTraining.getDelayStandingCompetition();
 				averageDelayStandingNum++;
 			}
-
+			
 			totalShootsLying += shootingTraining.getNumLyingInRest() + shootingTraining.getNumLyingLoading()
 							+ shootingTraining.getNumLyingCompetition();
 			totalMissLying += shootingTraining.getMissLyingInRest() + shootingTraining.getMissLyingLoading()
 							+ shootingTraining.getMissLyingCompetition();
-
+			
 			totalShootsStanding += shootingTraining.getNumStandingInRest() + shootingTraining.getNumStandingLoading()
 							+ shootingTraining.getNumStandingCompetition();
 			totalMissStanding += shootingTraining.getMissStandingInRest() + shootingTraining.getMissStandingLoading()
 							+ shootingTraining.getMissStandingCompetition();
 		}
-
+		
 		if (averageFirstLyingNum > 0)
 			averageFirstLying /= averageFirstLyingNum;
-
+		
 		if (averageFirstStandingNum > 0)
 			averageFirstStanding /= averageFirstStandingNum;
-
+		
 		if (averageDelayLyingNum > 0)
 			averageDelayLying /= averageDelayLyingNum;
-
+		
 		if (averageDelayStandingNum > 0)
 			averageDelayStanding /= averageDelayStandingNum;
-
+		
 		if (totalShootsLying > 0)
 			effectivenessLying = 100.0 / totalShootsLying * totalMissLying;
-
+		
 		if (totalShootsStanding > 0)
 			effectivenessStanding = 100.0 / totalShootsStanding * totalMissStanding;
 	}
