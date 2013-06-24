@@ -265,6 +265,13 @@ public class MainFrame extends javax.swing.JFrame
     });
 
     jButtonIndividualReport.setText("Индивидуальный отчет ...");
+    jButtonIndividualReport.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonIndividualReportActionPerformed(evt);
+      }
+    });
 
     org.jdesktop.layout.GroupLayout jPanelWorkingControlsLayout = new org.jdesktop.layout.GroupLayout(jPanelWorkingControls);
     jPanelWorkingControls.setLayout(jPanelWorkingControlsLayout);
@@ -475,6 +482,19 @@ public class MainFrame extends javax.swing.JFrame
 		editShootingTrainingsDialog.setLocationRelativeTo(this);
 		editShootingTrainingsDialog.setVisible(true);
   }//GEN-LAST:event_jButtonEditTrainingsActionPerformed
+
+  private void jButtonIndividualReportActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonIndividualReportActionPerformed
+  {//GEN-HEADEREND:event_jButtonIndividualReportActionPerformed
+		ShootingTrainingsFilterDialog filterDialog = new ShootingTrainingsFilterDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable());
+		filterDialog.setOneSportsmanSelectingMode();
+		filterDialog.setLocationRelativeTo(this);
+		filterDialog.setVisible(true);
+		
+		if (filterDialog.isOKButtonPressed())
+		{
+		}
+  }//GEN-LAST:event_jButtonIndividualReportActionPerformed
 
 	/**
 	 * @param args the command line arguments

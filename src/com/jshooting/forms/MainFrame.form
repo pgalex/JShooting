@@ -234,6 +234,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x418;&#x43d;&#x434;&#x438;&#x432;&#x438;&#x434;&#x443;&#x430;&#x43b;&#x44c;&#x43d;&#x44b;&#x439; &#x43e;&#x442;&#x447;&#x435;&#x442; ..."/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonIndividualReportActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

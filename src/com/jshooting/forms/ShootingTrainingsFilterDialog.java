@@ -14,6 +14,8 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.TitledBorder;
 
 /**
  * Shooting trainings filter setup dialog. Using to find which trainings need to
@@ -66,24 +68,27 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 			throw new IllegalArgumentException("sportsmansTable is null");
 		}
 
-		okButtonPressed = false;
+		this.okButtonPressed = false;
 		this.teamsTable = teamsTable;
 		this.sportsmansTable = sportsmansTable;
-
-		teamsComboBoxModel = new DefaultComboBoxModel();
-		sportsmansListModel = new DefaultListModel();
+		this.teamsComboBoxModel = new DefaultComboBoxModel();
+		this.sportsmansListModel = new DefaultListModel();
 
 		initComponents();
+
+		jListSportsmans.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		setSportsmanPanelTitleBySelectionMode();
+						
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		jDateChooserDateFrom.setDate(calendar.getTime());
-		
 		calendar.set(Calendar.HOUR_OF_DAY, 23);
 		calendar.set(Calendar.MINUTE, 59);
 		calendar.set(Calendar.SECOND, 59);
 		jDateChooserDateTo.setDate(calendar.getTime());
+
 		setTitle("Фильтр");
 
 		fillTeamsComboBox();
@@ -137,6 +142,38 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 		{
 			sportsmansListModel.removeAllElements();
 		}
+	}
+
+	/**
+	 * Set title of sportsmans panel by sportsmans list selection mode
+	 */
+	private void setSportsmanPanelTitleBySelectionMode()
+	{
+		TitledBorder sportsmanPanelBorder = (TitledBorder) jPanelSportsmans.getBorder();
+		switch (jListSportsmans.getSelectionMode())
+		{
+			case ListSelectionModel.SINGLE_SELECTION:
+				sportsmanPanelBorder.setTitle("Спортсмены (только один)");
+				break;
+			default:
+				sportsmanPanelBorder.setTitle("Спортсмены");
+				break;
+		}
+	}
+
+	/**
+	 * Set that can select only one sportsman in dialog
+	 */
+	public void setOneSportsmanSelectingMode()
+	{
+		int[] selectedItemsIndexes = jListSportsmans.getSelectedIndices();
+		if (selectedItemsIndexes.length > 0)
+		{
+			jListSportsmans.setSelectedIndex(selectedItemsIndexes[0]);
+		}
+
+		jListSportsmans.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		setSportsmanPanelTitleBySelectionMode();
 	}
 
 	/**
