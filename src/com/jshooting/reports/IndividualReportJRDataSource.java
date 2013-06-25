@@ -50,7 +50,7 @@ public class IndividualReportJRDataSource implements JRDataSource
 		{
 			throw new IllegalArgumentException("trainingsFilter is null");
 		}
-		if (trainingsFilter.getSportsmans().size() >= 1)
+		if (trainingsFilter.getSportsmans().size() > 1)
 		{
 			throw new IllegalArgumentException("filter must contains one sportsman");
 		}
@@ -76,8 +76,15 @@ public class IndividualReportJRDataSource implements JRDataSource
 	public boolean next() throws JRException
 	{
 		currentlyTrainingIndex++;
-		statisticsCalculator.calculateFor(reportingTrainings.get(currentlyTrainingIndex));
-		return currentlyTrainingIndex < reportingTrainings.size();
+		if (currentlyTrainingIndex < reportingTrainings.size())
+		{
+			statisticsCalculator.calculateFor(reportingTrainings.get(currentlyTrainingIndex));
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override

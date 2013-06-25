@@ -1,6 +1,7 @@
 package com.jshooting.forms;
 
 import com.jshooting.reports.CombinedReportJRDataSource;
+import com.jshooting.reports.IndividualReportJRDataSource;
 import com.jshooting.shootingDatabase.ShootingDatabase;
 import com.jshooting.shootingDatabase.ShootingDatabaseFactory;
 import java.awt.Dialog;
@@ -457,15 +458,14 @@ public class MainFrame extends javax.swing.JFrame
 
 			try
 			{
-				JasperDesign desing = JRXmlLoader.load("reports/combinedReport.jrxml");
-				JasperReport report = JasperCompileManager.compileReport(desing);
-
 				Map<String, Object> parametersMap = new HashMap<String, Object>();
 				DateFormat reportDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 				parametersMap.put("DATE_FROM", reportDateFormat.format(filterDialog.getFilter().getDateFrom()));
 				parametersMap.put("DATE_TO", reportDateFormat.format(filterDialog.getFilter().getDateTo()));
+				
+				JasperDesign desing = JRXmlLoader.load("reports/combinedReport.jrxml");
+				JasperReport report = JasperCompileManager.compileReport(desing);
 				JasperPrint jasperPrint = JasperFillManager.fillReport(report, parametersMap, reportDataSource);
-
 				JasperViewer.viewReport(jasperPrint, false);
 			}
 			catch (JRException ex)
@@ -490,9 +490,31 @@ public class MainFrame extends javax.swing.JFrame
 		filterDialog.setOneSportsmanSelectingMode();
 		filterDialog.setLocationRelativeTo(this);
 		filterDialog.setVisible(true);
-		
+
 		if (filterDialog.isOKButtonPressed())
 		{
+			IndividualReportJRDataSource reportDataSource = new IndividualReportJRDataSource(filterDialog.getFilter(),
+							shootingDatabase.getShootingTrainingsTable());
+			try
+			{
+				Map<String, Object> parametersMap = new HashMap<String, Object>();
+				DateFormat reportDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+				parametersMap.put("DATE_FROM", reportDateFormat.format(filterDialog.getFilter().getDateFrom()));
+				parametersMap.put("DATE_TO", reportDateFormat.format(filterDialog.getFilter().getDateTo()));
+				if (filterDialog.getFilter().getSportsmans().size() > 0)
+				{
+					parametersMap.put("SPORTSMAN_NAME", filterDialog.getFilter().getSportsmans().get(0).getName());
+				}
+
+				JasperDesign desing = JRXmlLoader.load("reports/individualReport.jrxml");
+				JasperReport report = JasperCompileManager.compileReport(desing);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(report, parametersMap, reportDataSource);
+				JasperViewer.viewReport(jasperPrint, false);
+			}
+			catch (JRException ex)
+			{
+				Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
   }//GEN-LAST:event_jButtonIndividualReportActionPerformed
 

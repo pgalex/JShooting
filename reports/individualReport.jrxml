@@ -217,7 +217,7 @@
 			</staticText>
 			<staticText>
 				<reportElement uuid="35074dd1-9866-48c1-a537-2131782965d6" x="73" y="20" width="130" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Тип тренировки]]></text>
@@ -303,7 +303,9 @@
 			</textField>
 			<textField>
 				<reportElement uuid="4f990352-6dc2-4068-9947-2ef4aaee56c7" x="0" y="0" width="73" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isStrikeThrough="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{trainingDate}]]></textFieldExpression>
 			</textField>
 			<textField>
