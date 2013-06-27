@@ -179,7 +179,6 @@ public class MainFrame extends javax.swing.JFrame
     jButtonAddTrainings = new javax.swing.JButton();
     jButtonCombined = new javax.swing.JButton();
     jButtonTrainingMethods = new javax.swing.JButton();
-    jButtonTeams = new javax.swing.JButton();
     jButtonEditTrainings = new javax.swing.JButton();
     jButtonIndividualReport = new javax.swing.JButton();
 
@@ -287,15 +286,6 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButtonTeams.setText("Команды ...");
-    jButtonTeams.addActionListener(new java.awt.event.ActionListener()
-    {
-      public void actionPerformed(java.awt.event.ActionEvent evt)
-      {
-        jButtonTeamsActionPerformed(evt);
-      }
-    });
-
     jButtonEditTrainings.setText("Просмотр и редактирование тренировок ...");
     jButtonEditTrainings.addActionListener(new java.awt.event.ActionListener()
     {
@@ -322,25 +312,20 @@ public class MainFrame extends javax.swing.JFrame
         .addContainerGap()
         .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(jPanelWorkingControlsLayout.createSequentialGroup()
-            .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-              .add(jPanelWorkingControlsLayout.createSequentialGroup()
-                .add(jButtonAddTrainings)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jButtonEditTrainings))
-              .add(jPanelWorkingControlsLayout.createSequentialGroup()
-                .add(jButtonCombined)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jButtonIndividualReport)))
-            .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(jButtonAddTrainings)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jButtonEditTrainings))
           .add(jPanelWorkingControlsLayout.createSequentialGroup()
-            .add(jButtonTeams)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jButtonCombined)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jButtonIndividualReport))
+          .add(jPanelWorkingControlsLayout.createSequentialGroup()
             .add(jButtonSportsmans)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jButtonPlaces)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jButtonTrainingMethods)
-            .add(60, 60, 60))))
+            .add(jButtonTrainingMethods)))
+        .addContainerGap(10, Short.MAX_VALUE))
     );
     jPanelWorkingControlsLayout.setVerticalGroup(
       jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -349,8 +334,7 @@ public class MainFrame extends javax.swing.JFrame
         .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jButtonSportsmans)
           .add(jButtonPlaces)
-          .add(jButtonTrainingMethods)
-          .add(jButtonTeams))
+          .add(jButtonTrainingMethods))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jButtonAddTrainings)
@@ -444,14 +428,6 @@ public class MainFrame extends javax.swing.JFrame
 		addShootingTrainingDialog.setLocationRelativeTo(this);
 		addShootingTrainingDialog.setVisible(true);
   }//GEN-LAST:event_jButtonAddTrainingsActionPerformed
-
-  private void jButtonTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTeamsActionPerformed
-  {//GEN-HEADEREND:event_jButtonTeamsActionPerformed
-		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
-						shootingDatabase.getTeamsTable());
-		editTeamsDialog.setLocationRelativeTo(this);
-		editTeamsDialog.setVisible(true);
-  }//GEN-LAST:event_jButtonTeamsActionPerformed
 
   private void jButtonCombinedActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCombinedActionPerformed
   {//GEN-HEADEREND:event_jButtonCombinedActionPerformed
@@ -587,7 +563,6 @@ public class MainFrame extends javax.swing.JFrame
   private javax.swing.JButton jButtonOpenDatabase;
   private javax.swing.JButton jButtonPlaces;
   private javax.swing.JButton jButtonSportsmans;
-  private javax.swing.JButton jButtonTeams;
   private javax.swing.JButton jButtonTrainingMethods;
   private javax.swing.JLabel jLabelDatabaseFileName;
   private javax.swing.JPanel jPanelChooseDatabaseControls;

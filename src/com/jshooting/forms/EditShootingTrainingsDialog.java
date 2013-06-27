@@ -39,7 +39,6 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
 		shootingTrainingsTableModel = new ShootingTrainingsTableModel(shootingTrainingsTable);
 
 		initComponents();
-		setTitle("Тренировки");
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -83,6 +82,7 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
     jDateChooserDateTo = new com.toedter.calendar.JDateChooser();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    setTitle("Тренировки");
     setMinimumSize(new java.awt.Dimension(629, 158));
 
     jTableTrainings.setModel(shootingTrainingsTableModel);
