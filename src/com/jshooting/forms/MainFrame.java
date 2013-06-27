@@ -41,38 +41,54 @@ public class MainFrame extends javax.swing.JFrame
 	private ShootingDatabase shootingDatabase;
 
 	/**
-	 * Creates new form MainFrame
+	 * Creates new form
 	 */
 	public MainFrame()
 	{
-		initComponents();
-		setTitle("JShooting");
-
 		shootingDatabase = null;
 
+		initComponents();
+
 		readUserSettings();
-		File previousDatabaseFile = new File(UserSettings.getInstance().getDatabaseFileName());
-		if (previousDatabaseFile.exists())
-		{
-			connectToPreviousDatabase();
-		}
-		else
-		{
-			shootingDatabase = null;
-		}
+		connectToDatabaseFromUserSettings();
 
 		updateWorkingControlsEnable();
 		updateDatabaseFileNameControls();
 	}
 
 	/**
-	 * Connect to database, by file name saved in user settings
+	 * Try connect to database by database file name storing in user settings
 	 */
-	private void connectToPreviousDatabase()
+	private void connectToDatabaseFromUserSettings()
+	{
+		boolean noDatabaseSavedInSettings = UserSettings.getInstance().getDatabaseFileName().isEmpty();
+		if (noDatabaseSavedInSettings)
+		{
+			shootingDatabase = null;
+			return;
+		}
+
+		File previousDatabaseFile = new File(UserSettings.getInstance().getDatabaseFileName());
+		if (previousDatabaseFile.exists())
+		{
+			openOrCreateDatabase(previousDatabaseFile.getPath());
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Не удалось подключится к предыдущей базе данных", "Предупреждение", JOptionPane.WARNING_MESSAGE);
+		}
+	}
+
+	/**
+	 * Try connect to database file. If database not exists it will be created
+	 *
+	 * @param databaseFilePath path to database file
+	 */
+	private void openOrCreateDatabase(String databaseFilePath)
 	{
 		try
 		{
-			shootingDatabase = ShootingDatabaseFactory.openDatabaseFromFile(UserSettings.getInstance().getDatabaseFileName());
+			shootingDatabase = ShootingDatabaseFactory.openDatabaseFromFile(databaseFilePath);
 		}
 		catch (Exception ex)
 		{
@@ -97,6 +113,29 @@ public class MainFrame extends javax.swing.JFrame
 	}
 
 	/**
+	 * Save new user settings to file
+	 */
+	private void saveUserSettings()
+	{
+		try
+		{
+			if (shootingDatabase != null)
+			{
+				UserSettings.getInstance().setDatabaseFileName(shootingDatabase.getFileName());
+			}
+			else
+			{
+				UserSettings.getInstance().setDatabaseFileName("");
+			}
+			UserSettings.getInstance().writeToFile(new File(USER_SETTINGS_FILE_NAME));
+		}
+		catch (IOException ex)
+		{
+			Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	/**
 	 * Set working controls enable by shooting database state(choosed or no)
 	 */
 	private void updateWorkingControlsEnable()
@@ -105,7 +144,7 @@ public class MainFrame extends javax.swing.JFrame
 	}
 
 	/**
-	 * Set database file name to controls
+	 * Set database file name to database file name control
 	 */
 	private void updateDatabaseFileNameControls()
 	{
@@ -145,6 +184,7 @@ public class MainFrame extends javax.swing.JFrame
     jButtonIndividualReport = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setTitle("JShooting");
     setResizable(false);
     addWindowListener(new java.awt.event.WindowAdapter()
     {
@@ -342,22 +382,7 @@ public class MainFrame extends javax.swing.JFrame
 
   private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
   {//GEN-HEADEREND:event_formWindowClosing
-		try
-		{
-			if (shootingDatabase != null)
-			{
-				UserSettings.getInstance().setDatabaseFileName(shootingDatabase.getFileName());
-			}
-			else
-			{
-				UserSettings.getInstance().setDatabaseFileName("");
-			}
-			UserSettings.getInstance().writeToFile(new File(USER_SETTINGS_FILE_NAME));
-		}
-		catch (IOException ex)
-		{
-			Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		saveUserSettings();
   }//GEN-LAST:event_formWindowClosing
 
   private void jButtonCreateDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCreateDatabaseActionPerformed
@@ -368,19 +393,11 @@ public class MainFrame extends javax.swing.JFrame
 		int showDialogResult = fileChooser.showSaveDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
-			try
+			if (fileChooser.getSelectedFile().exists())
 			{
-				if (fileChooser.getSelectedFile().exists())
-				{
-					fileChooser.getSelectedFile().delete();
-				}
-				shootingDatabase = ShootingDatabaseFactory.openDatabaseFromFile(fileChooser.getSelectedFile().getPath());
+				fileChooser.getSelectedFile().delete();
 			}
-			catch (Exception ex)
-			{
-				JOptionPane.showMessageDialog(null, "Невозможно создать базу данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
-				shootingDatabase = null;
-			}
+			openOrCreateDatabase(fileChooser.getSelectedFile().getPath());
 
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
@@ -395,15 +412,7 @@ public class MainFrame extends javax.swing.JFrame
 		int showDialogResult = fileChooser.showOpenDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
-			try
-			{
-				shootingDatabase = ShootingDatabaseFactory.openDatabaseFromFile(fileChooser.getSelectedFile().getPath());
-			}
-			catch (Exception ex)
-			{
-				JOptionPane.showMessageDialog(null, "Невозможно открыть базу данных: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
-				shootingDatabase = null;
-			}
+			openOrCreateDatabase(fileChooser.getSelectedFile().getPath());
 
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
@@ -462,7 +471,7 @@ public class MainFrame extends javax.swing.JFrame
 				DateFormat reportDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 				parametersMap.put("DATE_FROM", reportDateFormat.format(filterDialog.getFilter().getDateFrom()));
 				parametersMap.put("DATE_TO", reportDateFormat.format(filterDialog.getFilter().getDateTo()));
-				
+
 				JasperDesign desing = JRXmlLoader.load("reports/combinedReport.jrxml");
 				JasperReport report = JasperCompileManager.compileReport(desing);
 				JasperPrint jasperPrint = JasperFillManager.fillReport(report, parametersMap, reportDataSource);
