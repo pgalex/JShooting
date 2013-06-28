@@ -1,9 +1,11 @@
 package com.jshooting.forms;
 
+import com.jshooting.componentsHighlighting.ComponentsHighlighter;
 import com.jshooting.reports.CombinedReportJRDataSource;
 import com.jshooting.reports.IndividualReportJRDataSource;
 import com.jshooting.shootingDatabase.ShootingDatabase;
 import com.jshooting.shootingDatabase.ShootingDatabaseFactory;
+import java.awt.Color;
 import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +41,7 @@ public class MainFrame extends javax.swing.JFrame
 	 * Connection to database. If null there is no database choosed
 	 */
 	private ShootingDatabase shootingDatabase;
+	private ComponentsHighlighter componentsHighlighter;
 
 	/**
 	 * Creates new form
@@ -46,6 +49,7 @@ public class MainFrame extends javax.swing.JFrame
 	public MainFrame()
 	{
 		shootingDatabase = null;
+		componentsHighlighter = new ComponentsHighlighter();
 
 		initComponents();
 
@@ -140,7 +144,18 @@ public class MainFrame extends javax.swing.JFrame
 	 */
 	private void updateWorkingControlsEnable()
 	{
-		jPanelWorkingControls.setVisible(shootingDatabase != null);
+		if (shootingDatabase == null)
+		{
+			componentsHighlighter.startComponentHightlighing(jButtonOpenDatabase, Color.GREEN, 2700);
+			componentsHighlighter.startComponentHightlighing(jButtonCreateDatabase, Color.GREEN, 2700);
+			jPanelWorkingControls.setVisible(false);
+		}
+		else
+		{
+			componentsHighlighter.stopComponentHighlighting(jButtonOpenDatabase);
+			componentsHighlighter.stopComponentHighlighting(jButtonCreateDatabase);
+			jPanelWorkingControls.setVisible(true);
+		}
 	}
 
 	/**
