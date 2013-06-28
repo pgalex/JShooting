@@ -146,8 +146,10 @@ public class MainFrame extends javax.swing.JFrame
 	{
 		if (shootingDatabase == null)
 		{
-			componentsHighlighter.startComponentHightlighing(jButtonOpenDatabase, Color.GREEN, 2700);
-			componentsHighlighter.startComponentHightlighing(jButtonCreateDatabase, Color.GREEN, 2700);
+			componentsHighlighter.startComponentHightlighing(jButtonOpenDatabase,
+							new Color(160, 255, 160, 255), 1200);
+			componentsHighlighter.startComponentHightlighing(jButtonCreateDatabase,
+							new Color(160, 255, 160, 255), 1200);
 			jPanelWorkingControls.setVisible(false);
 		}
 		else

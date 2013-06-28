@@ -10,6 +10,8 @@ import java.util.Map;
 import javax.swing.Timer;
 
 /**
+ * AWT Components highlighter. Smooth blinks component's background between two
+ * colors
  *
  * @author pgalex
  */
@@ -23,7 +25,7 @@ public class ComponentsHighlighter
 	{
 		highlightingComponents = Collections.synchronizedMap(new HashMap<Component, ColorChanger>());
 
-		changingColorTimer = new javax.swing.Timer(100, new ActionListener()
+		changingColorTimer = new javax.swing.Timer(CHANGIND_COLOR_TIMER_IDLE, new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
