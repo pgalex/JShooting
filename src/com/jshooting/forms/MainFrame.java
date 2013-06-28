@@ -5,7 +5,6 @@ import com.jshooting.reports.CombinedReportJRDataSource;
 import com.jshooting.reports.IndividualReportJRDataSource;
 import com.jshooting.shootingDatabase.ShootingDatabase;
 import com.jshooting.shootingDatabase.ShootingDatabaseFactory;
-import java.awt.Color;
 import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
@@ -147,9 +146,9 @@ public class MainFrame extends javax.swing.JFrame
 		if (shootingDatabase == null)
 		{
 			componentsHighlighter.startComponentHightlighing(jButtonOpenDatabase,
-							new Color(160, 255, 160, 255), 1200);
+							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
 			componentsHighlighter.startComponentHightlighing(jButtonCreateDatabase,
-							new Color(160, 255, 160, 255), 1200);
+							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
 			jPanelWorkingControls.setVisible(false);
 		}
 		else
