@@ -33,6 +33,13 @@ public class ComponentsHighlighter
 		});
 	}
 
+	@Override
+	protected void finalize() throws Throwable
+	{
+		super.finalize();
+		changingColorTimer.stop();
+	}
+
 	private void changingColorTimerActionPerformed(ActionEvent ev)
 	{
 		for (Map.Entry<Component, ColorChanger> entry : highlightingComponents.entrySet())
@@ -77,6 +84,11 @@ public class ComponentsHighlighter
 		{
 			component.setBackground(highlightingComponents.get(component).getInitialColor());
 			highlightingComponents.remove(component);
+		}
+
+		if (highlightingComponents.isEmpty())
+		{
+			changingColorTimer.stop();
 		}
 	}
 }
