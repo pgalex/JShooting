@@ -72,7 +72,11 @@ public class ComponentsHighlighter
 
 		ColorChanger colorChanger = new ColorChanger(component.getBackground(), highlightColor, blinkingTime, CHANGIND_COLOR_TIMER_IDLE);
 		highlightingComponents.put(component, colorChanger);
-		changingColorTimer.start();
+
+		if (!changingColorTimer.isRunning())
+		{
+			changingColorTimer.start();
+		}
 	}
 
 	public void stopComponentHighlighting(Component component)
