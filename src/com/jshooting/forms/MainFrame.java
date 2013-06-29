@@ -40,6 +40,9 @@ public class MainFrame extends javax.swing.JFrame
 	 * Connection to database. If null there is no database choosed
 	 */
 	private ShootingDatabase shootingDatabase;
+	/**
+	 * Highlighter of frame components
+	 */
 	private ComponentsHighlighter componentsHighlighter;
 
 	/**
