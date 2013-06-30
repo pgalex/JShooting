@@ -104,8 +104,8 @@ public class EditPlacesDialog extends javax.swing.JDialog
 		placesTableModel.addNewPlace();
 		if (jTablePlaces.getRowCount() > 0)
 		{
-			jTablePlaces.setRowSelectionInterval(placesTableModel.getRowCount() - 1, placesTableModel.getRowCount() - 1);
-			jTablePlaces.editCellAt(placesTableModel.getRowCount() - 1, PlacesTableModel.NAME_COLUMN_INDEX);
+			jTablePlaces.setRowSelectionInterval(jTablePlaces.getRowCount() - 1, jTablePlaces.getRowCount() - 1);
+			jTablePlaces.editCellAt(jTablePlaces.getRowCount() - 1, PlacesTableModel.NAME_COLUMN_INDEX);
 			jTablePlaces.requestFocus();
 		}
   }//GEN-LAST:event_jButtonAddPlaceActionPerformed

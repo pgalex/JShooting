@@ -202,13 +202,22 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 
   private void jButtonAddSportsmanActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddSportsmanActionPerformed
   {//GEN-HEADEREND:event_jButtonAddSportsmanActionPerformed
-		if (jComboBoxTeams.getSelectedItem() != null)
+		if (jComboBoxTeams.getSelectedItem() == null)
 		{
-			Team selectedTeam = (Team) jComboBoxTeams.getSelectedItem();
-			Sportsman newSportsman = new Sportsman();
-			newSportsman.setName("Новый спортсмен");
-			newSportsman.setTeam(selectedTeam);
-			sportsmansTableModel.addNewSportsman(newSportsman);
+			return;
+		}
+		
+		Team selectedTeam = (Team) jComboBoxTeams.getSelectedItem();
+		Sportsman newSportsman = new Sportsman();
+		newSportsman.setName("");
+		newSportsman.setTeam(selectedTeam);
+		sportsmansTableModel.addNewSportsman(newSportsman);
+		
+		if (jTableSportsmans.getRowCount() > 0)
+		{
+			jTableSportsmans.setRowSelectionInterval(jTableSportsmans.getRowCount() - 1, jTableSportsmans.getRowCount() - 1);
+			jTableSportsmans.editCellAt(jTableSportsmans.getRowCount() - 1, PlacesTableModel.NAME_COLUMN_INDEX);
+			jTableSportsmans.requestFocus();
 		}
   }//GEN-LAST:event_jButtonAddSportsmanActionPerformed
 
