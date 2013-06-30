@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.componentsHighlighting.ComponentsHighlighter;
 import com.jshooting.shootingDatabase.TeamsTable;
 import java.awt.Window;
 
@@ -10,6 +11,7 @@ import java.awt.Window;
  */
 public class EditTeamsDialog extends javax.swing.JDialog
 {
+	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Table model for teams table
 	 */
@@ -27,16 +29,30 @@ public class EditTeamsDialog extends javax.swing.JDialog
 					TeamsTable editingTeamsTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-
+		
 		if (editingTeamsTable == null)
 		{
 			throw new IllegalArgumentException("editingTeamsTable is null");
 		}
-
+		
 		teamsTableModel = new TeamsTableModel(editingTeamsTable);
-
+		componentsHighlighter = new ComponentsHighlighter();
+		
 		initComponents();
-		setTitle("Команды");
+		
+		updateHighlighting();
+	}
+	
+	private void updateHighlighting()
+	{
+		if (jTableTeams.getRowCount() == 0)
+		{
+			componentsHighlighter.startComponentHightlighing(jButtonAddTeam, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+		}
+		else
+		{
+			componentsHighlighter.stopComponentHighlighting(jButtonAddTeam);
+		}
 	}
 
 	/**
@@ -54,6 +70,7 @@ public class EditTeamsDialog extends javax.swing.JDialog
     jButtonAddTeam = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    setTitle("Комадны");
 
     jTableTeams.setModel(teamsTableModel);
     jTableTeams.setRowHeight(24);
@@ -99,6 +116,8 @@ public class EditTeamsDialog extends javax.swing.JDialog
 			jTableTeams.editCellAt(jTableTeams.getRowCount() - 1, TeamsTableModel.NAME_COLUMN_INDEX);
 			jTableTeams.requestFocus();
 		}
+		
+		updateHighlighting();
   }//GEN-LAST:event_jButtonAddTeamActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTeam;

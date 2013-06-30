@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.componentsHighlighting.ComponentsHighlighter;
 import com.jshooting.shootingDatabase.TrainingMethodsTable;
 import java.awt.Window;
 
@@ -10,6 +11,7 @@ import java.awt.Window;
  */
 public class EditTrainingMethodsDialog extends javax.swing.JDialog
 {
+	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Table model for training methods table
 	 */
@@ -35,9 +37,23 @@ public class EditTrainingMethodsDialog extends javax.swing.JDialog
 		}
 
 		trainingMethodsTableModel = new TrainingMethodsTableModel(trainingMethodsTable);
+		componentsHighlighter = new ComponentsHighlighter();
 
 		initComponents();
-		setTitle("Средства");
+
+		updateHighlighting();
+	}
+
+	private void updateHighlighting()
+	{
+		if (jTableTrainingMethods.getRowCount() == 0)
+		{
+			componentsHighlighter.startComponentHightlighing(jButtonAddTrainingMethod, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+		}
+		else
+		{
+			componentsHighlighter.stopComponentHighlighting(jButtonAddTrainingMethod);
+		}
 	}
 
 	/**
@@ -55,6 +71,7 @@ public class EditTrainingMethodsDialog extends javax.swing.JDialog
     jButtonAddTrainingMethod = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    setTitle("Средства");
 
     jTableTrainingMethods.setModel(trainingMethodsTableModel);
     jTableTrainingMethods.setRowHeight(24);
@@ -100,6 +117,8 @@ public class EditTrainingMethodsDialog extends javax.swing.JDialog
 			jTableTrainingMethods.editCellAt(jTableTrainingMethods.getRowCount() - 1, TrainingMethodsTableModel.NAME_COLUMN_INDEX);
 			jTableTrainingMethods.requestFocus();
 		}
+
+		updateHighlighting();
   }//GEN-LAST:event_jButtonAddTrainingMethodActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTrainingMethod;
