@@ -112,7 +112,7 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 	/**
 	 * Add new row with default value
 	 */
-	public void addNewRow()
+	public void addNewTrainingMethod()
 	{
 		try
 		{

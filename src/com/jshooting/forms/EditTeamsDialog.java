@@ -91,7 +91,7 @@ public class EditTeamsDialog extends javax.swing.JDialog
 
   private void jButtonAddTeamActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTeamActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTeamActionPerformed
-		teamsTableModel.addNewRow();
+		teamsTableModel.addNewTeam();
   }//GEN-LAST:event_jButtonAddTeamActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTeam;

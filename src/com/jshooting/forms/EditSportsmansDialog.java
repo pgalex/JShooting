@@ -207,7 +207,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 			Sportsman newSportsman = new Sportsman();
 			newSportsman.setName("Новый спортсмен");
 			newSportsman.setTeam(selectedTeam);
-			sportsmansTableModel.addSportsman(newSportsman);
+			sportsmansTableModel.addNewSportsman(newSportsman);
 		}
   }//GEN-LAST:event_jButtonAddSportsmanActionPerformed
 

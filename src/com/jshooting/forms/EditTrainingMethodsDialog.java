@@ -92,7 +92,7 @@ public class EditTrainingMethodsDialog extends javax.swing.JDialog
 
   private void jButtonAddTrainingMethodActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingMethodActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingMethodActionPerformed
-		trainingMethodsTableModel.addNewRow();
+		trainingMethodsTableModel.addNewTrainingMethod();
   }//GEN-LAST:event_jButtonAddTrainingMethodActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTrainingMethod;

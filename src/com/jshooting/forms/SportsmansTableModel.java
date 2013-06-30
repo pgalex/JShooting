@@ -38,7 +38,7 @@ public class SportsmansTableModel extends AbstractTableModel
 		}
 
 		this.sportsmansTable = sportsmansTable;
-		filteringTeam = null;
+		this.filteringTeam = null;
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class SportsmansTableModel extends AbstractTableModel
 	 * @param sportsmanToAdd adding sportsman
 	 * @throws IllegalArgumentException sportsmanToAdd is null or its team is null
 	 */
-	public void addSportsman(Sportsman sportsmanToAdd) throws IllegalArgumentException
+	public void addNewSportsman(Sportsman sportsmanToAdd) throws IllegalArgumentException
 	{
 		if (sportsmanToAdd == null)
 		{

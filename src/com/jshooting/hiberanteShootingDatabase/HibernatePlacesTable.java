@@ -82,7 +82,6 @@ public class HibernatePlacesTable implements PlacesTable
 			throw new IllegalArgumentException("placeToUpdate is null");
 		}
 
-
 		session.beginTransaction();
 		session.update(placeToUpdate);
 		session.getTransaction().commit();

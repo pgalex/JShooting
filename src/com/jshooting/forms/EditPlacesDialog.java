@@ -1,25 +1,49 @@
 package com.jshooting.forms;
 
+import com.jshooting.shootingDatabase.PlacesTable;
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Window;
+import javax.swing.DefaultCellEditor;
+import javax.swing.table.TableColumn;
 
 /**
  * Dialog for editing places
  *
  * @author pgalex
  */
-public class EditPlaceDialog extends javax.swing.JDialog
+public class EditPlacesDialog extends javax.swing.JDialog
 {
+	/**
+	 * Table model of places table
+	 */
+	private PlacesTableModel placesTableModel;
+
 	/**
 	 * Creates new dialog
 	 *
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
+	 * @param placesTable table of places
+	 * @throws IllegalArgumentException placesTable is null
 	 */
-	public EditPlaceDialog(Window parentWindow, ModalityType modalityType)
+	public EditPlacesDialog(Window parentWindow, ModalityType modalityType, PlacesTable placesTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
+		if (placesTable == null)
+		{
+			throw new IllegalArgumentException("placesTable is null");
+		}
+
+		placesTableModel = new PlacesTableModel(placesTable);
+
 		initComponents();
+
+		TableColumn beginDateColumn = jTablePlaces.getColumnModel().getColumn(PlacesTableModel.BEGIN_DATE_COLUMN_INDEX);
+		beginDateColumn.setCellEditor(new DefaultCellEditor(new JTextFieldDateEditor(null, null, '-')));
+
+		TableColumn endDateColumn = jTablePlaces.getColumnModel().getColumn(PlacesTableModel.END_DATE_COLUMN_INDEX);
+		endDateColumn.setCellEditor(new DefaultCellEditor(new JTextFieldDateEditor(null, null, '-')));
 	}
 
 	/**
@@ -33,26 +57,15 @@ public class EditPlaceDialog extends javax.swing.JDialog
   {
 
     jScrollPane1 = new javax.swing.JScrollPane();
-    jTable1 = new javax.swing.JTable();
+    jTablePlaces = new javax.swing.JTable();
     jButtonAddPlace = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("УТС");
 
-    jTable1.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null}
-      },
-      new String []
-      {
-        "Title 1", "Title 2", "Title 3", "Title 4"
-      }
-    ));
-    jScrollPane1.setViewportView(jTable1);
+    jTablePlaces.setModel(placesTableModel);
+    jTablePlaces.setRowHeight(24);
+    jScrollPane1.setViewportView(jTablePlaces);
 
     jButtonAddPlace.setText("Добавить");
     jButtonAddPlace.addActionListener(new java.awt.event.ActionListener()
@@ -67,7 +80,7 @@ public class EditPlaceDialog extends javax.swing.JDialog
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
       .add(layout.createSequentialGroup()
         .addContainerGap()
         .add(jButtonAddPlace)
@@ -76,7 +89,7 @@ public class EditPlaceDialog extends javax.swing.JDialog
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonAddPlace)
         .addContainerGap())
@@ -87,12 +100,11 @@ public class EditPlaceDialog extends javax.swing.JDialog
 
   private void jButtonAddPlaceActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddPlaceActionPerformed
   {//GEN-HEADEREND:event_jButtonAddPlaceActionPerformed
-    // TODO add your handling code here:
+		placesTableModel.addNewPlace();
   }//GEN-LAST:event_jButtonAddPlaceActionPerformed
-
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddPlace;
   private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JTable jTable1;
+  private javax.swing.JTable jTablePlaces;
   // End of variables declaration//GEN-END:variables
 }

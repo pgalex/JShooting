@@ -97,7 +97,7 @@ public class TeamsTableModel extends AbstractTableModel
 	/**
 	 * Add new row with default value
 	 */
-	public void addNewRow()
+	public void addNewTeam()
 	{
 		try
 		{
