@@ -65,6 +65,7 @@ public class EditPlacesDialog extends javax.swing.JDialog
 
     jTablePlaces.setModel(placesTableModel);
     jTablePlaces.setRowHeight(24);
+    jTablePlaces.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     jScrollPane1.setViewportView(jTablePlaces);
 
     jButtonAddPlace.setText("Добавить");
@@ -101,6 +102,12 @@ public class EditPlacesDialog extends javax.swing.JDialog
   private void jButtonAddPlaceActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddPlaceActionPerformed
   {//GEN-HEADEREND:event_jButtonAddPlaceActionPerformed
 		placesTableModel.addNewPlace();
+		if (jTablePlaces.getRowCount() > 0)
+		{
+			jTablePlaces.setRowSelectionInterval(placesTableModel.getRowCount() - 1, placesTableModel.getRowCount() - 1);
+			jTablePlaces.editCellAt(placesTableModel.getRowCount() - 1, PlacesTableModel.NAME_COLUMN_INDEX);
+			jTablePlaces.requestFocus();
+		}
   }//GEN-LAST:event_jButtonAddPlaceActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddPlace;

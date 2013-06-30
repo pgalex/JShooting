@@ -192,7 +192,7 @@ public class PlacesTableModel extends AbstractTableModel
 		try
 		{
 			Place newPlace = new Place();
-			newPlace.setName("Новое место проведения");
+			newPlace.setName("");
 
 			Calendar calendar = Calendar.getInstance();
 			calendar.set(Calendar.HOUR_OF_DAY, 0);
