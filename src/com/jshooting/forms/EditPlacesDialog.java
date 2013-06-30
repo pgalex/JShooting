@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.componentsHighlighting.ComponentsHighlighter;
 import com.jshooting.shootingDatabase.PlacesTable;
 import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Window;
@@ -13,6 +14,7 @@ import javax.swing.table.TableColumn;
  */
 public class EditPlacesDialog extends javax.swing.JDialog
 {
+	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Table model of places table
 	 */
@@ -36,6 +38,7 @@ public class EditPlacesDialog extends javax.swing.JDialog
 		}
 
 		placesTableModel = new PlacesTableModel(placesTable);
+		componentsHighlighter = new ComponentsHighlighter();
 
 		initComponents();
 
@@ -44,6 +47,20 @@ public class EditPlacesDialog extends javax.swing.JDialog
 
 		TableColumn endDateColumn = jTablePlaces.getColumnModel().getColumn(PlacesTableModel.END_DATE_COLUMN_INDEX);
 		endDateColumn.setCellEditor(new DefaultCellEditor(new JTextFieldDateEditor(null, null, '-')));
+
+		updateHighlighting();
+	}
+
+	private void updateHighlighting()
+	{
+		if (jTablePlaces.getRowCount() == 0)
+		{
+			componentsHighlighter.startComponentHightlighing(jButtonAddPlace, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+		}
+		else
+		{
+			componentsHighlighter.stopComponentHighlighting(jButtonAddPlace);
+		}
 	}
 
 	/**
@@ -108,6 +125,8 @@ public class EditPlacesDialog extends javax.swing.JDialog
 			jTablePlaces.editCellAt(jTablePlaces.getRowCount() - 1, PlacesTableModel.NAME_COLUMN_INDEX);
 			jTablePlaces.requestFocus();
 		}
+
+		updateHighlighting();
   }//GEN-LAST:event_jButtonAddPlaceActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddPlace;

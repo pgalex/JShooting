@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.componentsHighlighting.ComponentsHighlighter;
 import com.jshooting.shootingDatabase.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.shootingDatabase.Team;
@@ -17,6 +18,7 @@ import javax.swing.UIManager;
  */
 public class EditSportsmansDialog extends javax.swing.JDialog
 {
+	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Model of team selecting combo box
 	 */
@@ -56,30 +58,46 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 
 		this.teamsTable = teamsTable;
 		this.sportsmansTableModel = new SportsmansTableModel(sportsmansTable);
+		this.componentsHighlighter = new ComponentsHighlighter();
 		initializeTeamsComboBoxModel();
 
 		initComponents();
 
 		fillSportsmansTableBySelectedTeam();
-		updateControlsStateByTeams();
+		updateHighlighting();
 	}
 
 	/**
 	 * Update dialog controls state by "is any teams exists"
 	 */
-	private void updateControlsStateByTeams()
+	private void updateHighlighting()
 	{
+		if (jComboBoxTeams.getItemCount() == 0)
+		{
+			componentsHighlighter.startComponentHightlighing(jButtonEditTeams, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+		}
+		else
+		{
+			componentsHighlighter.stopComponentHighlighting(jButtonEditTeams);
+		}
+
 		if (jComboBoxTeams.getItemCount() > 0)
 		{
 			jButtonAddSportsman.setEnabled(true);
-			jComboBoxTeams.setEnabled(true);
-			jButtonEditTeams.setBackground(UIManager.getColor("Button.background"));
+
+			if (jTableSportsmans.getRowCount() == 0)
+			{
+				componentsHighlighter.startComponentHightlighing(jButtonAddSportsman, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+			}
+			else
+			{
+				componentsHighlighter.stopComponentHighlighting(jButtonAddSportsman);
+			}
 		}
 		else
 		{
 			jButtonAddSportsman.setEnabled(false);
-			jComboBoxTeams.setEnabled(false);
-			jButtonEditTeams.setBackground(new Color(0, 185, 0, 255));
+			componentsHighlighter.stopComponentHighlighting(jButtonAddSportsman);
 		}
 	}
 
@@ -206,19 +224,21 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		{
 			return;
 		}
-		
+
 		Team selectedTeam = (Team) jComboBoxTeams.getSelectedItem();
 		Sportsman newSportsman = new Sportsman();
 		newSportsman.setName("");
 		newSportsman.setTeam(selectedTeam);
 		sportsmansTableModel.addNewSportsman(newSportsman);
-		
+
 		if (jTableSportsmans.getRowCount() > 0)
 		{
 			jTableSportsmans.setRowSelectionInterval(jTableSportsmans.getRowCount() - 1, jTableSportsmans.getRowCount() - 1);
 			jTableSportsmans.editCellAt(jTableSportsmans.getRowCount() - 1, SportsmansTableModel.NAME_COLUMN_INDEX);
 			jTableSportsmans.requestFocus();
 		}
+
+		updateHighlighting();
   }//GEN-LAST:event_jButtonAddSportsmanActionPerformed
 
   private void jButtonEditTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTeamsActionPerformed
@@ -236,7 +256,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 			jComboBoxTeams.setSelectedIndex(previousSelectedTeamIndex);
 		}
 		fillSportsmansTableBySelectedTeam();
-		updateControlsStateByTeams();
+		updateHighlighting();
   }//GEN-LAST:event_jButtonEditTeamsActionPerformed
 
   private void jComboBoxTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxTeamsActionPerformed
