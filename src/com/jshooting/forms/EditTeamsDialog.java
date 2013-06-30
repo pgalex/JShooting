@@ -56,6 +56,7 @@ public class EditTeamsDialog extends javax.swing.JDialog
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
     jTableTeams.setModel(teamsTableModel);
+    jTableTeams.setRowHeight(24);
     jScrollPane1.setViewportView(jTableTeams);
 
     jButtonAddTeam.setText("Добавить");

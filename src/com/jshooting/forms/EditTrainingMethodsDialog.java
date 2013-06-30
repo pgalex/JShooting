@@ -57,6 +57,7 @@ public class EditTrainingMethodsDialog extends javax.swing.JDialog
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
     jTableTrainingMethods.setModel(trainingMethodsTableModel);
+    jTableTrainingMethods.setRowHeight(24);
     jScrollPane1.setViewportView(jTableTrainingMethods);
 
     jButtonAddTrainingMethod.setText("Добавить");

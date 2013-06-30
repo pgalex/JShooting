@@ -86,6 +86,7 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
     setMinimumSize(new java.awt.Dimension(629, 158));
 
     jTableTrainings.setModel(shootingTrainingsTableModel);
+    jTableTrainings.setRowHeight(24);
     jScrollPane1.setViewportView(jTableTrainings);
 
     jButtonAddTrainings.setText("Добавить тренировки ...");

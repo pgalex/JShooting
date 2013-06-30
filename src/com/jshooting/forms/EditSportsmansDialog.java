@@ -132,6 +132,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
     setTitle("Спортсмены");
 
     jTableSportsmans.setModel(sportsmansTableModel);
+    jTableSportsmans.setRowHeight(24);
     jScrollPane1.setViewportView(jTableSportsmans);
 
     jComboBoxTeams.setModel(teamsComboBoxModel);
