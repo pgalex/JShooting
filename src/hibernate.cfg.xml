@@ -11,5 +11,6 @@
     <mapping resource="Sportsman.hbm.xml"/>
     <mapping resource="TrainingMethod.hbm.xml"/>
     <mapping resource="ShootingTraining.hbm.xml"/>
+    <mapping resource="Place.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

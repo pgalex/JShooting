@@ -1,5 +1,6 @@
 package com.jshooting.hiberanteShootingDatabase;
 
+import com.jshooting.shootingDatabase.PlacesTable;
 import com.jshooting.shootingDatabase.ShootingDatabase;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import com.jshooting.shootingDatabase.SportsmansTable;
@@ -21,6 +22,9 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	 * Hiberanate session factory
 	 */
 	private SessionFactory sessionFactory;
+	/**
+	 * Hibernate session
+	 */
 	private Session session;
 	/**
 	 * Name of database file
@@ -42,6 +46,10 @@ public class HibernateShootingDatabase implements ShootingDatabase
 	 * Shootings trainings table
 	 */
 	private ShootingTrainingsTable shootingTrainingTable;
+	/**
+	 * Places table
+	 */
+	private PlacesTable placesTable;
 
 	/**
 	 * Create connection to database by file name
@@ -75,6 +83,7 @@ public class HibernateShootingDatabase implements ShootingDatabase
 			sportsmansTable = new HibernateSportsmansTable(session);
 			trainingMethodsTable = new HibernateTrainingMethodsTable(session);
 			shootingTrainingTable = new HibernateShootingTrainingsTable(session);
+			placesTable = new HibernatePlacesTable(session);
 		}
 		catch (Exception ex)
 		{
@@ -151,9 +160,25 @@ public class HibernateShootingDatabase implements ShootingDatabase
 		return fileName;
 	}
 
+	/**
+	 * Get shooting trainigs table
+	 *
+	 * @return database's table of shooting trainigs
+	 */
 	@Override
 	public ShootingTrainingsTable getShootingTrainingsTable()
 	{
 		return shootingTrainingTable;
+	}
+
+	/**
+	 * Get places table
+	 *
+	 * @return database's table of places
+	 */
+	@Override
+	public PlacesTable getPlacesTable()
+	{
+		return placesTable;
 	}
 }
