@@ -94,6 +94,12 @@ public class EditTrainingMethodsDialog extends javax.swing.JDialog
   private void jButtonAddTrainingMethodActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingMethodActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingMethodActionPerformed
 		trainingMethodsTableModel.addNewTrainingMethod();
+		if (jTableTrainingMethods.getRowCount() > 0)
+		{
+			jTableTrainingMethods.setRowSelectionInterval(jTableTrainingMethods.getRowCount() - 1, jTableTrainingMethods.getRowCount() - 1);
+			jTableTrainingMethods.editCellAt(jTableTrainingMethods.getRowCount() - 1, TrainingMethodsTableModel.NAME_COLUMN_INDEX);
+			jTableTrainingMethods.requestFocus();
+		}
   }//GEN-LAST:event_jButtonAddTrainingMethodActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTrainingMethod;

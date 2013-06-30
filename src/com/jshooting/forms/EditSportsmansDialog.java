@@ -216,7 +216,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		if (jTableSportsmans.getRowCount() > 0)
 		{
 			jTableSportsmans.setRowSelectionInterval(jTableSportsmans.getRowCount() - 1, jTableSportsmans.getRowCount() - 1);
-			jTableSportsmans.editCellAt(jTableSportsmans.getRowCount() - 1, PlacesTableModel.NAME_COLUMN_INDEX);
+			jTableSportsmans.editCellAt(jTableSportsmans.getRowCount() - 1, SportsmansTableModel.NAME_COLUMN_INDEX);
 			jTableSportsmans.requestFocus();
 		}
   }//GEN-LAST:event_jButtonAddSportsmanActionPerformed

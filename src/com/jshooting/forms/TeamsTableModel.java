@@ -12,6 +12,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TeamsTableModel extends AbstractTableModel
 {
+	public static final int NAME_COLUMN_INDEX = 0;
 	/**
 	 * Editing teams table
 	 */
@@ -102,7 +103,7 @@ public class TeamsTableModel extends AbstractTableModel
 		try
 		{
 			Team newTeam = new Team();
-			newTeam.setName("Новая команда");
+			newTeam.setName("");
 			teamsTable.addTeam(newTeam);
 			fireTableRowsInserted(teamsTable.getAllTeams().size() - 1, teamsTable.getAllTeams().size() - 1);
 		}

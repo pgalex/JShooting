@@ -93,6 +93,12 @@ public class EditTeamsDialog extends javax.swing.JDialog
   private void jButtonAddTeamActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTeamActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTeamActionPerformed
 		teamsTableModel.addNewTeam();
+		if (jTableTeams.getRowCount() > 0)
+		{
+			jTableTeams.setRowSelectionInterval(jTableTeams.getRowCount() - 1, jTableTeams.getRowCount() - 1);
+			jTableTeams.editCellAt(jTableTeams.getRowCount() - 1, TeamsTableModel.NAME_COLUMN_INDEX);
+			jTableTeams.requestFocus();
+		}
   }//GEN-LAST:event_jButtonAddTeamActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTeam;

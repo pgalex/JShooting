@@ -13,6 +13,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TrainingMethodsTableModel extends AbstractTableModel
 {
+	public static final int NAME_COLUMN_INDEX = 0;
 	/**
 	 * Editing training methods table
 	 */
@@ -117,7 +118,7 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 		try
 		{
 			TrainingMethod newMethod = new TrainingMethod();
-			newMethod.setName("Новое средство");
+			newMethod.setName("");
 			trainingMethodsTable.addTrainingMethod(newMethod);
 			fireTableRowsInserted(trainingMethodsTable.getAllTrainingMethods().size() - 1,
 							trainingMethodsTable.getAllTrainingMethods().size() - 1);

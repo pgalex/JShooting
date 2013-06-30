@@ -15,6 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class SportsmansTableModel extends AbstractTableModel
 {
+	public static final int NAME_COLUMN_INDEX = 0;
 	/**
 	 * Sportsman table using to fill model
 	 */
