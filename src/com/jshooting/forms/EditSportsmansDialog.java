@@ -17,8 +17,8 @@ import javax.swing.DefaultComboBoxModel;
 public class EditSportsmansDialog extends javax.swing.JDialog
 {
 	/**
-	 * Components highlighting
-	 */
+	 * Components highlighter	
+ */
 	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Model of team selecting combo box
