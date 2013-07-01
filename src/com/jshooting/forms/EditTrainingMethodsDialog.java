@@ -11,6 +11,9 @@ import java.awt.Window;
  */
 public class EditTrainingMethodsDialog extends javax.swing.JDialog
 {
+	/**
+	 * Components highlighter
+	 */
 	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Table model for training methods table

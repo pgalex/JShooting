@@ -262,6 +262,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
   private void jComboBoxTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxTeamsActionPerformed
   {//GEN-HEADEREND:event_jComboBoxTeamsActionPerformed
 		fillSportsmansTableBySelectedTeam();
+		updateHighlighting();
   }//GEN-LAST:event_jComboBoxTeamsActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddSportsman;
