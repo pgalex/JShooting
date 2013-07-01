@@ -61,7 +61,7 @@ public class MainFrame extends javax.swing.JFrame
 		updateWorkingControlsEnable();
 		updateDatabaseFileNameControls();
 	}
-
+	
 	/**
 	 * Try connect to database by database file name storing in user settings
 	 */

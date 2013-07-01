@@ -6,10 +6,8 @@ import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
-import java.awt.Color;
 import java.awt.Window;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.UIManager;
 
 /**
  * Sportsmans editing dialog
@@ -18,6 +16,9 @@ import javax.swing.UIManager;
  */
 public class EditSportsmansDialog extends javax.swing.JDialog
 {
+	/**
+	 * Components highlighting
+	 */
 	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Model of team selecting combo box
@@ -64,13 +65,23 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		initComponents();
 
 		fillSportsmansTableBySelectedTeam();
-		updateHighlighting();
+		updateAddSportsmanButtonEnable();
+		updateEditTeamsButtonHighlighting();
+		updateAddSportsmanButtonHighlighting();
 	}
 
 	/**
-	 * Update dialog controls state by "is any teams exists"
+	 * Update add sportsman button enable by "any team selected"
 	 */
-	private void updateHighlighting()
+	private void updateAddSportsmanButtonEnable()
+	{
+		jButtonAddSportsman.setEnabled(jComboBoxTeams.getSelectedItem() != null);
+	}
+
+	/**
+	 * Update highlighting of add teams button
+	 */
+	private void updateEditTeamsButtonHighlighting()
 	{
 		if (jComboBoxTeams.getItemCount() == 0)
 		{
@@ -80,23 +91,19 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		{
 			componentsHighlighter.stopComponentHighlighting(jButtonEditTeams);
 		}
+	}
 
-		if (jComboBoxTeams.getItemCount() > 0)
+	/**
+	 * Update add sportsman button highlighting
+	 */
+	private void updateAddSportsmanButtonHighlighting()
+	{
+		if (jComboBoxTeams.getItemCount() > 0 && jTableSportsmans.getRowCount() == 0)
 		{
-			jButtonAddSportsman.setEnabled(true);
-
-			if (jTableSportsmans.getRowCount() == 0)
-			{
-				componentsHighlighter.startComponentHightlighing(jButtonAddSportsman, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
-			}
-			else
-			{
-				componentsHighlighter.stopComponentHighlighting(jButtonAddSportsman);
-			}
+			componentsHighlighter.startComponentHightlighing(jButtonAddSportsman, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
 		}
 		else
 		{
-			jButtonAddSportsman.setEnabled(false);
 			componentsHighlighter.stopComponentHighlighting(jButtonAddSportsman);
 		}
 	}
@@ -238,13 +245,12 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 			jTableSportsmans.requestFocus();
 		}
 
-		updateHighlighting();
+		updateAddSportsmanButtonHighlighting();
   }//GEN-LAST:event_jButtonAddSportsmanActionPerformed
 
   private void jButtonEditTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTeamsActionPerformed
   {//GEN-HEADEREND:event_jButtonEditTeamsActionPerformed
-		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, ModalityType.APPLICATION_MODAL,
-						teamsTable);
+		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, ModalityType.APPLICATION_MODAL, teamsTable);
 		editTeamsDialog.setLocationRelativeTo(this);
 		editTeamsDialog.setVisible(true);
 
@@ -255,14 +261,18 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		{
 			jComboBoxTeams.setSelectedIndex(previousSelectedTeamIndex);
 		}
+
 		fillSportsmansTableBySelectedTeam();
-		updateHighlighting();
+
+		updateAddSportsmanButtonEnable();
+		updateEditTeamsButtonHighlighting();
+		updateAddSportsmanButtonHighlighting();
   }//GEN-LAST:event_jButtonEditTeamsActionPerformed
 
   private void jComboBoxTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxTeamsActionPerformed
   {//GEN-HEADEREND:event_jComboBoxTeamsActionPerformed
 		fillSportsmansTableBySelectedTeam();
-		updateHighlighting();
+		updateAddSportsmanButtonHighlighting();
   }//GEN-LAST:event_jComboBoxTeamsActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddSportsman;
