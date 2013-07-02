@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.shootingDatabase.PlacesTable;
 import com.jshooting.shootingDatabase.ShootingTraining;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import com.jshooting.shootingDatabase.ShootingTrainingType;
@@ -51,6 +52,10 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	 * Table of shooting trainings
 	 */
 	private ShootingTrainingsTable shootingTrainingTable;
+	/**
+	 * Table of places
+	 */
+	private PlacesTable placesTable;
 
 	/**
 	 * Create new dialog
@@ -61,13 +66,13 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	 * @param sportsmansTable table of sportsmans
 	 * @param trainingMethodsTable table of training methods
 	 * @param shootingTrainingTable table of shooting trainings
-	 * @throws IllegalArgumentException teamsTable, sportsmansTable,
+	 * @param placesTable table of places
+	 * @throws IllegalArgumentException teamsTable, sportsmansTable, placesTable,
 	 * shootingTrainingTable or trainingMethodsTable is null
 	 */
 	public AddShootingTrainingDialog(Window parentWindow, ModalityType modalityType,
-					TeamsTable teamsTable, SportsmansTable sportsmansTable,
-					TrainingMethodsTable trainingMethodsTable,
-					ShootingTrainingsTable shootingTrainingTable) throws IllegalArgumentException
+					TeamsTable teamsTable, SportsmansTable sportsmansTable, TrainingMethodsTable trainingMethodsTable,
+					ShootingTrainingsTable shootingTrainingTable, PlacesTable placesTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
@@ -87,18 +92,22 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("shootingTrainingTable is null");
 		}
+		if (placesTable == null)
+		{
+			throw new IllegalArgumentException("placesTable is null");
+		}
 
 		this.teamsTable = teamsTable;
 		this.sportsmansTable = sportsmansTable;
 		this.trainingMethodsTable = trainingMethodsTable;
 		this.shootingTrainingTable = shootingTrainingTable;
+		this.placesTable = placesTable;
 
 		teamsComboBoxModel = new DefaultComboBoxModel();
 		sportsmansComboBoxModel = new DefaultComboBoxModel();
 		trainingMethodsComboBoxModel = new DefaultComboBoxModel();
 
 		initComponents();
-		setTitle("Добавить тренировку");
 		jLabelAddingToDatabaseAnimation.setVisible(false);
 
 		fillTeamsComboBox();
@@ -250,6 +259,8 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     jSpinnerZeroingIn = new javax.swing.JSpinner();
     jSpinnerScatt = new javax.swing.JSpinner();
     jLabelAddingToDatabaseAnimation = new javax.swing.JLabel();
+    jTextFieldPlaceName = new javax.swing.JTextField();
+    jLabel28 = new javax.swing.JLabel();
 
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][]
@@ -267,6 +278,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     jScrollPane1.setViewportView(jTable1);
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    setTitle("Добавить тренировку");
     setResizable(false);
 
     jLabel1.setText("Спортсмен");
@@ -603,6 +615,10 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 
     jLabelAddingToDatabaseAnimation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/ajax-loader.gif"))); // NOI18N
 
+    jTextFieldPlaceName.setEditable(false);
+
+    jLabel28.setText("УТС");
+
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -621,9 +637,11 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
                   .add(jLabel3)
                   .add(jLabel1)
                   .add(jLabel2)
-                  .add(jLabel4))
+                  .add(jLabel4)
+                  .add(jLabel28))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                  .add(jTextFieldPlaceName)
                   .add(jTextFieldWeather)
                   .add(jComboBoxTrainingMethod, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                   .add(jComboBoxTrainingType, 0, 186, Short.MAX_VALUE)
@@ -647,7 +665,10 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
         .addContainerGap()
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+          .add(layout.createSequentialGroup()
+            .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 269, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
           .add(layout.createSequentialGroup()
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
               .add(jComboBoxTeam, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -660,6 +681,10 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
               .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
               .add(jDateChooserTrainingDate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+              .add(jTextFieldPlaceName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .add(jLabel28))
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
               .add(jComboBoxTrainingType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -671,9 +696,8 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
               .add(jTextFieldWeather, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-              .add(jLabel5)))
-          .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 269, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+              .add(jLabel5))
+            .add(49, 49, 49)))
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jTextFieldComments, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jLabel6))
@@ -748,7 +772,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 					{
 						try
 						{
-							Thread.sleep(1500);
+							Thread.sleep(1000);
 						}
 						catch (InterruptedException ex)
 						{
@@ -797,6 +821,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
   private javax.swing.JLabel jLabel25;
   private javax.swing.JLabel jLabel26;
   private javax.swing.JLabel jLabel27;
+  private javax.swing.JLabel jLabel28;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
   private javax.swing.JLabel jLabel5;
@@ -832,6 +857,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
   private javax.swing.JSpinner jSpinnerZeroingIn;
   private javax.swing.JTable jTable1;
   private javax.swing.JTextField jTextFieldComments;
+  private javax.swing.JTextField jTextFieldPlaceName;
   private javax.swing.JTextField jTextFieldWeather;
   // End of variables declaration//GEN-END:variables
 }

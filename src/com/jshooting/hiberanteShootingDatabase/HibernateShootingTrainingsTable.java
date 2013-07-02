@@ -124,8 +124,7 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		}
 		
 		Criteria criteria = createCriteriaByFilter(filter, session);
-		List<ShootingTraining> trainingsByFilter = criteria.list();
-		return trainingsByFilter;
+		return criteria.list();
 	}
 
 	/**

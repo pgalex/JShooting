@@ -1,6 +1,7 @@
 package com.jshooting.shootingDatabase;
 
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +18,16 @@ public interface PlacesTable
 	 * @throws DatabaseErrorException error while getting places
 	 */
 	public List<Place> getAllPlaces() throws DatabaseErrorException;
+
+	/**
+	 * Get places that exists in period by its begin and end date
+	 *
+	 * @param periodDateFrom period date from (including)
+	 * @param periodDateTo period date to (including)
+	 * @return list of places exists in given period
+	 * @throws IllegalArgumentException periodDateFrom is null, periodDateTo is null; periodDateFrom more than periodDateTo
+	 */
+	public List<Place> getPlacesByPeriod(Date periodDateFrom, Date periodDateTo) throws IllegalArgumentException;
 
 	/**
 	 * Add new place

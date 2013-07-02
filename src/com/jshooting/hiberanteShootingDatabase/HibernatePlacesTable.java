@@ -2,9 +2,13 @@ package com.jshooting.hiberanteShootingDatabase;
 
 import com.jshooting.shootingDatabase.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
+import com.jshooting.shootingDatabase.ShootingTraining;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import java.util.Date;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * Places table hibernate realization
@@ -45,6 +49,37 @@ public class HibernatePlacesTable implements PlacesTable
 	public List<Place> getAllPlaces() throws DatabaseErrorException
 	{
 		return session.createCriteria(Place.class).list();
+	}
+
+	/**
+	 * Get places that exists in period by its begin and end date
+	 *
+	 * @param periodDateFrom period date from (including)
+	 * @param periodDateTo period date to (including)
+	 * @return list of places exists in given period
+	 * @throws IllegalArgumentException periodDateFrom is null, periodDateTo is
+	 * null; periodDateFrom more than periodDateTo
+	 */
+	@Override
+	public List<Place> getPlacesByPeriod(Date periodDateFrom, Date periodDateTo) throws IllegalArgumentException
+	{
+		if (periodDateFrom == null)
+		{
+			throw new IllegalArgumentException("periodDateFrom is null");
+		}
+		if (periodDateTo == null)
+		{
+			throw new IllegalArgumentException("periodDateTo is null");
+		}
+		if (periodDateFrom.after(periodDateTo))
+		{
+			throw new IllegalArgumentException("periodDateFrom is after periodDateTo");
+		}
+
+		Criteria criteria = session.createCriteria(Place.class);
+		criteria.add(Restrictions.ge("endDate", periodDateFrom));
+		criteria.add(Restrictions.le("beginDate", periodDateTo));
+		return criteria.list();
 	}
 
 	/**

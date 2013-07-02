@@ -52,16 +52,16 @@ public class MainFrame extends javax.swing.JFrame
 	{
 		shootingDatabase = null;
 		componentsHighlighter = new ComponentsHighlighter();
-		
+
 		initComponents();
-		
+
 		readUserSettings();
 		connectToDatabaseFromUserSettings();
-		
+
 		updateWorkingControlsEnable();
 		updateDatabaseFileNameControls();
 	}
-	
+
 	/**
 	 * Try connect to database by database file name storing in user settings
 	 */
@@ -73,7 +73,7 @@ public class MainFrame extends javax.swing.JFrame
 			shootingDatabase = null;
 			return;
 		}
-		
+
 		File previousDatabaseFile = new File(UserSettings.getInstance().getDatabaseFileName());
 		if (previousDatabaseFile.exists())
 		{
@@ -394,12 +394,12 @@ public class MainFrame extends javax.swing.JFrame
   {//GEN-HEADEREND:event_formWindowClosing
 		saveUserSettings();
   }//GEN-LAST:event_formWindowClosing
-	
+
   private void jButtonCreateDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCreateDatabaseActionPerformed
   {//GEN-HEADEREND:event_jButtonCreateDatabaseActionPerformed
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		
+
 		int showDialogResult = fileChooser.showSaveDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
@@ -408,27 +408,27 @@ public class MainFrame extends javax.swing.JFrame
 				fileChooser.getSelectedFile().delete();
 			}
 			openOrCreateDatabase(fileChooser.getSelectedFile().getPath());
-			
+
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
 		}
   }//GEN-LAST:event_jButtonCreateDatabaseActionPerformed
-	
+
   private void jButtonOpenDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOpenDatabaseActionPerformed
   {//GEN-HEADEREND:event_jButtonOpenDatabaseActionPerformed
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		
+
 		int showDialogResult = fileChooser.showOpenDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
 			openOrCreateDatabase(fileChooser.getSelectedFile().getPath());
-			
+
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
 		}
   }//GEN-LAST:event_jButtonOpenDatabaseActionPerformed
-	
+
   private void jButtonSportsmansActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSportsmansActionPerformed
   {//GEN-HEADEREND:event_jButtonSportsmansActionPerformed
 		EditSportsmansDialog editSportsmansDialog = new EditSportsmansDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
@@ -436,7 +436,7 @@ public class MainFrame extends javax.swing.JFrame
 		editSportsmansDialog.setLocationRelativeTo(this);
 		editSportsmansDialog.setVisible(true);
   }//GEN-LAST:event_jButtonSportsmansActionPerformed
-	
+
   private void jButtonTrainingMethodsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTrainingMethodsActionPerformed
   {//GEN-HEADEREND:event_jButtonTrainingMethodsActionPerformed
 		EditTrainingMethodsDialog editTrainingMethodsDialog = new EditTrainingMethodsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
@@ -444,36 +444,35 @@ public class MainFrame extends javax.swing.JFrame
 		editTrainingMethodsDialog.setLocationRelativeTo(this);
 		editTrainingMethodsDialog.setVisible(true);
   }//GEN-LAST:event_jButtonTrainingMethodsActionPerformed
-	
+
   private void jButtonAddTrainingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingsActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingsActionPerformed
 		AddShootingTrainingDialog addShootingTrainingDialog = new AddShootingTrainingDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
-						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable(),
-						shootingDatabase.getTrainingMethodsTable(),
-						shootingDatabase.getShootingTrainingsTable());
+						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable(), shootingDatabase.getTrainingMethodsTable(),
+						shootingDatabase.getShootingTrainingsTable(), shootingDatabase.getPlacesTable());
 		addShootingTrainingDialog.setLocationRelativeTo(this);
 		addShootingTrainingDialog.setVisible(true);
   }//GEN-LAST:event_jButtonAddTrainingsActionPerformed
-	
+
   private void jButtonCombinedActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCombinedActionPerformed
   {//GEN-HEADEREND:event_jButtonCombinedActionPerformed
 		ShootingTrainingsFilterDialog filterDialog = new ShootingTrainingsFilterDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
 						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable());
 		filterDialog.setLocationRelativeTo(this);
 		filterDialog.setVisible(true);
-		
+
 		if (filterDialog.isOKButtonPressed())
 		{
 			CombinedReportJRDataSource reportDataSource = new CombinedReportJRDataSource(filterDialog.getFilter(),
 							shootingDatabase.getShootingTrainingsTable());
-			
+
 			try
 			{
 				Map<String, Object> parametersMap = new HashMap<String, Object>();
 				DateFormat reportDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 				parametersMap.put("DATE_FROM", reportDateFormat.format(filterDialog.getFilter().getDateFrom()));
 				parametersMap.put("DATE_TO", reportDateFormat.format(filterDialog.getFilter().getDateTo()));
-				
+
 				JasperDesign desing = JRXmlLoader.load("reports/combinedReport.jrxml");
 				JasperReport report = JasperCompileManager.compileReport(desing);
 				JasperPrint jasperPrint = JasperFillManager.fillReport(report, parametersMap, reportDataSource);
@@ -485,7 +484,7 @@ public class MainFrame extends javax.swing.JFrame
 			}
 		}
   }//GEN-LAST:event_jButtonCombinedActionPerformed
-	
+
   private void jButtonEditTrainingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTrainingsActionPerformed
   {//GEN-HEADEREND:event_jButtonEditTrainingsActionPerformed
 		EditShootingTrainingsDialog editShootingTrainingsDialog = new EditShootingTrainingsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
@@ -493,7 +492,7 @@ public class MainFrame extends javax.swing.JFrame
 		editShootingTrainingsDialog.setLocationRelativeTo(this);
 		editShootingTrainingsDialog.setVisible(true);
   }//GEN-LAST:event_jButtonEditTrainingsActionPerformed
-	
+
   private void jButtonIndividualReportActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonIndividualReportActionPerformed
   {//GEN-HEADEREND:event_jButtonIndividualReportActionPerformed
 		ShootingTrainingsFilterDialog filterDialog = new ShootingTrainingsFilterDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
@@ -501,7 +500,7 @@ public class MainFrame extends javax.swing.JFrame
 		filterDialog.setOneSportsmanSelectingMode();
 		filterDialog.setLocationRelativeTo(this);
 		filterDialog.setVisible(true);
-		
+
 		if (filterDialog.isOKButtonPressed())
 		{
 			IndividualReportJRDataSource reportDataSource = new IndividualReportJRDataSource(filterDialog.getFilter(),
@@ -516,7 +515,7 @@ public class MainFrame extends javax.swing.JFrame
 				{
 					parametersMap.put("SPORTSMAN_NAME", filterDialog.getFilter().getSportsmans().get(0).getName());
 				}
-				
+
 				JasperDesign desing = JRXmlLoader.load("reports/individualReport.jrxml");
 				JasperReport report = JasperCompileManager.compileReport(desing);
 				JasperPrint jasperPrint = JasperFillManager.fillReport(report, parametersMap, reportDataSource);
@@ -528,7 +527,7 @@ public class MainFrame extends javax.swing.JFrame
 			}
 		}
   }//GEN-LAST:event_jButtonIndividualReportActionPerformed
-	
+
   private void jButtonPlacesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonPlacesActionPerformed
   {//GEN-HEADEREND:event_jButtonPlacesActionPerformed
 		EditPlacesDialog editPlaceDialog = new EditPlacesDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
