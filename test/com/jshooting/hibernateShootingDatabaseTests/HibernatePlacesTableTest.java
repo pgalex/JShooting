@@ -38,44 +38,16 @@ public class HibernatePlacesTableTest
 		place1.setEndDate(calendar.getTime());  //12-22 +
 
 
-		Place place2 = new Place();
-		place2.setName("place2");
-		calendar.set(2013, 1, 20, 0, 0, 0);
-		place2.setBeginDate(calendar.getTime());
-		calendar.set(2013, 1, 25, 23, 59, 59);
-		place2.setEndDate(calendar.getTime()); //20-25 +
-
-
-		Place place3 = new Place();
-		place3.setName("place3");
-		calendar.set(2013, 1, 10, 0, 0, 0);
-		place3.setBeginDate(calendar.getTime());
-		calendar.set(2013, 1, 21, 0, 0, 0); //10-21 -
-		place3.setEndDate(calendar.getTime());
-
-		Place place4 = new Place();
-		place4.setName("place4");
-		calendar.set(2013, 1, 26, 0, 0, 0);
-		place4.setBeginDate(calendar.getTime());
-		calendar.set(2013, 1, 28, 0, 0, 0);
-		place4.setEndDate(calendar.getTime());// 26-28 -
-
-
 		HibernatePlacesTable placesTable = new HibernatePlacesTable(session);
 		placesTable.addPlace(place1);
-		placesTable.addPlace(place2);
-		placesTable.addPlace(place3);
-		placesTable.addPlace(place4);
 
 		calendar.set(2013, 1, 22, 0, 0, 0);
 		Date beginDate = calendar.getTime();
-		calendar.set(2013, 1, 25, 0, 0, 0);
+		calendar.set(2013, 1, 22, 23, 59, 59);
 		Date endDate = calendar.getTime();
 
 		List<Place> placesInPeriod = placesTable.getPlacesByPeriod(beginDate, endDate);
-		assertEquals(2, placesInPeriod.size());
-		assertTrue(placesInPeriod.get(0).getName().equals(place1.getName()) || placesInPeriod.get(0).getName().equals(place2.getName()));
-		assertTrue(placesInPeriod.get(1).getName().equals(place1.getName()) || placesInPeriod.get(1).getName().equals(place2.getName()));
+		assertEquals(1, placesInPeriod.size());
 
 		session.close();
 		sessionFactory.close();

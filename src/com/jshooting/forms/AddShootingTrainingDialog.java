@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.shootingDatabase.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
 import com.jshooting.shootingDatabase.ShootingTraining;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
@@ -12,8 +13,11 @@ import com.jshooting.shootingDatabase.TrainingMethod;
 import com.jshooting.shootingDatabase.TrainingMethodsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.awt.Window;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -114,6 +118,44 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 		fillSportmanComboBoxBySelectedTeam();
 		fillTrainingMethodComboBox();
 		jDateChooserTrainingDate.setDate(new Date());
+		updatePlaceByTrainingDate();
+	}
+
+	/**
+	 * Update place that exists in date of training
+	 */
+	private void updatePlaceByTrainingDate()
+	{
+		try
+		{
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(jDateChooserTrainingDate.getDate());
+
+			calendar.set(Calendar.HOUR_OF_DAY, 0);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);
+			Date periodDateFrom = calendar.getTime();
+
+			calendar.set(Calendar.HOUR_OF_DAY, 23);
+			calendar.set(Calendar.MINUTE, 59);
+			calendar.set(Calendar.SECOND, 59);
+			calendar.set(Calendar.MILLISECOND, 999);
+			Date periodDateTo = calendar.getTime();
+
+			List<Place> placesInTrainingDate = placesTable.getPlacesByPeriod(periodDateFrom, periodDateTo);
+			if (placesInTrainingDate.size() > 0)
+			{
+				jTextFieldPlaceName.setText(placesInTrainingDate.get(0).getName());
+			}
+			else
+			{
+				jTextFieldPlaceName.setText("");
+			}
+		}
+		catch (DatabaseErrorException ex)
+		{
+			jTextFieldPlaceName.setText("");
+		}
 	}
 
 	/**
@@ -305,6 +347,14 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
     jLabel5.setText("Погода");
 
     jLabel6.setText("Комментарий");
+
+    jDateChooserTrainingDate.addPropertyChangeListener(new java.beans.PropertyChangeListener()
+    {
+      public void propertyChange(java.beans.PropertyChangeEvent evt)
+      {
+        jDateChooserTrainingDatePropertyChange(evt);
+      }
+    });
 
     jButtonAddTraining.setText("Добавить тренировку");
     jButtonAddTraining.setToolTipText("Добавить тренировку для выбранного спортсмена");
@@ -794,6 +844,14 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 			JOptionPane.showMessageDialog(null, "Необходимо выбрать спортсмена и средство", "Ошибка", JOptionPane.ERROR_MESSAGE);
 		}
   }//GEN-LAST:event_jButtonAddTrainingActionPerformed
+
+  private void jDateChooserTrainingDatePropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_jDateChooserTrainingDatePropertyChange
+  {//GEN-HEADEREND:event_jDateChooserTrainingDatePropertyChange
+		if ("date".equals(evt.getPropertyName()))
+		{
+			updatePlaceByTrainingDate();
+		}
+  }//GEN-LAST:event_jDateChooserTrainingDatePropertyChange
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTraining;
   private javax.swing.JComboBox jComboBoxSportsman;

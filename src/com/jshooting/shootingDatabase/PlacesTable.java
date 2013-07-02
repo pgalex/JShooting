@@ -25,9 +25,11 @@ public interface PlacesTable
 	 * @param periodDateFrom period date from (including)
 	 * @param periodDateTo period date to (including)
 	 * @return list of places exists in given period
-	 * @throws IllegalArgumentException periodDateFrom is null, periodDateTo is null; periodDateFrom more than periodDateTo
+	 * @throws IllegalArgumentException periodDateFrom is null, periodDateTo is
+	 * null; periodDateFrom more than periodDateTo
+	 * @throws DatabaseErrorException error while getting places 
 	 */
-	public List<Place> getPlacesByPeriod(Date periodDateFrom, Date periodDateTo) throws IllegalArgumentException;
+	public List<Place> getPlacesByPeriod(Date periodDateFrom, Date periodDateTo) throws IllegalArgumentException, DatabaseErrorException;
 
 	/**
 	 * Add new place

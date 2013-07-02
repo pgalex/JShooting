@@ -2,7 +2,6 @@ package com.jshooting.forms;
 
 import com.jshooting.shootingDatabase.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
-import com.jshooting.shootingDatabase.Team;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -157,10 +154,10 @@ public class PlacesTableModel extends AbstractTableModel
 					updatingPlace.setName((String) newValue);
 					break;
 				case BEGIN_DATE_COLUMN_INDEX:
-					updatingPlace.setBeginDate((new SimpleDateFormat("dd.MM.yyyy")).parse((String) newValue));
+					updatePlaceBeginDate(updatingPlace, (new SimpleDateFormat("dd.MM.yyyy")).parse((String) newValue));
 					break;
 				case END_DATE_COLUMN_INDEX:
-					updatingPlace.setEndDate((new SimpleDateFormat("dd.MM.yyyy")).parse((String) newValue));
+					updatePlaceEndDate(updatingPlace, (new SimpleDateFormat("dd.MM.yyyy")).parse((String) newValue));
 					break;
 				default:
 					break;
@@ -176,6 +173,42 @@ public class PlacesTableModel extends AbstractTableModel
 			fillPlacesArrayFromDatabase();
 			fireTableCellUpdated(rowIndex, columnIndex);
 		}
+	}
+
+	private void updatePlaceBeginDate(Place place, Date newBeginDate) throws IllegalArgumentException
+	{
+		if (place == null)
+		{
+			throw new IllegalArgumentException("place is null");
+		}
+		if (newBeginDate == null)
+		{
+			throw new IllegalArgumentException("newBeginDate is null");
+		}
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(newBeginDate);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		place.setBeginDate(calendar.getTime());
+	}
+
+	private void updatePlaceEndDate(Place place, Date newEndDate) throws IllegalArgumentException
+	{
+		if (place == null)
+		{
+			throw new IllegalArgumentException("place is null");
+		}
+		if (newEndDate == null)
+		{
+			throw new IllegalArgumentException("newBeginDate is null");
+		}
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(newEndDate);
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
+		place.setEndDate(calendar.getTime());
 	}
 
 	@Override

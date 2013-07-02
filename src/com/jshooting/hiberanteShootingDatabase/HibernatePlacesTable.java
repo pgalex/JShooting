@@ -2,7 +2,6 @@ package com.jshooting.hiberanteShootingDatabase;
 
 import com.jshooting.shootingDatabase.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
-import com.jshooting.shootingDatabase.ShootingTraining;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.Date;
 import java.util.List;
@@ -61,7 +60,7 @@ public class HibernatePlacesTable implements PlacesTable
 	 * null; periodDateFrom more than periodDateTo
 	 */
 	@Override
-	public List<Place> getPlacesByPeriod(Date periodDateFrom, Date periodDateTo) throws IllegalArgumentException
+	public List<Place> getPlacesByPeriod(Date periodDateFrom, Date periodDateTo) throws IllegalArgumentException, DatabaseErrorException
 	{
 		if (periodDateFrom == null)
 		{
