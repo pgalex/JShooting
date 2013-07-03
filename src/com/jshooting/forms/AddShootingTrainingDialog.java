@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.PlacesNamesListFormer;
 import com.jshooting.shootingDatabase.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
 import com.jshooting.shootingDatabase.ShootingTraining;
@@ -77,7 +78,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 					ShootingTrainingsTable shootingTrainingTable, PlacesTable placesTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-
+		
 		if (teamsTable == null)
 		{
 			throw new IllegalArgumentException("teamsTable is null");
@@ -98,20 +99,20 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("placesTable is null");
 		}
-
+		
 		this.teamsTable = teamsTable;
 		this.sportsmansTable = sportsmansTable;
 		this.trainingMethodsTable = trainingMethodsTable;
 		this.shootingTrainingTable = shootingTrainingTable;
 		this.placesTable = placesTable;
-
+		
 		teamsComboBoxModel = new DefaultComboBoxModel();
 		sportsmansComboBoxModel = new DefaultComboBoxModel();
 		trainingMethodsComboBoxModel = new DefaultComboBoxModel();
-
+		
 		initComponents();
 		jLabelAddingToDatabaseAnimation.setVisible(false);
-
+		
 		fillTeamsComboBox();
 		fillSportmanComboBoxBySelectedTeam();
 		fillTrainingMethodComboBox();
@@ -128,28 +129,19 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 		{
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(jDateChooserTrainingDate.getDate());
-
+			
 			calendar.set(Calendar.HOUR_OF_DAY, 0);
 			calendar.set(Calendar.MINUTE, 0);
 			calendar.set(Calendar.SECOND, 0);
 			Date periodDateFrom = calendar.getTime();
-
+			
 			calendar.set(Calendar.HOUR_OF_DAY, 23);
 			calendar.set(Calendar.MINUTE, 59);
 			calendar.set(Calendar.SECOND, 59);
 			Date periodDateTo = calendar.getTime();
+			
 
-			String placesListString = new String();
-			List<Place> placesInTrainingDate = placesTable.getPlacesByPeriod(periodDateFrom, periodDateTo);
-			for (int i = 0; i < placesInTrainingDate.size(); i++)
-			{
-				placesListString += placesInTrainingDate.get(i).getName();
-				if (i != placesInTrainingDate.size() - 1)
-				{
-					placesListString += ", ";
-				}
-			}
-			jTextFieldPlaceName.setText(placesListString);
+			jTextFieldPlaceName.setText(PlacesNamesListFormer.getPlacesNamesString(placesTable.getPlacesByPeriod(periodDateFrom, periodDateTo)));
 		}
 		catch (DatabaseErrorException ex)
 		{
@@ -764,12 +756,12 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
   {//GEN-HEADEREND:event_jComboBoxTeamActionPerformed
 		fillSportmanComboBoxBySelectedTeam();
   }//GEN-LAST:event_jComboBoxTeamActionPerformed
-
+	
   private void jButtonAddTrainingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingActionPerformed
 		Object selectedSportsmanItem = jComboBoxSportsman.getSelectedItem();
 		Object selectedMethodItem = jComboBoxTrainingMethod.getSelectedItem();
-
+		
 		if (selectedSportsmanItem instanceof Sportsman
 						&& selectedMethodItem instanceof TrainingMethod)
 		{
@@ -782,37 +774,37 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 				newTraining.setTrainingMethod((TrainingMethod) selectedMethodItem);
 				newTraining.setWeather(jTextFieldWeather.getText());
 				newTraining.setComments(jTextFieldComments.getText());
-
+				
 				newTraining.setNumLyingInRest((Integer) jSpinnerNumLyingInRest.getValue());
 				newTraining.setMissLyingInRest((Integer) jSpinnerMissLyingInRest.getValue());
 				newTraining.setNumLyingLoading((Integer) jSpinnerNumLyingLoading.getValue());
 				newTraining.setMissLyingLoading((Integer) jSpinnerMissLyingLoading.getValue());
 				newTraining.setNumLyingCompetition((Integer) jSpinnerNumLyingCompetition.getValue());
 				newTraining.setMissLyingCompetition((Integer) jSpinnerMissLyingCompetition.getValue());
-
+				
 				newTraining.setNumStandingInRest((Integer) jSpinnerNumStandingInRest.getValue());
 				newTraining.setMissStandingInRest(((Integer) jSpinnerMissStandingInRest.getValue()));
 				newTraining.setNumStandingLoading((Integer) jSpinnerNumStandingLoading.getValue());
 				newTraining.setMissStandingLoading((Integer) jSpinnerMissStandingLoading.getValue());
 				newTraining.setNumStandingCompetition((Integer) jSpinnerNumStandingCompetition.getValue());
 				newTraining.setMissStandingCompetition((Integer) jSpinnerMissStandingCompetition.getValue());
-
+				
 				newTraining.setFirstLyingLoading((Integer) jSpinnerFirstLyingLoading.getValue());
 				newTraining.setFirstLyingCompetition((Integer) jSpinnerFirstLyingCompetition.getValue());
 				newTraining.setDelayLyingLoading((Integer) jSpinnerDelayLyingLoading.getValue());
 				newTraining.setDelayLyingCompetition((Integer) jSpinnerDelayLyingCompetition.getValue());
-
+				
 				newTraining.setFirstStandingLoading((Integer) jSpinnerFirstStandingLoading.getValue());
 				newTraining.setFirstStandingCompetition((Integer) jSpinnerFirstStandingCompetition.getValue());
 				newTraining.setDelayStandingLoading((Integer) jSpinnerDelayStandingLoading.getValue());
 				newTraining.setDelayStandingCompetition((Integer) jSpinnerDelayStandingCompetition.getValue());
-
+				
 				newTraining.setZeroingIn((Integer) jSpinnerZeroingIn.getValue());
 				newTraining.setTrail((Integer) jSpinnerTrail.getValue());
 				newTraining.setScatt((Integer) jSpinnerScatt.getValue());
-
+				
 				shootingTrainingTable.addTraining(newTraining);
-
+				
 				jLabelAddingToDatabaseAnimation.setVisible(true);
 				Thread hidingAnimationThread = new Thread(new Runnable()
 				{
@@ -831,7 +823,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 					}
 				});
 				hidingAnimationThread.start();
-
+				
 			}
 			catch (DatabaseErrorException ex)
 			{
@@ -843,7 +835,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 			JOptionPane.showMessageDialog(null, "Необходимо выбрать спортсмена и средство", "Ошибка", JOptionPane.ERROR_MESSAGE);
 		}
   }//GEN-LAST:event_jButtonAddTrainingActionPerformed
-
+	
   private void jDateChooserTrainingDatePropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_jDateChooserTrainingDatePropertyChange
   {//GEN-HEADEREND:event_jDateChooserTrainingDatePropertyChange
 		if ("date".equals(evt.getPropertyName()))

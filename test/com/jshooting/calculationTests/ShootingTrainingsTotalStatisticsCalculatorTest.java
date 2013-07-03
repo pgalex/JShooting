@@ -1,6 +1,6 @@
 package com.jshooting.calculationTests;
 
-import com.jshooting.calculation.ShootingTrainingsStatisticsCalculator;
+import com.jshooting.logics.ShootingTrainingsStatisticsCalculator;
 import com.jshooting.shootingDatabase.ShootingTraining;
 import java.util.ArrayList;
 import java.util.List;

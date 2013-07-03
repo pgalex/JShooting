@@ -1,4 +1,4 @@
-package com.jshooting.calculation;
+package com.jshooting.logics;
 
 import com.jshooting.shootingDatabase.ShootingTraining;
 import java.util.ArrayList;

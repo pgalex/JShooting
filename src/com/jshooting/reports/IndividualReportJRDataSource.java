@@ -1,6 +1,6 @@
 package com.jshooting.reports;
 
-import com.jshooting.calculation.ShootingTrainingsStatisticsCalculator;
+import com.jshooting.logics.ShootingTrainingsStatisticsCalculator;
 import com.jshooting.shootingDatabase.ShootingTraining;
 import com.jshooting.shootingDatabase.ShootingTrainingType;
 import com.jshooting.shootingDatabase.ShootingTrainingsFilter;
