@@ -9,7 +9,7 @@
     <property column="trainingDate" name="date" not-null="true" type="date"/>
     <property name="type" not-null="true">
       <type name="org.hibernate.type.EnumType">
-        <param name="enumClass">com.jshooting.shootingDatabase.ShootingTrainingType</param>
+        <param name="enumClass">com.jshooting.model.ShootingTrainingType</param>
       </type>
     </property>
     <many-to-one class="com.jshooting.model.TrainingMethod" column="trainingMethod" name="trainingMethod" not-null="true"/>

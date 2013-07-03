@@ -140,7 +140,6 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 			calendar.set(Calendar.SECOND, 59);
 			Date periodDateTo = calendar.getTime();
 			
-
 			jTextFieldPlaceName.setText(PlacesNamesListFormer.getPlacesNamesString(placesTable.getPlacesByPeriod(periodDateFrom, periodDateTo)));
 		}
 		catch (DatabaseErrorException ex)
