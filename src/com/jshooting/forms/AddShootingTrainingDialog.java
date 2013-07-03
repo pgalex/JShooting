@@ -16,8 +16,6 @@ import java.awt.Window;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -142,15 +140,17 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 			calendar.set(Calendar.MILLISECOND, 999);
 			Date periodDateTo = calendar.getTime();
 
+			String placesListString = new String();
 			List<Place> placesInTrainingDate = placesTable.getPlacesByPeriod(periodDateFrom, periodDateTo);
-			if (placesInTrainingDate.size() > 0)
+			for (int i = 0; i < placesInTrainingDate.size(); i++)
 			{
-				jTextFieldPlaceName.setText(placesInTrainingDate.get(0).getName());
+				placesListString += placesInTrainingDate.get(i).getName();
+				if (i != placesInTrainingDate.size() - 1)
+				{
+					placesListString += ", ";
+				}
 			}
-			else
-			{
-				jTextFieldPlaceName.setText("");
-			}
+			jTextFieldPlaceName.setText(placesListString);
 		}
 		catch (DatabaseErrorException ex)
 		{
