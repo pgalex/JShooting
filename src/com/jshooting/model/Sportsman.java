@@ -1,24 +1,26 @@
-package com.jshooting.shootingDatabase;
+package com.jshooting.model;
 
 /**
- * Training method
+ * Sportsman
  *
  * @author pgalex
  */
-public class TrainingMethod
+public class Sportsman
 {
 	/**
 	 * Id
 	 */
 	private long id;
 	/**
-	 * Name
+	 * Name of sportsman
 	 */
 	private String name;
+	/**
+	 * Sportsman's team. Not null
+	 */
+	private Team team;
 
 	/**
-	 * Id
-	 *
 	 * @return the id
 	 */
 	public long getId()
@@ -27,8 +29,6 @@ public class TrainingMethod
 	}
 
 	/**
-	 * Id
-	 *
 	 * @param id the id to set
 	 */
 	public void setId(long id)
@@ -37,8 +37,6 @@ public class TrainingMethod
 	}
 
 	/**
-	 * Name
-	 *
 	 * @return the name
 	 */
 	public String getName()
@@ -47,13 +45,27 @@ public class TrainingMethod
 	}
 
 	/**
-	 * Name
-	 *
 	 * @param name the name to set
 	 */
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	/**
+	 * @return the team
+	 */
+	public Team getTeam()
+	{
+		return team;
+	}
+
+	/**
+	 * @param team the team to set
+	 */
+	public void setTeam(Team team)
+	{
+		this.team = team;
 	}
 
 	@Override

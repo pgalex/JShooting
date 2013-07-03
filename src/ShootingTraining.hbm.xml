@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-  <class name="com.jshooting.shootingDatabase.ShootingTraining" table="Trainings">
+  <class name="com.jshooting.model.ShootingTraining" table="Trainings">
     <id column="trainingId" name="id" type="long">
       <generator class="native"/>
     </id>
-    <many-to-one class="com.jshooting.shootingDatabase.Sportsman" column="trainingSportsman" name="sportsman" not-null="true"/>
+    <many-to-one class="com.jshooting.model.Sportsman" column="trainingSportsman" name="sportsman" not-null="true"/>
     <property column="trainingDate" name="date" not-null="true" type="date"/>
     <property name="type" not-null="true">
       <type name="org.hibernate.type.EnumType">
         <param name="enumClass">com.jshooting.shootingDatabase.ShootingTrainingType</param>
       </type>
     </property>
-    <many-to-one class="com.jshooting.shootingDatabase.TrainingMethod" column="trainingMethod" name="trainingMethod" not-null="true"/>
+    <many-to-one class="com.jshooting.model.TrainingMethod" column="trainingMethod" name="trainingMethod" not-null="true"/>
     <property column="trainingWeather" name="weather" type="string"/>
     <property column="trainingComments" name="comments" type="string"/>
     <property column="trainingNumLyingInRest" name="numLyingInRest" type="int"/>

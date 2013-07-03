@@ -1,7 +1,7 @@
 package com.jshooting.hibernateShootingDatabaseTests;
 
 import com.jshooting.hiberanteShootingDatabase.HibernateTrainingMethodsTable;
-import com.jshooting.shootingDatabase.TrainingMethod;
+import com.jshooting.model.TrainingMethod;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import com.jshooting.testUtils.HibernateTesting;
 import com.jshooting.testUtils.IOTesting;

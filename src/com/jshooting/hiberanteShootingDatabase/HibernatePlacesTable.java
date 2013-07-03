@@ -1,6 +1,6 @@
 package com.jshooting.hiberanteShootingDatabase;
 
-import com.jshooting.shootingDatabase.Place;
+import com.jshooting.model.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.Date;

@@ -1,6 +1,6 @@
 package com.jshooting.forms;
 
-import com.jshooting.shootingDatabase.TrainingMethod;
+import com.jshooting.model.TrainingMethod;
 import com.jshooting.shootingDatabase.TrainingMethodsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;

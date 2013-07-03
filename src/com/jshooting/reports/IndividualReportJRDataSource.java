@@ -1,9 +1,9 @@
 package com.jshooting.reports;
 
 import com.jshooting.logics.ShootingTrainingsStatisticsCalculator;
-import com.jshooting.shootingDatabase.ShootingTraining;
-import com.jshooting.shootingDatabase.ShootingTrainingType;
-import com.jshooting.shootingDatabase.ShootingTrainingsFilter;
+import com.jshooting.model.ShootingTraining;
+import com.jshooting.model.ShootingTrainingType;
+import com.jshooting.model.ShootingTrainingsFilter;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.text.SimpleDateFormat;

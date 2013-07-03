@@ -1,5 +1,7 @@
 package com.jshooting.shootingDatabase;
 
+import com.jshooting.model.ShootingTrainingsFilter;
+import com.jshooting.model.ShootingTraining;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 

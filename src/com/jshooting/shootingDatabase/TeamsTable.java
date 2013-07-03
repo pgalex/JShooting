@@ -1,5 +1,6 @@
 package com.jshooting.shootingDatabase;
 
+import com.jshooting.model.Team;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 

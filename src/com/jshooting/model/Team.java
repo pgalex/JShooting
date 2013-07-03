@@ -1,26 +1,26 @@
-package com.jshooting.shootingDatabase;
+package com.jshooting.model;
+
+import java.io.Serializable;
 
 /**
- * Sportsman
+ * Team
  *
  * @author pgalex
  */
-public class Sportsman
+public class Team implements Serializable
 {
 	/**
 	 * Id
 	 */
 	private long id;
 	/**
-	 * Name of sportsman
+	 * Name
 	 */
 	private String name;
-	/**
-	 * Sportsman's team. Not null
-	 */
-	private Team team;
 
 	/**
+	 * Id
+	 *
 	 * @return the id
 	 */
 	public long getId()
@@ -29,6 +29,8 @@ public class Sportsman
 	}
 
 	/**
+	 * Id
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(long id)
@@ -37,6 +39,8 @@ public class Sportsman
 	}
 
 	/**
+	 * Name of team
+	 *
 	 * @return the name
 	 */
 	public String getName()
@@ -45,27 +49,13 @@ public class Sportsman
 	}
 
 	/**
+	 * Name of team
+	 *
 	 * @param name the name to set
 	 */
 	public void setName(String name)
 	{
 		this.name = name;
-	}
-
-	/**
-	 * @return the team
-	 */
-	public Team getTeam()
-	{
-		return team;
-	}
-
-	/**
-	 * @param team the team to set
-	 */
-	public void setTeam(Team team)
-	{
-		this.team = team;
 	}
 
 	@Override

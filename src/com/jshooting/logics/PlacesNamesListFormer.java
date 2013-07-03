@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.shootingDatabase.Place;
+import com.jshooting.model.Place;
 import java.util.List;
 
 /**

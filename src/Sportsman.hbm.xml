@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.jshooting.shootingDatabase.Sportsman" table="Sportsmans">
-        <id name="id" column="sportsmanId" type="long">
-            <generator class="native"></generator>
-        </id>
-        <property name="name" column="sportsmanName" type="string"></property>
-        <many-to-one name="team" class="com.jshooting.shootingDatabase.Team" column="sportsmanTeam" not-null="true"/>
-   
-    </class>
+  <class name="com.jshooting.model.Sportsman" table="Sportsmans">
+    <id column="sportsmanId" name="id" type="long">
+      <generator class="native"/>
+    </id>
+    <property column="sportsmanName" name="name" type="string"/>
+    <many-to-one class="com.jshooting.model.Team" column="sportsmanTeam" name="team" not-null="true"/>
+  </class>
 </hibernate-mapping>

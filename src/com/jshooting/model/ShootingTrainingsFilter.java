@@ -1,4 +1,4 @@
-package com.jshooting.shootingDatabase;
+package com.jshooting.model;
 
 import java.util.Date;
 import java.util.List;

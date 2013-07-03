@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.shootingDatabase.ShootingTraining;
+import com.jshooting.model.ShootingTraining;
 import java.util.ArrayList;
 import java.util.List;
 

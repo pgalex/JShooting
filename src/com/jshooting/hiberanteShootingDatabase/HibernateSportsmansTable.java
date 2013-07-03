@@ -1,8 +1,8 @@
 package com.jshooting.hiberanteShootingDatabase;
 
-import com.jshooting.shootingDatabase.Sportsman;
+import com.jshooting.model.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
-import com.jshooting.shootingDatabase.Team;
+import com.jshooting.model.Team;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.List;
 import org.hibernate.Criteria;

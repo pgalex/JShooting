@@ -1,13 +1,11 @@
-package com.jshooting.shootingDatabase;
-
-import java.io.Serializable;
+package com.jshooting.model;
 
 /**
- * Team
+ * Training method
  *
  * @author pgalex
  */
-public class Team implements Serializable
+public class TrainingMethod
 {
 	/**
 	 * Id
@@ -39,7 +37,7 @@ public class Team implements Serializable
 	}
 
 	/**
-	 * Name of team
+	 * Name
 	 *
 	 * @return the name
 	 */
@@ -49,7 +47,7 @@ public class Team implements Serializable
 	}
 
 	/**
-	 * Name of team
+	 * Name
 	 *
 	 * @param name the name to set
 	 */

@@ -1,16 +1,16 @@
 package com.jshooting.forms;
 
 import com.jshooting.logics.PlacesNamesListFormer;
-import com.jshooting.shootingDatabase.Place;
+import com.jshooting.model.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
-import com.jshooting.shootingDatabase.ShootingTraining;
+import com.jshooting.model.ShootingTraining;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
-import com.jshooting.shootingDatabase.ShootingTrainingType;
-import com.jshooting.shootingDatabase.Sportsman;
+import com.jshooting.model.ShootingTrainingType;
+import com.jshooting.model.Sportsman;
 import com.jshooting.shootingDatabase.SportsmansTable;
-import com.jshooting.shootingDatabase.Team;
+import com.jshooting.model.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
-import com.jshooting.shootingDatabase.TrainingMethod;
+import com.jshooting.model.TrainingMethod;
 import com.jshooting.shootingDatabase.TrainingMethodsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.awt.Window;

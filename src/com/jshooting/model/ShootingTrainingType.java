@@ -1,4 +1,4 @@
-package com.jshooting.shootingDatabase;
+package com.jshooting.model;
 
 /**
  * Type of shooting training

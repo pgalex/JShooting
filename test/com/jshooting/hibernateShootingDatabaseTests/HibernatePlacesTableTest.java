@@ -1,7 +1,7 @@
 package com.jshooting.hibernateShootingDatabaseTests;
 
 import com.jshooting.hiberanteShootingDatabase.HibernatePlacesTable;
-import com.jshooting.shootingDatabase.Place;
+import com.jshooting.model.Place;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import com.jshooting.testUtils.HibernateTesting;
 import com.jshooting.testUtils.IOTesting;

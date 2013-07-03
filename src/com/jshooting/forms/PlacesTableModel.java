@@ -1,6 +1,6 @@
 package com.jshooting.forms;
 
-import com.jshooting.shootingDatabase.Place;
+import com.jshooting.model.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.text.ParseException;

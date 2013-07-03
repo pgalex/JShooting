@@ -1,6 +1,6 @@
 package com.jshooting.forms;
 
-import com.jshooting.shootingDatabase.Team;
+import com.jshooting.model.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import javax.swing.table.AbstractTableModel;
