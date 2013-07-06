@@ -1,6 +1,7 @@
 package com.jshooting.forms;
 
 import com.jshooting.componentsHighlighting.ComponentsHighlighter;
+import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.reports.CombinedReportJRDataSource;
 import com.jshooting.reports.IndividualReportJRDataSource;
 import com.jshooting.shootingDatabase.ShootingDatabase;
@@ -432,7 +433,7 @@ public class MainFrame extends javax.swing.JFrame
   private void jButtonSportsmansActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSportsmansActionPerformed
   {//GEN-HEADEREND:event_jButtonSportsmansActionPerformed
 		EditSportsmansDialog editSportsmansDialog = new EditSportsmansDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
-						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable());
+						shootingDatabase.getTeamsTable(), new ShootingLogicsFactory(shootingDatabase));
 		editSportsmansDialog.setLocationRelativeTo(this);
 		editSportsmansDialog.setVisible(true);
   }//GEN-LAST:event_jButtonSportsmansActionPerformed

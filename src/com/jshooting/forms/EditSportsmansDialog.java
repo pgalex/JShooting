@@ -1,8 +1,7 @@
 package com.jshooting.forms;
 
 import com.jshooting.componentsHighlighting.ComponentsHighlighter;
-import com.jshooting.model.Sportsman;
-import com.jshooting.shootingDatabase.SportsmansTable;
+import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.model.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
@@ -17,8 +16,8 @@ import javax.swing.DefaultComboBoxModel;
 public class EditSportsmansDialog extends javax.swing.JDialog
 {
 	/**
-	 * Components highlighter	
- */
+	 * Components highlighter
+	 */
 	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Model of team selecting combo box
@@ -39,12 +38,12 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
 	 * @param teamsTable teams table
-	 * @param sportsmansTable sportsmans table
-	 * @throws IllegalArgumentException teamsTable or sportsmansTable is null
+	 * @param logicsFactory shooting logics factory
+	 * @throws IllegalArgumentException teamsTable or logicsFactory is null
 	 *
 	 */
 	public EditSportsmansDialog(Window parentWindow, ModalityType modalityType, TeamsTable teamsTable,
-					SportsmansTable sportsmansTable) throws IllegalArgumentException
+					ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
@@ -52,13 +51,13 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("teamsTable is null");
 		}
-		if (sportsmansTable == null)
+		if (logicsFactory == null)
 		{
-			throw new IllegalArgumentException("sportsmansTable is null");
+			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
 		this.teamsTable = teamsTable;
-		this.sportsmansTableModel = new SportsmansTableModel(sportsmansTable);
+		this.sportsmansTableModel = new SportsmansTableModel(logicsFactory);
 		this.componentsHighlighter = new ComponentsHighlighter();
 		initializeTeamsComboBoxModel();
 
@@ -233,10 +232,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		}
 
 		Team selectedTeam = (Team) jComboBoxTeams.getSelectedItem();
-		Sportsman newSportsman = new Sportsman();
-		newSportsman.setName("");
-		newSportsman.setTeam(selectedTeam);
-		sportsmansTableModel.addNewSportsman(newSportsman);
+		sportsmansTableModel.addNewSportsman(selectedTeam);
 
 		if (jTableSportsmans.getRowCount() > 0)
 		{

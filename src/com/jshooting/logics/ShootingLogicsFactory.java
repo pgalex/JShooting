@@ -30,4 +30,24 @@ public class ShootingLogicsFactory
 
 		this.shootingDatabase = shootingDatabase;
 	}
+
+	/**
+	 * Create new sportsmans getter
+	 *
+	 * @return sportsmans getter
+	 */
+	public SportsmansGetter createSportsmansGetter()
+	{
+		return new SportsmansGetter(shootingDatabase.getSportsmansTable());
+	}
+
+	/**
+	 * Create new sportsmans modifier
+	 *
+	 * @return sportsmans modifier
+	 */
+	public SportsmansModifier createSportsmansModifier()
+	{
+		return new SportsmansModifier(shootingDatabase.getSportsmansTable());
+	}
 }

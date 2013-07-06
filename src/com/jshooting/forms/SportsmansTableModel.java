@@ -1,9 +1,11 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.logics.SportsmansGetter;
+import com.jshooting.logics.SportsmansModifier;
+import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Sportsman;
-import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.model.Team;
-import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -20,9 +22,13 @@ public class SportsmansTableModel extends AbstractTableModel
 	 */
 	public static final int NAME_COLUMN_INDEX = 0;
 	/**
-	 * Sportsman table using to fill model
+	 * Using to get sportsmans with criterias
 	 */
-	private SportsmansTable sportsmansTable;
+	private SportsmansGetter sportsmansGetter;
+	/**
+	 * Using to edit sportsmans
+	 */
+	private SportsmansModifier sportsmansModifier;
 	/**
 	 * Team which sportsmans need to show. If null - show all sportsmans
 	 */
@@ -31,18 +37,18 @@ public class SportsmansTableModel extends AbstractTableModel
 	/**
 	 * Create by sportsmans table with not filtering by team
 	 *
-	 * @param sportsmansTable Sportsman table using to fill model
-	 * @throws IllegalArgumentException sportsmansTable is null
+	 * @param logicsFactory shooting logics factory. Must be not null
+	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public SportsmansTableModel(SportsmansTable sportsmansTable) throws IllegalArgumentException
+	public SportsmansTableModel(ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
-		if (sportsmansTable == null)
+		if (logicsFactory == null)
 		{
-			throw new IllegalArgumentException("sportsmansTable is null");
+			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		this.sportsmansTable = sportsmansTable;
-		this.filteringTeam = null;
+		sportsmansGetter = logicsFactory.createSportsmansGetter();
+		sportsmansModifier = logicsFactory.createSportsmansModifier();
 	}
 
 	/**
@@ -75,14 +81,14 @@ public class SportsmansTableModel extends AbstractTableModel
 		{
 			if (filteringTeam != null)
 			{
-				return sportsmansTable.getSportsmansInTeam(filteringTeam);
+				return sportsmansGetter.getSportsmansInTeam(filteringTeam);
 			}
 			else
 			{
-				return sportsmansTable.getAllSportsmans();
+				return new ArrayList<Sportsman>();
 			}
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			return new ArrayList<Sportsman>();
 		}
@@ -136,14 +142,14 @@ public class SportsmansTableModel extends AbstractTableModel
 			{
 				Sportsman updatingSportsman = sportsmans.get(i);
 				updatingSportsman.setName((String) o);
-				sportsmansTable.updateSportsman(updatingSportsman);
+				sportsmansModifier.updateSportsman(updatingSportsman);
 			}
 			else
 			{
 				// do nothing
 			}
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			// do nothing
 		}
@@ -152,27 +158,22 @@ public class SportsmansTableModel extends AbstractTableModel
 	/**
 	 * Add new sportsman
 	 *
-	 * @param sportsmanToAdd adding sportsman
-	 * @throws IllegalArgumentException sportsmanToAdd is null or its team is null
+	 * @param newSportsmanTeam team of new sportsmans. Must be not null
+	 * @throws IllegalArgumentException newSportsmanTeam is null
 	 */
-	public void addNewSportsman(Sportsman sportsmanToAdd) throws IllegalArgumentException
+	public void addNewSportsman(Team newSportsmanTeam) throws IllegalArgumentException
 	{
-		if (sportsmanToAdd == null)
+		if (newSportsmanTeam == null)
 		{
 			throw new IllegalArgumentException("sportsmanToAdd is null");
-		}
-		if (sportsmanToAdd.getTeam() == null)
-		{
-			throw new IllegalArgumentException("sportsmanToAdd team is null");
 		}
 
 		try
 		{
-			sportsmansTable.addSportsman(sportsmanToAdd);
-			fireTableRowsInserted(sportsmansTable.getAllSportsmans().size() - 1,
-							sportsmansTable.getAllSportsmans().size() - 1);
+			sportsmansModifier.addNewSportsmanWithTeam(newSportsmanTeam);
+			fireTableRowsInserted(getRowCount() - 1, getRowCount() - 1);
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			// do nothing
 		}

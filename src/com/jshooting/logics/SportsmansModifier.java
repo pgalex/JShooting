@@ -29,7 +29,7 @@ public class SportsmansModifier
 		{
 			throw new IllegalArgumentException("sportsmansTable is null");
 		}
-		
+
 		this.sportsmansTable = sportsmansTable;
 	}
 
@@ -46,13 +46,42 @@ public class SportsmansModifier
 		{
 			throw new IllegalArgumentException("newSportsmanTeam is null");
 		}
-		
+
 		try
 		{
 			Sportsman newSportsman = new Sportsman();
 			newSportsman.setName("");
 			newSportsman.setTeam(newSportsmanTeam);
 			sportsmansTable.addSportsman(newSportsman);
+		}
+		catch (Exception ex)
+		{
+			throw new ShootingLogicsException(ex);
+		}
+	}
+
+	/**
+	 * Update exists sportsman
+	 *
+	 * @param sportsmansToUpdate updating sportsman
+	 * @throws IllegalArgumentException sportsmansToUpdate is null or its team is
+	 * null
+	 * @throws ShootingLogicsException error while updating
+	 */
+	public void updateSportsman(Sportsman sportsmansToUpdate) throws IllegalArgumentException, ShootingLogicsException
+	{
+		if (sportsmansToUpdate == null)
+		{
+			throw new IllegalArgumentException("sportsmansToUpdate is null");
+		}
+		if (sportsmansToUpdate.getTeam() == null)
+		{
+			throw new IllegalArgumentException("sportsmansToUpdate team is null");
+		}
+		
+		try
+		{
+			sportsmansTable.updateSportsman(sportsmansToUpdate);
 		}
 		catch (Exception ex)
 		{
