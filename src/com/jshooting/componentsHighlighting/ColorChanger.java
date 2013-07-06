@@ -171,6 +171,11 @@ public class ColorChanger
 		return new Color((int) Math.round(currentColorRed), (int) Math.round(currentColorGreen), (int) Math.round(currentColorBlue), (int) Math.round(currentColorAlpha));
 	}
 
+	/**
+	 * Get initial highlighting color
+	 *
+	 * @return initial highlighting color
+	 */
 	public Color getInitialColor()
 	{
 		return initialColor;
