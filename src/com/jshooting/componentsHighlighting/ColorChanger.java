@@ -3,7 +3,7 @@ package com.jshooting.componentsHighlighting;
 import java.awt.Color;
 
 /**
- * Changer of color blinking between two colors
+ * Changer of color, smoothly blinkns it between two colors
  *
  * @author pgalex
  */
@@ -53,11 +53,12 @@ public class ColorChanger
 	/**
 	 * Create color changer between two colors
 	 *
-	 * @param initialColor initial color
-	 * @param endColor end color
+	 * @param initialColor initial color. Must be not null
+	 * @param endColor end color. Must be not null
 	 * @param blinkingTime time in milliseconds in that need two change initial
-	 * color to end and back to initial
-	 * @param changingColorTimerIdle time in milliseconds in which color changing
+	 * color to end and back to initial. Must be more than changingColorTimerIdle
+	 * @param changingColorTimerIdle time in milliseconds in which color changing.
+	 * Must be more than zero
 	 * @throws IllegalArgumentException initialColor or endColor is null;
 	 * changingColorTimerIdle less or equals zero; blinkingTime less or equals
 	 * changingColorTimerIdle
