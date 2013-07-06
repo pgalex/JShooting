@@ -32,16 +32,6 @@ public class ShootingLogicsFactory
 	}
 
 	/**
-	 * Create new sportsmans getter
-	 *
-	 * @return sportsmans getter
-	 */
-	public SportsmansGetter createSportsmansGetter()
-	{
-		return new SportsmansGetter(shootingDatabase.getSportsmansTable());
-	}
-
-	/**
 	 * Create new sportsmans modifier
 	 *
 	 * @return sportsmans modifier
@@ -49,5 +39,10 @@ public class ShootingLogicsFactory
 	public SportsmansModifier createSportsmansModifier()
 	{
 		return new SportsmansModifier(shootingDatabase.getSportsmansTable());
+	}
+
+	public SportsmansByTeamGetter createSportsmansByTeamGetter()
+	{
+		return new SportsmansByTeamGetter(shootingDatabase.getSportsmansTable());
 	}
 }

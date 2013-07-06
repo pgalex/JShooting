@@ -1,7 +1,7 @@
 package com.jshooting.forms;
 
 import com.jshooting.logics.ShootingLogicsFactory;
-import com.jshooting.logics.SportsmansGetter;
+import com.jshooting.logics.SportsmansByTeamGetter;
 import com.jshooting.logics.SportsmansModifier;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Sportsman;
@@ -24,15 +24,11 @@ public class SportsmansTableModel extends AbstractTableModel
 	/**
 	 * Using to get sportsmans with criterias
 	 */
-	private SportsmansGetter sportsmansGetter;
+	private SportsmansByTeamGetter sportsmansGetter;
 	/**
 	 * Using to edit sportsmans
 	 */
 	private SportsmansModifier sportsmansModifier;
-	/**
-	 * Team which sportsmans need to show. If null - show all sportsmans
-	 */
-	private Team filteringTeam;
 	/**
 	 * List of sportsmans in filtering team. Using to optimize access to database
 	 */
@@ -51,9 +47,8 @@ public class SportsmansTableModel extends AbstractTableModel
 			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		sportsmansGetter = logicsFactory.createSportsmansGetter();
+		sportsmansGetter = logicsFactory.createSportsmansByTeamGetter();
 		sportsmansModifier = logicsFactory.createSportsmansModifier();
-		filteringTeam = null;
 		sportsmanInFilteringTeam = new ArrayList<Sportsman>();
 	}
 
@@ -65,7 +60,7 @@ public class SportsmansTableModel extends AbstractTableModel
 	 */
 	public void setFilteringTeam(Team filteringTeamToSet)
 	{
-		filteringTeam = filteringTeamToSet;
+		sportsmansGetter.setFilteringTeam(filteringTeamToSet);
 		updateSportsmanInFilteringTeamList();
 		fireTableDataChanged();
 	}
@@ -78,14 +73,7 @@ public class SportsmansTableModel extends AbstractTableModel
 	{
 		try
 		{
-			if (filteringTeam != null)
-			{
-				sportsmanInFilteringTeam = sportsmansGetter.getSportsmansInTeam(filteringTeam);
-			}
-			else
-			{
-				sportsmanInFilteringTeam = new ArrayList<Sportsman>();
-			}
+			sportsmanInFilteringTeam = sportsmansGetter.getSportsmansInFilteringTeam();
 		}
 		catch (ShootingLogicsException ex)
 		{
