@@ -46,7 +46,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 					ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-
+		
 		if (teamsTable == null)
 		{
 			throw new IllegalArgumentException("teamsTable is null");
@@ -55,14 +55,14 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("logicsFactory is null");
 		}
-
+		
 		this.teamsTable = teamsTable;
 		this.sportsmansTableModel = new SportsmansTableModel(logicsFactory);
 		this.componentsHighlighter = new ComponentsHighlighter();
 		initializeTeamsComboBoxModel();
-
+		
 		initComponents();
-
+		
 		fillSportsmansTableBySelectedTeam();
 		updateAddSportsmanButtonEnable();
 		updateEditTeamsButtonHighlighting();
@@ -132,6 +132,10 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		{
 			Team selectedTeam = (Team) jComboBoxTeams.getSelectedItem();
 			sportsmansTableModel.setFilteringTeam(selectedTeam);
+		}
+		else
+		{
+			sportsmansTableModel.setFilteringTeam(null);
 		}
 	}
 
@@ -230,26 +234,26 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		{
 			return;
 		}
-
+		
 		Team selectedTeam = (Team) jComboBoxTeams.getSelectedItem();
 		sportsmansTableModel.addNewSportsman(selectedTeam);
-
+		
 		if (jTableSportsmans.getRowCount() > 0)
 		{
 			jTableSportsmans.setRowSelectionInterval(jTableSportsmans.getRowCount() - 1, jTableSportsmans.getRowCount() - 1);
 			jTableSportsmans.editCellAt(jTableSportsmans.getRowCount() - 1, SportsmansTableModel.NAME_COLUMN_INDEX);
 			jTableSportsmans.requestFocus();
 		}
-
+		
 		updateAddSportsmanButtonHighlighting();
   }//GEN-LAST:event_jButtonAddSportsmanActionPerformed
-
+	
   private void jButtonEditTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTeamsActionPerformed
   {//GEN-HEADEREND:event_jButtonEditTeamsActionPerformed
 		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, ModalityType.APPLICATION_MODAL, teamsTable);
 		editTeamsDialog.setLocationRelativeTo(this);
 		editTeamsDialog.setVisible(true);
-
+		
 		int previousSelectedTeamIndex = jComboBoxTeams.getSelectedIndex();
 		initializeTeamsComboBoxModel();
 		jComboBoxTeams.setModel(teamsComboBoxModel);
@@ -257,14 +261,14 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 		{
 			jComboBoxTeams.setSelectedIndex(previousSelectedTeamIndex);
 		}
-
+		
 		fillSportsmansTableBySelectedTeam();
-
+		
 		updateAddSportsmanButtonEnable();
 		updateEditTeamsButtonHighlighting();
 		updateAddSportsmanButtonHighlighting();
   }//GEN-LAST:event_jButtonEditTeamsActionPerformed
-
+	
   private void jComboBoxTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxTeamsActionPerformed
   {//GEN-HEADEREND:event_jComboBoxTeamsActionPerformed
 		fillSportsmansTableBySelectedTeam();

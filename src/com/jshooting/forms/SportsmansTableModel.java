@@ -33,9 +33,13 @@ public class SportsmansTableModel extends AbstractTableModel
 	 * Team which sportsmans need to show. If null - show all sportsmans
 	 */
 	private Team filteringTeam;
+	/**
+	 * List of sportsmans in filtering team. Using to optimize access to database
+	 */
+	private List<Sportsman> sportsmanInFilteringTeam;
 
 	/**
-	 * Create by sportsmans table with not filtering by team
+	 * Create by sportsmans table with null filtering team
 	 *
 	 * @param logicsFactory shooting logics factory. Must be not null
 	 * @throws IllegalArgumentException logicsFactory is null
@@ -49,55 +53,50 @@ public class SportsmansTableModel extends AbstractTableModel
 
 		sportsmansGetter = logicsFactory.createSportsmansGetter();
 		sportsmansModifier = logicsFactory.createSportsmansModifier();
+		filteringTeam = null;
+		sportsmanInFilteringTeam = new ArrayList<Sportsman>();
 	}
 
 	/**
 	 * Set team which sportsmans need to get from table
 	 *
 	 * @param filteringTeamToSet team which sportsmans need to get from sportsmans
-	 * table
-	 * @throws IllegalArgumentException filteringTeam is null
+	 * table. If filtering team is null, model will be empty
 	 */
-	public void setFilteringTeam(Team filteringTeamToSet) throws IllegalArgumentException
+	public void setFilteringTeam(Team filteringTeamToSet)
 	{
-		if (filteringTeamToSet == null)
-		{
-			throw new IllegalArgumentException("filteringTeam is null");
-		}
-
 		filteringTeam = filteringTeamToSet;
+		updateSportsmanInFilteringTeamList();
 		fireTableDataChanged();
 	}
 
 	/**
-	 * Get sportsmans from sportsmans table using filtering team
+	 * Fill sportsmans list by filtering team from database
 	 *
-	 * @return sportsmans get using filtering team. Empty if there is no
-	 * sportsmans
 	 */
-	private List<Sportsman> getSportsmansByTeamFilter()
+	private void updateSportsmanInFilteringTeamList()
 	{
 		try
 		{
 			if (filteringTeam != null)
 			{
-				return sportsmansGetter.getSportsmansInTeam(filteringTeam);
+				sportsmanInFilteringTeam = sportsmansGetter.getSportsmansInTeam(filteringTeam);
 			}
 			else
 			{
-				return new ArrayList<Sportsman>();
+				sportsmanInFilteringTeam = new ArrayList<Sportsman>();
 			}
 		}
 		catch (ShootingLogicsException ex)
 		{
-			return new ArrayList<Sportsman>();
+			sportsmanInFilteringTeam = new ArrayList<Sportsman>();
 		}
 	}
 
 	@Override
 	public int getRowCount()
 	{
-		return getSportsmansByTeamFilter().size();
+		return sportsmanInFilteringTeam.size();
 	}
 
 	@Override
@@ -113,12 +112,11 @@ public class SportsmansTableModel extends AbstractTableModel
 	}
 
 	@Override
-	public Object getValueAt(int i, int i1)
+	public Object getValueAt(int rowIndex, int columnIndex)
 	{
-		List<Sportsman> sportsmans = getSportsmansByTeamFilter();
-		if (sportsmans.size() > 0)
+		if (sportsmanInFilteringTeam.size() > 0)
 		{
-			return sportsmans.get(i);
+			return sportsmanInFilteringTeam.get(rowIndex);
 		}
 		else
 		{
@@ -133,16 +131,16 @@ public class SportsmansTableModel extends AbstractTableModel
 	}
 
 	@Override
-	public void setValueAt(Object o, int i, int i1)
+	public void setValueAt(Object newValue, int rowIndex, int i1)
 	{
 		try
 		{
-			List<Sportsman> sportsmans = getSportsmansByTeamFilter();
-			if (i < sportsmans.size())
+			if (rowIndex < sportsmanInFilteringTeam.size())
 			{
-				Sportsman updatingSportsman = sportsmans.get(i);
-				updatingSportsman.setName((String) o);
+				Sportsman updatingSportsman = sportsmanInFilteringTeam.get(rowIndex);
+				updatingSportsman.setName((String) newValue);
 				sportsmansModifier.updateSportsman(updatingSportsman);
+				updateSportsmanInFilteringTeamList();
 			}
 			else
 			{
@@ -165,12 +163,13 @@ public class SportsmansTableModel extends AbstractTableModel
 	{
 		if (newSportsmanTeam == null)
 		{
-			throw new IllegalArgumentException("sportsmanToAdd is null");
+			throw new IllegalArgumentException("newSportsmanTeam is null");
 		}
 
 		try
 		{
 			sportsmansModifier.addNewSportsmanWithTeam(newSportsmanTeam);
+			updateSportsmanInFilteringTeamList();
 			fireTableRowsInserted(getRowCount() - 1, getRowCount() - 1);
 		}
 		catch (ShootingLogicsException ex)
