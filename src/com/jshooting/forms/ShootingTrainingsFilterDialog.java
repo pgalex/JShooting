@@ -234,6 +234,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
   private void initComponents()
   {
 
+    buttonGroupPeriodType = new javax.swing.ButtonGroup();
     jPanelSportsmans = new javax.swing.JPanel();
     jLabelTeam = new javax.swing.JLabel();
     jComboBoxTeams = new javax.swing.JComboBox();
@@ -244,6 +245,9 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
     jDateChooserDateFrom = new com.toedter.calendar.JDateChooser();
     jLabel2 = new javax.swing.JLabel();
     jDateChooserDateTo = new com.toedter.calendar.JDateChooser();
+    jRadioButtonDatesPeriod = new javax.swing.JRadioButton();
+    jRadioButtonPlacePeriod = new javax.swing.JRadioButton();
+    jComboBoxPlace = new javax.swing.JComboBox();
     jPanelTrainingsType = new javax.swing.JPanel();
     jCheckBoxComplex = new javax.swing.JCheckBox();
     jCheckBoxShooting = new javax.swing.JCheckBox();
@@ -298,15 +302,39 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
           .add(jComboBoxTeams, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jLabelTeam))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
         .addContainerGap())
     );
 
-    jPanelPeriod.setBorder(javax.swing.BorderFactory.createTitledBorder("Период (включительно)"));
+    jPanelPeriod.setBorder(javax.swing.BorderFactory.createTitledBorder("Период"));
 
     jLabel1.setText("c");
 
     jLabel2.setText("по");
+
+    buttonGroupPeriodType.add(jRadioButtonDatesPeriod);
+    jRadioButtonDatesPeriod.setSelected(true);
+    jRadioButtonDatesPeriod.setText("Даты (включительно)");
+    jRadioButtonDatesPeriod.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jRadioButtonDatesPeriodActionPerformed(evt);
+      }
+    });
+
+    buttonGroupPeriodType.add(jRadioButtonPlacePeriod);
+    jRadioButtonPlacePeriod.setText("УТС");
+    jRadioButtonPlacePeriod.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jRadioButtonPlacePeriodActionPerformed(evt);
+      }
+    });
+
+    jComboBoxPlace.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    jComboBoxPlace.setEnabled(false);
 
     org.jdesktop.layout.GroupLayout jPanelPeriodLayout = new org.jdesktop.layout.GroupLayout(jPanelPeriod);
     jPanelPeriod.setLayout(jPanelPeriodLayout);
@@ -315,24 +343,40 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
       .add(jPanelPeriodLayout.createSequentialGroup()
         .addContainerGap()
         .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(jLabel1)
-          .add(jLabel2))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(jDateChooserDateTo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-          .add(jDateChooserDateFrom, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addContainerGap())
+          .add(jPanelPeriodLayout.createSequentialGroup()
+            .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(jRadioButtonPlacePeriod, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(jRadioButtonDatesPeriod, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
+            .addContainerGap())
+          .add(jPanelPeriodLayout.createSequentialGroup()
+            .add(29, 29, 29)
+            .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(jComboBoxPlace, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(jPanelPeriodLayout.createSequentialGroup()
+                .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                  .add(jLabel2)
+                  .add(jLabel1))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                  .add(jDateChooserDateFrom, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .add(jDateChooserDateTo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
     );
     jPanelPeriodLayout.setVerticalGroup(
       jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanelPeriodLayout.createSequentialGroup()
-        .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-          .add(jDateChooserDateFrom, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .add(jRadioButtonDatesPeriod)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-          .add(jDateChooserDateTo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jDateChooserDateFrom, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jDateChooserDateTo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jRadioButtonPlacePeriod)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jComboBoxPlace, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -369,7 +413,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
         .add(jPanelTrainingsTypeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(jCheckBoxComplex, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .add(jCheckBoxShooting, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jCheckBoxCompetition, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+          .add(jCheckBoxCompetition, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
     );
     jPanelTrainingsTypeLayout.setVerticalGroup(
@@ -380,7 +424,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
         .add(jCheckBoxShooting)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jCheckBoxCompetition)
-        .addContainerGap(127, Short.MAX_VALUE))
+        .addContainerGap(128, Short.MAX_VALUE))
     );
 
     jButtonOK.setText("OK");
@@ -411,9 +455,9 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
           .add(layout.createSequentialGroup()
             .add(jPanelSportsmans, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jPanelPeriod, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(jPanelPeriod, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jPanelTrainingsType, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(jPanelTrainingsType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
           .add(layout.createSequentialGroup()
             .add(jButtonOK)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -477,12 +521,29 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
   {//GEN-HEADEREND:event_formWindowClosed
 		okButtonPressed = false;
   }//GEN-LAST:event_formWindowClosed
+
+  private void jRadioButtonPlacePeriodActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jRadioButtonPlacePeriodActionPerformed
+  {//GEN-HEADEREND:event_jRadioButtonPlacePeriodActionPerformed
+    jComboBoxPlace.setEnabled(true);
+		jDateChooserDateFrom.setEnabled(false);
+		jDateChooserDateTo.setEnabled(false);
+  }//GEN-LAST:event_jRadioButtonPlacePeriodActionPerformed
+
+  private void jRadioButtonDatesPeriodActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jRadioButtonDatesPeriodActionPerformed
+  {//GEN-HEADEREND:event_jRadioButtonDatesPeriodActionPerformed
+    jComboBoxPlace.setEnabled(false);
+		jDateChooserDateFrom.setEnabled(true);
+		jDateChooserDateTo.setEnabled(true);
+  }//GEN-LAST:event_jRadioButtonDatesPeriodActionPerformed
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.ButtonGroup buttonGroupPeriodType;
   private javax.swing.JButton jButtonCancel;
   private javax.swing.JButton jButtonOK;
   private javax.swing.JCheckBox jCheckBoxCompetition;
   private javax.swing.JCheckBox jCheckBoxComplex;
   private javax.swing.JCheckBox jCheckBoxShooting;
+  private javax.swing.JComboBox jComboBoxPlace;
   private javax.swing.JComboBox jComboBoxTeams;
   private com.toedter.calendar.JDateChooser jDateChooserDateFrom;
   private com.toedter.calendar.JDateChooser jDateChooserDateTo;
@@ -493,6 +554,8 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
   private javax.swing.JPanel jPanelPeriod;
   private javax.swing.JPanel jPanelSportsmans;
   private javax.swing.JPanel jPanelTrainingsType;
+  private javax.swing.JRadioButton jRadioButtonDatesPeriod;
+  private javax.swing.JRadioButton jRadioButtonPlacePeriod;
   private javax.swing.JScrollPane jScrollPane1;
   // End of variables declaration//GEN-END:variables
 }
