@@ -433,7 +433,7 @@ public class MainFrame extends javax.swing.JFrame
   private void jButtonSportsmansActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSportsmansActionPerformed
   {//GEN-HEADEREND:event_jButtonSportsmansActionPerformed
 		EditSportsmansDialog editSportsmansDialog = new EditSportsmansDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
-						shootingDatabase.getTeamsTable(), new ShootingLogicsFactory(shootingDatabase));
+						new ShootingLogicsFactory(shootingDatabase));
 		editSportsmansDialog.setLocationRelativeTo(this);
 		editSportsmansDialog.setVisible(true);
   }//GEN-LAST:event_jButtonSportsmansActionPerformed

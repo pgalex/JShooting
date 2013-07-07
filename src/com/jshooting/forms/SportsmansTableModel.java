@@ -49,7 +49,7 @@ public class SportsmansTableModel extends AbstractTableModel
 
 		sportsmansGetter = logicsFactory.createSportsmansByTeamGetter();
 		sportsmansModifier = logicsFactory.createSportsmansModifier();
-		sportsmanInFilteringTeam = new ArrayList<Sportsman>();
+		updateSportsmanInFilteringTeamList();
 	}
 
 	/**

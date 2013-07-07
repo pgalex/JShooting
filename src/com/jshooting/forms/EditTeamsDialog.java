@@ -1,6 +1,7 @@
 package com.jshooting.forms;
 
 import com.jshooting.componentsHighlighting.ComponentsHighlighter;
+import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.shootingDatabase.TeamsTable;
 import java.awt.Window;
 
@@ -22,27 +23,27 @@ public class EditTeamsDialog extends javax.swing.JDialog
 	 *
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
-	 * @param editingTeamsTable teams table using to edit teams
-	 * @throws IllegalArgumentException editingTeamsTable is null
+	 * @param logicsFactory shooting logics factory. Must be not null
+	 * @throws IllegalArgumentException logicsFactory is null
 	 */
 	public EditTeamsDialog(Window parentWindow, ModalityType modalityType,
-					TeamsTable editingTeamsTable) throws IllegalArgumentException
+					ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-		
-		if (editingTeamsTable == null)
+
+		if (logicsFactory == null)
 		{
 			throw new IllegalArgumentException("editingTeamsTable is null");
 		}
-		
-		teamsTableModel = new TeamsTableModel(editingTeamsTable);
+
+		teamsTableModel = new TeamsTableModel(logicsFactory);
 		componentsHighlighter = new ComponentsHighlighter();
-		
+
 		initComponents();
-		
+
 		updateHighlighting();
 	}
-	
+
 	private void updateHighlighting()
 	{
 		if (jTableTeams.getRowCount() == 0)
@@ -116,7 +117,7 @@ public class EditTeamsDialog extends javax.swing.JDialog
 			jTableTeams.editCellAt(jTableTeams.getRowCount() - 1, TeamsTableModel.NAME_COLUMN_INDEX);
 			jTableTeams.requestFocus();
 		}
-		
+
 		updateHighlighting();
   }//GEN-LAST:event_jButtonAddTeamActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables

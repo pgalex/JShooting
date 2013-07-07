@@ -1,8 +1,12 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.logics.TeamsGetter;
+import com.jshooting.logics.TeamsModifier;
+import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Team;
-import com.jshooting.shootingDatabase.TeamsTable;
-import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -12,28 +16,56 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TeamsTableModel extends AbstractTableModel
 {
+	/**
+	 * Index of team name column
+	 */
 	public static final int NAME_COLUMN_INDEX = 0;
 	/**
-	 * Editing teams table
+	 * Using to edit teams
 	 */
-	private TeamsTable teamsTable;
+	private TeamsModifier teamsModifier;
+	/**
+	 * Using to get teams
+	 */
+	private TeamsGetter teamsGetter;
+	/**
+	 * List of teams, using to optimize access to database
+	 */
+	private List<Team> teams;
 
 	/**
-	 * Create for editing given teams table
+	 * Create with logics factory
 	 *
-	 * @param editingTeamsTable editing teams table
+	 * @param logicsFactory editing teams table
 	 * @throws IllegalArgumentException editingTeamsTable is null
 	 */
-	public TeamsTableModel(TeamsTable editingTeamsTable) throws IllegalArgumentException
+	public TeamsTableModel(ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super();
 
-		if (editingTeamsTable == null)
+		if (logicsFactory == null)
 		{
 			throw new IllegalArgumentException("editingTeamsTable is null");
 		}
 
-		teamsTable = editingTeamsTable;
+		teamsModifier = logicsFactory.createTeamsModifier();
+		teamsGetter = logicsFactory.createTeamsGetter();
+		updateTeamsList();
+	}
+
+	/**
+	 * Update cached list of teams
+	 */
+	private void updateTeamsList()
+	{
+		try
+		{
+			teams = teamsGetter.getAllTeams();
+		}
+		catch (ShootingLogicsException ex)
+		{
+			teams = new ArrayList<Team>();
+		}
 	}
 
 	@Override
@@ -45,14 +77,7 @@ public class TeamsTableModel extends AbstractTableModel
 	@Override
 	public int getRowCount()
 	{
-		try
-		{
-			return teamsTable.getAllTeams().size();
-		}
-		catch (DatabaseErrorException ex)
-		{
-			return 0;
-		}
+		return teams.size();
 	}
 
 	@Override
@@ -62,13 +87,13 @@ public class TeamsTableModel extends AbstractTableModel
 	}
 
 	@Override
-	public Object getValueAt(int i, int i1)
+	public Object getValueAt(int rowIndex, int columnIndex)
 	{
-		try
+		if (teams.size() > 0)
 		{
-			return teamsTable.getAllTeams().get(i);
+			return teams.get(rowIndex);
 		}
-		catch (DatabaseErrorException ex)
+		else
 		{
 			return null;
 		}
@@ -81,15 +106,23 @@ public class TeamsTableModel extends AbstractTableModel
 	}
 
 	@Override
-	public void setValueAt(Object o, int i, int i1)
+	public void setValueAt(Object newValue, int rowIndex, int columnIndex)
 	{
 		try
 		{
-			Team updatingTeam = teamsTable.getAllTeams().get(i);
-			updatingTeam.setName((String) o);
-			teamsTable.updateTeam(updatingTeam);
+			if (rowIndex < teams.size())
+			{
+				Team updatingTeam = teams.get(rowIndex);
+				updatingTeam.setName((String) newValue);
+				teamsModifier.updateTeam(updatingTeam);
+				updateTeamsList();
+			}
+			else
+			{
+				// do nothing
+			}
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			// do nothing
 		}
@@ -102,12 +135,11 @@ public class TeamsTableModel extends AbstractTableModel
 	{
 		try
 		{
-			Team newTeam = new Team();
-			newTeam.setName("");
-			teamsTable.addTeam(newTeam);
-			fireTableRowsInserted(teamsTable.getAllTeams().size() - 1, teamsTable.getAllTeams().size() - 1);
+			teamsModifier.addNewTeam();
+			updateTeamsList();
+			fireTableRowsInserted(teams.size() - 1, teams.size() - 1);
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			// do nothing
 		}

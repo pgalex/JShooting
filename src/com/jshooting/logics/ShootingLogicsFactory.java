@@ -45,4 +45,14 @@ public class ShootingLogicsFactory
 	{
 		return new SportsmansByTeamGetter(shootingDatabase.getSportsmansTable());
 	}
+
+	public TeamsGetter createTeamsGetter()
+	{
+		return new TeamsGetter(shootingDatabase.getTeamsTable());
+	}
+
+	public TeamsModifier createTeamsModifier()
+	{
+		return new TeamsModifier(shootingDatabase.getTeamsTable());
+	}
 }
