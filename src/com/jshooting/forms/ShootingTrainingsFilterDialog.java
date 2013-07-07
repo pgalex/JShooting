@@ -1,12 +1,13 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.logics.SportsmansByTeamGetter;
+import com.jshooting.logics.TeamsGetter;
+import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.ShootingTrainingType;
 import com.jshooting.model.ShootingTrainingsFilter;
 import com.jshooting.model.Sportsman;
-import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.model.Team;
-import com.jshooting.shootingDatabase.TeamsTable;
-import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.awt.Window;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,11 +37,11 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 	/**
 	 * Table of sportsmans
 	 */
-	private SportsmansTable sportsmansTable;
+	private SportsmansByTeamGetter sportsmansGetter;
 	/**
 	 * Table of teams
 	 */
-	private TeamsTable teamsTable;
+	private TeamsGetter teamsGetter;
 	/**
 	 * Is OK button was pressed
 	 */
@@ -51,34 +52,30 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 	 *
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
-	 * @param teamsTable table of teams
-	 * @param sportsmansTable table of sportsmans
+	 * @param logicsFactory shooting logics factory
+	 * @throws IllegalArgumentException logicsFactory is null
 	 */
 	public ShootingTrainingsFilterDialog(Window parentWindow, ModalityType modalityType,
-					TeamsTable teamsTable, SportsmansTable sportsmansTable)
+					ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
-		if (teamsTable == null)
+		if (logicsFactory == null)
 		{
-			throw new IllegalArgumentException("teamsTable is null");
-		}
-		if (sportsmansTable == null)
-		{
-			throw new IllegalArgumentException("sportsmansTable is null");
+			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		this.okButtonPressed = false;
-		this.teamsTable = teamsTable;
-		this.sportsmansTable = sportsmansTable;
-		this.teamsComboBoxModel = new DefaultComboBoxModel();
-		this.sportsmansListModel = new DefaultListModel();
+		okButtonPressed = false;
+		teamsGetter = logicsFactory.createTeamsGetter();
+		sportsmansGetter = logicsFactory.createSportsmansByTeamGetter();
+		teamsComboBoxModel = new DefaultComboBoxModel();
+		sportsmansListModel = new DefaultListModel();
 
 		initComponents();
 
 		jListSportsmans.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		setSportsmanPanelTitleBySelectionMode();
-						
+
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
@@ -89,56 +86,46 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 		calendar.set(Calendar.SECOND, 59);
 		jDateChooserDateTo.setDate(calendar.getTime());
 
-		setTitle("Фильтр");
-
 		fillTeamsComboBox();
-		fillSportmansListBySelectedTeam();
+		refillSportmansList();
 	}
 
 	/**
-	 * Fill teams combo box model by teams table. Model will be empty if can no
-	 * get access to table
-	 *
-	 * @param teamsTable table of teams
+	 * Fill teams combo box model by teams table. Model will be empty if can not
+	 * get teams
 	 */
 	private void fillTeamsComboBox()
 	{
 		try
 		{
 			teamsComboBoxModel.removeAllElements();
-			List<Team> allTeams = teamsTable.getAllTeams();
+			List<Team> allTeams = teamsGetter.getAllTeams();
 			for (Team team : allTeams)
 			{
 				teamsComboBoxModel.addElement(team);
 			}
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			teamsComboBoxModel.removeAllElements();
 		}
 	}
 
 	/**
-	 * Fill sportmans list model by sportmans in team, selected in teams combo
-	 * box. Empty if team not selected or can not get access to sportmans table
+	 * Fill sportmans list model by sportmans in getter's filtering team
 	 */
-	private void fillSportmansListBySelectedTeam()
+	private void refillSportmansList()
 	{
 		try
 		{
 			sportsmansListModel.removeAllElements();
-			Object selectedItem = jComboBoxTeams.getSelectedItem();
-			if (selectedItem instanceof Team)
+			List<Sportsman> sportsmansInSelectedTeam = sportsmansGetter.getSportsmansInFilteringTeam();
+			for (Sportsman sportsman : sportsmansInSelectedTeam)
 			{
-				Team selectedTeam = (Team) selectedItem;
-				List<Sportsman> sportsmansInSelectedTeam = sportsmansTable.getSportsmansInTeam(selectedTeam);
-				for (Sportsman sportsman : sportsmansInSelectedTeam)
-				{
-					sportsmansListModel.addElement(sportsman);
-				}
+				sportsmansListModel.addElement(sportsman);
 			}
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			sportsmansListModel.removeAllElements();
 		}
@@ -256,6 +243,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
     jButtonCancel = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    setTitle("Фильтр");
     setResizable(false);
     addWindowListener(new java.awt.event.WindowAdapter()
     {
@@ -288,7 +276,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
       .add(jPanelSportsmansLayout.createSequentialGroup()
         .addContainerGap()
         .add(jPanelSportsmansLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(jScrollPane1)
+          .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
           .add(jPanelSportsmansLayout.createSequentialGroup()
             .add(jLabelTeam)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -346,7 +334,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
           .add(jPanelPeriodLayout.createSequentialGroup()
             .add(jPanelPeriodLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
               .add(jRadioButtonPlacePeriod, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .add(jRadioButtonDatesPeriod, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
+              .add(jRadioButtonDatesPeriod, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
             .addContainerGap())
           .add(jPanelPeriodLayout.createSequentialGroup()
             .add(29, 29, 29)
@@ -377,7 +365,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
         .add(jRadioButtonPlacePeriod)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jComboBoxPlace, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap(56, Short.MAX_VALUE))
     );
 
     jPanelTrainingsType.setBorder(javax.swing.BorderFactory.createTitledBorder("Тип тренировки"));
@@ -453,9 +441,9 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
         .addContainerGap()
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(layout.createSequentialGroup()
-            .add(jPanelSportsmans, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(jPanelSportsmans, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jPanelPeriod, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jPanelPeriod, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jPanelTrainingsType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
           .add(layout.createSequentialGroup()
@@ -485,7 +473,17 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 
   private void jComboBoxTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxTeamsActionPerformed
   {//GEN-HEADEREND:event_jComboBoxTeamsActionPerformed
-		fillSportmansListBySelectedTeam();
+		Object selectedItem = jComboBoxTeams.getSelectedItem();
+		if (selectedItem != null)
+		{
+			sportsmansGetter.setFilteringTeam((Team) selectedItem);
+		}
+		else
+		{
+			sportsmansGetter.setFilteringTeam(null);
+		}
+
+		refillSportmansList();
   }//GEN-LAST:event_jComboBoxTeamsActionPerformed
 
   private void jCheckBoxComplexActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBoxComplexActionPerformed
@@ -524,18 +522,17 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 
   private void jRadioButtonPlacePeriodActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jRadioButtonPlacePeriodActionPerformed
   {//GEN-HEADEREND:event_jRadioButtonPlacePeriodActionPerformed
-    jComboBoxPlace.setEnabled(true);
+		jComboBoxPlace.setEnabled(true);
 		jDateChooserDateFrom.setEnabled(false);
 		jDateChooserDateTo.setEnabled(false);
   }//GEN-LAST:event_jRadioButtonPlacePeriodActionPerformed
 
   private void jRadioButtonDatesPeriodActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jRadioButtonDatesPeriodActionPerformed
   {//GEN-HEADEREND:event_jRadioButtonDatesPeriodActionPerformed
-    jComboBoxPlace.setEnabled(false);
+		jComboBoxPlace.setEnabled(false);
 		jDateChooserDateFrom.setEnabled(true);
 		jDateChooserDateTo.setEnabled(true);
   }//GEN-LAST:event_jRadioButtonDatesPeriodActionPerformed
-
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.ButtonGroup buttonGroupPeriodType;
   private javax.swing.JButton jButtonCancel;
