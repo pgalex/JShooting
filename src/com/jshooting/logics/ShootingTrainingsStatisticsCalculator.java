@@ -92,7 +92,7 @@ public class ShootingTrainingsStatisticsCalculator
 		{
 			throw new IllegalArgumentException("training is null");
 		}
-		
+
 		ArrayList<ShootingTraining> listOfTrainings = new ArrayList<ShootingTraining>();
 		listOfTrainings.add(training);
 		calculateFor(listOfTrainings);
@@ -111,7 +111,7 @@ public class ShootingTrainingsStatisticsCalculator
 		{
 			throw new IllegalArgumentException("trainings incorrect");
 		}
-		
+
 		totalShoots = 0;
 		totalInRest = 0;
 		totalLoading = 0;
@@ -120,24 +120,24 @@ public class ShootingTrainingsStatisticsCalculator
 		totalScatt = 0;
 		effectivenessLying = 0;
 		effectivenessStanding = 0;
-		
+
 		averageFirstLying = 0;
 		int averageFirstLyingNum = 0;
-		
+
 		averageFirstStanding = 0;
 		int averageFirstStandingNum = 0;
-		
+
 		averageDelayLying = 0;
 		int averageDelayLyingNum = 0;
-		
+
 		averageDelayStanding = 0;
 		int averageDelayStandingNum = 0;
-		
+
 		int totalShootsLying = 0;
 		int totalMissLying = 0;
 		int totalShootsStanding = 0;
 		int totalMissStanding = 0;
-		
+
 		for (ShootingTraining shootingTraining : trainings)
 		{
 			totalShoots += shootingTraining.getNumLyingInRest() + shootingTraining.getNumLyingLoading()
@@ -149,8 +149,8 @@ public class ShootingTrainingsStatisticsCalculator
 			totalCompetition += shootingTraining.getNumLyingCompetition() + shootingTraining.getNumStandingCompetition();
 			totalTrail += shootingTraining.getTrail();
 			totalScatt += shootingTraining.getScatt();
-			
-			
+
+
 			if (shootingTraining.getFirstLyingLoading() > 0)
 			{
 				averageFirstLying += shootingTraining.getFirstLyingLoading();
@@ -161,7 +161,7 @@ public class ShootingTrainingsStatisticsCalculator
 				averageFirstLying += shootingTraining.getFirstLyingCompetition();
 				averageFirstLyingNum++;
 			}
-			
+
 			if (shootingTraining.getFirstStandingLoading() > 0)
 			{
 				averageFirstStanding += shootingTraining.getFirstStandingLoading();
@@ -172,7 +172,7 @@ public class ShootingTrainingsStatisticsCalculator
 				averageFirstStanding += shootingTraining.getFirstStandingCompetition();
 				averageFirstStandingNum++;
 			}
-			
+
 			if (shootingTraining.getDelayLyingLoading() > 0)
 			{
 				averageDelayLying += shootingTraining.getDelayLyingLoading();
@@ -183,47 +183,47 @@ public class ShootingTrainingsStatisticsCalculator
 				averageDelayLying += shootingTraining.getDelayLyingCompetition();
 				averageDelayLyingNum++;
 			}
-			
+
 			if (shootingTraining.getDelayStandingLoading() > 0)
 			{
 				averageDelayStanding += shootingTraining.getDelayStandingLoading();
 				averageDelayStandingNum++;
 			}
-			
+
 			if (shootingTraining.getDelayStandingCompetition() > 0)
 			{
 				averageDelayStanding += shootingTraining.getDelayStandingCompetition();
 				averageDelayStandingNum++;
 			}
-			
+
 			totalShootsLying += shootingTraining.getNumLyingInRest() + shootingTraining.getNumLyingLoading()
 							+ shootingTraining.getNumLyingCompetition();
 			totalMissLying += shootingTraining.getMissLyingInRest() + shootingTraining.getMissLyingLoading()
 							+ shootingTraining.getMissLyingCompetition();
-			
+
 			totalShootsStanding += shootingTraining.getNumStandingInRest() + shootingTraining.getNumStandingLoading()
 							+ shootingTraining.getNumStandingCompetition();
 			totalMissStanding += shootingTraining.getMissStandingInRest() + shootingTraining.getMissStandingLoading()
 							+ shootingTraining.getMissStandingCompetition();
 		}
-		
+
 		if (averageFirstLyingNum > 0)
-			averageFirstLying /= averageFirstLyingNum;
-		
+			averageFirstLying /= (double) averageFirstLyingNum;
+
 		if (averageFirstStandingNum > 0)
-			averageFirstStanding /= averageFirstStandingNum;
-		
+			averageFirstStanding /= (double) averageFirstStandingNum;
+
 		if (averageDelayLyingNum > 0)
-			averageDelayLying /= averageDelayLyingNum;
-		
+			averageDelayLying /= (double) averageDelayLyingNum;
+
 		if (averageDelayStandingNum > 0)
-			averageDelayStanding /= averageDelayStandingNum;
-		
+			averageDelayStanding /= (double) averageDelayStandingNum;
+
 		if (totalShootsLying > 0)
-			effectivenessLying = 100.0 / totalShootsLying * totalMissLying;
-		
+			effectivenessLying = 100.0 - ((double) totalMissLying / (double) totalShootsLying * 100.0);
+
 		if (totalShootsStanding > 0)
-			effectivenessStanding = 100.0 / totalShootsStanding * totalMissStanding;
+			effectivenessStanding = 100.0 - ((double) totalMissStanding / (double) totalShootsStanding * 100.0);
 	}
 
 	/**
