@@ -51,14 +51,10 @@ public class ShootingTrainingsStatisticsCalculator
 	 * Average time of shooting (delay)- standing
 	 */
 	private double averageDelayStanding;
-	/**
-	 * Effectiveness of all shoots - lying in percent
-	 */
-	private double effectivenessLying;
-	/**
-	 * Effectiveness of all shoots - standing in percent
-	 */
-	private double effectivenessStanding;
+	private int totalShootsLying;
+	private int totalMissLying;
+	private int totalShootsStanding;
+	private int totalMissStanding;
 
 	/**
 	 * Create with zero values
@@ -75,8 +71,10 @@ public class ShootingTrainingsStatisticsCalculator
 		averageFirstStanding = 0;
 		averageDelayLying = 0;
 		averageDelayStanding = 0;
-		effectivenessLying = 0;
-		effectivenessStanding = 0;
+		totalShootsLying = 0;
+		totalMissLying = 0;
+		totalShootsStanding = 0;
+		totalMissStanding = 0;
 	}
 
 	/**
@@ -118,8 +116,10 @@ public class ShootingTrainingsStatisticsCalculator
 		totalCompetition = 0;
 		totalTrail = 0;
 		totalScatt = 0;
-		effectivenessLying = 0;
-		effectivenessStanding = 0;
+		totalShootsLying = 0;
+		totalMissLying = 0;
+		totalShootsStanding = 0;
+		totalMissStanding = 0;
 
 		averageFirstLying = 0;
 		int averageFirstLyingNum = 0;
@@ -132,11 +132,6 @@ public class ShootingTrainingsStatisticsCalculator
 
 		averageDelayStanding = 0;
 		int averageDelayStandingNum = 0;
-
-		int totalShootsLying = 0;
-		int totalMissLying = 0;
-		int totalShootsStanding = 0;
-		int totalMissStanding = 0;
 
 		for (ShootingTraining shootingTraining : trainings)
 		{
@@ -218,12 +213,6 @@ public class ShootingTrainingsStatisticsCalculator
 
 		if (averageDelayStandingNum > 0)
 			averageDelayStanding /= (double) averageDelayStandingNum;
-
-		if (totalShootsLying > 0)
-			effectivenessLying = 100.0 - ((double) totalMissLying / (double) totalShootsLying * 100.0);
-
-		if (totalShootsStanding > 0)
-			effectivenessStanding = 100.0 - ((double) totalMissStanding / (double) totalShootsStanding * 100.0);
 	}
 
 	/**
@@ -355,7 +344,11 @@ public class ShootingTrainingsStatisticsCalculator
 	 */
 	public double getEffectivenessLying()
 	{
-		return effectivenessLying;
+		// excpetion on not exists
+		if (totalShootsLying > 0)
+			return (100.0 - ((double) totalMissLying / (double) totalShootsLying * 100.0));
+		else
+			return 0;
 	}
 
 	/**
@@ -365,7 +358,26 @@ public class ShootingTrainingsStatisticsCalculator
 	 */
 	public double getEffectivenessStanding()
 	{
-		return effectivenessStanding;
+		// excpetion on not exists
+		if (totalShootsStanding > 0)
+			return (100.0 - ((double) totalMissStanding / (double) totalShootsStanding * 100.0));
+		else
+			return 0;
+	}
+
+	public boolean isEffectivenessLyingExists()
+	{
+		return totalShootsLying > 0;
+	}
+
+	public boolean isEffectivenessStandingExists()
+	{
+		return totalShootsStanding > 0;
+	}
+
+	public boolean isAverageEffectivenessExists()
+	{
+		return isEffectivenessLyingExists() || isEffectivenessStandingExists();
 	}
 
 	/**
@@ -375,6 +387,27 @@ public class ShootingTrainingsStatisticsCalculator
 	 */
 	public double getAverageEffectiveness()
 	{
-		return (effectivenessStanding + effectivenessLying) / 2.0;
+		if (isEffectivenessLyingExists())
+		{
+			if (isEffectivenessStandingExists())
+			{
+				return (getEffectivenessLying() + getEffectivenessStanding()) / 2.0;
+			}
+			else
+			{
+				return getEffectivenessLying();
+			}
+		}
+		else
+		{
+			if (isEffectivenessStandingExists())
+			{
+				return getEffectivenessStanding();
+			}
+			else
+			{
+				return 0;
+			}
+		}
 	}
 }
