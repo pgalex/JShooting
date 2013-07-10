@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class ShootingTrainingsTotalStatisticsCalculatorTest
 {
 	@Test
-	public void gettingNotExistsEffectivenessLyingTest()
+	public void gettingNotExistsLyingEffectivenessTest()
 	{
 		ShootingTraining training1 = new ShootingTraining();
 		training1.setNumLyingInRest(0);
@@ -24,7 +24,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		training1.setMissLyingInRest(0);
 		training1.setMissLyingLoading(0);
 		training1.setMissLyingCompetition(0);
-		
+
 		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
 		trainingsList.add(training1);
 
@@ -35,11 +35,60 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 			calculator.getEffectivenessLying();
 			fail();
 		}
-		catch(NullPointerException ex)
+		catch (NullPointerException ex)
 		{
 			// ok
 		}
 	}
+
+	@Test
+	public void gettingNotExistsStandingEffectivenessTest()
+	{
+		ShootingTraining training1 = new ShootingTraining();
+		training1.setNumStandingInRest(0);
+		training1.setNumStandingLoading(0);
+		training1.setNumStandingCompetition(0);
+		training1.setMissStandingInRest(0);
+		training1.setMissStandingLoading(0);
+		training1.setMissStandingCompetition(0);
+
+		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
+		trainingsList.add(training1);
+
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
+		calculator.calculateFor(trainingsList);
+
+		try
+		{
+			calculator.getEffectivenessStanding();
+			fail();
+		}
+		catch (NullPointerException ex)
+		{
+			// ok
+		}
+	}
+
+	@Test
+	public void standingEffectivenessNotExistsTest()
+	{
+		ShootingTraining training1 = new ShootingTraining();
+		training1.setNumStandingInRest(0);
+		training1.setNumStandingLoading(0);
+		training1.setNumStandingCompetition(0);
+		training1.setMissStandingInRest(0);
+		training1.setMissStandingLoading(0);
+		training1.setMissStandingCompetition(0);
+
+		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
+		trainingsList.add(training1);
+
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
+		calculator.calculateFor(trainingsList);
+
+		assertFalse(calculator.isEffectivenessStandingExists());
+	}
+
 	@Test
 	public void lyingEffectivenessNotExistsTest()
 	{
@@ -65,7 +114,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 
 		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
 		calculator.calculateFor(trainingsList);
-		
+
 		assertFalse(calculator.isEffectivenessLyingExists());
 	}
 
@@ -143,6 +192,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
 		calculator.calculateFor(trainingsList);
 
+		assertTrue(calculator.isEffectivenessStandingExists());
 		assertEquals(90, calculator.getEffectivenessStanding(), 0.0001);
 	}
 
