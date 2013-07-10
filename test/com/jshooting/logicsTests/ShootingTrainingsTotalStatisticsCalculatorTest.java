@@ -15,6 +15,126 @@ import static org.junit.Assert.*;
 public class ShootingTrainingsTotalStatisticsCalculatorTest
 {
 	@Test
+	public void averageEffectivenessExistsStandingAndLyingNotExistsTest()
+	{
+		ShootingTraining training1 = new ShootingTraining();
+		training1.setNumLyingInRest(0);
+		training1.setNumLyingLoading(0);
+		training1.setNumLyingCompetition(0);
+		training1.setMissLyingInRest(0);
+		training1.setMissLyingLoading(0);
+		training1.setMissLyingCompetition(0);
+
+		training1.setNumStandingInRest(0);
+		training1.setNumStandingLoading(0);
+		training1.setNumStandingCompetition(0);
+		training1.setMissStandingInRest(0);
+		training1.setMissStandingLoading(0);
+		training1.setMissStandingCompetition(0);
+
+		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
+		trainingsList.add(training1);
+
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
+		calculator.calculateFor(trainingsList);
+
+		assertFalse(calculator.isAverageEffectivenessExists());
+		try
+		{
+			calculator.getAverageEffectiveness();
+			fail();
+		}
+		catch(NullPointerException ex)
+		{
+			// ok
+		}
+	}
+	
+	@Test
+	public void averageEffectivenessExistsStandingAndLyingExistsTest()
+	{
+		ShootingTraining training1 = new ShootingTraining();
+		training1.setNumLyingInRest(0);
+		training1.setNumLyingLoading(0);
+		training1.setNumLyingCompetition(100);
+		training1.setMissLyingInRest(0);
+		training1.setMissLyingLoading(0);
+		training1.setMissLyingCompetition(30);
+
+		training1.setNumStandingInRest(0);
+		training1.setNumStandingLoading(100);
+		training1.setNumStandingCompetition(0);
+		training1.setMissStandingInRest(0);
+		training1.setMissStandingLoading(40);
+		training1.setMissStandingCompetition(0);
+
+		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
+		trainingsList.add(training1);
+
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
+		calculator.calculateFor(trainingsList);
+
+		assertTrue(calculator.isAverageEffectivenessExists());
+		assertEquals((60.0 + 70.0) / 2.0, calculator.getAverageEffectiveness(), 0.001);
+	}
+
+	@Test
+	public void averageEffectivenessExistsStandingExistsTest()
+	{
+		ShootingTraining training1 = new ShootingTraining();
+		training1.setNumLyingInRest(0);
+		training1.setNumLyingLoading(0);
+		training1.setNumLyingCompetition(0);
+		training1.setMissLyingInRest(0);
+		training1.setMissLyingLoading(0);
+		training1.setMissLyingCompetition(0);
+
+		training1.setNumStandingInRest(0);
+		training1.setNumStandingLoading(100);
+		training1.setNumStandingCompetition(0);
+		training1.setMissStandingInRest(0);
+		training1.setMissStandingLoading(40);
+		training1.setMissStandingCompetition(0);
+
+		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
+		trainingsList.add(training1);
+
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
+		calculator.calculateFor(trainingsList);
+
+		assertTrue(calculator.isAverageEffectivenessExists());
+		assertEquals(60.0, calculator.getAverageEffectiveness(), 0.001);
+	}
+
+	@Test
+	public void averageEffectivenessExistsLyingExistsTest()
+	{
+		ShootingTraining training1 = new ShootingTraining();
+		training1.setNumLyingInRest(100);
+		training1.setNumLyingLoading(0);
+		training1.setNumLyingCompetition(0);
+		training1.setMissLyingInRest(20);
+		training1.setMissLyingLoading(0);
+		training1.setMissLyingCompetition(0);
+
+		training1.setNumStandingInRest(0);
+		training1.setNumStandingLoading(0);
+		training1.setNumStandingCompetition(0);
+		training1.setMissStandingInRest(0);
+		training1.setMissStandingLoading(0);
+		training1.setMissStandingCompetition(0);
+
+		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
+		trainingsList.add(training1);
+
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
+		calculator.calculateFor(trainingsList);
+
+		assertTrue(calculator.isAverageEffectivenessExists());
+		assertEquals(80.0, calculator.getAverageEffectiveness(), 0.001);
+	}
+
+	@Test
 	public void gettingNotExistsLyingEffectivenessTest()
 	{
 		ShootingTraining training1 = new ShootingTraining();

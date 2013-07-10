@@ -424,11 +424,6 @@ public class ShootingTrainingsStatisticsCalculator
 	 */
 	public double getAverageEffectiveness() throws NullPointerException
 	{
-		if (isAverageEffectivenessExists())
-		{
-			throw new NullPointerException("average effectiveness not exists");
-		}
-
 		if (isEffectivenessLyingExists())
 		{
 			if (isEffectivenessStandingExists())
