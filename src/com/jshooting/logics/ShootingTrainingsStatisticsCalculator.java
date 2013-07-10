@@ -51,9 +51,21 @@ public class ShootingTrainingsStatisticsCalculator
 	 * Average time of shooting (delay)- standing
 	 */
 	private double averageDelayStanding;
+	/**
+	 * Total number of shoots - lying
+	 */
 	private int totalShootsLying;
+	/**
+	 * Total number of miss shoots - lying
+	 */
 	private int totalMissLying;
+	/**
+	 * Total number of shoots - standing
+	 */
 	private int totalShootsStanding;
+	/**
+	 * Total number of miss shoots - standing
+	 */
 	private int totalMissStanding;
 
 	/**
@@ -341,40 +353,64 @@ public class ShootingTrainingsStatisticsCalculator
 	 * Effectiveness of all shoots - lying
 	 *
 	 * @return the effectivenessLying
+	 * @throws NullPointerException effectiveness lying not exists (can not be
+	 * computed)
 	 */
-	public double getEffectivenessLying()
+	public double getEffectivenessLying() throws NullPointerException
 	{
-		// excpetion on not exists
-		if (totalShootsLying > 0)
-			return (100.0 - ((double) totalMissLying / (double) totalShootsLying * 100.0));
-		else
-			return 0;
+		if (!isEffectivenessLyingExists())
+		{
+			throw new NullPointerException("effectiveness lying not exists");
+		}
+
+		return (100.0 - ((double) totalMissLying / (double) totalShootsLying * 100.0));
 	}
 
 	/**
 	 * Effectiveness of all shoots - standing in percent
 	 *
 	 * @return the effectivenessStanding
+	 * @throws NullPointerException effectiveness standing not exists (can not be
+	 * computed)
 	 */
-	public double getEffectivenessStanding()
+	public double getEffectivenessStanding() throws NullPointerException
 	{
-		// excpetion on not exists
-		if (totalShootsStanding > 0)
-			return (100.0 - ((double) totalMissStanding / (double) totalShootsStanding * 100.0));
-		else
-			return 0;
+		if (!isEffectivenessStandingExists())
+		{
+			throw new NullPointerException("effectiveness lying not exists");
+		}
+
+		return (100.0 - ((double) totalMissStanding / (double) totalShootsStanding * 100.0));
 	}
 
+	/**
+	 * Is effectiveness lying exists. Effectiveness not exists if there is no
+	 * shoots lying
+	 *
+	 * @return is effectiveness lying exists
+	 */
 	public boolean isEffectivenessLyingExists()
 	{
 		return totalShootsLying > 0;
 	}
 
+	/**
+	 * Is effectiveness standing exists. Effectiveness not exists if there is no
+	 * shoots standing
+	 *
+	 * @return is effectiveness standing exists
+	 */
 	public boolean isEffectivenessStandingExists()
 	{
 		return totalShootsStanding > 0;
 	}
 
+	/**
+	 * Is average effectiveness exists. Effectiveness exists if effectiveness
+	 * lying or effectiveness standing exists
+	 *
+	 * @return is average effectiveness exists
+	 */
 	public boolean isAverageEffectivenessExists()
 	{
 		return isEffectivenessLyingExists() || isEffectivenessStandingExists();
@@ -384,9 +420,15 @@ public class ShootingTrainingsStatisticsCalculator
 	 * Get average standing and lying effectiveness
 	 *
 	 * @return average of standing and lying effectiveness
+	 * @throws NullPointerException average effectiveness not exists
 	 */
-	public double getAverageEffectiveness()
+	public double getAverageEffectiveness() throws NullPointerException
 	{
+		if (isAverageEffectivenessExists())
+		{
+			throw new NullPointerException("average effectiveness not exists");
+		}
+
 		if (isEffectivenessLyingExists())
 		{
 			if (isEffectivenessStandingExists())
@@ -406,7 +448,8 @@ public class ShootingTrainingsStatisticsCalculator
 			}
 			else
 			{
-				return 0;
+				// equals to isAverageEffectivenessExists
+				throw new NullPointerException("average effectiveness not exists");
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-package com.jshooting.calculationTests;
+package com.jshooting.logicsTests;
 
 import com.jshooting.logics.ShootingTrainingsStatisticsCalculator;
 import com.jshooting.model.ShootingTraining;
@@ -14,6 +14,61 @@ import static org.junit.Assert.*;
  */
 public class ShootingTrainingsTotalStatisticsCalculatorTest
 {
+	@Test
+	public void gettingNotExistsEffectivenessLyingTest()
+	{
+		ShootingTraining training1 = new ShootingTraining();
+		training1.setNumLyingInRest(0);
+		training1.setNumLyingLoading(0);
+		training1.setNumLyingCompetition(0);
+		training1.setMissLyingInRest(0);
+		training1.setMissLyingLoading(0);
+		training1.setMissLyingCompetition(0);
+		
+		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
+		trainingsList.add(training1);
+
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
+		calculator.calculateFor(trainingsList);
+		try
+		{
+			calculator.getEffectivenessLying();
+			fail();
+		}
+		catch(NullPointerException ex)
+		{
+			// ok
+		}
+	}
+	@Test
+	public void lyingEffectivenessNotExistsTest()
+	{
+		ShootingTraining training1 = new ShootingTraining();
+		training1.setNumLyingInRest(0);
+		training1.setNumLyingLoading(0);
+		training1.setNumLyingCompetition(0);
+		training1.setMissLyingInRest(0);
+		training1.setMissLyingLoading(0);
+		training1.setMissLyingCompetition(0);
+
+		ShootingTraining training2 = new ShootingTraining();
+		training2.setNumLyingInRest(0);
+		training2.setNumLyingLoading(0);
+		training2.setNumLyingCompetition(0);
+		training2.setMissLyingInRest(0);
+		training2.setMissLyingLoading(0);
+		training2.setMissLyingCompetition(0);
+
+		List<ShootingTraining> trainingsList = new ArrayList<ShootingTraining>();
+		trainingsList.add(training1);
+		trainingsList.add(training2);
+
+		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
+		calculator.calculateFor(trainingsList);
+		
+		assertFalse(calculator.isEffectivenessLyingExists());
+	}
+
 	@Test
 	public void calculationEffectivenessLyingTest()
 	{
@@ -49,6 +104,7 @@ public class ShootingTrainingsTotalStatisticsCalculatorTest
 		ShootingTrainingsStatisticsCalculator calculator = new ShootingTrainingsStatisticsCalculator();
 		calculator.calculateFor(trainingsList);
 
+		assertTrue(calculator.isEffectivenessLyingExists());
 		assertEquals(80, calculator.getEffectivenessLying(), 0.0001);
 	}
 
