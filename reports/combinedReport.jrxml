@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="combinedReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33573a3a-7df7-4327-b1c8-afb9bda94a84">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="76"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="DATE_FROM" class="java.lang.String"/>
 	<parameter name="DATE_TO" class="java.lang.String"/>
-	<field name="number" class="java.lang.Integer"/>
+	<field name="number" class="java.lang.String"/>
 	<field name="sportsmanName" class="java.lang.String"/>
-	<field name="totalShoots" class="java.lang.Integer"/>
-	<field name="totalInRest" class="java.lang.Integer"/>
-	<field name="totalLoading" class="java.lang.Integer"/>
-	<field name="totalCompetition" class="java.lang.Integer"/>
-	<field name="totalTrial" class="java.lang.Integer"/>
-	<field name="totalScatt" class="java.lang.Integer"/>
-	<field name="effectivenessLying" class="java.lang.Float"/>
-	<field name="effectivenessStanding" class="java.lang.Float"/>
-	<field name="effectivenessAverage" class="java.lang.Float"/>
-	<field name="averageFirstLying" class="java.lang.Float"/>
-	<field name="averageFirstStanding" class="java.lang.Float"/>
-	<field name="averageDelayLying" class="java.lang.Float"/>
-	<field name="averageDelayStanding" class="java.lang.Float"/>
+	<field name="totalShoots" class="java.lang.String"/>
+	<field name="totalInRest" class="java.lang.String"/>
+	<field name="totalLoading" class="java.lang.String"/>
+	<field name="totalCompetition" class="java.lang.String"/>
+	<field name="totalTrial" class="java.lang.String"/>
+	<field name="totalScatt" class="java.lang.String"/>
+	<field name="effectivenessLying" class="java.lang.String"/>
+	<field name="effectivenessStanding" class="java.lang.String"/>
+	<field name="effectivenessAverage" class="java.lang.String"/>
+	<field name="averageFirstLying" class="java.lang.String"/>
+	<field name="averageFirstStanding" class="java.lang.String"/>
+	<field name="averageDelayLying" class="java.lang.String"/>
+	<field name="averageDelayStanding" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
