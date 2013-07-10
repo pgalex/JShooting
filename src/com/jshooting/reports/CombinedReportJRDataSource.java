@@ -123,43 +123,43 @@ public class CombinedReportJRDataSource implements JRDataSource
 		}
 		else if ("totalShoots".equals(jrf.getName()))
 		{
-			return ReportsDataSourceFieldValuesFormer.determineIntFieldValueWithTestingToZero(statisticsCalculator.getTotalShoots());
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalShoots());
 		}
 		else if ("totalInRest".equals(jrf.getName()))
 		{
-			return ReportsDataSourceFieldValuesFormer.determineIntFieldValueWithTestingToZero(statisticsCalculator.getTotalInRest());
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalInRest());
 		}
 		else if ("totalLoading".equals(jrf.getName()))
 		{
-			return ReportsDataSourceFieldValuesFormer.determineIntFieldValueWithTestingToZero(statisticsCalculator.getTotalLoading());
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalLoading());
 		}
 		else if ("totalCompetition".equals(jrf.getName()))
 		{
-			return ReportsDataSourceFieldValuesFormer.determineIntFieldValueWithTestingToZero(statisticsCalculator.getTotalCompetition());
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalCompetition());
 		}
 		else if ("totalTrial".equals(jrf.getName()))
 		{
-			return ReportsDataSourceFieldValuesFormer.determineIntFieldValueWithTestingToZero(statisticsCalculator.getTotalTrail());
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalTrail());
 		}
 		else if ("totalScatt".equals(jrf.getName()))
 		{
-			return ReportsDataSourceFieldValuesFormer.determineIntFieldValueWithTestingToZero(statisticsCalculator.getTotalScatt());
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalScatt());
 		}
 		else if ("averageFirstLying".equals(jrf.getName()))
 		{
-			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValueWithTestingToZero(statisticsCalculator.getAverageFirstLying());
+			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValue(statisticsCalculator.getAverageFirstLying());
 		}
 		else if ("averageFirstStanding".equals(jrf.getName()))
 		{
-			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValueWithTestingToZero(statisticsCalculator.getAverageFirstStanding());
+			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValue(statisticsCalculator.getAverageFirstStanding());
 		}
 		else if ("averageDelayLying".equals(jrf.getName()))
 		{
-			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValueWithTestingToZero(statisticsCalculator.getAverageDelayLying());
+			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValue(statisticsCalculator.getAverageDelayLying());
 		}
 		else if ("averageDelayStanding".equals(jrf.getName()))
 		{
-			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValueWithTestingToZero(statisticsCalculator.getAverageDelayStanding());
+			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValue(statisticsCalculator.getAverageDelayStanding());
 		}
 		else if ("effectivenessLying".equals(jrf.getName()))
 		{

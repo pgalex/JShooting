@@ -100,55 +100,55 @@ public class IndividualReportJRDataSource implements JRDataSource
 		}
 		else if ("totalShoots".equals(jrf.getName()))
 		{
-			return statisticsCalculator.getTotalShoots();
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalShoots());
 		}
 		else if ("totalInRest".equals(jrf.getName()))
 		{
-			return statisticsCalculator.getTotalInRest();
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalInRest());
 		}
 		else if ("totalLoading".equals(jrf.getName()))
 		{
-			return statisticsCalculator.getTotalLoading();
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalLoading());
 		}
 		else if ("totalCompetition".equals(jrf.getName()))
 		{
-			return statisticsCalculator.getTotalCompetition();
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalCompetition());
 		}
 		else if ("totalTrial".equals(jrf.getName()))
 		{
-			return statisticsCalculator.getTotalTrail();
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalTrail());
 		}
 		else if ("totalScatt".equals(jrf.getName()))
 		{
-			return statisticsCalculator.getTotalScatt();
+			return ReportsDataSourceFieldValuesFormer.determineIntFieldValue(statisticsCalculator.getTotalScatt());
 		}
 		else if ("averageFirstLying".equals(jrf.getName()))
 		{
-			return Math.round(statisticsCalculator.getAverageFirstLying() * 10.0) / 10.0;
+			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValue(statisticsCalculator.getAverageFirstLying());
 		}
 		else if ("averageFirstStanding".equals(jrf.getName()))
 		{
-			return Math.round(statisticsCalculator.getAverageFirstStanding() * 10.0) / 10.0;
+			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValue(statisticsCalculator.getAverageFirstStanding());
 		}
 		else if ("averageDelayLying".equals(jrf.getName()))
 		{
-			return Math.round(statisticsCalculator.getAverageDelayLying() * 10.0) / 10.0;
+			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValue(statisticsCalculator.getAverageDelayLying());
 		}
 		else if ("averageDelayStanding".equals(jrf.getName()))
 		{
-			return Math.round(statisticsCalculator.getAverageDelayStanding() * 10.0) / 10.0;
+			return ReportsDataSourceFieldValuesFormer.determineDoubleFieldValue(statisticsCalculator.getAverageDelayStanding());
 		}
 		else if ("effectivenessLying".equals(jrf.getName()))
 		{
-			return Math.round(statisticsCalculator.getEffectivenessLying() * 10.0) / 10.0;
+			return ReportsDataSourceFieldValuesFormer.determineLyingEffectivenessFieldValue(statisticsCalculator);
 		}
 		else if ("effectivenessStanding".equals(jrf.getName()))
 		{
-			return Math.round(statisticsCalculator.getEffectivenessStanding() * 10.0) / 10.0;
+			return ReportsDataSourceFieldValuesFormer.determineStandingEffectivenessFieldValue(statisticsCalculator);
 		}
 		else if ("effectivenessAverage".equals(jrf.getName()))
 		{
-			return Math.round(statisticsCalculator.getAverageEffectiveness() * 10.0) / 10.0;
+			return ReportsDataSourceFieldValuesFormer.determineAverageEffectivenessFieldValue(statisticsCalculator);
 		}
 		else
 		{

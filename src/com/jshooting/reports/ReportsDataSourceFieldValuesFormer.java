@@ -18,7 +18,7 @@ public class ReportsDataSourceFieldValuesFormer
 
 		if (statisticsCalculator.isAverageEffectivenessExists())
 		{
-			return determineDoubleFieldValueWithTestingToZero(statisticsCalculator.getAverageEffectiveness());
+			return determineDoubleFieldValue(statisticsCalculator.getAverageEffectiveness());
 		}
 		else
 		{
@@ -35,7 +35,7 @@ public class ReportsDataSourceFieldValuesFormer
 
 		if (statisticsCalculator.isEffectivenessStandingExists())
 		{
-			return determineDoubleFieldValueWithTestingToZero(statisticsCalculator.getEffectivenessStanding());
+			return determineDoubleFieldValue(statisticsCalculator.getEffectivenessStanding());
 		}
 		else
 		{
@@ -52,7 +52,7 @@ public class ReportsDataSourceFieldValuesFormer
 
 		if (statisticsCalculator.isEffectivenessLyingExists())
 		{
-			return determineDoubleFieldValueWithTestingToZero(statisticsCalculator.getEffectivenessLying());
+			return determineDoubleFieldValue(statisticsCalculator.getEffectivenessLying());
 		}
 		else
 		{
@@ -60,7 +60,7 @@ public class ReportsDataSourceFieldValuesFormer
 		}
 	}
 
-	public static String determineIntFieldValueWithTestingToZero(int value)
+	public static String determineIntFieldValue(int value)
 	{
 		if (value > 0)
 		{
@@ -72,7 +72,7 @@ public class ReportsDataSourceFieldValuesFormer
 		}
 	}
 
-	public static String determineDoubleFieldValueWithTestingToZero(double value)
+	public static String determineDoubleFieldValue(double value)
 	{
 		if (value > 0)
 		{
