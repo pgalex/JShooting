@@ -11,6 +11,7 @@ import com.jshooting.model.Team;
 import java.awt.Window;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -181,11 +182,6 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 	 */
 	public ShootingTrainingsFilter getFilter()
 	{
-		if (jDateChooserDateFrom.getDate().after(jDateChooserDateTo.getDate()))
-		{
-			return null;
-		}
-
 		Object[] selectedSportsmans = jListSportsmans.getSelectedValues();
 		List<Sportsman> filteringSportsmans = new ArrayList<Sportsman>();
 		for (int i = 0; i < selectedSportsmans.length; i++)
@@ -498,15 +494,15 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 
   private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOKActionPerformed
   {//GEN-HEADEREND:event_jButtonOKActionPerformed
-		if (!jDateChooserDateFrom.getDate().after(jDateChooserDateTo.getDate()))
+		if (jDateChooserDateFrom.getDate().after(jDateChooserDateTo.getDate()))
 		{
-			okButtonPressed = true;
-			setVisible(false);
+			Date swapTemporary = jDateChooserDateFrom.getDate();
+			jDateChooserDateFrom.setDate(jDateChooserDateTo.getDate());
+			jDateChooserDateTo.setDate(swapTemporary);
 		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Дата 'c' периода позже даты 'по' ", "Ошибка", JOptionPane.ERROR_MESSAGE);
-		}
+
+		okButtonPressed = true;
+		setVisible(false);
   }//GEN-LAST:event_jButtonOKActionPerformed
 
   private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelActionPerformed
