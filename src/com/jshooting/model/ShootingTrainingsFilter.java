@@ -15,6 +15,10 @@ public class ShootingTrainingsFilter
 	 */
 	private List<Sportsman> sportsmans;
 	/**
+	 * Place, that used like dates period if not null
+	 */
+	private Place place;
+	/**
 	 * Trainings begin date (including). Must be before or equals dateTo
 	 */
 	private Date dateFrom;
@@ -28,7 +32,7 @@ public class ShootingTrainingsFilter
 	private List<ShootingTrainingType> trainingTypes;
 
 	/**
-	 * Create with filtering options
+	 * Create with dates period
 	 *
 	 * @param sportsmans sportsmans which trainings need to use. Must be not null,
 	 * not contains null
@@ -61,6 +65,41 @@ public class ShootingTrainingsFilter
 		this.dateFrom = dateFrom;
 		this.dateTo = dateTo;
 		this.trainingTypes = trainingTypes;
+		this.place = null;
+	}
+
+	/**
+	 * Create with places using as period
+	 *
+	 * @param sportsmans sportsmans which trainings need to use. Must be not null,
+	 * not contains null
+	 * @param place place, which begin and and dates will be used as period. Must
+	 * be not null
+	 * @param trainingTypes trainings types. Must be not null, not contains null
+	 * @throws IllegalArgumentException sportsmans is null or contains empty;
+	 * trainingTypes is null or contains null; place is null
+	 */
+	public ShootingTrainingsFilter(List<Sportsman> sportsmans, Place place,
+					List<ShootingTrainingType> trainingTypes) throws IllegalArgumentException
+	{
+		if (!isSportsmansCorrect(sportsmans))
+		{
+			throw new IllegalArgumentException("sportsmans incorrect");
+		}
+		if (place == null)
+		{
+			throw new IllegalArgumentException("place is null");
+		}
+		if (!isTrainingTypesCorrect(trainingTypes))
+		{
+			throw new IllegalArgumentException("trainingTypes incorrect");
+		}
+
+		this.sportsmans = sportsmans;
+		this.dateFrom = place.getBeginDate();
+		this.dateTo = place.getEndDate();
+		this.trainingTypes = trainingTypes;
+		this.place = place;
 	}
 
 	/**
@@ -168,5 +207,26 @@ public class ShootingTrainingsFilter
 	public List<ShootingTrainingType> getTrainingTypes()
 	{
 		return trainingTypes;
+	}
+
+	/**
+	 * Is dateFrom and dateTo determines by places date begin and date end
+	 *
+	 * @return is place determines period
+	 */
+	public boolean isPlaceUsedAsPeriod()
+	{
+		return place != null;
+	}
+
+	/**
+	 * Get place determines period
+	 *
+	 * @return place determines period. Null if place not set(period determines by
+	 * given dates)
+	 */
+	public Place getPlace()
+	{
+		return place;
 	}
 }
