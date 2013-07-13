@@ -1,9 +1,11 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.PlacesGetter;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.SportsmansByTeamGetter;
 import com.jshooting.logics.TeamsGetter;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.model.Place;
 import com.jshooting.model.ShootingTrainingType;
 import com.jshooting.model.ShootingTrainingsFilter;
 import com.jshooting.model.Sportsman;
@@ -36,13 +38,21 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 	 */
 	private DefaultListModel sportsmansListModel;
 	/**
+	 * Model of places combo box
+	 */
+	private DefaultComboBoxModel placesComboBoxModel;
+	/**
 	 * Table of sportsmans
 	 */
 	private SportsmansByTeamGetter sportsmansGetter;
 	/**
-	 * Table of teams
+	 * Teams getter. Using to fill teams list
 	 */
 	private TeamsGetter teamsGetter;
+	/**
+	 * Places getter. Using to fill places list
+	 */
+	private PlacesGetter placesGetter;
 	/**
 	 * Is OK button was pressed
 	 */
@@ -68,9 +78,11 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 
 		okButtonPressed = false;
 		teamsGetter = logicsFactory.createTeamsGetter();
+		placesGetter = logicsFactory.createPlacesGetter();
 		sportsmansGetter = logicsFactory.createSportsmansByTeamGetter();
 		teamsComboBoxModel = new DefaultComboBoxModel();
 		sportsmansListModel = new DefaultListModel();
+		placesComboBoxModel = new DefaultComboBoxModel();
 
 		initComponents();
 
@@ -88,7 +100,28 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 		jDateChooserDateTo.setDate(calendar.getTime());
 
 		fillTeamsComboBox();
+		fillPlacesComboBox();
 		refillSportmansList();
+	}
+
+	/**
+	 * Fill places combo box model
+	 */
+	private void fillPlacesComboBox()
+	{
+		try
+		{
+			placesComboBoxModel.removeAllElements();
+			List<Place> allPlaces = placesGetter.getAllPlaces();
+			for (Place place : allPlaces)
+			{
+				placesComboBoxModel.addElement(place);
+			}
+		}
+		catch (ShootingLogicsException ex)
+		{
+			placesComboBoxModel.removeAllElements();
+		}
 	}
 
 	/**
@@ -203,8 +236,27 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 			filteringTrainingTypes.add(ShootingTrainingType.COMPETITION);
 		}
 
-		return new ShootingTrainingsFilter(filteringSportsmans, jDateChooserDateFrom.getDate(),
-						jDateChooserDateTo.getDate(), filteringTrainingTypes);
+		if (jRadioButtonDatesPeriod.isSelected())
+		{
+			return new ShootingTrainingsFilter(filteringSportsmans, jDateChooserDateFrom.getDate(), jDateChooserDateTo.getDate(), filteringTrainingTypes);
+		}
+		else
+		{
+			return new ShootingTrainingsFilter(filteringSportsmans, (Place) jComboBoxPlace.getSelectedItem(), filteringTrainingTypes);
+		}
+	}
+
+	/**
+	 * Set period choosers dates by selected place date from and date to
+	 */
+	private void setPeriodDatesBySelectedPlace()
+	{
+		if (jComboBoxPlace.getSelectedItem() != null)
+		{
+			Place selectedPlace = (Place) jComboBoxPlace.getSelectedItem();
+			jDateChooserDateFrom.setDate(selectedPlace.getBeginDate());
+			jDateChooserDateTo.setDate(selectedPlace.getEndDate());
+		}
 	}
 
 	/**
@@ -317,8 +369,15 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
       }
     });
 
-    jComboBoxPlace.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    jComboBoxPlace.setModel(placesComboBoxModel);
     jComboBoxPlace.setEnabled(false);
+    jComboBoxPlace.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jComboBoxPlaceActionPerformed(evt);
+      }
+    });
 
     org.jdesktop.layout.GroupLayout jPanelPeriodLayout = new org.jdesktop.layout.GroupLayout(jPanelPeriod);
     jPanelPeriod.setLayout(jPanelPeriodLayout);
@@ -494,6 +553,17 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 
   private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOKActionPerformed
   {//GEN-HEADEREND:event_jButtonOKActionPerformed
+		if (jListSportsmans.getSelectedValues().length == 0)
+		{
+			JOptionPane.showMessageDialog(null, "Не выбран ни один спортсмен", "Ошибка", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		if (jRadioButtonPlacePeriod.isSelected() && jComboBoxPlace.getSelectedItem() == null)
+		{
+			JOptionPane.showMessageDialog(null, "УТС не выбран", "Ошибка", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
 		if (jDateChooserDateFrom.getDate().after(jDateChooserDateTo.getDate()))
 		{
 			Date swapTemporary = jDateChooserDateFrom.getDate();
@@ -521,6 +591,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 		jComboBoxPlace.setEnabled(true);
 		jDateChooserDateFrom.setEnabled(false);
 		jDateChooserDateTo.setEnabled(false);
+		setPeriodDatesBySelectedPlace();
   }//GEN-LAST:event_jRadioButtonPlacePeriodActionPerformed
 
   private void jRadioButtonDatesPeriodActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jRadioButtonDatesPeriodActionPerformed
@@ -529,6 +600,11 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 		jDateChooserDateFrom.setEnabled(true);
 		jDateChooserDateTo.setEnabled(true);
   }//GEN-LAST:event_jRadioButtonDatesPeriodActionPerformed
+
+  private void jComboBoxPlaceActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxPlaceActionPerformed
+  {//GEN-HEADEREND:event_jComboBoxPlaceActionPerformed
+		setPeriodDatesBySelectedPlace();
+  }//GEN-LAST:event_jComboBoxPlaceActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.ButtonGroup buttonGroupPeriodType;
   private javax.swing.JButton jButtonCancel;

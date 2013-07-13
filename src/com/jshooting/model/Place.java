@@ -105,4 +105,10 @@ public class Place
 	{
 		this.endDate = endDate;
 	}
+
+	@Override
+	public String toString()
+	{
+		return name;
+	}
 }

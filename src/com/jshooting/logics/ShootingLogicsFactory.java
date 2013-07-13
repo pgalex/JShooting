@@ -55,4 +55,9 @@ public class ShootingLogicsFactory
 	{
 		return new TeamsModifier(shootingDatabase.getTeamsTable());
 	}
+
+	public PlacesGetter createPlacesGetter()
+	{
+		return new PlacesGetter(shootingDatabase.getPlacesTable());
+	}
 }
