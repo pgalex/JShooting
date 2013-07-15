@@ -19,11 +19,13 @@ public class ShootingTrainingsFilter
 	 */
 	private Place place;
 	/**
-	 * Trainings begin date (including). Must be before or equals dateTo
+	 * Trainings begin date (including). Must be before or equals dateTo. Null if
+	 * date determining by period
 	 */
 	private Date dateFrom;
 	/**
-	 * Trainings end date (including). Must be after or equals dateTo
+	 * Trainings end date (including). Must be after or equals dateTo. Null if
+	 * date determining by period
 	 */
 	private Date dateTo;
 	/**
@@ -96,8 +98,8 @@ public class ShootingTrainingsFilter
 		}
 
 		this.sportsmans = sportsmans;
-		this.dateFrom = place.getBeginDate();
-		this.dateTo = place.getEndDate();
+		this.dateFrom = null;
+		this.dateTo = null;
 		this.trainingTypes = trainingTypes;
 		this.place = place;
 	}
@@ -186,7 +188,14 @@ public class ShootingTrainingsFilter
 	 */
 	public Date getDateFrom()
 	{
-		return dateFrom;
+		if (isPlaceUsedAsPeriod())
+		{
+			return place.getBeginDate();
+		}
+		else
+		{
+			return dateFrom;
+		}
 	}
 
 	/**
@@ -196,7 +205,14 @@ public class ShootingTrainingsFilter
 	 */
 	public Date getDateTo()
 	{
-		return dateTo;
+		if (isPlaceUsedAsPeriod())
+		{
+			return place.getEndDate();
+		}
+		else
+		{
+			return dateTo;
+		}
 	}
 
 	/**
