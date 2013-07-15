@@ -6,6 +6,7 @@
 	<parameter name="DATE_FROM" class="java.lang.String"/>
 	<parameter name="DATE_TO" class="java.lang.String"/>
 	<parameter name="SPORTSMAN_NAME" class="java.lang.String"/>
+	<parameter name="PLACE_NAME" class="java.lang.String"/>
 	<field name="totalShoots" class="java.lang.String"/>
 	<field name="totalInRest" class="java.lang.String"/>
 	<field name="totalLoading" class="java.lang.String"/>
@@ -62,7 +63,7 @@
 				<textFieldExpression><![CDATA[$P{DATE_FROM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="b888aab0-e526-4c70-89c8-572e7a588f3c" x="232" y="69" width="100" height="18"/>
+				<reportElement uuid="b888aab0-e526-4c70-89c8-572e7a588f3c" x="232" y="69" width="85" height="18"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -81,6 +82,13 @@
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{SPORTSMAN_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1f9dc738-b59d-432b-8269-29c97527a390" x="317" y="69" width="485" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PLACE_NAME}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
