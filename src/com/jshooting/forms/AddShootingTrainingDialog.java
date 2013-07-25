@@ -1,6 +1,13 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.PlacesGetter;
 import com.jshooting.logics.PlacesNamesListFormer;
+import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.logics.ShootingTrainingsModifier;
+import com.jshooting.logics.SportsmansByTeamGetter;
+import com.jshooting.logics.TeamsGetter;
+import com.jshooting.logics.TrainingMethodsGetter;
+import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.shootingDatabase.PlacesTable;
 import com.jshooting.model.ShootingTraining;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
@@ -39,75 +46,54 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	 */
 	private DefaultComboBoxModel trainingMethodsComboBoxModel;
 	/**
-	 * Table of sportsmans. Using to refill sportsmans combo by selected team
+	 * Using to refill sportsmans combo by selected team
 	 */
-	private SportsmansTable sportsmansTable;
+	private SportsmansByTeamGetter sportsmansGetter;
 	/**
-	 * Table of teams
+	 * Using to get teams
 	 */
-	private TeamsTable teamsTable;
+	private TeamsGetter teamGetter;
 	/**
-	 * Table of training methods
+	 * Using to get training methods
 	 */
-	private TrainingMethodsTable trainingMethodsTable;
+	private TrainingMethodsGetter trainingMethodsGetter;
 	/**
-	 * Table of shooting trainings
+	 * Using to get places
 	 */
-	private ShootingTrainingsTable shootingTrainingTable;
+	private PlacesGetter placesGetter;
 	/**
-	 * Table of places
+	 * Using to add trainings
 	 */
-	private PlacesTable placesTable;
+	private ShootingTrainingsModifier shootingTrainingModifier;
 
 	/**
 	 * Create new dialog
 	 *
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
-	 * @param teamsTable table of teams
-	 * @param sportsmansTable table of sportsmans
-	 * @param trainingMethodsTable table of training methods
-	 * @param shootingTrainingTable table of shooting trainings
-	 * @param placesTable table of places
-	 * @throws IllegalArgumentException teamsTable, sportsmansTable, placesTable,
-	 * shootingTrainingTable or trainingMethodsTable is null
+	 * @param logicsFactory logics factory. Must be not null
+	 * @param shootingTrainingTable 
+	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public AddShootingTrainingDialog(Window parentWindow, ModalityType modalityType,
-					TeamsTable teamsTable, SportsmansTable sportsmansTable, TrainingMethodsTable trainingMethodsTable,
-					ShootingTrainingsTable shootingTrainingTable, PlacesTable placesTable) throws IllegalArgumentException
+	public AddShootingTrainingDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
-		if (teamsTable == null)
+		if (logicsFactory == null)
 		{
-			throw new IllegalArgumentException("teamsTable is null");
-		}
-		if (sportsmansTable == null)
-		{
-			throw new IllegalArgumentException("sportsmansTable is null");
-		}
-		if (trainingMethodsTable == null)
-		{
-			throw new IllegalArgumentException("trainingMethodsTable is null");
-		}
-		if (shootingTrainingTable == null)
-		{
-			throw new IllegalArgumentException("shootingTrainingTable is null");
-		}
-		if (placesTable == null)
-		{
-			throw new IllegalArgumentException("placesTable is null");
+			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		this.teamsTable = teamsTable;
-		this.sportsmansTable = sportsmansTable;
-		this.trainingMethodsTable = trainingMethodsTable;
-		this.shootingTrainingTable = shootingTrainingTable;
-		this.placesTable = placesTable;
+		shootingTrainingModifier = logicsFactory.createShootingTrainingsModifier();
+		sportsmansGetter = logicsFactory.createSportsmansByTeamGetter();
+		teamGetter = logicsFactory.createTeamsGetter();
+		trainingMethodsGetter = logicsFactory.createTrainingMethodsGetter();
+		placesGetter = logicsFactory.createPlacesGetter();
 
-		this.teamsComboBoxModel = new DefaultComboBoxModel();
-		this.sportsmansComboBoxModel = new DefaultComboBoxModel();
-		this.trainingMethodsComboBoxModel = new DefaultComboBoxModel();
+
+		teamsComboBoxModel = new DefaultComboBoxModel();
+		sportsmansComboBoxModel = new DefaultComboBoxModel();
+		trainingMethodsComboBoxModel = new DefaultComboBoxModel();
 
 		initComponents();
 		jLabelAddingToDatabaseAnimation.setVisible(false);
@@ -139,30 +125,30 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 			calendar.set(Calendar.SECOND, 59);
 			Date periodDateTo = calendar.getTime();
 
-			jTextFieldPlaceName.setText(PlacesNamesListFormer.getPlacesNamesString(placesTable.getPlacesByPeriod(periodDateFrom, periodDateTo)));
+			jTextFieldPlaceName.setText(PlacesNamesListFormer.getPlacesNamesString(placesGetter.getPlacesByPeriod(periodDateFrom, periodDateTo)));
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			jTextFieldPlaceName.setText("");
 		}
 	}
 
 	/**
-	 * Fill training methods combo box model with training methods table. Model
-	 * will be empty can not get access to table data
+	 * Fill training methods combo box model with training methods table
+	 *
 	 */
 	private void fillTrainingMethodComboBox()
 	{
 		try
 		{
 			trainingMethodsComboBoxModel.removeAllElements();
-			List<TrainingMethod> allMethods = trainingMethodsTable.getAllTrainingMethods();
+			List<TrainingMethod> allMethods = trainingMethodsGetter.getAllTrainingMethods();
 			for (TrainingMethod trainingMethod : allMethods)
 			{
 				trainingMethodsComboBoxModel.addElement(trainingMethod);
 			}
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			trainingMethodsComboBoxModel.removeAllElements();
 		}
@@ -179,13 +165,13 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 		try
 		{
 			teamsComboBoxModel.removeAllElements();
-			List<Team> allTeams = teamsTable.getAllTeams();
+			List<Team> allTeams = teamGetter.getAllTeams();
 			for (Team team : allTeams)
 			{
 				teamsComboBoxModel.addElement(team);
 			}
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			teamsComboBoxModel.removeAllElements();
 		}
@@ -205,14 +191,15 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 			if (selectedItem instanceof Team)
 			{
 				Team selectedTeam = (Team) selectedItem;
-				List<Sportsman> sportsmansInSelectedTeam = sportsmansTable.getSportsmansInTeam(selectedTeam);
+				sportsmansGetter.setFilteringTeam(selectedTeam);
+				List<Sportsman> sportsmansInSelectedTeam = sportsmansGetter.getSportsmansInFilteringTeam();
 				for (Sportsman sportsman : sportsmansInSelectedTeam)
 				{
 					sportsmansComboBoxModel.addElement(sportsman);
 				}
 			}
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			sportsmansComboBoxModel.removeAllElements();
 		}
@@ -801,7 +788,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 				newTraining.setTrail((Integer) jSpinnerTrail.getValue());
 				newTraining.setScatt((Integer) jSpinnerScatt.getValue());
 
-				shootingTrainingTable.addTraining(newTraining);
+				shootingTrainingModifier.addTraining(newTraining);
 
 				jLabelAddingToDatabaseAnimation.setVisible(true);
 				Thread hidingAnimationThread = new Thread(new Runnable()
@@ -823,7 +810,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 				hidingAnimationThread.start();
 
 			}
-			catch (DatabaseErrorException ex)
+			catch (ShootingLogicsException ex)
 			{
 				JOptionPane.showMessageDialog(null, "Невозможно добавить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 			}

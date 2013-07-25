@@ -450,8 +450,7 @@ public class MainFrame extends javax.swing.JFrame
   private void jButtonAddTrainingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingsActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingsActionPerformed
 		AddShootingTrainingDialog addShootingTrainingDialog = new AddShootingTrainingDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
-						shootingDatabase.getTeamsTable(), shootingDatabase.getSportsmansTable(), shootingDatabase.getTrainingMethodsTable(),
-						shootingDatabase.getShootingTrainingsTable(), shootingDatabase.getPlacesTable());
+						new ShootingLogicsFactory(shootingDatabase));
 		addShootingTrainingDialog.setLocationRelativeTo(this);
 		addShootingTrainingDialog.setVisible(true);
   }//GEN-LAST:event_jButtonAddTrainingsActionPerformed
@@ -482,7 +481,7 @@ public class MainFrame extends javax.swing.JFrame
 				{
 					parametersMap.put("PLACE_NAME", "");
 				}
-				
+
 				JasperDesign desing = JRXmlLoader.load("reports/combinedReport.jrxml");
 				JasperReport report = JasperCompileManager.compileReport(desing);
 				JasperPrint jasperPrint = JasperFillManager.fillReport(report, parametersMap, reportDataSource);

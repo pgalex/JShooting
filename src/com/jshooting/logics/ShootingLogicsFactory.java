@@ -70,4 +70,9 @@ public class ShootingLogicsFactory
 	{
 		return new TrainingMethodsModifier(shootingDatabase.getTrainingMethodsTable());
 	}
+
+	public ShootingTrainingsModifier createShootingTrainingsModifier()
+	{
+		return new ShootingTrainingsModifier(shootingDatabase.getShootingTrainingsTable());
+	}
 }
