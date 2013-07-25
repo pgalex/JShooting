@@ -14,6 +14,9 @@ import javax.swing.table.TableColumn;
  */
 public class EditPlacesDialog extends javax.swing.JDialog
 {
+	/**
+	 * Dialog components highlighter
+	 */
 	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Table model of places table
@@ -51,6 +54,9 @@ public class EditPlacesDialog extends javax.swing.JDialog
 		updateHighlighting();
 	}
 
+	/**
+	 * Update dialog components highlighting
+	 */
 	private void updateHighlighting()
 	{
 		if (jTablePlaces.getRowCount() == 0)

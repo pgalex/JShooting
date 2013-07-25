@@ -49,7 +49,7 @@ public class SportsmansTableModel extends AbstractTableModel
 
 		sportsmansGetter = logicsFactory.createSportsmansByTeamGetter();
 		sportsmansModifier = logicsFactory.createSportsmansModifier();
-		updateSportsmanInFilteringTeamList();
+		updateSportsmansList();
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class SportsmansTableModel extends AbstractTableModel
 	public void setFilteringTeam(Team filteringTeamToSet)
 	{
 		sportsmansGetter.setFilteringTeam(filteringTeamToSet);
-		updateSportsmanInFilteringTeamList();
+		updateSportsmansList();
 		fireTableDataChanged();
 	}
 
@@ -69,7 +69,7 @@ public class SportsmansTableModel extends AbstractTableModel
 	 * Fill sportsmans list by filtering team from database
 	 *
 	 */
-	private void updateSportsmanInFilteringTeamList()
+	private void updateSportsmansList()
 	{
 		try
 		{
@@ -119,7 +119,7 @@ public class SportsmansTableModel extends AbstractTableModel
 	}
 
 	@Override
-	public void setValueAt(Object newValue, int rowIndex, int i1)
+	public void setValueAt(Object newValue, int rowIndex, int columnIndex)
 	{
 		try
 		{
@@ -128,7 +128,7 @@ public class SportsmansTableModel extends AbstractTableModel
 				Sportsman updatingSportsman = sportsmanInFilteringTeam.get(rowIndex);
 				updatingSportsman.setName((String) newValue);
 				sportsmansModifier.updateSportsman(updatingSportsman);
-				updateSportsmanInFilteringTeamList();
+				updateSportsmansList();
 			}
 			else
 			{
@@ -137,7 +137,8 @@ public class SportsmansTableModel extends AbstractTableModel
 		}
 		catch (ShootingLogicsException ex)
 		{
-			// do nothing
+			updateSportsmansList();
+			fireTableCellUpdated(rowIndex, columnIndex);
 		}
 	}
 
@@ -157,7 +158,7 @@ public class SportsmansTableModel extends AbstractTableModel
 		try
 		{
 			sportsmansModifier.addNewSportsmanWithTeam(newSportsmanTeam);
-			updateSportsmanInFilteringTeamList();
+			updateSportsmansList();
 			fireTableRowsInserted(getRowCount() - 1, getRowCount() - 1);
 		}
 		catch (ShootingLogicsException ex)

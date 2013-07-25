@@ -60,4 +60,14 @@ public class ShootingLogicsFactory
 	{
 		return new PlacesGetter(shootingDatabase.getPlacesTable());
 	}
+
+	public TrainingMethodsGetter createTrainingMethodsGetter()
+	{
+		return new TrainingMethodsGetter(shootingDatabase.getTrainingMethodsTable());
+	}
+
+	public TrainingMethodsModifier createTrainingMethodsModifier()
+	{
+		return new TrainingMethodsModifier(shootingDatabase.getTrainingMethodsTable());
+	}
 }

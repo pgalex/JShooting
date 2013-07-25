@@ -1,8 +1,13 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.logics.TrainingMethodsGetter;
+import com.jshooting.logics.TrainingMethodsModifier;
+import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.TrainingMethod;
 import com.jshooting.shootingDatabase.TrainingMethodsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -13,26 +18,55 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TrainingMethodsTableModel extends AbstractTableModel
 {
+	/**
+	 * Index of training method name in table
+	 */
 	public static final int NAME_COLUMN_INDEX = 0;
 	/**
-	 * Editing training methods table
+	 * Training methods getter
 	 */
-	private TrainingMethodsTable trainingMethodsTable;
+	private TrainingMethodsGetter trainingMethodsGetter;
+	/**
+	 * Using to edit training methods throught table model
+	 */
+	private TrainingMethodsModifier trainingMethodsModifier;
+	/**
+	 * Using to optimize access to database
+	 */
+	private List<TrainingMethod> trainingMethods;
 
 	/**
-	 * Create for editing training methods table
+	 * Create editing training methods table model
 	 *
-	 * @param editingTable editing training methods table. Must be not null
-	 * @throws IllegalArgumentException editingTable is null
+	 * @param logicsFactory logics fatory. Must be not null
+	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public TrainingMethodsTableModel(TrainingMethodsTable editingTable) throws IllegalArgumentException
+	public TrainingMethodsTableModel(ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
-		if (editingTable == null)
+		if (logicsFactory == null)
 		{
-			throw new IllegalArgumentException("editingTable is null");
+			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		trainingMethodsTable = editingTable;
+		trainingMethodsGetter = logicsFactory.createTrainingMethodsGetter();
+		trainingMethodsModifier = logicsFactory.createTrainingMethodsModifier();
+		trainingMethods = new ArrayList<TrainingMethod>();
+		updateTrainingMethodsList();
+	}
+
+	/**
+	 * Update list of training methods
+	 */
+	private void updateTrainingMethodsList()
+	{
+		try
+		{
+			trainingMethods = trainingMethodsGetter.getAllTrainingMethods();
+		}
+		catch (ShootingLogicsException ex)
+		{
+			trainingMethods = new ArrayList<TrainingMethod>();
+		}
 	}
 
 	@Override
@@ -44,14 +78,7 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 	@Override
 	public int getRowCount()
 	{
-		try
-		{
-			return trainingMethodsTable.getAllTrainingMethods().size();
-		}
-		catch (DatabaseErrorException ex)
-		{
-			return 0;
-		}
+		return trainingMethods.size();
 	}
 
 	@Override
@@ -61,24 +88,9 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 	}
 
 	@Override
-	public Object getValueAt(int i, int i1)
+	public Object getValueAt(int rowIndex, int columnIndex)
 	{
-		try
-		{
-			List<TrainingMethod> allMethods = trainingMethodsTable.getAllTrainingMethods();
-			if (!allMethods.isEmpty())
-			{
-				return allMethods.get(i);
-			}
-			else
-			{
-				return null;
-			}
-		}
-		catch (DatabaseErrorException ex)
-		{
-			return null;
-		}
+		return trainingMethods.get(rowIndex);
 	}
 
 	@Override
@@ -88,25 +100,26 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 	}
 
 	@Override
-	public void setValueAt(Object o, int i, int i1)
+	public void setValueAt(Object newValue, int rowIndex, int columnIndex)
 	{
 		try
 		{
-			List<TrainingMethod> allMethods = trainingMethodsTable.getAllTrainingMethods();
-			if (i >= 0 && i < allMethods.size())
+			if (rowIndex >= 0 && rowIndex < trainingMethods.size())
 			{
-				TrainingMethod updatingMethod = allMethods.get(i);
-				updatingMethod.setName((String) o);
-				trainingMethodsTable.updateTrainingMethod(updatingMethod);
+				TrainingMethod updatingMethod = trainingMethods.get(rowIndex);
+				updatingMethod.setName((String) newValue);
+				trainingMethodsModifier.updateTrainingMethod(updatingMethod);
+				updateTrainingMethodsList();
 			}
 			else
 			{
 				// do nothing
 			}
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
-			// do nothing
+			updateTrainingMethodsList();
+			fireTableCellUpdated(rowIndex, columnIndex);
 		}
 	}
 
@@ -117,13 +130,12 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 	{
 		try
 		{
-			TrainingMethod newMethod = new TrainingMethod();
-			newMethod.setName("");
-			trainingMethodsTable.addTrainingMethod(newMethod);
-			fireTableRowsInserted(trainingMethodsTable.getAllTrainingMethods().size() - 1,
-							trainingMethodsTable.getAllTrainingMethods().size() - 1);
+			trainingMethodsModifier.addNewTrainingMethod();
+			updateTrainingMethodsList();
+			fireTableRowsInserted(trainingMethodsGetter.getAllTrainingMethods().size() - 1,
+							trainingMethodsGetter.getAllTrainingMethods().size() - 1);
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			// do nothing
 		}

@@ -1,7 +1,7 @@
 package com.jshooting.forms;
 
 import com.jshooting.componentsHighlighting.ComponentsHighlighter;
-import com.jshooting.shootingDatabase.TrainingMethodsTable;
+import com.jshooting.logics.ShootingLogicsFactory;
 import java.awt.Window;
 
 /**
@@ -25,21 +25,20 @@ public class EditTrainingMethodsDialog extends javax.swing.JDialog
 	 *
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
-	 * @param trainingMethodsTable editing training methods table. Must be not
-	 * null
-	 * @throws IllegalArgumentException
+	 * @param logicsFactory logics fatory. Must be not null
+	 * @throws IllegalArgumentException logicsFactory is null
 	 */
 	public EditTrainingMethodsDialog(Window parentWindow, ModalityType modalityType,
-					TrainingMethodsTable trainingMethodsTable) throws IllegalArgumentException
+					ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
-		if (trainingMethodsTable == null)
+		if (logicsFactory == null)
 		{
-			throw new IllegalArgumentException("trainingMethodsTable is null");
+			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		trainingMethodsTableModel = new TrainingMethodsTableModel(trainingMethodsTable);
+		trainingMethodsTableModel = new TrainingMethodsTableModel(logicsFactory);
 		componentsHighlighter = new ComponentsHighlighter();
 
 		initComponents();

@@ -46,14 +46,14 @@ public class PlacesTableModel extends AbstractTableModel
 		}
 
 		this.placesTable = placesTable;
-		fillPlacesArrayFromDatabase();
+		updatePlacesList();
 	}
 
 	/**
 	 * Update placeses array by database table. List will be empty if can not get
 	 * access to database
 	 */
-	private void fillPlacesArrayFromDatabase()
+	private void updatePlacesList()
 	{
 		try
 		{
@@ -163,14 +163,11 @@ public class PlacesTableModel extends AbstractTableModel
 					break;
 			}
 			placesTable.updatePlace(updatingPlace);
+			updatePlacesList();
 		}
-		catch (DatabaseErrorException ex)
+		catch (Exception ex)
 		{
-			// do nothing
-		}
-		catch (ParseException ex)
-		{
-			fillPlacesArrayFromDatabase();
+			updatePlacesList();
 			fireTableCellUpdated(rowIndex, columnIndex);
 		}
 	}
@@ -239,7 +236,7 @@ public class PlacesTableModel extends AbstractTableModel
 			newPlace.setEndDate(calendar.getTime());
 
 			placesTable.addPlace(newPlace);
-			fillPlacesArrayFromDatabase();
+			updatePlacesList();
 			fireTableRowsInserted(places.size() - 1, places.size() - 1);
 		}
 		catch (DatabaseErrorException ex)

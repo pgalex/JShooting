@@ -124,7 +124,8 @@ public class TeamsTableModel extends AbstractTableModel
 		}
 		catch (ShootingLogicsException ex)
 		{
-			// do nothing
+			updateTeamsList();
+			
 		}
 	}
 
