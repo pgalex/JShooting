@@ -1,7 +1,7 @@
 package com.jshooting.forms;
 
 import com.jshooting.componentsHighlighting.ComponentsHighlighter;
-import com.jshooting.shootingDatabase.PlacesTable;
+import com.jshooting.logics.ShootingLogicsFactory;
 import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Window;
 import javax.swing.DefaultCellEditor;
@@ -28,19 +28,19 @@ public class EditPlacesDialog extends javax.swing.JDialog
 	 *
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
-	 * @param placesTable table of places
-	 * @throws IllegalArgumentException placesTable is null
+	 * @param logicsFactory logics factory. Must be not null
+	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public EditPlacesDialog(Window parentWindow, ModalityType modalityType, PlacesTable placesTable) throws IllegalArgumentException
+	public EditPlacesDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
-		if (placesTable == null)
+		if (logicsFactory == null)
 		{
-			throw new IllegalArgumentException("placesTable is null");
+			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		placesTableModel = new PlacesTableModel(placesTable);
+		placesTableModel = new PlacesTableModel(logicsFactory);
 		componentsHighlighter = new ComponentsHighlighter();
 
 		initComponents();

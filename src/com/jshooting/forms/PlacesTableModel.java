@@ -1,9 +1,10 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.PlacesGetter;
+import com.jshooting.logics.PlacesModifier;
+import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Place;
-import com.jshooting.shootingDatabase.PlacesTable;
-import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,13 +19,26 @@ import javax.swing.table.AbstractTableModel;
  */
 public class PlacesTableModel extends AbstractTableModel
 {
+	/**
+	 * Place name column index
+	 */
 	public static final int NAME_COLUMN_INDEX = 0;
+	/**
+	 * Place begin date column index
+	 */
 	public static final int BEGIN_DATE_COLUMN_INDEX = 1;
+	/**
+	 * Place end date column index
+	 */
 	public static final int END_DATE_COLUMN_INDEX = 2;
 	/**
-	 * Editing table of places
+	 * Using to get places
 	 */
-	private PlacesTable placesTable;
+	private PlacesGetter placesGetter;
+	/**
+	 * Using to modify places
+	 */
+	private PlacesModifier placesModifier;
 	/**
 	 * List of places using for optimization accessing to database
 	 */
@@ -33,33 +47,31 @@ public class PlacesTableModel extends AbstractTableModel
 	/**
 	 * Create with editing place table
 	 *
-	 * @param placesTable editing place table
+	 * @param logicsFactory logics factory. Must be not null
 	 * @throws IllegalArgumentException placesTable is null
 	 */
-	public PlacesTableModel(PlacesTable placesTable) throws IllegalArgumentException
+	public PlacesTableModel(ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
-		super();
-
-		if (placesTable == null)
+		if (logicsFactory == null)
 		{
-			throw new IllegalArgumentException("placesTable is null");
+			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		this.placesTable = placesTable;
+		placesGetter = logicsFactory.createPlacesGetter();
+		placesModifier = logicsFactory.createPlacesModifier();
 		updatePlacesList();
 	}
 
 	/**
-	 * Update placeses array by database table. List will be empty if can not get
-	 * access to database
+	 * Update placeses array by database table
 	 */
 	private void updatePlacesList()
 	{
 		try
 		{
-			places = placesTable.getAllPlaces();
+			places = placesGetter.getAllPlaces();
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			places = new ArrayList<Place>();
 		}
@@ -70,9 +82,9 @@ public class PlacesTableModel extends AbstractTableModel
 	{
 		try
 		{
-			return placesTable.getAllPlaces().size();
+			return placesGetter.getAllPlaces().size();
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			return 0;
 		}
@@ -119,26 +131,17 @@ public class PlacesTableModel extends AbstractTableModel
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex)
 	{
-		try
+		Place place = places.get(rowIndex);
+		switch (columnIndex)
 		{
-			List<Place> allPlaces = placesTable.getAllPlaces();
-			Place place = allPlaces.get(rowIndex);
-
-			switch (columnIndex)
-			{
-				case NAME_COLUMN_INDEX:
-					return place.getName();
-				case BEGIN_DATE_COLUMN_INDEX:
-					return place.getBeginDate();
-				case END_DATE_COLUMN_INDEX:
-					return place.getEndDate();
-				default:
-					return "";
-			}
-		}
-		catch (DatabaseErrorException ex)
-		{
-			return null;
+			case NAME_COLUMN_INDEX:
+				return place.getName();
+			case BEGIN_DATE_COLUMN_INDEX:
+				return place.getBeginDate();
+			case END_DATE_COLUMN_INDEX:
+				return place.getEndDate();
+			default:
+				return "";
 		}
 	}
 
@@ -162,7 +165,7 @@ public class PlacesTableModel extends AbstractTableModel
 				default:
 					break;
 			}
-			placesTable.updatePlace(updatingPlace);
+			placesModifier.updatePlace(updatingPlace);
 			updatePlacesList();
 		}
 		catch (Exception ex)
@@ -182,6 +185,7 @@ public class PlacesTableModel extends AbstractTableModel
 		{
 			throw new IllegalArgumentException("newBeginDate is null");
 		}
+
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(newBeginDate);
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -235,11 +239,11 @@ public class PlacesTableModel extends AbstractTableModel
 			calendar.set(Calendar.SECOND, 59);
 			newPlace.setEndDate(calendar.getTime());
 
-			placesTable.addPlace(newPlace);
+			placesModifier.addNewPlace();
 			updatePlacesList();
 			fireTableRowsInserted(places.size() - 1, places.size() - 1);
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			// do nothing
 		}

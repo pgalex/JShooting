@@ -549,7 +549,7 @@ public class MainFrame extends javax.swing.JFrame
   private void jButtonPlacesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonPlacesActionPerformed
   {//GEN-HEADEREND:event_jButtonPlacesActionPerformed
 		EditPlacesDialog editPlaceDialog = new EditPlacesDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
-						shootingDatabase.getPlacesTable());
+						new ShootingLogicsFactory(shootingDatabase));
 		editPlaceDialog.setLocationRelativeTo(this);
 		editPlaceDialog.setVisible(true);
   }//GEN-LAST:event_jButtonPlacesActionPerformed

@@ -61,6 +61,11 @@ public class ShootingLogicsFactory
 		return new PlacesGetter(shootingDatabase.getPlacesTable());
 	}
 
+	public PlacesModifier createPlacesModifier()
+	{
+		return new PlacesModifier(shootingDatabase.getPlacesTable());
+	}
+
 	public TrainingMethodsGetter createTrainingMethodsGetter()
 	{
 		return new TrainingMethodsGetter(shootingDatabase.getTrainingMethodsTable());

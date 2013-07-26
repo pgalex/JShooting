@@ -8,17 +8,11 @@ import com.jshooting.logics.SportsmansByTeamGetter;
 import com.jshooting.logics.TeamsGetter;
 import com.jshooting.logics.TrainingMethodsGetter;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
-import com.jshooting.shootingDatabase.PlacesTable;
 import com.jshooting.model.ShootingTraining;
-import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import com.jshooting.model.ShootingTrainingType;
 import com.jshooting.model.Sportsman;
-import com.jshooting.shootingDatabase.SportsmansTable;
 import com.jshooting.model.Team;
-import com.jshooting.shootingDatabase.TeamsTable;
 import com.jshooting.model.TrainingMethod;
-import com.jshooting.shootingDatabase.TrainingMethodsTable;
-import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.awt.Window;
 import java.util.Calendar;
 import java.util.Date;
@@ -72,7 +66,6 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
 	 * @param logicsFactory logics factory. Must be not null
-	 * @param shootingTrainingTable 
 	 * @throws IllegalArgumentException logicsFactory is null
 	 */
 	public AddShootingTrainingDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
@@ -89,7 +82,6 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 		teamGetter = logicsFactory.createTeamsGetter();
 		trainingMethodsGetter = logicsFactory.createTrainingMethodsGetter();
 		placesGetter = logicsFactory.createPlacesGetter();
-
 
 		teamsComboBoxModel = new DefaultComboBoxModel();
 		sportsmansComboBoxModel = new DefaultComboBoxModel();

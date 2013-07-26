@@ -3,11 +3,8 @@ package com.jshooting.logics;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
-import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.Date;
 import java.util.List;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
 
 /**
  * Using to get places
