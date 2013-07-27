@@ -27,6 +27,36 @@ public class Place
 	private Date endDate;
 
 	/**
+	 * Is correct
+	 *
+	 * @return is all fields correct
+	 */
+	public boolean isCorrect()
+	{
+		return isDatesCorrect();
+	}
+
+	/**
+	 * Is begin and end dates correct
+	 *
+	 * @return is dates correct
+	 */
+	public boolean isDatesCorrect()
+	{
+		if (beginDate == null || endDate == null)
+		{
+			return false;
+		}
+
+		if (beginDate.after(endDate))
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Id
 	 *
 	 * @return the id
