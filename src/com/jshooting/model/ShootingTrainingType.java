@@ -28,7 +28,7 @@ public enum ShootingTrainingType
 		switch (value)
 		{
 			case COMPLEX:
-				return "Комплексаная";
+				return "Комплексная";
 			case SHOOTING:
 				return "Стрелковая";
 			case COMPETITION:

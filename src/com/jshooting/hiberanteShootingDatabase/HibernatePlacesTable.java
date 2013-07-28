@@ -82,10 +82,10 @@ public class HibernatePlacesTable implements PlacesTable
 	}
 
 	/**
-	 * Add new place
+	 * Add place
 	 *
-	 * @param placeToAdd adding place. Must be not null
-	 * @throws IllegalArgumentException placeToAdd is null
+	 * @param placeToAdd adding place. Must be not null. Must be correct
+	 * @throws IllegalArgumentException placeToAdd is null or incorrect
 	 * @throws DatabaseErrorException error while adding
 	 */
 	@Override
@@ -94,6 +94,10 @@ public class HibernatePlacesTable implements PlacesTable
 		if (placeToAdd == null)
 		{
 			throw new IllegalArgumentException("placeToAdd is null");
+		}
+		if (!placeToAdd.isCorrect())
+		{
+			throw new IllegalArgumentException("placeToAdd incorrect");
 		}
 
 		session.beginTransaction();
@@ -104,8 +108,8 @@ public class HibernatePlacesTable implements PlacesTable
 	/**
 	 * Update exists place
 	 *
-	 * @param placeToUpdate updating place. Must be not null
-	 * @throws IllegalArgumentException placeToUpdate is null
+	 * @param placeToUpdate updating place. Must be not null. Must be correct
+	 * @throws IllegalArgumentException placeToUpdate is null or incorrect
 	 * @throws DatabaseErrorException error while updating
 	 */
 	@Override
@@ -114,6 +118,10 @@ public class HibernatePlacesTable implements PlacesTable
 		if (placeToUpdate == null)
 		{
 			throw new IllegalArgumentException("placeToUpdate is null");
+		}
+		if (!placeToUpdate.isCorrect())
+		{
+			throw new IllegalArgumentException("placeToAdd incorrect");
 		}
 
 		session.beginTransaction();

@@ -28,15 +28,15 @@ public interface PlacesTable
 	 * @return list of places exists in given period
 	 * @throws IllegalArgumentException periodDateFrom is null, periodDateTo is
 	 * null; periodDateFrom more than periodDateTo
-	 * @throws DatabaseErrorException error while getting places 
+	 * @throws DatabaseErrorException error while getting places
 	 */
 	public List<Place> getPlacesByPeriod(Date periodDateFrom, Date periodDateTo) throws IllegalArgumentException, DatabaseErrorException;
 
 	/**
-	 * Add new place
+	 * Add place
 	 *
-	 * @param placeToAdd adding place. Must be not null
-	 * @throws IllegalArgumentException placeToAdd is null
+	 * @param placeToAdd adding place. Must be not null. Must be correct
+	 * @throws IllegalArgumentException placeToAdd is null or incorrect
 	 * @throws DatabaseErrorException error while adding
 	 */
 	public void addPlace(Place placeToAdd) throws IllegalArgumentException, DatabaseErrorException;
@@ -44,8 +44,8 @@ public interface PlacesTable
 	/**
 	 * Update exists place
 	 *
-	 * @param placeToUpdate updating place. Must be not null
-	 * @throws IllegalArgumentException placeToUpdate is null
+	 * @param placeToUpdate updating place. Must be not null. Must be correct
+	 * @throws IllegalArgumentException placeToUpdate is null or incorrect
 	 * @throws DatabaseErrorException error while updating
 	 */
 	public void updatePlace(Place placeToUpdate) throws IllegalArgumentException, DatabaseErrorException;

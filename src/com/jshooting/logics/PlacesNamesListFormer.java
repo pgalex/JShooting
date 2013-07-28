@@ -11,11 +11,11 @@ import java.util.List;
 public class PlacesNamesListFormer
 {
 	/**
-	 * Get string of names of places
+	 * Get string contains names of places
 	 *
-	 * @param places places"
+	 * @param places places to take names from
 	 * @return string of names of places. Empty if there is no places
-	 * @throws IllegalArgumentException places is null;
+	 * @throws IllegalArgumentException places is null
 	 */
 	public static String getPlacesNamesString(List<Place> places) throws IllegalArgumentException
 	{

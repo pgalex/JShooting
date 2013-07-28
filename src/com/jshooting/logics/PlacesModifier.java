@@ -3,7 +3,6 @@ package com.jshooting.logics;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
-import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.Calendar;
 
 /**
@@ -68,8 +67,8 @@ public class PlacesModifier
 	/**
 	 * Update exists place
 	 *
-	 * @param placeToUpdate updating place. Must be not null
-	 * @throws IllegalArgumentException placeToUpdate is null
+	 * @param placeToUpdate updating place. Must be not null, must be correct
+	 * @throws IllegalArgumentException placeToUpdate is null or incorrect
 	 * @throws ShootingLogicsException error while updating
 	 */
 	public void updatePlace(Place placeToUpdate) throws IllegalArgumentException, ShootingLogicsException
@@ -77,6 +76,10 @@ public class PlacesModifier
 		if (placeToUpdate == null)
 		{
 			throw new IllegalArgumentException("placeToUpdate is null");
+		}
+		if(!placeToUpdate.isCorrect())
+		{
+			throw new IllegalArgumentException("placeToUpdate incorrect");
 		}
 
 		try
