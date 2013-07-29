@@ -3,7 +3,6 @@ package com.jshooting.logics;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
-import java.util.Calendar;
 
 /**
  * Using to modify places
@@ -34,29 +33,26 @@ public class PlacesModifier
 	}
 
 	/**
-	 * Add new place with empty name and current day as dates
+	 * Add place
 	 *
+	 * @param placeToAdd adding place. Must be not null and correct
+	 * @throws IllegalArgumentException placeToAdd is null or incorrect
 	 * @throws ShootingLogicsException error while adding
 	 */
-	public void addNewPlace() throws ShootingLogicsException
+	public void addPlace(Place placeToAdd) throws IllegalArgumentException, ShootingLogicsException
 	{
+		if (placeToAdd == null)
+		{
+			throw new IllegalArgumentException("placeToAdd is null");
+		}
+		if (!placeToAdd.isCorrect())
+		{
+			throw new IllegalArgumentException("placeToAdd incorrect");
+		}
+
 		try
 		{
-			Place newPlace = new Place();
-			newPlace.setName("");
-
-			Calendar calendar = Calendar.getInstance();
-			calendar.set(Calendar.HOUR_OF_DAY, 0);
-			calendar.set(Calendar.MINUTE, 0);
-			calendar.set(Calendar.SECOND, 0);
-			newPlace.setBeginDate(calendar.getTime());
-
-			calendar.set(Calendar.HOUR_OF_DAY, 23);
-			calendar.set(Calendar.MINUTE, 59);
-			calendar.set(Calendar.SECOND, 59);
-			newPlace.setEndDate(calendar.getTime());
-
-			placesTable.addPlace(newPlace);
+			placesTable.addPlace(placeToAdd);
 		}
 		catch (Exception ex)
 		{
@@ -77,7 +73,7 @@ public class PlacesModifier
 		{
 			throw new IllegalArgumentException("placeToUpdate is null");
 		}
-		if(!placeToUpdate.isCorrect())
+		if (!placeToUpdate.isCorrect())
 		{
 			throw new IllegalArgumentException("placeToUpdate incorrect");
 		}

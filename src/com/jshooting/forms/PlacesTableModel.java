@@ -5,9 +5,7 @@ import com.jshooting.logics.PlacesModifier;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Place;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -19,6 +17,10 @@ import javax.swing.table.AbstractTableModel;
  */
 public class PlacesTableModel extends AbstractTableModel
 {
+	/**
+	 * Count of columns in places table
+	 */
+	public static final int COLUMNS_COUNT = 3;
 	/**
 	 * Place name column index
 	 */
@@ -77,6 +79,33 @@ public class PlacesTableModel extends AbstractTableModel
 		}
 	}
 
+	/**
+	 * Update model by getting data from database
+	 */
+	public void update()
+	{
+		updatePlacesList();
+		fireTableDataChanged();
+	}
+
+	/**
+	 * Get place associated with row
+	 *
+	 * @param rowIndex index of row to get place of. Must be more or equals zero
+	 * and less than rows count
+	 * @return place associated with row with given index
+	 * @throws IllegalArgumentException rowIndex out of bounds
+	 */
+	public Place getPlaceAtRow(int rowIndex) throws IllegalArgumentException
+	{
+		if (rowIndex < 0 || rowIndex >= places.size())
+		{
+			throw new IllegalArgumentException("rowIndex out of bounds");
+		}
+
+		return places.get(rowIndex);
+	}
+
 	@Override
 	public int getRowCount()
 	{
@@ -93,7 +122,7 @@ public class PlacesTableModel extends AbstractTableModel
 	@Override
 	public int getColumnCount()
 	{
-		return 3;
+		return COLUMNS_COUNT;
 	}
 
 	@Override
@@ -146,106 +175,8 @@ public class PlacesTableModel extends AbstractTableModel
 	}
 
 	@Override
-	public void setValueAt(Object newValue, int rowIndex, int columnIndex)
-	{
-		try
-		{
-			Place updatingPlace = places.get(rowIndex);
-			switch (columnIndex)
-			{
-				case NAME_COLUMN_INDEX:
-					updatingPlace.setName((String) newValue);
-					break;
-				case BEGIN_DATE_COLUMN_INDEX:
-					updatePlaceBeginDate(updatingPlace, (new SimpleDateFormat("dd.MM.yyyy")).parse((String) newValue));
-					break;
-				case END_DATE_COLUMN_INDEX:
-					updatePlaceEndDate(updatingPlace, (new SimpleDateFormat("dd.MM.yyyy")).parse((String) newValue));
-					break;
-				default:
-					break;
-			}
-			placesModifier.updatePlace(updatingPlace);
-			updatePlacesList();
-		}
-		catch (Exception ex)
-		{
-			updatePlacesList();
-			fireTableCellUpdated(rowIndex, columnIndex);
-		}
-	}
-
-	private void updatePlaceBeginDate(Place place, Date newBeginDate) throws IllegalArgumentException
-	{
-		if (place == null)
-		{
-			throw new IllegalArgumentException("place is null");
-		}
-		if (newBeginDate == null)
-		{
-			throw new IllegalArgumentException("newBeginDate is null");
-		}
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(newBeginDate);
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		place.setBeginDate(calendar.getTime());
-	}
-
-	private void updatePlaceEndDate(Place place, Date newEndDate) throws IllegalArgumentException
-	{
-		if (place == null)
-		{
-			throw new IllegalArgumentException("place is null");
-		}
-		if (newEndDate == null)
-		{
-			throw new IllegalArgumentException("newBeginDate is null");
-		}
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(newEndDate);
-		calendar.set(Calendar.HOUR_OF_DAY, 23);
-		calendar.set(Calendar.MINUTE, 59);
-		calendar.set(Calendar.SECOND, 59);
-		place.setEndDate(calendar.getTime());
-	}
-
-	@Override
 	public boolean isCellEditable(int i, int i1)
 	{
-		return true;
-	}
-
-	/**
-	 * Add new place to database and model
-	 */
-	public void addNewPlace()
-	{
-		try
-		{
-			Place newPlace = new Place();
-			newPlace.setName("");
-
-			Calendar calendar = Calendar.getInstance();
-			calendar.set(Calendar.HOUR_OF_DAY, 0);
-			calendar.set(Calendar.MINUTE, 0);
-			calendar.set(Calendar.SECOND, 0);
-			newPlace.setBeginDate(calendar.getTime());
-
-			calendar.set(Calendar.HOUR_OF_DAY, 23);
-			calendar.set(Calendar.MINUTE, 59);
-			calendar.set(Calendar.SECOND, 59);
-			newPlace.setEndDate(calendar.getTime());
-
-			placesModifier.addNewPlace();
-			updatePlacesList();
-			fireTableRowsInserted(places.size() - 1, places.size() - 1);
-		}
-		catch (ShootingLogicsException ex)
-		{
-			// do nothing
-		}
+		return false;
 	}
 }

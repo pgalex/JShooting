@@ -1,18 +1,109 @@
 package com.jshooting.forms;
 
+import com.jshooting.model.Place;
+import java.awt.Window;
+import java.util.Calendar;
+
 /**
  * Dialog for adding or editing place
+ *
  * @author pgalex
  */
 public class PlaceDialog extends javax.swing.JDialog
 {
 	/**
-	 * Creates new form PlaceDialog
+	 * is ok button was pressed
 	 */
-	public PlaceDialog(java.awt.Frame parent, boolean modal)
+	private boolean isOkButtonPressed;
+	/**
+	 * Place, editing with dialog
+	 */
+	private Place editingPlace;
+
+	/**
+	 * Creates new dialog
+	 *
+	 * @param parentWindow parent window
+	 * @param modalityType modality type of dialog
+	 * @param dialogTitle title of dialog
+	 * @param okButtonText text on "ok" button
+	 * @throws IllegalArgumentException logicsFactory is null
+	 */
+	public PlaceDialog(Window parentWindow, ModalityType modalityType, String dialogTitle, String okButtonText)
 	{
-		super(parent, modal);
+		super(parentWindow, modalityType);
+
+		isOkButtonPressed = false;
+		editingPlace = new Place();
+
 		initComponents();
+
+		setTitle(dialogTitle);
+		jButtonOK.setText(okButtonText);
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		jDateChooserBeginDate.setDate(calendar.getTime());
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
+		jDateChooserEndDate.setDate(calendar.getTime());
+
+		editingPlace.setBeginDate(jDateChooserBeginDate.getDate());
+		editingPlace.setEndDate(jDateChooserEndDate.getDate());
+	}
+
+	/**
+	 * Get place by dialog input
+	 *
+	 * @return place by dialog input
+	 */
+	public Place getPlace()
+	{
+		editingPlace.setName(jTextFieldPlaceName.getText());
+
+		if (jDateChooserBeginDate.getDate().before(jDateChooserEndDate.getDate()) || jDateChooserBeginDate.getDate().equals(jDateChooserEndDate.getDate()))
+		{
+			editingPlace.setBeginDate(jDateChooserBeginDate.getDate());
+			editingPlace.setEndDate(jDateChooserEndDate.getDate());
+		}
+		else
+		{
+			editingPlace.setEndDate(jDateChooserBeginDate.getDate());
+			editingPlace.setBeginDate(jDateChooserEndDate.getDate());
+		}
+
+		return editingPlace;
+	}
+
+	/**
+	 * Set dialog controls values by place
+	 *
+	 * @param place place to set dialog contols values by. Must be not null
+	 * @throws IllegalArgumentException place is null
+	 */
+	public void setPlace(Place place) throws IllegalArgumentException
+	{
+		if (place == null)
+		{
+			throw new IllegalArgumentException("place is null");
+		}
+
+		editingPlace = place;
+		jTextFieldPlaceName.setText(place.getName());
+		jDateChooserBeginDate.setDate(place.getBeginDate());
+		jDateChooserEndDate.setDate(place.getEndDate());
+	}
+
+	/**
+	 * Is ok button was pressed in dialog
+	 *
+	 * @return is ok button was pressed
+	 */
+	public boolean isOkButtonPressed()
+	{
+		return isOkButtonPressed;
 	}
 
 	/**
@@ -25,79 +116,110 @@ public class PlaceDialog extends javax.swing.JDialog
   private void initComponents()
   {
 
+    jLabel1 = new javax.swing.JLabel();
+    jLabel2 = new javax.swing.JLabel();
+    jTextFieldPlaceName = new javax.swing.JTextField();
+    jLabel3 = new javax.swing.JLabel();
+    jDateChooserBeginDate = new com.toedter.calendar.JDateChooser();
+    jDateChooserEndDate = new com.toedter.calendar.JDateChooser();
+    jButtonOK = new javax.swing.JButton();
+    jButtonCancel = new javax.swing.JButton();
+
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    setResizable(false);
+
+    jLabel1.setText("Место проведения");
+
+    jLabel2.setText("Дата начала");
+
+    jLabel3.setText("Дата завершения");
+
+    jButtonOK.setText("ОК");
+    jButtonOK.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonOKActionPerformed(evt);
+      }
+    });
+
+    jButtonCancel.setText("Отмена");
+    jButtonCancel.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonCancelActionPerformed(evt);
+      }
+    });
 
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(0, 400, Short.MAX_VALUE)
+      .add(layout.createSequentialGroup()
+        .addContainerGap()
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(layout.createSequentialGroup()
+            .add(jButtonOK)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jButtonCancel)
+            .add(0, 0, Short.MAX_VALUE))
+          .add(layout.createSequentialGroup()
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(jLabel2)
+              .add(jLabel3)
+              .add(jLabel1))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(jTextFieldPlaceName)
+              .add(jDateChooserEndDate, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+              .add(jDateChooserBeginDate, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        .addContainerGap())
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(0, 300, Short.MAX_VALUE)
+      .add(layout.createSequentialGroup()
+        .addContainerGap()
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(jLabel1)
+          .add(jTextFieldPlaceName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+          .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .add(jDateChooserBeginDate, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+          .add(jDateChooserEndDate, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .add(jLabel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(jButtonOK)
+          .add(jButtonCancel))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[])
-	{
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-		 * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-		 */
-		try
-		{
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-			{
-				if ("Nimbus".equals(info.getName()))
-				{
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		}
-		catch (ClassNotFoundException ex)
-		{
-			java.util.logging.Logger.getLogger(PlaceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		catch (InstantiationException ex)
-		{
-			java.util.logging.Logger.getLogger(PlaceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		catch (IllegalAccessException ex)
-		{
-			java.util.logging.Logger.getLogger(PlaceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		catch (javax.swing.UnsupportedLookAndFeelException ex)
-		{
-			java.util.logging.Logger.getLogger(PlaceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		//</editor-fold>
+  private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelActionPerformed
+  {//GEN-HEADEREND:event_jButtonCancelActionPerformed
+		isOkButtonPressed = false;
+		setVisible(false);
+  }//GEN-LAST:event_jButtonCancelActionPerformed
 
-		/* Create and display the dialog */
-		java.awt.EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				PlaceDialog dialog = new PlaceDialog(new javax.swing.JFrame(), true);
-				dialog.addWindowListener(new java.awt.event.WindowAdapter()
-				{
-					@Override
-					public void windowClosing(java.awt.event.WindowEvent e)
-					{
-						System.exit(0);
-					}
-				});
-				dialog.setVisible(true);
-			}
-		});
-	}
+  private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOKActionPerformed
+  {//GEN-HEADEREND:event_jButtonOKActionPerformed
+		isOkButtonPressed = true;
+		setVisible(false);
+  }//GEN-LAST:event_jButtonOKActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton jButtonCancel;
+  private javax.swing.JButton jButtonOK;
+  private com.toedter.calendar.JDateChooser jDateChooserBeginDate;
+  private com.toedter.calendar.JDateChooser jDateChooserEndDate;
+  private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel3;
+  private javax.swing.JTextField jTextFieldPlaceName;
   // End of variables declaration//GEN-END:variables
 }
