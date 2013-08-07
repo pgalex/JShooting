@@ -1,7 +1,6 @@
 package com.jshooting.forms;
 
 import com.jshooting.logics.PlacesGetter;
-import com.jshooting.logics.PlacesModifier;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Place;
@@ -38,10 +37,6 @@ public class PlacesTableModel extends AbstractTableModel
 	 */
 	private PlacesGetter placesGetter;
 	/**
-	 * Using to modify places
-	 */
-	private PlacesModifier placesModifier;
-	/**
 	 * List of places using for optimization accessing to database
 	 */
 	private List<Place> places;
@@ -60,7 +55,6 @@ public class PlacesTableModel extends AbstractTableModel
 		}
 
 		placesGetter = logicsFactory.createPlacesGetter();
-		placesModifier = logicsFactory.createPlacesModifier();
 		updatePlacesList();
 	}
 
