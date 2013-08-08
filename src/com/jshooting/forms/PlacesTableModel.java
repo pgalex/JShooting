@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
- * Table model of places table. Uses for editing places throught table
+ * Table model of places table
  *
  * @author pgalex
  */
@@ -37,7 +37,8 @@ public class PlacesTableModel extends AbstractTableModel
 	 */
 	private PlacesGetter placesGetter;
 	/**
-	 * List of places using for optimization accessing to database
+	 * List of places using for optimization accessing to database. Synchronized
+	 * with database places
 	 */
 	private List<Place> places;
 

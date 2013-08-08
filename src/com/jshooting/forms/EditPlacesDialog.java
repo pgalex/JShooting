@@ -156,7 +156,7 @@ public class EditPlacesDialog extends javax.swing.JDialog
   private void jButtonAddPlaceActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddPlaceActionPerformed
   {//GEN-HEADEREND:event_jButtonAddPlaceActionPerformed
 
-		PlaceDialog addPlaceDialog = new PlaceDialog(this, ModalityType.DOCUMENT_MODAL, "Добавить  УТС", "Добавить");
+		PlaceDialog addPlaceDialog = new PlaceDialog(this, ModalityType.DOCUMENT_MODAL, "Добавить УТС", "Добавить");
 		addPlaceDialog.setLocationRelativeTo(this);
 		addPlaceDialog.setVisible(true);
 		if (addPlaceDialog.isOkButtonPressed())
@@ -195,7 +195,7 @@ public class EditPlacesDialog extends javax.swing.JDialog
 				}
 				catch (ShootingLogicsException ex)
 				{
-					JOptionPane.showMessageDialog(null, "Не изменить УТС: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Не удалось изменить УТС: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 				}
 				finally
 				{
