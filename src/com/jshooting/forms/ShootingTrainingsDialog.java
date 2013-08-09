@@ -3,8 +3,6 @@ package com.jshooting.forms;
 import com.jshooting.logics.DateModifier;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import java.awt.Window;
-import java.util.Calendar;
-import java.util.Date;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -42,8 +40,8 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 
 		initComponents();
 
-		jDateChooserDateFrom.setDate(DateModifier.createDateAsDayBegin(new Date()));
-		jDateChooserDateTo.setDate(DateModifier.createDateAsDayEnd(new Date()));
+		jDateChooserDateFrom.setDate(DateModifier.createTodayBegin());
+		jDateChooserDateTo.setDate(DateModifier.createTodayEnd());
 
 		jTableTrainings.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 

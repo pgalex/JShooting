@@ -5,8 +5,6 @@ import com.jshooting.logics.TrainingMethodsGetter;
 import com.jshooting.logics.TrainingMethodsModifier;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.TrainingMethod;
-import com.jshooting.shootingDatabase.TrainingMethodsTable;
-import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

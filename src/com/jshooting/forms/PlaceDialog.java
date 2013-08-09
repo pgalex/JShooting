@@ -1,8 +1,8 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.DateModifier;
 import com.jshooting.model.Place;
 import java.awt.Window;
-import java.util.Calendar;
 
 /**
  * Dialog for adding or editing place
@@ -40,15 +40,9 @@ public class PlaceDialog extends javax.swing.JDialog
 
 		setTitle(dialogTitle);
 		jButtonOK.setText(okButtonText);
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		jDateChooserBeginDate.setDate(calendar.getTime());
-		calendar.set(Calendar.HOUR_OF_DAY, 23);
-		calendar.set(Calendar.MINUTE, 59);
-		calendar.set(Calendar.SECOND, 59);
-		jDateChooserEndDate.setDate(calendar.getTime());
+
+		jDateChooserBeginDate.setDate(DateModifier.createTodayBegin());
+		jDateChooserEndDate.setDate(DateModifier.createTodayEnd());
 
 		editingPlace.setBeginDate(jDateChooserBeginDate.getDate());
 		editingPlace.setEndDate(jDateChooserEndDate.getDate());

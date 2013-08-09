@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.DateModifier;
 import com.jshooting.logics.PlacesGetter;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.SportsmansByTeamGetter;
@@ -12,7 +13,6 @@ import com.jshooting.model.Sportsman;
 import com.jshooting.model.Team;
 import java.awt.Window;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -89,19 +89,12 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 		jListSportsmans.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		setSportsmanPanelTitleBySelectionMode();
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		jDateChooserDateFrom.setDate(calendar.getTime());
-		calendar.set(Calendar.HOUR_OF_DAY, 23);
-		calendar.set(Calendar.MINUTE, 59);
-		calendar.set(Calendar.SECOND, 59);
-		jDateChooserDateTo.setDate(calendar.getTime());
+		jDateChooserDateFrom.setDate(DateModifier.createTodayBegin());
+		jDateChooserDateTo.setDate(DateModifier.createTodayEnd());
 
 		fillTeamsComboBox();
 		fillPlacesComboBox();
-		refillSportmansList();
+		fillSportmansList();
 	}
 
 	/**
@@ -148,7 +141,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 	/**
 	 * Fill sportmans list model by sportmans in getter's filtering team
 	 */
-	private void refillSportmansList()
+	private void fillSportmansList()
 	{
 		try
 		{
@@ -538,7 +531,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 			sportsmansGetter.setFilteringTeam(null);
 		}
 
-		refillSportmansList();
+		fillSportmansList();
   }//GEN-LAST:event_jComboBoxTeamsActionPerformed
 
   private void jCheckBoxComplexActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBoxComplexActionPerformed

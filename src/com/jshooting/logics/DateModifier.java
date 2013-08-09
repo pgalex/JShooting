@@ -55,4 +55,14 @@ public class DateModifier
 		calendar.set(Calendar.MILLISECOND, 999);
 		return calendar.getTime();
 	}
+
+	public static Date createTodayBegin()
+	{
+		return createDateAsDayBegin(new Date());
+	}
+
+	public static Date createTodayEnd()
+	{
+		return createDateAsDayEnd(new Date());
+	}
 }

@@ -46,6 +46,9 @@ public class EditTrainingMethodsDialog extends javax.swing.JDialog
 		updateHighlighting();
 	}
 
+	/**
+	 * Update dilaog components highlighting
+	 */
 	private void updateHighlighting()
 	{
 		if (jTableTrainingMethods.getRowCount() == 0)

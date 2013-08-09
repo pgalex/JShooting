@@ -2,7 +2,6 @@ package com.jshooting.forms;
 
 import com.jshooting.componentsHighlighting.ComponentsHighlighter;
 import com.jshooting.logics.ShootingLogicsFactory;
-import com.jshooting.shootingDatabase.TeamsTable;
 import java.awt.Window;
 
 /**
@@ -12,6 +11,9 @@ import java.awt.Window;
  */
 public class EditTeamsDialog extends javax.swing.JDialog
 {
+	/**
+	 * Dialog components highlighter
+	 */
 	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Table model for teams table
@@ -44,6 +46,9 @@ public class EditTeamsDialog extends javax.swing.JDialog
 		updateHighlighting();
 	}
 
+	/**
+	 * Update dialog components highlighting
+	 */
 	private void updateHighlighting()
 	{
 		if (jTableTeams.getRowCount() == 0)
