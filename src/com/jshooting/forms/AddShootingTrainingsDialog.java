@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.DateModifier;
 import com.jshooting.logics.PlacesGetter;
 import com.jshooting.logics.PlacesNamesListFormer;
 import com.jshooting.logics.ShootingLogicsFactory;
@@ -14,7 +15,6 @@ import com.jshooting.model.Sportsman;
 import com.jshooting.model.Team;
 import com.jshooting.model.TrainingMethod;
 import java.awt.Window;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -104,18 +104,8 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 	{
 		try
 		{
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(jDateChooserTrainingDate.getDate());
-
-			calendar.set(Calendar.HOUR_OF_DAY, 0);
-			calendar.set(Calendar.MINUTE, 0);
-			calendar.set(Calendar.SECOND, 0);
-			Date periodDateFrom = calendar.getTime();
-
-			calendar.set(Calendar.HOUR_OF_DAY, 23);
-			calendar.set(Calendar.MINUTE, 59);
-			calendar.set(Calendar.SECOND, 59);
-			Date periodDateTo = calendar.getTime();
+			Date periodDateFrom = DateModifier.createDateAsDayBegin(jDateChooserTrainingDate.getDate());
+			Date periodDateTo = DateModifier.createDateAsDayEnd(jDateChooserTrainingDate.getDate());
 
 			jTextFieldPlaceName.setText(PlacesNamesListFormer.getPlacesNamesString(placesGetter.getPlacesByPeriod(periodDateFrom, periodDateTo)));
 		}

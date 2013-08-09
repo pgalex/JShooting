@@ -16,7 +16,7 @@ public class DateModifierTest
 	public void settingDateAsDayBeginTest()
 	{
 		Date today = new Date();
-		Date dayBegin = DateModifier.setDateAsDayBegin(today);
+		Date dayBegin = DateModifier.createDateAsDayBegin(today);
 		assertTrue(today.after(dayBegin) || today.equals(dayBegin));
 	}
 
@@ -24,7 +24,7 @@ public class DateModifierTest
 	public void settingDateAsDayEndTest()
 	{
 		Date today = new Date();
-		Date dayEnd = DateModifier.setDateAsDayEnd(today);
+		Date dayEnd = DateModifier.createDateAsDayEnd(today);
 		assertTrue(today.before(dayEnd) || today.equals(dayEnd));
 	}
 
@@ -34,7 +34,7 @@ public class DateModifierTest
 	{
 		try
 		{
-			DateModifier.setDateAsDayBegin(null);
+			DateModifier.createDateAsDayBegin(null);
 			fail();
 		}
 		catch (IllegalArgumentException ex)
@@ -48,7 +48,7 @@ public class DateModifierTest
 	{
 		try
 		{
-			DateModifier.setDateAsDayEnd(null);
+			DateModifier.createDateAsDayEnd(null);
 			fail();
 		}
 		catch (IllegalArgumentException ex)

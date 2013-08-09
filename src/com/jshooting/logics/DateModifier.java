@@ -17,7 +17,7 @@ public class DateModifier
 	 * @return date with time set to day begin
 	 * @throws IllegalArgumentException date is null
 	 */
-	public static Date setDateAsDayBegin(Date date) throws IllegalArgumentException
+	public static Date createDateAsDayBegin(Date date) throws IllegalArgumentException
 	{
 		if (date == null)
 		{
@@ -40,7 +40,7 @@ public class DateModifier
 	 * @return date with time set to day end
 	 * @throws IllegalArgumentException date is null
 	 */
-	public static Date setDateAsDayEnd(Date date) throws IllegalArgumentException
+	public static Date createDateAsDayEnd(Date date) throws IllegalArgumentException
 	{
 		if (date == null)
 		{
