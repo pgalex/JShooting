@@ -1,8 +1,10 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.DateModifier;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import java.awt.Window;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -10,7 +12,7 @@ import javax.swing.ListSelectionModel;
  *
  * @author pgalex
  */
-public class EditShootingTrainingsDialog extends javax.swing.JDialog
+public class ShootingTrainingsDialog extends javax.swing.JDialog
 {
 	/**
 	 * Table model of trainings table
@@ -26,7 +28,7 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
 	 * not null
 	 * @throws IllegalArgumentException shootingTrainingsTable is null
 	 */
-	public EditShootingTrainingsDialog(Window parentWindow, ModalityType modalityType,
+	public ShootingTrainingsDialog(Window parentWindow, ModalityType modalityType,
 					ShootingTrainingsTable shootingTrainingsTable) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
@@ -40,16 +42,8 @@ public class EditShootingTrainingsDialog extends javax.swing.JDialog
 
 		initComponents();
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		jDateChooserDateFrom.setDate(calendar.getTime());
-
-		calendar.set(Calendar.HOUR_OF_DAY, 23);
-		calendar.set(Calendar.MINUTE, 59);
-		calendar.set(Calendar.SECOND, 59);
-		jDateChooserDateTo.setDate(calendar.getTime());
+		jDateChooserDateFrom.setDate(DateModifier.createDateAsDayBegin(new Date()));
+		jDateChooserDateTo.setDate(DateModifier.createDateAsDayEnd(new Date()));
 
 		jTableTrainings.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
