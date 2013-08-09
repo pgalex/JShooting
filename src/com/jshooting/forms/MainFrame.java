@@ -449,7 +449,7 @@ public class MainFrame extends javax.swing.JFrame
 
   private void jButtonAddTrainingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingsActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingsActionPerformed
-		AddShootingTrainingDialog addShootingTrainingDialog = new AddShootingTrainingDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+		AddShootingTrainingsDialog addShootingTrainingDialog = new AddShootingTrainingsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
 						new ShootingLogicsFactory(shootingDatabase));
 		addShootingTrainingDialog.setLocationRelativeTo(this);
 		addShootingTrainingDialog.setVisible(true);

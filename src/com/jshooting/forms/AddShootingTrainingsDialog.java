@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  *
  * @author pgalex
  */
-public class AddShootingTrainingDialog extends javax.swing.JDialog
+public class AddShootingTrainingsDialog extends javax.swing.JDialog
 {
 	/**
 	 * Model for teams combo box
@@ -68,7 +68,7 @@ public class AddShootingTrainingDialog extends javax.swing.JDialog
 	 * @param logicsFactory logics factory. Must be not null
 	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public AddShootingTrainingDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
+	public AddShootingTrainingsDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
