@@ -420,23 +420,9 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 
     jCheckBoxComplex.setSelected(true);
     jCheckBoxComplex.setText("Комплексная");
-    jCheckBoxComplex.addActionListener(new java.awt.event.ActionListener()
-    {
-      public void actionPerformed(java.awt.event.ActionEvent evt)
-      {
-        jCheckBoxComplexActionPerformed(evt);
-      }
-    });
 
     jCheckBoxShooting.setSelected(true);
     jCheckBoxShooting.setText("Стрелковая");
-    jCheckBoxShooting.addActionListener(new java.awt.event.ActionListener()
-    {
-      public void actionPerformed(java.awt.event.ActionEvent evt)
-      {
-        jCheckBoxShootingActionPerformed(evt);
-      }
-    });
 
     jCheckBoxCompetition.setSelected(true);
     jCheckBoxCompetition.setText("Соревнование");
@@ -534,16 +520,6 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 		fillSportmansList();
   }//GEN-LAST:event_jComboBoxTeamsActionPerformed
 
-  private void jCheckBoxComplexActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBoxComplexActionPerformed
-  {//GEN-HEADEREND:event_jCheckBoxComplexActionPerformed
-		// TODO add your handling code here:
-  }//GEN-LAST:event_jCheckBoxComplexActionPerformed
-
-  private void jCheckBoxShootingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBoxShootingActionPerformed
-  {//GEN-HEADEREND:event_jCheckBoxShootingActionPerformed
-		// TODO add your handling code here:
-  }//GEN-LAST:event_jCheckBoxShootingActionPerformed
-
   private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOKActionPerformed
   {//GEN-HEADEREND:event_jButtonOKActionPerformed
 		if (jListSportsmans.getSelectedValues().length == 0)
@@ -596,7 +572,10 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 
   private void jComboBoxPlaceActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxPlaceActionPerformed
   {//GEN-HEADEREND:event_jComboBoxPlaceActionPerformed
-		setPeriodDatesBySelectedPlace();
+		if (jRadioButtonPlacePeriod.isSelected())
+		{
+			setPeriodDatesBySelectedPlace();
+		}
   }//GEN-LAST:event_jComboBoxPlaceActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.ButtonGroup buttonGroupPeriodType;
