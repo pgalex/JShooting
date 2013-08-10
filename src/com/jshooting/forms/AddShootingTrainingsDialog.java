@@ -89,8 +89,6 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
   private void initComponents()
   {
 
-    jScrollPane1 = new javax.swing.JScrollPane();
-    jTable1 = new javax.swing.JTable();
     jLabel1 = new javax.swing.JLabel();
     jComboBoxSportsman = new javax.swing.JComboBox();
     jLabel2 = new javax.swing.JLabel();
@@ -153,21 +151,6 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
     jLabelAddingToDatabaseAnimation = new javax.swing.JLabel();
     jTextFieldPlaceName = new javax.swing.JTextField();
     jLabel28 = new javax.swing.JLabel();
-
-    jTable1.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][]
-      {
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null}
-      },
-      new String []
-      {
-        "Title 1", "Title 2", "Title 3", "Title 4"
-      }
-    ));
-    jScrollPane1.setViewportView(jTable1);
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Добавить тренировку");
@@ -720,7 +703,6 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
   private javax.swing.JLabel jLabel9;
   private javax.swing.JLabel jLabelAddingToDatabaseAnimation;
   private javax.swing.JPanel jPanel1;
-  private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JSpinner jSpinnerDelayLyingCompetition;
   private javax.swing.JSpinner jSpinnerDelayLyingLoading;
   private javax.swing.JSpinner jSpinnerDelayStandingCompetition;
@@ -744,7 +726,6 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
   private javax.swing.JSpinner jSpinnerScatt;
   private javax.swing.JSpinner jSpinnerTrail;
   private javax.swing.JSpinner jSpinnerZeroingIn;
-  private javax.swing.JTable jTable1;
   private javax.swing.JTextField jTextFieldComments;
   private javax.swing.JTextField jTextFieldPlaceName;
   private javax.swing.JTextField jTextFieldWeather;
