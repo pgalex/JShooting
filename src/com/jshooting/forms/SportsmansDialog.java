@@ -13,7 +13,7 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author pgalex
  */
-public class EditSportsmansDialog extends javax.swing.JDialog
+public class SportsmansDialog extends javax.swing.JDialog
 {
 	/**
 	 * Components highlighter
@@ -45,7 +45,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 	 * @throws IllegalArgumentException logicsFactory is null
 	 *
 	 */
-	public EditSportsmansDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
+	public SportsmansDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
@@ -251,7 +251,7 @@ public class EditSportsmansDialog extends javax.swing.JDialog
 
   private void jButtonEditTeamsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditTeamsActionPerformed
   {//GEN-HEADEREND:event_jButtonEditTeamsActionPerformed
-		EditTeamsDialog editTeamsDialog = new EditTeamsDialog(this, ModalityType.APPLICATION_MODAL, logicsFactory);
+		TeamsDialog editTeamsDialog = new TeamsDialog(this, ModalityType.APPLICATION_MODAL, logicsFactory);
 		editTeamsDialog.setLocationRelativeTo(this);
 		editTeamsDialog.setVisible(true);
 

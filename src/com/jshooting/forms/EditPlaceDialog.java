@@ -9,7 +9,7 @@ import java.awt.Window;
  *
  * @author pgalex
  */
-public class PlaceDialog extends javax.swing.JDialog
+public class EditPlaceDialog extends javax.swing.JDialog
 {
 	/**
 	 * is ok button was pressed
@@ -29,7 +29,7 @@ public class PlaceDialog extends javax.swing.JDialog
 	 * @param okButtonText text on "ok" button
 	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public PlaceDialog(Window parentWindow, ModalityType modalityType, String dialogTitle, String okButtonText)
+	public EditPlaceDialog(Window parentWindow, ModalityType modalityType, String dialogTitle, String okButtonText)
 	{
 		super(parentWindow, modalityType);
 

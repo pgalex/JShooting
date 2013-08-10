@@ -9,7 +9,7 @@ import java.awt.Window;
  *
  * @author pgalex
  */
-public class EditTeamsDialog extends javax.swing.JDialog
+public class TeamsDialog extends javax.swing.JDialog
 {
 	/**
 	 * Dialog components highlighter
@@ -28,7 +28,7 @@ public class EditTeamsDialog extends javax.swing.JDialog
 	 * @param logicsFactory shooting logics factory. Must be not null
 	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public EditTeamsDialog(Window parentWindow, ModalityType modalityType,
+	public TeamsDialog(Window parentWindow, ModalityType modalityType,
 					ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);

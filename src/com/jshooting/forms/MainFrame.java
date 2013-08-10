@@ -433,7 +433,7 @@ public class MainFrame extends javax.swing.JFrame
 
   private void jButtonSportsmansActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSportsmansActionPerformed
   {//GEN-HEADEREND:event_jButtonSportsmansActionPerformed
-		EditSportsmansDialog editSportsmansDialog = new EditSportsmansDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+		SportsmansDialog editSportsmansDialog = new SportsmansDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
 						new ShootingLogicsFactory(shootingDatabase));
 		editSportsmansDialog.setLocationRelativeTo(this);
 		editSportsmansDialog.setVisible(true);
@@ -441,7 +441,7 @@ public class MainFrame extends javax.swing.JFrame
 
   private void jButtonTrainingMethodsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTrainingMethodsActionPerformed
   {//GEN-HEADEREND:event_jButtonTrainingMethodsActionPerformed
-		EditTrainingMethodsDialog editTrainingMethodsDialog = new EditTrainingMethodsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+		TrainingMethodsDialog editTrainingMethodsDialog = new TrainingMethodsDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
 						new ShootingLogicsFactory(shootingDatabase));
 		editTrainingMethodsDialog.setLocationRelativeTo(this);
 		editTrainingMethodsDialog.setVisible(true);
@@ -548,7 +548,7 @@ public class MainFrame extends javax.swing.JFrame
 
   private void jButtonPlacesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonPlacesActionPerformed
   {//GEN-HEADEREND:event_jButtonPlacesActionPerformed
-		EditPlacesDialog editPlaceDialog = new EditPlacesDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+		PlacesDialog editPlaceDialog = new PlacesDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
 						new ShootingLogicsFactory(shootingDatabase));
 		editPlaceDialog.setLocationRelativeTo(this);
 		editPlaceDialog.setVisible(true);

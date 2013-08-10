@@ -16,7 +16,7 @@ import javax.swing.table.TableColumn;
  *
  * @author pgalex
  */
-public class EditPlacesDialog extends javax.swing.JDialog
+public class PlacesDialog extends javax.swing.JDialog
 {
 	/**
 	 * Dialog components highlighter
@@ -39,7 +39,7 @@ public class EditPlacesDialog extends javax.swing.JDialog
 	 * @param logicsFactory logics factory. Must be not null
 	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public EditPlacesDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
+	public PlacesDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
@@ -156,7 +156,7 @@ public class EditPlacesDialog extends javax.swing.JDialog
   private void jButtonAddPlaceActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddPlaceActionPerformed
   {//GEN-HEADEREND:event_jButtonAddPlaceActionPerformed
 
-		PlaceDialog addPlaceDialog = new PlaceDialog(this, ModalityType.DOCUMENT_MODAL, "Добавить УТС", "Добавить");
+		EditPlaceDialog addPlaceDialog = new EditPlaceDialog(this, ModalityType.DOCUMENT_MODAL, "Добавить УТС", "Добавить");
 		addPlaceDialog.setLocationRelativeTo(this);
 		addPlaceDialog.setVisible(true);
 		if (addPlaceDialog.isOkButtonPressed())
@@ -183,7 +183,7 @@ public class EditPlacesDialog extends javax.swing.JDialog
 		if (jTablePlaces.getSelectedRowCount() > 0)
 		{
 			Place placeToEdit = placesTableModel.getPlaceAtRow(jTablePlaces.getSelectedRows()[0]);
-			PlaceDialog editPlaceDialog = new PlaceDialog(this, ModalityType.DOCUMENT_MODAL, "Редактировать УТС", "OK");
+			EditPlaceDialog editPlaceDialog = new EditPlaceDialog(this, ModalityType.DOCUMENT_MODAL, "Редактировать УТС", "OK");
 			editPlaceDialog.setPlace(placeToEdit);
 			editPlaceDialog.setLocationRelativeTo(this);
 			editPlaceDialog.setVisible(true);

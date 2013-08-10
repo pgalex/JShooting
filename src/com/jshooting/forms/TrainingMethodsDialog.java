@@ -9,7 +9,7 @@ import java.awt.Window;
  *
  * @author pgalex
  */
-public class EditTrainingMethodsDialog extends javax.swing.JDialog
+public class TrainingMethodsDialog extends javax.swing.JDialog
 {
 	/**
 	 * Components highlighter
@@ -28,7 +28,7 @@ public class EditTrainingMethodsDialog extends javax.swing.JDialog
 	 * @param logicsFactory logics fatory. Must be not null
 	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public EditTrainingMethodsDialog(Window parentWindow, ModalityType modalityType,
+	public TrainingMethodsDialog(Window parentWindow, ModalityType modalityType,
 					ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
