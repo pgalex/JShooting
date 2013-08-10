@@ -34,7 +34,7 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		{
 			throw new IllegalArgumentException("session is null");
 		}
-		
+
 		this.session = session;
 	}
 
@@ -51,7 +51,7 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		{
 			throw new IllegalArgumentException("trainingToDelete is null");
 		}
-		
+
 		session.beginTransaction();
 		session.delete(trainingToDelete);
 		session.getTransaction().commit();
@@ -99,7 +99,7 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		{
 			throw new IllegalArgumentException("trainingToAdd training method is null");
 		}
-		
+
 		session.beginTransaction();
 		session.save(trainingToAdd);
 		session.getTransaction().commit();
@@ -122,7 +122,7 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		{
 			throw new IllegalArgumentException("filter is null");
 		}
-		
+
 		Criteria criteria = createCriteriaByFilter(filter, session);
 		return criteria.list();
 	}
@@ -145,7 +145,7 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		{
 			throw new IllegalArgumentException("session is null");
 		}
-		
+
 		Criteria criteriaByFilter = session.createCriteria(ShootingTraining.class);
 		criteriaByFilter.add(Restrictions.in("sportsman", filter.getSportsmans()));
 		criteriaByFilter.add(Restrictions.between("date", filter.getDateFrom(), filter.getDateTo()));
@@ -153,5 +153,32 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		criteriaByFilter.add(Restrictions.le("date", filter.getDateTo()));
 		criteriaByFilter.add(Restrictions.in("type", filter.getTrainingTypes()));
 		return criteriaByFilter;
+	}
+
+	/**
+	 * Update exists training
+	 *
+	 * @param trainingToUpdate updating training. Must be not null
+	 * @throws IllegalArgumentException trainingToUpdate is null
+	 * @throws DatabaseErrorException error while updating
+	 */
+	@Override
+	public void updateTraining(ShootingTraining trainingToUpdate) throws IllegalArgumentException, DatabaseErrorException
+	{
+		if (trainingToUpdate == null)
+		{
+			throw new IllegalArgumentException("trainingToUpdate is null");
+		}
+
+		try
+		{
+			session.beginTransaction();
+			session.update(trainingToUpdate);
+			session.getTransaction().commit();
+		}
+		catch (Exception ex)
+		{
+			throw new DatabaseErrorException(ex);
+		}
 	}
 }

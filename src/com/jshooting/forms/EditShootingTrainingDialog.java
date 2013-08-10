@@ -2,6 +2,7 @@ package com.jshooting.forms;
 
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.model.ShootingTraining;
+import static com.jshooting.model.ShootingTrainingType.COMPLEX;
 import java.awt.Window;
 import java.util.Date;
 
@@ -20,6 +21,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 	 * Shooting training editing with dialog
 	 */
 	private ShootingTraining editingShootingTraining;
+	private boolean okButtonPressed;
 
 	/**
 	 * Create to edit shooting training
@@ -35,7 +37,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 					ShootingTraining shootingTrainingToEdit) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-
+		
 		if (logicsFactory == null)
 		{
 			throw new IllegalArgumentException("logicsFactory is null");
@@ -44,17 +46,72 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("shootingTrainingToEdit is null");
 		}
-
+		
 		dialogController = new ShootingTrainingDialogController(logicsFactory);
 		editingShootingTraining = shootingTrainingToEdit;
-
+		okButtonPressed = false;
+		
 		initComponents();
-		jDateChooserTrainingDate.setDate(new Date());
-
+		
 		dialogController.refillTeamsComboBoxModel();
 		dialogController.fillSportmanComboBoxByTeam(jComboBoxTeam.getSelectedItem());
 		dialogController.refillTrainingMethodComboBox();
-		jTextFieldPlaceName.setText(dialogController.findPlacesNamesByTrainingDate(jDateChooserTrainingDate.getDate()));
+		setControlsByEditingTraining();
+	}
+	
+	private void setControlsByEditingTraining()
+	{
+		jComboBoxTeam.setSelectedItem(editingShootingTraining.getSportsman().getTeam());
+		jComboBoxSportsman.setSelectedItem(editingShootingTraining.getSportsman());
+		jDateChooserTrainingDate.setDate(editingShootingTraining.getDate());
+		jTextFieldPlaceName.setText(dialogController.findPlacesNamesByTrainingDate(editingShootingTraining.getDate()));
+		jComboBoxTrainingMethod.setSelectedItem(editingShootingTraining.getTrainingMethod());
+		jTextFieldWeather.setText(editingShootingTraining.getWeather());
+		jTextFieldComments.setText(editingShootingTraining.getComments());
+		
+		switch (editingShootingTraining.getType())
+		{
+			case COMPLEX:
+				jComboBoxTrainingType.setSelectedIndex(0);
+				break;
+			case SHOOTING:
+				jComboBoxTrainingType.setSelectedIndex(1);
+				break;
+			case COMPETITION:
+				jComboBoxTrainingType.setSelectedIndex(2);
+				break;
+			default:
+				throw new NullPointerException("недопустимое значение ShootingTrainingType");
+		}
+		
+		jSpinnerDelayLyingCompetition.setValue(editingShootingTraining.getDelayLyingCompetition());
+		jSpinnerDelayLyingLoading.setValue(editingShootingTraining.getDelayLyingLoading());
+		jSpinnerDelayStandingCompetition.setValue(editingShootingTraining.getDelayStandingCompetition());
+		jSpinnerDelayStandingLoading.setValue(editingShootingTraining.getDelayStandingLoading());
+		jSpinnerFirstLyingCompetition.setValue(editingShootingTraining.getFirstLyingCompetition());
+		jSpinnerFirstLyingLoading.setValue(editingShootingTraining.getFirstLyingLoading());
+		jSpinnerFirstStandingCompetition.setValue(editingShootingTraining.getFirstStandingCompetition());
+		jSpinnerFirstStandingLoading.setValue(editingShootingTraining.getFirstStandingLoading());
+		jSpinnerMissLyingCompetition.setValue(editingShootingTraining.getMissLyingCompetition());
+		jSpinnerMissLyingInRest.setValue(editingShootingTraining.getMissLyingInRest());
+		jSpinnerMissLyingLoading.setValue(editingShootingTraining.getMissLyingLoading());
+		jSpinnerMissStandingCompetition.setValue(editingShootingTraining.getMissStandingCompetition());
+		jSpinnerMissStandingInRest.setValue(editingShootingTraining.getMissStandingInRest());
+		jSpinnerMissStandingLoading.setValue(editingShootingTraining.getMissStandingLoading());
+		jSpinnerNumLyingCompetition.setValue(editingShootingTraining.getNumLyingCompetition());
+		jSpinnerNumLyingInRest.setValue(editingShootingTraining.getNumLyingInRest());
+		jSpinnerNumLyingLoading.setValue(editingShootingTraining.getNumLyingLoading());
+		jSpinnerNumStandingCompetition.setValue(editingShootingTraining.getNumStandingCompetition());
+		jSpinnerNumStandingInRest.setValue(editingShootingTraining.getNumStandingInRest());
+		jSpinnerNumStandingLoading.setValue(editingShootingTraining.getNumStandingLoading());
+		jSpinnerScatt.setValue(editingShootingTraining.getScatt());
+		jSpinnerTrail.setValue(editingShootingTraining.getTrail());
+		jSpinnerZeroingIn.setValue(editingShootingTraining.getZeroingIn());
+	}
+	
+	public boolean isOkButtonPressed()
+	{
+		return okButtonPressed;
 	}
 
 	/**
@@ -479,8 +536,22 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
     jLabel28.setText("УТС");
 
     jButton1.setText("OK");
+    jButton1.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButton1ActionPerformed(evt);
+      }
+    });
 
     jButton2.setText("Отмена");
+    jButton2.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButton2ActionPerformed(evt);
+      }
+    });
 
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -578,7 +649,6 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
   {//GEN-HEADEREND:event_jComboBoxTeamActionPerformed
 		dialogController.fillSportmanComboBoxByTeam(jComboBoxTeam.getSelectedItem());
   }//GEN-LAST:event_jComboBoxTeamActionPerformed
-
   private void jDateChooserTrainingDatePropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_jDateChooserTrainingDatePropertyChange
   {//GEN-HEADEREND:event_jDateChooserTrainingDatePropertyChange
 		if ("date".equals(evt.getPropertyName()))
@@ -586,6 +656,18 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 			jTextFieldPlaceName.setText(dialogController.findPlacesNamesByTrainingDate(jDateChooserTrainingDate.getDate()));
 		}
   }//GEN-LAST:event_jDateChooserTrainingDatePropertyChange
+	
+  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
+  {//GEN-HEADEREND:event_jButton1ActionPerformed
+		okButtonPressed = true;
+		setVisible(false);
+  }//GEN-LAST:event_jButton1ActionPerformed
+	
+  private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
+  {//GEN-HEADEREND:event_jButton2ActionPerformed
+		okButtonPressed = false;
+		setVisible(false);
+  }//GEN-LAST:event_jButton2ActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButton1;
   private javax.swing.JButton jButton2;

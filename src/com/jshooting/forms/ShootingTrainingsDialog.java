@@ -4,7 +4,7 @@ import com.jshooting.logics.DateModifier;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.ShootingTrainingsModifier;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
-import com.jshooting.shootingDatabase.ShootingTrainingsTable;
+import com.jshooting.model.ShootingTraining;
 import java.awt.Window;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +22,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 	 * Table model of trainings table
 	 */
 	private ShootingTrainingsTableModel shootingTrainingsTableModel;
+	private ShootingLogicsFactory logicsFactory;
 	private ShootingTrainingsModifier shootingTrainingsModifier;
 
 	/**
@@ -41,6 +42,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
+		this.logicsFactory = logicsFactory;
 		shootingTrainingsTableModel = new ShootingTrainingsTableModel(logicsFactory);
 		shootingTrainingsModifier = logicsFactory.createShootingTrainingsModifier();
 
@@ -79,7 +81,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Тренировки");
-    setMinimumSize(new java.awt.Dimension(629, 158));
+    setMinimumSize(new java.awt.Dimension(640, 117));
 
     jTableTrainings.setModel(shootingTrainingsTableModel);
     jTableTrainings.setRowHeight(24);
@@ -124,7 +126,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
         .add(jButtonEditSelected)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonDeleteSelected)
-        .addContainerGap(151, Short.MAX_VALUE))
+        .addContainerGap(161, Short.MAX_VALUE))
     );
     jPanelEditControlsLayout.setVerticalGroup(
       jPanelEditControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -187,7 +189,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
       .add(layout.createSequentialGroup()
         .add(jPanelFilter, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanelEditControls, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
     );
@@ -202,22 +204,45 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 
   private void jButtonDeleteSelectedActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonDeleteSelectedActionPerformed
   {//GEN-HEADEREND:event_jButtonDeleteSelectedActionPerformed
-		if (jTableTrainings.getSelectedRowCount() > 0)
+		if (jTableTrainings.getSelectedRowCount() == 0)
 		{
-			try
-			{
-				shootingTrainingsModifier.deleteTraining(shootingTrainingsTableModel.getShootingTrainingAtRow(jTableTrainings.getSelectedRow()));
-				shootingTrainingsTableModel.update();
-			}
-			catch (ShootingLogicsException ex)
-			{
-				JOptionPane.showMessageDialog(null, "Не удалось удалить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
-			}
+			return;
+		}
+
+		try
+		{
+			shootingTrainingsModifier.deleteTraining(shootingTrainingsTableModel.getShootingTrainingAtRow(jTableTrainings.getSelectedRow()));
+			shootingTrainingsTableModel.update();
+		}
+		catch (ShootingLogicsException ex)
+		{
+			JOptionPane.showMessageDialog(null, "Не удалось удалить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 		}
   }//GEN-LAST:event_jButtonDeleteSelectedActionPerformed
 
   private void jButtonEditSelectedActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditSelectedActionPerformed
   {//GEN-HEADEREND:event_jButtonEditSelectedActionPerformed
+		if (jTableTrainings.getSelectedRowCount() == 0)
+		{
+			return;
+		}
+
+		EditShootingTrainingDialog editShootingTrainingDialog = new EditShootingTrainingDialog(this, ModalityType.APPLICATION_MODAL, logicsFactory,
+						shootingTrainingsTableModel.getShootingTrainingAtRow(jTableTrainings.getSelectedRow()));
+		editShootingTrainingDialog.setLocationRelativeTo(this);
+		editShootingTrainingDialog.setVisible(true);
+		if (editShootingTrainingDialog.isOkButtonPressed())
+		{
+			try
+			{
+				shootingTrainingsModifier.updateTraining(editShootingTrainingDialog.getEditingShootingTraining());
+				shootingTrainingsTableModel.update();
+			}
+			catch (ShootingLogicsException ex)
+			{
+				JOptionPane.showMessageDialog(null, "Не удалось изменить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+			}
+		}
   }//GEN-LAST:event_jButtonEditSelectedActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTrainings;

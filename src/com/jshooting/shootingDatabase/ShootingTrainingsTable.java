@@ -13,6 +13,15 @@ import java.util.List;
 public interface ShootingTrainingsTable
 {
 	/**
+	 * Update exists training
+	 *
+	 * @param trainingToUpdate updating training. Must be not null
+	 * @throws IllegalArgumentException trainingToUpdate is null
+	 * @throws DatabaseErrorException error while updating
+	 */
+	public void updateTraining(ShootingTraining trainingToUpdate) throws IllegalArgumentException, DatabaseErrorException;
+
+	/**
 	 * Delete given shooting training from table
 	 *
 	 * @param trainingToDelete deleting training

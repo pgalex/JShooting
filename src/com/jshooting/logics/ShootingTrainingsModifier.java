@@ -81,4 +81,28 @@ public class ShootingTrainingsModifier
 			throw new ShootingLogicsException(ex);
 		}
 	}
+
+	/**
+	 * Update exists training
+	 *
+	 * @param trainingToUpdate updating training. Must be not null
+	 * @throws IllegalArgumentException trainingToUpdate is null
+	 * @throws ShootingLogicsException error while updating
+	 */
+	public void updateTraining(ShootingTraining trainingToUpdate) throws IllegalArgumentException, ShootingLogicsException
+	{
+		if (trainingToUpdate == null)
+		{
+			throw new IllegalArgumentException("trainingToUpdate is null");
+		}
+
+		try
+		{
+			shootingTrainingsTable.updateTraining(trainingToUpdate);
+		}
+		catch (Exception ex)
+		{
+			throw new ShootingLogicsException(ex);
+		}
+	}
 }

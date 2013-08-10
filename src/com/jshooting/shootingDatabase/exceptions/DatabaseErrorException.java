@@ -7,9 +7,9 @@ package com.jshooting.shootingDatabase.exceptions;
  */
 public class DatabaseErrorException extends Exception
 {
-	public DatabaseErrorException(Throwable thrwbl)
+	public DatabaseErrorException(Throwable ex)
 	{
-		super(thrwbl);
+		super(ex);
 	}
 
 	public DatabaseErrorException(String string)
