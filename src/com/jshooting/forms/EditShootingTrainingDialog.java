@@ -1,20 +1,9 @@
 package com.jshooting.forms;
 
-import com.jshooting.logics.DateModifier;
-import com.jshooting.logics.PlacesGetter;
-import com.jshooting.logics.PlacesNamesListFormer;
 import com.jshooting.logics.ShootingLogicsFactory;
-import com.jshooting.logics.SportsmansByTeamGetter;
-import com.jshooting.logics.TeamsGetter;
-import com.jshooting.logics.TrainingMethodsGetter;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
-import com.jshooting.model.Sportsman;
-import com.jshooting.model.Team;
-import com.jshooting.model.TrainingMethod;
+import com.jshooting.model.ShootingTraining;
 import java.awt.Window;
 import java.util.Date;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
 /**
  * Dialog for adding shooting training
@@ -24,43 +13,26 @@ import javax.swing.DefaultComboBoxModel;
 public class EditShootingTrainingDialog extends javax.swing.JDialog
 {
 	/**
-	 * Model for teams combo box
+	 * Controller that contains work logics of dialog components
 	 */
-	private DefaultComboBoxModel teamsComboBoxModel;
+	private ShootingTrainingDialogController dialogController;
 	/**
-	 * Model for sportsmans combo box
+	 * Shooting training editing with dialog
 	 */
-	private DefaultComboBoxModel sportsmansComboBoxModel;
-	/**
-	 * Model for training methods combo box
-	 */
-	private DefaultComboBoxModel trainingMethodsComboBoxModel;
-	/**
-	 * Using to refill sportsmans combo by selected team
-	 */
-	private SportsmansByTeamGetter sportsmansGetter;
-	/**
-	 * Using to get teams
-	 */
-	private TeamsGetter teamGetter;
-	/**
-	 * Using to get training methods
-	 */
-	private TrainingMethodsGetter trainingMethodsGetter;
-	/**
-	 * Using to get places
-	 */
-	private PlacesGetter placesGetter;
+	private ShootingTraining editingShootingTraining;
 
 	/**
-	 * Create new dialog
+	 * Create to edit shooting training
 	 *
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
 	 * @param logicsFactory logics factory. Must be not null
-	 * @throws IllegalArgumentException logicsFactory is null
+	 * @param shootingTrainingToEdit editing shooting training. Must be not null
+	 * @throws IllegalArgumentException logicsFactory is null,
+	 * shootingTrainingToEdit is null
 	 */
-	public EditShootingTrainingDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
+	public EditShootingTrainingDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory,
+					ShootingTraining shootingTrainingToEdit) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
@@ -68,113 +40,31 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("logicsFactory is null");
 		}
+		if (shootingTrainingToEdit == null)
+		{
+			throw new IllegalArgumentException("shootingTrainingToEdit is null");
+		}
 
-		sportsmansGetter = logicsFactory.createSportsmansByTeamGetter();
-		teamGetter = logicsFactory.createTeamsGetter();
-		trainingMethodsGetter = logicsFactory.createTrainingMethodsGetter();
-		placesGetter = logicsFactory.createPlacesGetter();
-
-		teamsComboBoxModel = new DefaultComboBoxModel();
-		sportsmansComboBoxModel = new DefaultComboBoxModel();
-		trainingMethodsComboBoxModel = new DefaultComboBoxModel();
+		dialogController = new ShootingTrainingDialogController(logicsFactory);
+		editingShootingTraining = shootingTrainingToEdit;
 
 		initComponents();
-
-		fillTeamsComboBox();
-		fillSportmanComboBoxBySelectedTeam();
-		fillTrainingMethodComboBox();
 		jDateChooserTrainingDate.setDate(new Date());
-		findAndSetPlaceByTrainingDate();
+
+		dialogController.refillTeamsComboBoxModel();
+		dialogController.fillSportmanComboBoxByTeam(jComboBoxTeam.getSelectedItem());
+		dialogController.refillTrainingMethodComboBox();
+		jTextFieldPlaceName.setText(dialogController.findPlacesNamesByTrainingDate(jDateChooserTrainingDate.getDate()));
 	}
 
 	/**
-	 * Find and set to field place that exists in date of training
-	 */
-	private void findAndSetPlaceByTrainingDate()
-	{
-		try
-		{
-			Date periodDateFrom = DateModifier.createDateAsDayBegin(jDateChooserTrainingDate.getDate());
-			Date periodDateTo = DateModifier.createDateAsDayEnd(jDateChooserTrainingDate.getDate());
-
-			jTextFieldPlaceName.setText(PlacesNamesListFormer.getPlacesNamesString(placesGetter.getPlacesByPeriod(periodDateFrom, periodDateTo)));
-		}
-		catch (ShootingLogicsException ex)
-		{
-			jTextFieldPlaceName.setText("");
-		}
-	}
-
-	/**
-	 * Fill training methods combo box model with training methods table
+	 * Get editing shooting training
 	 *
+	 * @return Shooting training editing with dialog
 	 */
-	private void fillTrainingMethodComboBox()
+	public ShootingTraining getEditingShootingTraining()
 	{
-		try
-		{
-			trainingMethodsComboBoxModel.removeAllElements();
-			List<TrainingMethod> allMethods = trainingMethodsGetter.getAllTrainingMethods();
-			for (TrainingMethod trainingMethod : allMethods)
-			{
-				trainingMethodsComboBoxModel.addElement(trainingMethod);
-			}
-		}
-		catch (ShootingLogicsException ex)
-		{
-			trainingMethodsComboBoxModel.removeAllElements();
-		}
-	}
-
-	/**
-	 * Fill teams combo box model by teams table. Model will be empty if can no
-	 * get access to table
-	 *
-	 * @param teamsTable table of teams
-	 */
-	private void fillTeamsComboBox()
-	{
-		try
-		{
-			teamsComboBoxModel.removeAllElements();
-			List<Team> allTeams = teamGetter.getAllTeams();
-			for (Team team : allTeams)
-			{
-				teamsComboBoxModel.addElement(team);
-			}
-		}
-		catch (ShootingLogicsException ex)
-		{
-			teamsComboBoxModel.removeAllElements();
-		}
-	}
-
-	/**
-	 * Fill sportmans combo box model by sportmans in team, selected in teams
-	 * combo box. Empty if team not selected or can not get access to sportmans
-	 * table
-	 */
-	private void fillSportmanComboBoxBySelectedTeam()
-	{
-		try
-		{
-			sportsmansComboBoxModel.removeAllElements();
-			Object selectedItem = jComboBoxTeam.getSelectedItem();
-			if (selectedItem instanceof Team)
-			{
-				Team selectedTeam = (Team) selectedItem;
-				sportsmansGetter.setFilteringTeam(selectedTeam);
-				List<Sportsman> sportsmansInSelectedTeam = sportsmansGetter.getSportsmansInFilteringTeam();
-				for (Sportsman sportsman : sportsmansInSelectedTeam)
-				{
-					sportsmansComboBoxModel.addElement(sportsman);
-				}
-			}
-		}
-		catch (ShootingLogicsException ex)
-		{
-			sportsmansComboBoxModel.removeAllElements();
-		}
+		return editingShootingTraining;
 	}
 
 	/**
@@ -256,11 +146,11 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 
     jLabel1.setText("Спортсмен");
 
-    jComboBoxSportsman.setModel(sportsmansComboBoxModel);
+    jComboBoxSportsman.setModel(dialogController.getSportsmansComboBoxModel());
 
     jLabel2.setText("Команда");
 
-    jComboBoxTeam.setModel(teamsComboBoxModel);
+    jComboBoxTeam.setModel(dialogController.getTeamsComboBoxModel());
     jComboBoxTeam.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -271,7 +161,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 
     jLabel3.setText("Дата");
 
-    jComboBoxTrainingMethod.setModel(trainingMethodsComboBoxModel);
+    jComboBoxTrainingMethod.setModel(dialogController.getTrainingMethodsComboBoxModel());
 
     jLabel4.setText("Средство");
 
@@ -686,14 +576,14 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 
   private void jComboBoxTeamActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBoxTeamActionPerformed
   {//GEN-HEADEREND:event_jComboBoxTeamActionPerformed
-		fillSportmanComboBoxBySelectedTeam();
+		dialogController.fillSportmanComboBoxByTeam(jComboBoxTeam.getSelectedItem());
   }//GEN-LAST:event_jComboBoxTeamActionPerformed
 
   private void jDateChooserTrainingDatePropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_jDateChooserTrainingDatePropertyChange
   {//GEN-HEADEREND:event_jDateChooserTrainingDatePropertyChange
 		if ("date".equals(evt.getPropertyName()))
 		{
-			findAndSetPlaceByTrainingDate();
+			jTextFieldPlaceName.setText(dialogController.findPlacesNamesByTrainingDate(jDateChooserTrainingDate.getDate()));
 		}
   }//GEN-LAST:event_jDateChooserTrainingDatePropertyChange
   // Variables declaration - do not modify//GEN-BEGIN:variables

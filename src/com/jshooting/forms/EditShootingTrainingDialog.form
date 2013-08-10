@@ -144,7 +144,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxSportsman">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="sportsmansComboBoxModel" type="code"/>
+          <Connection code="dialogController.getSportsmansComboBoxModel()" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -156,7 +156,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxTeam">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="teamsComboBoxModel" type="code"/>
+          <Connection code="dialogController.getTeamsComboBoxModel()" type="code"/>
         </Property>
       </Properties>
       <Events>
@@ -171,7 +171,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxTrainingMethod">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="trainingMethodsComboBoxModel" type="code"/>
+          <Connection code="dialogController.getTrainingMethodsComboBoxModel()" type="code"/>
         </Property>
       </Properties>
     </Component>

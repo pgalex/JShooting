@@ -1,6 +1,7 @@
 package com.jshooting.forms;
 
 import com.jshooting.logics.DateModifier;
+import com.jshooting.logics.ShootingTrainingsModifier;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import java.awt.Window;
 import javax.swing.ListSelectionModel;
@@ -16,6 +17,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 	 * Table model of trainings table
 	 */
 	private ShootingTrainingsTableModel shootingTrainingsTableModel;
+	private ShootingTrainingsModifier shootingTrainingsModifier;
 
 	/**
 	 * Create new dialog
@@ -91,8 +93,14 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
       }
     });
 
-    jButtonEditSelected.setText("Редактировать выделенную");
-    jButtonEditSelected.setEnabled(false);
+    jButtonEditSelected.setText("Редактировать выделенную ...");
+    jButtonEditSelected.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonEditSelectedActionPerformed(evt);
+      }
+    });
 
     jButtonDeleteSelected.setText("Удалить выделенную");
     jButtonDeleteSelected.addActionListener(new java.awt.event.ActionListener()
@@ -114,7 +122,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
         .add(jButtonEditSelected)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonDeleteSelected)
-        .addContainerGap(167, Short.MAX_VALUE))
+        .addContainerGap(151, Short.MAX_VALUE))
     );
     jPanelEditControlsLayout.setVerticalGroup(
       jPanelEditControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -197,6 +205,12 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 			shootingTrainingsTableModel.removeRowAndTraining(jTableTrainings.getSelectedRow());
 		}
   }//GEN-LAST:event_jButtonDeleteSelectedActionPerformed
+
+  private void jButtonEditSelectedActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditSelectedActionPerformed
+  {//GEN-HEADEREND:event_jButtonEditSelectedActionPerformed
+    
+  }//GEN-LAST:event_jButtonEditSelectedActionPerformed
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTrainings;
   private javax.swing.JButton jButtonDeleteSelected;
