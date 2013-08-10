@@ -1,9 +1,14 @@
 package com.jshooting.forms;
 
 import com.jshooting.logics.DateModifier;
+import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.ShootingTrainingsModifier;
+import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import java.awt.Window;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -24,27 +29,24 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 	 *
 	 * @param parentWindow parent window
 	 * @param modalityType modality type of dialog
-	 * @param shootingTrainingsTable editing table of shooting trainings. Must be
-	 * not null
-	 * @throws IllegalArgumentException shootingTrainingsTable is null
+	 * @param logicsFactory logics factory. Must be not null
+	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public ShootingTrainingsDialog(Window parentWindow, ModalityType modalityType,
-					ShootingTrainingsTable shootingTrainingsTable) throws IllegalArgumentException
+	public ShootingTrainingsDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 
-		if (shootingTrainingsTable == null)
+		if (logicsFactory == null)
 		{
-			throw new IllegalArgumentException("shootingTrainingsTable is null");
+			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		shootingTrainingsTableModel = new ShootingTrainingsTableModel(shootingTrainingsTable);
+		shootingTrainingsTableModel = new ShootingTrainingsTableModel(logicsFactory);
+		shootingTrainingsModifier = logicsFactory.createShootingTrainingsModifier();
 
 		initComponents();
-
 		jDateChooserDateFrom.setDate(DateModifier.createTodayBegin());
 		jDateChooserDateTo.setDate(DateModifier.createTodayEnd());
-
 		jTableTrainings.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		//
@@ -202,15 +204,21 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
   {//GEN-HEADEREND:event_jButtonDeleteSelectedActionPerformed
 		if (jTableTrainings.getSelectedRowCount() > 0)
 		{
-			shootingTrainingsTableModel.removeRowAndTraining(jTableTrainings.getSelectedRow());
+			try
+			{
+				shootingTrainingsModifier.deleteTraining(shootingTrainingsTableModel.getShootingTrainingAtRow(jTableTrainings.getSelectedRow()));
+				shootingTrainingsTableModel.update();
+			}
+			catch (ShootingLogicsException ex)
+			{
+				JOptionPane.showMessageDialog(null, "Не удалось удалить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+			}
 		}
   }//GEN-LAST:event_jButtonDeleteSelectedActionPerformed
 
   private void jButtonEditSelectedActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonEditSelectedActionPerformed
   {//GEN-HEADEREND:event_jButtonEditSelectedActionPerformed
-    
   }//GEN-LAST:event_jButtonEditSelectedActionPerformed
-
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTrainings;
   private javax.swing.JButton jButtonDeleteSelected;

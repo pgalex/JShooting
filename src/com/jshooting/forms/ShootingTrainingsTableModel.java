@@ -1,5 +1,8 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.logics.ShootingTrainingsGetter;
+import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.ShootingTraining;
 import com.jshooting.model.ShootingTrainingType;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
@@ -36,59 +39,55 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 	/**
 	 * Shooting trainings table that model works with
 	 */
-	private ShootingTrainingsTable shootingTrainingsTable;
+	private ShootingTrainingsGetter shootingTrainingsGetter;
 
 	/**
-	 * Create model filling with trainings table
+	 * Create with logics factory
 	 *
-	 * @param shootingTrainingsTable table of shooting trainings using to fill.
-	 * Must be not null table model
-	 * @throws IllegalArgumentException shootingTrainingsTable is null
+	 * @param logicsFactory logics factory. Must be not null
+	 * @throws IllegalArgumentException logicsFactory is null
 	 */
-	public ShootingTrainingsTableModel(ShootingTrainingsTable shootingTrainingsTable) throws IllegalArgumentException
+	public ShootingTrainingsTableModel(ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
-		if (shootingTrainingsTable == null)
+		if (logicsFactory == null)
 		{
-			throw new IllegalArgumentException("shootingTrainingsTable is null");
+			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		this.shootingTrainingsTable = shootingTrainingsTable;
+		shootingTrainingsGetter = logicsFactory.createShootingTrainingsGetter();
 
-		fillTrainingsArrayFromDatabase();
+		updateTrainingsList();
 	}
 
 	/**
-	 * Fill currently working trainings array from database's trainings table
+	 * Refill working trainings list
 	 */
-	private void fillTrainingsArrayFromDatabase()
+	private void updateTrainingsList()
 	{
 		try
 		{
-			trainings = shootingTrainingsTable.getAllTrainings();
+			trainings = shootingTrainingsGetter.getAllTrainings();
 		}
-		catch (DatabaseErrorException ex)
+		catch (ShootingLogicsException ex)
 		{
 			trainings = new ArrayList<ShootingTraining>();
 		}
 	}
 
-	/**
-	 * Remove row and training from database by row index
-	 *
-	 * @param rowIndex index of row to remove
-	 * @throws IllegalArgumentException rowIndex is less than zero or more than
-	 * rows count
-	 */
-	public void removeRowAndTraining(int rowIndex) throws IllegalArgumentException
+	public void update()
+	{
+		updateTrainingsList();
+		fireTableDataChanged();
+	}
+
+	public ShootingTraining getShootingTrainingAtRow(int rowIndex) throws IllegalArgumentException
 	{
 		if (rowIndex < 0 || rowIndex >= trainings.size())
 		{
 			throw new IllegalArgumentException("rowIndex is out of range");
 		}
 
-		shootingTrainingsTable.deleteTraining(trainings.get(rowIndex));
-		trainings.remove(rowIndex);
-		fireTableRowsDeleted(rowIndex, rowIndex);
+		return trainings.get(rowIndex);
 	}
 
 	@Override

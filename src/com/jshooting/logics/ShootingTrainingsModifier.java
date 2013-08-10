@@ -3,7 +3,6 @@ package com.jshooting.logics;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.ShootingTraining;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
-import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 
 /**
  * Using to modify shooting trainings
@@ -29,7 +28,7 @@ public class ShootingTrainingsModifier
 		{
 			throw new IllegalArgumentException("shootingTrainingsTable is null");
 		}
-		
+
 		this.shootingTrainingsTable = shootingTrainingsTable;
 	}
 
@@ -48,10 +47,34 @@ public class ShootingTrainingsModifier
 		{
 			throw new IllegalArgumentException("trainingToAdd is null");
 		}
-		
+
 		try
 		{
 			shootingTrainingsTable.addTraining(trainingToAdd);
+		}
+		catch (Exception ex)
+		{
+			throw new ShootingLogicsException(ex);
+		}
+	}
+
+	/**
+	 * Delete exists shooting training
+	 *
+	 * @param trainingToDelete deleting training. Must be not null
+	 * @throws IllegalArgumentException trainingToDelete is null
+	 * @throws ShootingLogicsException error while deleting training
+	 */
+	public void deleteTraining(ShootingTraining trainingToDelete) throws IllegalArgumentException, ShootingLogicsException
+	{
+		if (trainingToDelete == null)
+		{
+			throw new IllegalArgumentException("trainingToDelete is null");
+		}
+
+		try
+		{
+			shootingTrainingsTable.deleteTraining(trainingToDelete);
 		}
 		catch (Exception ex)
 		{
