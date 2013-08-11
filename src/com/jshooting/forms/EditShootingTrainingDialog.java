@@ -2,6 +2,7 @@ package com.jshooting.forms;
 
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.model.ShootingTraining;
+import com.jshooting.model.ShootingTrainingType;
 import static com.jshooting.model.ShootingTrainingType.COMPLEX;
 import com.jshooting.model.Sportsman;
 import com.jshooting.model.TrainingMethod;
@@ -83,7 +84,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 				jComboBoxTrainingType.setSelectedIndex(2);
 				break;
 			default:
-				throw new NullPointerException("недопустимое значение ShootingTrainingType");
+				throw new NullPointerException("ShootingTrainingType unknown value");
 		}
 
 		jSpinnerDelayLyingCompetition.setValue(editingShootingTraining.getDelayLyingCompetition());
@@ -120,9 +121,57 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 	 * Get editing shooting training
 	 *
 	 * @return Shooting training editing with dialog
+	 * @throws NullPointerException sportsman or method not selected in dialog
 	 */
-	public ShootingTraining getEditingShootingTraining()
+	public ShootingTraining getEditingShootingTraining() throws NullPointerException
 	{
+		Object selectedSportsmanItem = jComboBoxSportsman.getSelectedItem();
+		Object selectedMethodItem = jComboBoxTrainingMethod.getSelectedItem();
+		if (!(selectedSportsmanItem instanceof Sportsman))
+		{
+			JOptionPane.showMessageDialog(null, "Необходимо выбрать спортсмена", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			throw new NullPointerException("sportsman not selected");
+		}
+		if (!(selectedMethodItem instanceof TrainingMethod))
+		{
+			JOptionPane.showMessageDialog(null, "Необходимо выбрать средство", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			throw new NullPointerException("method not selected");
+		}
+
+		editingShootingTraining.setSportsman((Sportsman) selectedSportsmanItem);
+		editingShootingTraining.setDate(jDateChooserTrainingDate.getDate());
+		editingShootingTraining.setType(ShootingTrainingType.values()[jComboBoxTrainingType.getSelectedIndex()]);
+		editingShootingTraining.setTrainingMethod((TrainingMethod) selectedMethodItem);
+		editingShootingTraining.setWeather(jTextFieldWeather.getText());
+		editingShootingTraining.setComments(jTextFieldComments.getText());
+
+		editingShootingTraining.setNumLyingInRest((Integer) jSpinnerNumLyingInRest.getValue());
+		editingShootingTraining.setMissLyingInRest((Integer) jSpinnerMissLyingInRest.getValue());
+		editingShootingTraining.setNumLyingLoading((Integer) jSpinnerNumLyingLoading.getValue());
+		editingShootingTraining.setMissLyingLoading((Integer) jSpinnerMissLyingLoading.getValue());
+		editingShootingTraining.setNumLyingCompetition((Integer) jSpinnerNumLyingCompetition.getValue());
+		editingShootingTraining.setMissLyingCompetition((Integer) jSpinnerMissLyingCompetition.getValue());
+
+		editingShootingTraining.setNumStandingInRest((Integer) jSpinnerNumStandingInRest.getValue());
+		editingShootingTraining.setMissStandingInRest(((Integer) jSpinnerMissStandingInRest.getValue()));
+		editingShootingTraining.setNumStandingLoading((Integer) jSpinnerNumStandingLoading.getValue());
+		editingShootingTraining.setMissStandingLoading((Integer) jSpinnerMissStandingLoading.getValue());
+		editingShootingTraining.setNumStandingCompetition((Integer) jSpinnerNumStandingCompetition.getValue());
+		editingShootingTraining.setMissStandingCompetition((Integer) jSpinnerMissStandingCompetition.getValue());
+
+		editingShootingTraining.setFirstLyingLoading((Integer) jSpinnerFirstLyingLoading.getValue());
+		editingShootingTraining.setFirstLyingCompetition((Integer) jSpinnerFirstLyingCompetition.getValue());
+		editingShootingTraining.setDelayLyingLoading((Integer) jSpinnerDelayLyingLoading.getValue());
+		editingShootingTraining.setDelayLyingCompetition((Integer) jSpinnerDelayLyingCompetition.getValue());
+
+		editingShootingTraining.setFirstStandingLoading((Integer) jSpinnerFirstStandingLoading.getValue());
+		editingShootingTraining.setFirstStandingCompetition((Integer) jSpinnerFirstStandingCompetition.getValue());
+		editingShootingTraining.setDelayStandingLoading((Integer) jSpinnerDelayStandingLoading.getValue());
+		editingShootingTraining.setDelayStandingCompetition((Integer) jSpinnerDelayStandingCompetition.getValue());
+
+		editingShootingTraining.setZeroingIn((Integer) jSpinnerZeroingIn.getValue());
+		editingShootingTraining.setTrail((Integer) jSpinnerTrail.getValue());
+		editingShootingTraining.setScatt((Integer) jSpinnerScatt.getValue());
 
 		return editingShootingTraining;
 	}

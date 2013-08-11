@@ -236,7 +236,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 			try
 			{
 				shootingTrainingsModifier.updateTraining(editShootingTrainingDialog.getEditingShootingTraining());
-				shootingTrainingsTableModel.update();
+				shootingTrainingsTableModel.updateRow(jTableTrainings.getSelectedRow());
 			}
 			catch (ShootingLogicsException ex)
 			{

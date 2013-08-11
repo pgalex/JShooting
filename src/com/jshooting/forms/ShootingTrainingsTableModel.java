@@ -5,8 +5,6 @@ import com.jshooting.logics.ShootingTrainingsGetter;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.ShootingTraining;
 import com.jshooting.model.ShootingTrainingType;
-import com.jshooting.shootingDatabase.ShootingTrainingsTable;
-import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +76,16 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 	{
 		updateTrainingsList();
 		fireTableDataChanged();
+	}
+
+	public void updateRow(int rowIndex) throws IllegalArgumentException
+	{
+		if (rowIndex < 0 || rowIndex >= trainings.size())
+		{
+			throw new IllegalArgumentException("rowIndex is out of range");
+		}
+
+		fireTableRowsUpdated(rowIndex, rowIndex);
 	}
 
 	public ShootingTraining getShootingTrainingAtRow(int rowIndex) throws IllegalArgumentException
