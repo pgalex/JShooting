@@ -3,8 +3,10 @@ package com.jshooting.forms;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.model.ShootingTraining;
 import static com.jshooting.model.ShootingTrainingType.COMPLEX;
+import com.jshooting.model.Sportsman;
+import com.jshooting.model.TrainingMethod;
 import java.awt.Window;
-import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  * Dialog for adding shooting training
@@ -37,7 +39,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 					ShootingTraining shootingTrainingToEdit) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-		
+
 		if (logicsFactory == null)
 		{
 			throw new IllegalArgumentException("logicsFactory is null");
@@ -46,19 +48,19 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 		{
 			throw new IllegalArgumentException("shootingTrainingToEdit is null");
 		}
-		
+
 		dialogController = new ShootingTrainingDialogController(logicsFactory);
 		editingShootingTraining = shootingTrainingToEdit;
 		okButtonPressed = false;
-		
+
 		initComponents();
-		
+
 		dialogController.refillTeamsComboBoxModel();
 		dialogController.fillSportmanComboBoxByTeam(jComboBoxTeam.getSelectedItem());
 		dialogController.refillTrainingMethodComboBox();
 		setControlsByEditingTraining();
 	}
-	
+
 	private void setControlsByEditingTraining()
 	{
 		jComboBoxTeam.setSelectedItem(editingShootingTraining.getSportsman().getTeam());
@@ -68,7 +70,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 		jComboBoxTrainingMethod.setSelectedItem(editingShootingTraining.getTrainingMethod());
 		jTextFieldWeather.setText(editingShootingTraining.getWeather());
 		jTextFieldComments.setText(editingShootingTraining.getComments());
-		
+
 		switch (editingShootingTraining.getType())
 		{
 			case COMPLEX:
@@ -83,7 +85,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 			default:
 				throw new NullPointerException("недопустимое значение ShootingTrainingType");
 		}
-		
+
 		jSpinnerDelayLyingCompetition.setValue(editingShootingTraining.getDelayLyingCompetition());
 		jSpinnerDelayLyingLoading.setValue(editingShootingTraining.getDelayLyingLoading());
 		jSpinnerDelayStandingCompetition.setValue(editingShootingTraining.getDelayStandingCompetition());
@@ -108,7 +110,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 		jSpinnerTrail.setValue(editingShootingTraining.getTrail());
 		jSpinnerZeroingIn.setValue(editingShootingTraining.getZeroingIn());
 	}
-	
+
 	public boolean isOkButtonPressed()
 	{
 		return okButtonPressed;
@@ -121,6 +123,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 	 */
 	public ShootingTraining getEditingShootingTraining()
 	{
+
 		return editingShootingTraining;
 	}
 
@@ -194,8 +197,8 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
     jSpinnerScatt = new javax.swing.JSpinner();
     jTextFieldPlaceName = new javax.swing.JTextField();
     jLabel28 = new javax.swing.JLabel();
-    jButton1 = new javax.swing.JButton();
-    jButton2 = new javax.swing.JButton();
+    jButtonOk = new javax.swing.JButton();
+    jButtonCancel = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Добавить тренировку");
@@ -535,21 +538,21 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 
     jLabel28.setText("УТС");
 
-    jButton1.setText("OK");
-    jButton1.addActionListener(new java.awt.event.ActionListener()
+    jButtonOk.setText("OK");
+    jButtonOk.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        jButton1ActionPerformed(evt);
+        jButtonOkActionPerformed(evt);
       }
     });
 
-    jButton2.setText("Отмена");
-    jButton2.addActionListener(new java.awt.event.ActionListener()
+    jButtonCancel.setText("Отмена");
+    jButtonCancel.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
       {
-        jButton2ActionPerformed(evt);
+        jButtonCancelActionPerformed(evt);
       }
     });
 
@@ -589,9 +592,9 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 23, Short.MAX_VALUE)
             .add(jTextFieldComments, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 803, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
           .add(layout.createSequentialGroup()
-            .add(jButton1)
+            .add(jButtonOk)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jButton2)
+            .add(jButtonCancel)
             .add(0, 0, Short.MAX_VALUE)))
         .addContainerGap())
     );
@@ -637,8 +640,8 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
           .add(jLabel6))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 28, Short.MAX_VALUE)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jButton1)
-          .add(jButton2))
+          .add(jButtonOk)
+          .add(jButtonCancel))
         .addContainerGap())
     );
 
@@ -656,21 +659,33 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 			jTextFieldPlaceName.setText(dialogController.findPlacesNamesByTrainingDate(jDateChooserTrainingDate.getDate()));
 		}
   }//GEN-LAST:event_jDateChooserTrainingDatePropertyChange
-	
-  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-  {//GEN-HEADEREND:event_jButton1ActionPerformed
+
+  private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOkActionPerformed
+  {//GEN-HEADEREND:event_jButtonOkActionPerformed
+		if (!(jComboBoxSportsman.getSelectedItem() instanceof Sportsman))
+		{
+			JOptionPane.showMessageDialog(null, "Необходимо выбрать спортсмена", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (!(jComboBoxTrainingMethod.getSelectedItem() instanceof TrainingMethod))
+		{
+			JOptionPane.showMessageDialog(null, "Необходимо выбрать средство", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
 		okButtonPressed = true;
 		setVisible(false);
-  }//GEN-LAST:event_jButton1ActionPerformed
-	
-  private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-  {//GEN-HEADEREND:event_jButton2ActionPerformed
+  }//GEN-LAST:event_jButtonOkActionPerformed
+
+  private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelActionPerformed
+  {//GEN-HEADEREND:event_jButtonCancelActionPerformed
 		okButtonPressed = false;
 		setVisible(false);
-  }//GEN-LAST:event_jButton2ActionPerformed
+  }//GEN-LAST:event_jButtonCancelActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton jButton1;
-  private javax.swing.JButton jButton2;
+  private javax.swing.JButton jButtonCancel;
+  private javax.swing.JButton jButtonOk;
   private javax.swing.JComboBox jComboBoxSportsman;
   private javax.swing.JComboBox jComboBoxTeam;
   private javax.swing.JComboBox jComboBoxTrainingMethod;
