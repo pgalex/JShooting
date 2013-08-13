@@ -60,6 +60,7 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 	private void showAddingTrainingAnimation()
 	{
 		jLabelAddingToDatabaseAnimation.setVisible(true);
+		jButtonAddTraining.setEnabled(false);
 		Thread hidingAnimationThread = new Thread(new Runnable()
 		{
 			@Override
@@ -74,6 +75,7 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 					// do nothing
 				}
 				jLabelAddingToDatabaseAnimation.setVisible(false);
+				jButtonAddTraining.setEnabled(true);
 			}
 		});
 		hidingAnimationThread.start();
