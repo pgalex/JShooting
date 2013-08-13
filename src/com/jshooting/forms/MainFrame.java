@@ -424,11 +424,12 @@ public class MainFrame extends javax.swing.JFrame
 		int showDialogResult = fileChooser.showSaveDialog(this);
 		if (showDialogResult == JFileChooser.APPROVE_OPTION)
 		{
-			if (fileChooser.getSelectedFile().exists())
+			File selectedFile = fileChooser.getSelectedFile();
+			if (selectedFile.exists())
 			{
-				fileChooser.getSelectedFile().delete();
+				selectedFile.delete();
 			}
-			openOrCreateDatabase(fileChooser.getSelectedFile().getPath());
+			openOrCreateDatabase(selectedFile.getPath());
 
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
