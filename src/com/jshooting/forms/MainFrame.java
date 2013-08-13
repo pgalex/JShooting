@@ -43,7 +43,7 @@ public class MainFrame extends javax.swing.JFrame
 	 */
 	private ShootingDatabase shootingDatabase;
 	/**
-	 * Highlighter of frame components
+	 * Highlighter of dialog components
 	 */
 	private ComponentsHighlighter componentsHighlighter;
 
@@ -61,6 +61,7 @@ public class MainFrame extends javax.swing.JFrame
 		connectToDatabaseFromUserSettings();
 
 		updateWorkingControlsEnable();
+		updateDatabaseControlsHighlighing();
 		updateDatabaseFileNameControls();
 	}
 
@@ -88,18 +89,25 @@ public class MainFrame extends javax.swing.JFrame
 	}
 
 	/**
-	 * Try connect to database file. If database not exists it will be created
+	 * Connect to database by file path. If database not exists it will be
+	 * created. Shows error message if can not connect
 	 *
-	 * @param databaseFilePath path to database file
+	 * @param databaseFilePath path to database file. Must be not null
 	 */
-	private void openOrCreateDatabase(String databaseFilePath)
+	private void openOrCreateDatabase(String databaseFilePath) throws IllegalArgumentException
 	{
+		if (databaseFilePath == null)
+		{
+			throw new IllegalArgumentException("databaseFilePath is null");
+		}
+
 		try
 		{
 			if (shootingDatabase != null)
 			{
 				shootingDatabase.close();
 			}
+
 			shootingDatabase = ShootingDatabaseFactory.openDatabaseFromFile(databaseFilePath);
 		}
 		catch (Exception ex)
@@ -110,7 +118,7 @@ public class MainFrame extends javax.swing.JFrame
 	}
 
 	/**
-	 * Read user settings from file
+	 * Read user settings from standart user settings file
 	 */
 	private void readUserSettings()
 	{
@@ -125,7 +133,7 @@ public class MainFrame extends javax.swing.JFrame
 	}
 
 	/**
-	 * Save new user settings to file
+	 * Save user settings to standart settings file
 	 */
 	private void saveUserSettings()
 	{
@@ -139,6 +147,7 @@ public class MainFrame extends javax.swing.JFrame
 			{
 				UserSettings.getInstance().setDatabaseFileName("");
 			}
+
 			UserSettings.getInstance().writeToFile(new File(USER_SETTINGS_FILE_NAME));
 		}
 		catch (IOException ex)
@@ -148,9 +157,17 @@ public class MainFrame extends javax.swing.JFrame
 	}
 
 	/**
-	 * Set working controls enable by shooting database state(choosed or no)
+	 * Update working controls enable
 	 */
 	private void updateWorkingControlsEnable()
+	{
+		jPanelWorkingControls.setVisible(shootingDatabase != null);
+	}
+
+	/**
+	 * Update highlighing of database choosing controls
+	 */
+	private void updateDatabaseControlsHighlighing()
 	{
 		if (shootingDatabase == null)
 		{
@@ -158,13 +175,11 @@ public class MainFrame extends javax.swing.JFrame
 							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
 			componentsHighlighter.startComponentHightlighing(jButtonCreateDatabase,
 							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
-			jPanelWorkingControls.setVisible(false);
 		}
 		else
 		{
 			componentsHighlighter.stopComponentHighlighting(jButtonOpenDatabase);
 			componentsHighlighter.stopComponentHighlighting(jButtonCreateDatabase);
-			jPanelWorkingControls.setVisible(true);
 		}
 	}
 
@@ -417,6 +432,7 @@ public class MainFrame extends javax.swing.JFrame
 
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
+			updateDatabaseControlsHighlighing();
 		}
   }//GEN-LAST:event_jButtonCreateDatabaseActionPerformed
 
@@ -432,6 +448,7 @@ public class MainFrame extends javax.swing.JFrame
 
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
+			updateDatabaseControlsHighlighing();
 		}
   }//GEN-LAST:event_jButtonOpenDatabaseActionPerformed
 
