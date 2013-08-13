@@ -96,6 +96,10 @@ public class MainFrame extends javax.swing.JFrame
 	{
 		try
 		{
+			if (shootingDatabase != null)
+			{
+				shootingDatabase.close();
+			}
 			shootingDatabase = ShootingDatabaseFactory.openDatabaseFromFile(databaseFilePath);
 		}
 		catch (Exception ex)
