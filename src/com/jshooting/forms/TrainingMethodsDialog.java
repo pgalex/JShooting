@@ -77,6 +77,7 @@ public class TrainingMethodsDialog extends javax.swing.JDialog
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Средства");
+    setMinimumSize(new java.awt.Dimension(137, 79));
 
     jTableTrainingMethods.setModel(trainingMethodsTableModel);
     jTableTrainingMethods.setRowHeight(24);
@@ -98,13 +99,13 @@ public class TrainingMethodsDialog extends javax.swing.JDialog
       .add(layout.createSequentialGroup()
         .addContainerGap()
         .add(jButtonAddTrainingMethod)
-        .addContainerGap(289, Short.MAX_VALUE))
-      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+        .addContainerGap(291, Short.MAX_VALUE))
+      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonAddTrainingMethod)
         .addContainerGap())

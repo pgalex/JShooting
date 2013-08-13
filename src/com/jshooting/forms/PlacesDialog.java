@@ -103,6 +103,7 @@ public class PlacesDialog extends javax.swing.JDialog
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("УТС");
+    setMinimumSize(new java.awt.Dimension(269, 77));
 
     jTablePlaces.setModel(placesTableModel);
     jTablePlaces.setRowHeight(24);
@@ -131,18 +132,18 @@ public class PlacesDialog extends javax.swing.JDialog
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
       .add(layout.createSequentialGroup()
         .addContainerGap()
         .add(jButtonAddPlace)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonEditPlace)
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap(248, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jButtonAddPlace)

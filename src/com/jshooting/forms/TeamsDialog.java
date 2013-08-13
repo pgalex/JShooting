@@ -77,6 +77,7 @@ public class TeamsDialog extends javax.swing.JDialog
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Комадны");
+    setMinimumSize(new java.awt.Dimension(137, 79));
 
     jTableTeams.setModel(teamsTableModel);
     jTableTeams.setRowHeight(24);
@@ -98,13 +99,13 @@ public class TeamsDialog extends javax.swing.JDialog
       .add(layout.createSequentialGroup()
         .addContainerGap()
         .add(jButtonAddTeam)
-        .addContainerGap(255, Short.MAX_VALUE))
-      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+        .addContainerGap(247, Short.MAX_VALUE))
+      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonAddTeam)
         .addContainerGap())

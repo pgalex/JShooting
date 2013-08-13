@@ -159,6 +159,7 @@ public class SportsmansDialog extends javax.swing.JDialog
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Спортсмены");
+    setMinimumSize(new java.awt.Dimension(288, 126));
 
     jTableSportsmans.setModel(sportsmansTableModel);
     jTableSportsmans.setRowHeight(24);
@@ -197,7 +198,7 @@ public class SportsmansDialog extends javax.swing.JDialog
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+      .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
       .add(layout.createSequentialGroup()
         .addContainerGap()
         .add(jButtonAddSportsman)
@@ -220,7 +221,7 @@ public class SportsmansDialog extends javax.swing.JDialog
           .add(jLabelTeam)
           .add(jButtonEditTeams))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
         .add(jButtonAddSportsman)
         .addContainerGap())
