@@ -4,10 +4,7 @@ import com.jshooting.logics.DateModifier;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.ShootingTrainingsModifier;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
-import com.jshooting.model.ShootingTraining;
 import java.awt.Window;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
@@ -22,7 +19,13 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 	 * Table model of trainings table
 	 */
 	private ShootingTrainingsTableModel shootingTrainingsTableModel;
+	/**
+	 * Shooting logics factory
+	 */
 	private ShootingLogicsFactory logicsFactory;
+	/**
+	 * Trainings modifier using to edit trainings
+	 */
 	private ShootingTrainingsModifier shootingTrainingsModifier;
 
 	/**
@@ -87,8 +90,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
     jTableTrainings.setRowHeight(24);
     jScrollPane1.setViewportView(jTableTrainings);
 
-    jButtonAddTrainings.setText("Добавить тренировки ...");
-    jButtonAddTrainings.setEnabled(false);
+    jButtonAddTrainings.setText("Добавить тренировки");
     jButtonAddTrainings.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -97,7 +99,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
       }
     });
 
-    jButtonEditSelected.setText("Редактировать выделенную ...");
+    jButtonEditSelected.setText("Редактировать выделенную");
     jButtonEditSelected.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -126,7 +128,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
         .add(jButtonEditSelected)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonDeleteSelected)
-        .addContainerGap(161, Short.MAX_VALUE))
+        .addContainerGap(193, Short.MAX_VALUE))
     );
     jPanelEditControlsLayout.setVerticalGroup(
       jPanelEditControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -199,7 +201,11 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 
   private void jButtonAddTrainingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingsActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingsActionPerformed
-		// TODO add your handling code here:
+		AddShootingTrainingsDialog addShootingTrainingsDialog = new AddShootingTrainingsDialog(this, ModalityType.APPLICATION_MODAL, logicsFactory);
+		addShootingTrainingsDialog.setLocationRelativeTo(this);
+		addShootingTrainingsDialog.setVisible(true);
+		
+		shootingTrainingsTableModel.update();
   }//GEN-LAST:event_jButtonAddTrainingsActionPerformed
 
   private void jButtonDeleteSelectedActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonDeleteSelectedActionPerformed

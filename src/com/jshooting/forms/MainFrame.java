@@ -236,8 +236,9 @@ public class MainFrame extends javax.swing.JFrame
     jLabelDatabaseFileName.setText("База данных:");
 
     jTextFieldDatabaseFileName.setEditable(false);
+    jTextFieldDatabaseFileName.setToolTipText("Пусть к открытой базе данных");
 
-    jButtonOpenDatabase.setText("Открыть ...");
+    jButtonOpenDatabase.setText("Открыть");
     jButtonOpenDatabase.setToolTipText("Открыть существующую базу данных");
     jButtonOpenDatabase.addActionListener(new java.awt.event.ActionListener()
     {
@@ -247,7 +248,7 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButtonCreateDatabase.setText("Создать ...");
+    jButtonCreateDatabase.setText("Создать");
     jButtonCreateDatabase.setToolTipText("Создать новую базу данных");
     jButtonCreateDatabase.addActionListener(new java.awt.event.ActionListener()
     {
@@ -288,7 +289,9 @@ public class MainFrame extends javax.swing.JFrame
           .add(jButtonCreateDatabase)))
     );
 
-    jButtonSportsmans.setText("Спортсмены ...");
+    jButtonSportsmans.setText("Спортсмены");
+    jButtonSportsmans.setToolTipText("");
+    jButtonSportsmans.setActionCommand("Спортсмены");
     jButtonSportsmans.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -297,7 +300,9 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButtonPlaces.setText("УТС ...");
+    jButtonPlaces.setText("УТС");
+    jButtonPlaces.setToolTipText("");
+    jButtonPlaces.setActionCommand("УТС");
     jButtonPlaces.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -306,7 +311,8 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButtonAddTrainings.setText("Добавить тренировки ...");
+    jButtonAddTrainings.setText("Добавить тренировки");
+    jButtonAddTrainings.setActionCommand("Добавить тренировки");
     jButtonAddTrainings.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -315,7 +321,8 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButtonCombined.setText("Групповой отчет ...");
+    jButtonCombined.setText("Групповой отчет");
+    jButtonCombined.setActionCommand("Групповой отчет");
     jButtonCombined.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -324,7 +331,9 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButtonTrainingMethods.setText("Средства ...");
+    jButtonTrainingMethods.setText("Средства");
+    jButtonTrainingMethods.setToolTipText("");
+    jButtonTrainingMethods.setActionCommand("Средства");
     jButtonTrainingMethods.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -333,7 +342,8 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButtonEditTrainings.setText("Просмотр и редактирование тренировок ...");
+    jButtonEditTrainings.setText("Просмотр и редактирование тренировок");
+    jButtonEditTrainings.setActionCommand("Просмотр и редактирование тренировок");
     jButtonEditTrainings.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -342,7 +352,8 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButtonIndividualReport.setText("Индивидуальный отчет ...");
+    jButtonIndividualReport.setText("Индивидуальный отчет");
+    jButtonIndividualReport.setActionCommand("Индивидуальный отчет");
     jButtonIndividualReport.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -372,7 +383,7 @@ public class MainFrame extends javax.swing.JFrame
             .add(jButtonPlaces)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jButtonTrainingMethods)))
-        .addContainerGap(10, Short.MAX_VALUE))
+        .addContainerGap(38, Short.MAX_VALUE))
     );
     jPanelWorkingControlsLayout.setVerticalGroup(
       jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)

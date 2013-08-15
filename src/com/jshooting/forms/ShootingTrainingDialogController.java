@@ -4,7 +4,6 @@ import com.jshooting.logics.DateModifier;
 import com.jshooting.logics.PlacesGetter;
 import com.jshooting.logics.PlacesNamesListFormer;
 import com.jshooting.logics.ShootingLogicsFactory;
-import com.jshooting.logics.ShootingTrainingsModifier;
 import com.jshooting.logics.SportsmansByTeamGetter;
 import com.jshooting.logics.TeamsGetter;
 import com.jshooting.logics.TrainingMethodsGetter;
@@ -15,7 +14,6 @@ import com.jshooting.model.TrainingMethod;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextField;
 
 /**
  * Cantains logics and common part of dialogs displaying and modifing shooting
