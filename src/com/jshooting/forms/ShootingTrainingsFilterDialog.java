@@ -1,5 +1,6 @@
 package com.jshooting.forms;
 
+import com.jshooting.componentsHighlighting.ComponentsHighlighter;
 import com.jshooting.logics.DateModifier;
 import com.jshooting.logics.PlacesGetter;
 import com.jshooting.logics.ShootingLogicsFactory;
@@ -29,6 +30,10 @@ import javax.swing.border.TitledBorder;
  */
 public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 {
+	/**
+	 * Dialog components highlighting
+	 */
+	private ComponentsHighlighter componentsHighlighter;
 	/**
 	 * Model for teams combo box
 	 */
@@ -76,6 +81,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
+		componentsHighlighter = new ComponentsHighlighter();
 		okButtonPressed = false;
 		teamsGetter = logicsFactory.createTeamsGetter();
 		placesGetter = logicsFactory.createPlacesGetter();
@@ -525,11 +531,23 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 		if (jListSportsmans.getSelectedValues().length == 0)
 		{
 			JOptionPane.showMessageDialog(null, "Не выбран ни один спортсмен", "Ошибка", JOptionPane.WARNING_MESSAGE);
+			componentsHighlighter.startComponentHightlighingForTime(jListSportsmans, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME,
+							HighlightingConstants.WARNINGS_HIGHLIGHTING_TIME);
 			return;
 		}
 		if (jRadioButtonPlacePeriod.isSelected() && jComboBoxPlace.getSelectedItem() == null)
 		{
 			JOptionPane.showMessageDialog(null, "УТС не выбран", "Ошибка", JOptionPane.WARNING_MESSAGE);
+			//componentsHighlighter.startComponentHightlighing(jRadioButtonPlacePeriod, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+			//componentsHighlighter.stopComponentHighlightingTimeExpiration(jRadioButtonPlacePeriod, HighlightingConstants.WARNINGS_HIGHLIGHTING_TIME);
+			return;
+		}
+
+		if (!jCheckBoxComplex.isSelected() || !jCheckBoxShooting.isSelected() || !jCheckBoxCompetition.isSelected())
+		{
+			JOptionPane.showMessageDialog(null, "Не выбран ни один тип тренировки", "Ошибка", JOptionPane.WARNING_MESSAGE);
+			componentsHighlighter.startComponentHightlighingForTime(jPanelTrainingsType, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME,
+							HighlightingConstants.WARNINGS_HIGHLIGHTING_TIME);
 			return;
 		}
 

@@ -120,11 +120,98 @@ public class ComponentsHighlighter
 	}
 
 	/**
+	 * Start highlighting of component
+	 *
+	 * @param component component to highlight. Its background color will be
+	 * overriden. Must be not null
+	 * @param highlightColor color for highlighted state of component. Must be not
+	 * null
+	 * @param blinkingTime time in which need to change components color from
+	 * normal state to highlighted and back. Must be more than
+	 * CHANGIND_COLOR_TIMER_IDLE constant
+	 * @param highlightingTime time in milleseconds to stop highlighting after.
+	 * Must be more equals or more than zero
+	 * @throws IllegalArgumentException component is null; highlightColor is null;
+	 * blinkingTime less or equals CHANGIND_COLOR_TIMER_IDLE
+	 */
+	public void startComponentHightlighingForTime(Component component, Color highlightColor, int blinkingTime, long highlightingTime) throws IllegalArgumentException
+	{
+		if (component == null)
+		{
+			throw new IllegalArgumentException("component is null");
+		}
+		if (highlightColor == null)
+		{
+			throw new IllegalArgumentException("highlightColor is null");
+		}
+		if (blinkingTime <= CHANGIND_COLOR_TIMER_IDLE)
+		{
+			throw new IllegalArgumentException("blinkingTime must be more than " + CHANGIND_COLOR_TIMER_IDLE);
+		}
+		if (highlightingTime < 0)
+		{
+			throw new IllegalArgumentException("timeInMilleseconds is negative");
+		}
+
+		if (highlightingComponents.containsKey(component))
+		{
+			return; // already highlighted
+		}
+
+		ColorChanger colorChanger = new ColorChanger(component.getBackground(), highlightColor, blinkingTime, CHANGIND_COLOR_TIMER_IDLE);
+		highlightingComponents.put(component, colorChanger);
+
+		if (!changingColorTimer.isRunning())
+		{
+			changingColorTimer.start();
+		}
+		
+		stopComponentHighlightingTimeExpiration(component, highlightingTime);
+	}
+
+	/**
+	 * Stop given component highlighting after time expiration
+	 *
+	 * @param component component which highlighting need to stop.Must be not null
+	 * @param timeInMilleseconds time in milleseconds to stop highlighting after.
+	 * Must be more equals or more than zero
+	 * @throws IllegalArgumentException component is null or timeInMilleseconds
+	 * negative
+	 */
+	public void stopComponentHighlightingTimeExpiration(final Component component, final long timeInMilleseconds) throws IllegalArgumentException
+	{
+		if (component == null)
+		{
+			throw new IllegalArgumentException("component is null");
+		}
+		if (timeInMilleseconds < 0)
+		{
+			throw new IllegalArgumentException("timeInMilleseconds is negative");
+		}
+
+		Thread stoppingHighlightingThread = new Thread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				try
+				{
+					Thread.sleep(timeInMilleseconds);
+				}
+				catch (InterruptedException ex)
+				{
+					// do nothing
+				}
+				stopComponentHighlighting(component);
+			}
+		});
+		stoppingHighlightingThread.start();
+	}
+
+	/**
 	 * Stop highlighted of component
 	 *
-	 * @param component component which highlighting need to stop. Background
-	 * color of components set to color that was while starting of component
-	 * highlighting. Must be not null
+	 * @param component component which highlighting need to stop.Must be not null
 	 * @throws IllegalArgumentException component is null
 	 */
 	public void stopComponentHighlighting(Component component) throws IllegalArgumentException
