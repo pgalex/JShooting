@@ -426,6 +426,10 @@ public class MainFrame extends javax.swing.JFrame
   private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
   {//GEN-HEADEREND:event_formWindowClosing
 		saveUserSettings();
+		if (shootingDatabase != null)
+		{
+			DatabaseReserver.makeReserveOfDatabase(shootingDatabase.getFileName());
+		}
   }//GEN-LAST:event_formWindowClosing
 
   private void jButtonCreateDatabaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCreateDatabaseActionPerformed

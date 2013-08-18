@@ -38,29 +38,21 @@ public class DatabaseReserver
 			return;
 		}
 
-		Thread copingFileThread = new Thread(new Runnable()
+		try
 		{
-			@Override
-			public void run()
+			createReserveFolderIfNotExists();
+
+			File reserveFile = new File("reserve/" + databaseFile.getName());
+			if (reserveFile.exists())
 			{
-				try
-				{
-					createReserveFolderIfNotExists();
-					
-					File reserveFile = new File("reserve/" + databaseFile.getName());
-					if (reserveFile.exists())
-					{
-						reserveFile.delete();
-					}
-					copyFile(databaseFile, reserveFile);
-				}
-				catch (IOException ex)
-				{
-					// do nothing
-				}
+				reserveFile.delete();
 			}
-		});
-		copingFileThread.start();
+			copyFile(databaseFile, reserveFile);
+		}
+		catch (IOException ex)
+		{
+			// do nothing
+		}
 	}
 
 	private static void createReserveFolderIfNotExists()
