@@ -1,4 +1,4 @@
-package com.jshooting.forms;
+package com.jshooting.support;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

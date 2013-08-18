@@ -1,6 +1,6 @@
-package com.jshooting.formsTests;
+package com.jshooting.supportTests;
 
-import com.jshooting.forms.UserSettings;
+import com.jshooting.support.UserSettings;
 import java.io.File;
 import java.io.IOException;
 import org.junit.Test;
