@@ -291,7 +291,7 @@ public class MainFrame extends javax.swing.JFrame
     );
 
     jButtonSportsmans.setText("Спортсмены");
-    jButtonSportsmans.setToolTipText("");
+    jButtonSportsmans.setToolTipText(null);
     jButtonSportsmans.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -301,7 +301,7 @@ public class MainFrame extends javax.swing.JFrame
     });
 
     jButtonPlaces.setText("УТС");
-    jButtonPlaces.setToolTipText("");
+    jButtonPlaces.setToolTipText(null);
     jButtonPlaces.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -311,6 +311,7 @@ public class MainFrame extends javax.swing.JFrame
     });
 
     jButtonAddTrainings.setText("Добавить тренировки");
+    jButtonAddTrainings.setToolTipText(null);
     jButtonAddTrainings.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -320,6 +321,7 @@ public class MainFrame extends javax.swing.JFrame
     });
 
     jButtonCombined.setText("Групповой отчет");
+    jButtonCombined.setToolTipText(null);
     jButtonCombined.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -329,7 +331,7 @@ public class MainFrame extends javax.swing.JFrame
     });
 
     jButtonTrainingMethods.setText("Средства");
-    jButtonTrainingMethods.setToolTipText("");
+    jButtonTrainingMethods.setToolTipText(null);
     jButtonTrainingMethods.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -339,6 +341,7 @@ public class MainFrame extends javax.swing.JFrame
     });
 
     jButtonEditTrainings.setText("Просмотр и редактирование тренировок");
+    jButtonEditTrainings.setToolTipText(null);
     jButtonEditTrainings.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -348,6 +351,7 @@ public class MainFrame extends javax.swing.JFrame
     });
 
     jButtonIndividualReport.setText("Индивидуальный отчет");
+    jButtonIndividualReport.setToolTipText(null);
     jButtonIndividualReport.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -432,10 +436,19 @@ public class MainFrame extends javax.swing.JFrame
 			File selectedFile = fileChooser.getSelectedFile();
 			if (selectedFile.exists())
 			{
-				selectedFile.delete();
+				int confirmDialogResult = JOptionPane.showConfirmDialog(this, "Для новой базы данных выбран существующий файл.\n"
+								+ "Он будет перезаписан. Продолжить создание?",
+								"Создание базы данных", JOptionPane.YES_NO_OPTION);
+				if (confirmDialogResult == JOptionPane.YES_OPTION)
+				{
+					selectedFile.delete();
+					openOrCreateDatabase(selectedFile.getPath());
+				}
 			}
-			openOrCreateDatabase(selectedFile.getPath());
-
+			else
+			{
+				openOrCreateDatabase(selectedFile.getPath());
+			}
 			updateDatabaseFileNameControls();
 			updateWorkingControlsEnable();
 			updateDatabaseControlsHighlighing();
