@@ -11,7 +11,7 @@ import java.nio.channels.FileChannel;
  *
  * @author pgalex
  */
-public class DatabaseReserver
+public class DatabaseReserveMaker
 {
 	/**
 	 * Make reserve copy of database by its file name

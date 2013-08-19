@@ -8,7 +8,7 @@ import com.jshooting.reports.CombinedReportJRDataSource;
 import com.jshooting.reports.IndividualReportJRDataSource;
 import com.jshooting.shootingDatabase.ShootingDatabase;
 import com.jshooting.shootingDatabase.ShootingDatabaseFactory;
-import com.jshooting.support.DatabaseReserver;
+import com.jshooting.support.DatabaseReserveMaker;
 import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
@@ -111,7 +111,7 @@ public class MainFrame extends javax.swing.JFrame
 			}
 
 			shootingDatabase = ShootingDatabaseFactory.openDatabaseFromFile(databaseFilePath);
-			DatabaseReserver.makeReserveOfDatabase(shootingDatabase.getFileName());
+			DatabaseReserveMaker.makeReserveOfDatabase(shootingDatabase.getFileName());
 		}
 		catch (Exception ex)
 		{
