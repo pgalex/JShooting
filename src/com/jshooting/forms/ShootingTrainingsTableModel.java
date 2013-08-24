@@ -7,6 +7,7 @@ import com.jshooting.model.ShootingTraining;
 import com.jshooting.model.ShootingTrainingType;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -65,6 +66,7 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 		try
 		{
 			trainings = shootingTrainingsGetter.getAllTrainings();
+			Collections.reverse(trainings); // последняя добавленная тренировка будет отображаться наверху
 		}
 		catch (ShootingLogicsException ex)
 		{
