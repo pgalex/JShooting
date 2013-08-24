@@ -13,6 +13,7 @@ import com.jshooting.model.ShootingTrainingsFilter;
 import com.jshooting.model.Sportsman;
 import com.jshooting.model.Team;
 import com.jshooting.objectsHighlighting.ComponentBackgroundHighlightingAdapter;
+import com.jshooting.objectsHighlighting.ComponentForegroundHighlightingAdapter;
 import java.awt.Window;
 import java.util.ArrayList;
 import java.util.Date;
@@ -540,8 +541,9 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 		if (jRadioButtonPlacePeriod.isSelected() && jComboBoxPlace.getSelectedItem() == null)
 		{
 			JOptionPane.showMessageDialog(null, "УТС не выбран", "Ошибка", JOptionPane.WARNING_MESSAGE);
-			//componentsHighlighter.startObjectHightlighing(jRadioButtonPlacePeriod, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
-			//componentsHighlighter.stopObjectHighlightingTimeExpiration(jRadioButtonPlacePeriod, HighlightingConstants.WARNINGS_HIGHLIGHTING_TIME);
+			componentsHighlighter.startObjectHightlighingForTime(new ComponentForegroundHighlightingAdapter(jRadioButtonPlacePeriod),
+							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME,
+							HighlightingConstants.WARNINGS_HIGHLIGHTING_TIME);
 			return;
 		}
 
