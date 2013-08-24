@@ -1,4 +1,4 @@
-package com.jshooting.componentsHighlighting;
+package com.jshooting.objectsHighlighting;
 
 import java.awt.Color;
 

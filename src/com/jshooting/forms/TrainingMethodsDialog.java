@@ -1,7 +1,8 @@
 package com.jshooting.forms;
 
-import com.jshooting.componentsHighlighting.ComponentsHighlighter;
+import com.jshooting.objectsHighlighting.ColourObjectsHighlighter;
 import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.objectsHighlighting.ComponentBackgroundHighlightingAdapter;
 import java.awt.Window;
 
 /**
@@ -14,7 +15,7 @@ public class TrainingMethodsDialog extends javax.swing.JDialog
 	/**
 	 * Components highlighter
 	 */
-	private ComponentsHighlighter componentsHighlighter;
+	private ColourObjectsHighlighter componentsHighlighter;
 	/**
 	 * Table model for training methods table
 	 */
@@ -39,7 +40,7 @@ public class TrainingMethodsDialog extends javax.swing.JDialog
 		}
 
 		trainingMethodsTableModel = new TrainingMethodsTableModel(logicsFactory);
-		componentsHighlighter = new ComponentsHighlighter();
+		componentsHighlighter = new ColourObjectsHighlighter();
 
 		initComponents();
 
@@ -53,7 +54,8 @@ public class TrainingMethodsDialog extends javax.swing.JDialog
 	{
 		if (jTableTrainingMethods.getRowCount() == 0)
 		{
-			componentsHighlighter.startComponentHightlighing(jButtonAddTrainingMethod, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+			componentsHighlighter.startObjectHightlighing(new ComponentBackgroundHighlightingAdapter(jButtonAddTrainingMethod),
+							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
 		}
 		else
 		{

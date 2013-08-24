@@ -1,6 +1,6 @@
 package com.jshooting.forms;
 
-import com.jshooting.componentsHighlighting.ComponentsHighlighter;
+import com.jshooting.objectsHighlighting.ColourObjectsHighlighter;
 import com.jshooting.logics.DateModifier;
 import com.jshooting.logics.PlacesGetter;
 import com.jshooting.logics.ShootingLogicsFactory;
@@ -12,6 +12,7 @@ import com.jshooting.model.ShootingTrainingType;
 import com.jshooting.model.ShootingTrainingsFilter;
 import com.jshooting.model.Sportsman;
 import com.jshooting.model.Team;
+import com.jshooting.objectsHighlighting.ComponentBackgroundHighlightingAdapter;
 import java.awt.Window;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +34,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 	/**
 	 * Dialog components highlighting
 	 */
-	private ComponentsHighlighter componentsHighlighter;
+	private ColourObjectsHighlighter componentsHighlighter;
 	/**
 	 * Model for teams combo box
 	 */
@@ -81,7 +82,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 			throw new IllegalArgumentException("logicsFactory is null");
 		}
 
-		componentsHighlighter = new ComponentsHighlighter();
+		componentsHighlighter = new ColourObjectsHighlighter();
 		okButtonPressed = false;
 		teamsGetter = logicsFactory.createTeamsGetter();
 		placesGetter = logicsFactory.createPlacesGetter();
@@ -530,23 +531,25 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
   {//GEN-HEADEREND:event_jButtonOKActionPerformed
 		if (jListSportsmans.getSelectedValues().length == 0)
 		{
-			JOptionPane.showMessageDialog(null, "Не выбран ни один спортсмен", "Ошибка", JOptionPane.WARNING_MESSAGE);
-			componentsHighlighter.startComponentHightlighingForTime(jListSportsmans, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME,
+			JOptionPane.showMessageDialog(null, "Не выбран спортсмен", "Ошибка", JOptionPane.WARNING_MESSAGE);
+			componentsHighlighter.startObjectHightlighingForTime(new ComponentBackgroundHighlightingAdapter(jListSportsmans),
+							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME,
 							HighlightingConstants.WARNINGS_HIGHLIGHTING_TIME);
 			return;
 		}
 		if (jRadioButtonPlacePeriod.isSelected() && jComboBoxPlace.getSelectedItem() == null)
 		{
 			JOptionPane.showMessageDialog(null, "УТС не выбран", "Ошибка", JOptionPane.WARNING_MESSAGE);
-			//componentsHighlighter.startComponentHightlighing(jRadioButtonPlacePeriod, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
-			//componentsHighlighter.stopComponentHighlightingTimeExpiration(jRadioButtonPlacePeriod, HighlightingConstants.WARNINGS_HIGHLIGHTING_TIME);
+			//componentsHighlighter.startObjectHightlighing(jRadioButtonPlacePeriod, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+			//componentsHighlighter.stopObjectHighlightingTimeExpiration(jRadioButtonPlacePeriod, HighlightingConstants.WARNINGS_HIGHLIGHTING_TIME);
 			return;
 		}
 
 		if (!jCheckBoxComplex.isSelected() || !jCheckBoxShooting.isSelected() || !jCheckBoxCompetition.isSelected())
 		{
-			JOptionPane.showMessageDialog(null, "Не выбран ни один тип тренировки", "Ошибка", JOptionPane.WARNING_MESSAGE);
-			componentsHighlighter.startComponentHightlighingForTime(jPanelTrainingsType, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME,
+			JOptionPane.showMessageDialog(null, "Не выбран тип тренировки", "Ошибка", JOptionPane.WARNING_MESSAGE);
+			componentsHighlighter.startObjectHightlighingForTime(new ComponentBackgroundHighlightingAdapter(jPanelTrainingsType),
+							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME,
 							HighlightingConstants.WARNINGS_HIGHLIGHTING_TIME);
 			return;
 		}

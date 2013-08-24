@@ -1,10 +1,11 @@
 package com.jshooting.forms;
 
-import com.jshooting.componentsHighlighting.ComponentsHighlighter;
+import com.jshooting.objectsHighlighting.ColourObjectsHighlighter;
 import com.jshooting.logics.PlacesModifier;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Place;
+import com.jshooting.objectsHighlighting.ComponentBackgroundHighlightingAdapter;
 import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Window;
 import javax.swing.DefaultCellEditor;
@@ -21,7 +22,7 @@ public class PlacesDialog extends javax.swing.JDialog
 	/**
 	 * Dialog components highlighter
 	 */
-	private ComponentsHighlighter componentsHighlighter;
+	private ColourObjectsHighlighter componentsHighlighter;
 	/**
 	 * Table model of places table
 	 */
@@ -49,7 +50,7 @@ public class PlacesDialog extends javax.swing.JDialog
 		}
 
 		placesTableModel = new PlacesTableModel(logicsFactory);
-		componentsHighlighter = new ComponentsHighlighter();
+		componentsHighlighter = new ColourObjectsHighlighter();
 		placesModifier = logicsFactory.createPlacesModifier();
 
 		initComponents();
@@ -70,7 +71,8 @@ public class PlacesDialog extends javax.swing.JDialog
 	{
 		if (jTablePlaces.getRowCount() == 0)
 		{
-			componentsHighlighter.startComponentHightlighing(jButtonAddPlace, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+			componentsHighlighter.startObjectHightlighing(new ComponentBackgroundHighlightingAdapter(jButtonAddPlace), 
+							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
 		}
 		else
 		{

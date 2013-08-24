@@ -1,9 +1,10 @@
 package com.jshooting.forms;
 
 import com.jshooting.support.UserSettings;
-import com.jshooting.componentsHighlighting.ComponentsHighlighter;
+import com.jshooting.objectsHighlighting.ColourObjectsHighlighter;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.model.ShootingTrainingsFilter;
+import com.jshooting.objectsHighlighting.ComponentBackgroundHighlightingAdapter;
 import com.jshooting.reports.CombinedReportJRDataSource;
 import com.jshooting.reports.IndividualReportJRDataSource;
 import com.jshooting.shootingDatabase.ShootingDatabase;
@@ -47,7 +48,7 @@ public class MainFrame extends javax.swing.JFrame
 	/**
 	 * Highlighter of dialog components
 	 */
-	private ComponentsHighlighter componentsHighlighter;
+	private ColourObjectsHighlighter componentsHighlighter;
 
 	/**
 	 * Creates new form
@@ -55,7 +56,7 @@ public class MainFrame extends javax.swing.JFrame
 	public MainFrame()
 	{
 		shootingDatabase = null;
-		componentsHighlighter = new ComponentsHighlighter();
+		componentsHighlighter = new ColourObjectsHighlighter();
 
 		initComponents();
 
@@ -174,9 +175,9 @@ public class MainFrame extends javax.swing.JFrame
 	{
 		if (shootingDatabase == null)
 		{
-			componentsHighlighter.startComponentHightlighing(jButtonOpenDatabase,
+			componentsHighlighter.startObjectHightlighing(new ComponentBackgroundHighlightingAdapter(jButtonOpenDatabase),
 							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
-			componentsHighlighter.startComponentHightlighing(jButtonCreateDatabase,
+			componentsHighlighter.startObjectHightlighing(new ComponentBackgroundHighlightingAdapter(jButtonCreateDatabase),
 							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
 		}
 		else

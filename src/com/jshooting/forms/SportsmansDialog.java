@@ -1,10 +1,11 @@
 package com.jshooting.forms;
 
-import com.jshooting.componentsHighlighting.ComponentsHighlighter;
+import com.jshooting.objectsHighlighting.ColourObjectsHighlighter;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.TeamsGetter;
 import com.jshooting.logics.exceptions.ShootingLogicsException;
 import com.jshooting.model.Team;
+import com.jshooting.objectsHighlighting.ComponentBackgroundHighlightingAdapter;
 import java.awt.Window;
 import javax.swing.DefaultComboBoxModel;
 
@@ -18,7 +19,7 @@ public class SportsmansDialog extends javax.swing.JDialog
 	/**
 	 * Components highlighter
 	 */
-	private ComponentsHighlighter componentsHighlighter;
+	private ColourObjectsHighlighter componentsHighlighter;
 	/**
 	 * Model of team selecting combo box
 	 */
@@ -57,7 +58,7 @@ public class SportsmansDialog extends javax.swing.JDialog
 		this.logicsFactory = logicsFactory;
 		this.teamsGetter = logicsFactory.createTeamsGetter();
 		this.sportsmansTableModel = new SportsmansTableModel(logicsFactory);
-		this.componentsHighlighter = new ComponentsHighlighter();
+		this.componentsHighlighter = new ColourObjectsHighlighter();
 
 		initializeTeamsComboBoxModel();
 
@@ -84,7 +85,8 @@ public class SportsmansDialog extends javax.swing.JDialog
 	{
 		if (jComboBoxTeams.getItemCount() == 0)
 		{
-			componentsHighlighter.startComponentHightlighing(jButtonEditTeams, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+			componentsHighlighter.startObjectHightlighing(new ComponentBackgroundHighlightingAdapter(jButtonEditTeams),
+							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
 		}
 		else
 		{
@@ -99,7 +101,8 @@ public class SportsmansDialog extends javax.swing.JDialog
 	{
 		if (jComboBoxTeams.getItemCount() > 0 && jTableSportsmans.getRowCount() == 0)
 		{
-			componentsHighlighter.startComponentHightlighing(jButtonAddSportsman, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+			componentsHighlighter.startObjectHightlighing(new ComponentBackgroundHighlightingAdapter(jButtonAddSportsman),
+							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
 		}
 		else
 		{

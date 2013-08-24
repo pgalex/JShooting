@@ -1,7 +1,8 @@
 package com.jshooting.forms;
 
-import com.jshooting.componentsHighlighting.ComponentsHighlighter;
+import com.jshooting.objectsHighlighting.ColourObjectsHighlighter;
 import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.objectsHighlighting.ComponentBackgroundHighlightingAdapter;
 import java.awt.Window;
 
 /**
@@ -14,7 +15,7 @@ public class TeamsDialog extends javax.swing.JDialog
 	/**
 	 * Dialog components highlighter
 	 */
-	private ComponentsHighlighter componentsHighlighter;
+	private ColourObjectsHighlighter componentsHighlighter;
 	/**
 	 * Table model for teams table
 	 */
@@ -39,7 +40,7 @@ public class TeamsDialog extends javax.swing.JDialog
 		}
 
 		teamsTableModel = new TeamsTableModel(logicsFactory);
-		componentsHighlighter = new ComponentsHighlighter();
+		componentsHighlighter = new ColourObjectsHighlighter();
 
 		initComponents();
 
@@ -53,7 +54,8 @@ public class TeamsDialog extends javax.swing.JDialog
 	{
 		if (jTableTeams.getRowCount() == 0)
 		{
-			componentsHighlighter.startComponentHightlighing(jButtonAddTeam, HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
+			componentsHighlighter.startObjectHightlighing(new ComponentBackgroundHighlightingAdapter(jButtonAddTeam), 
+							HighlightingConstants.GOOD_HIGHLIGHT_COLOR, HighlightingConstants.BLINKING_TIME);
 		}
 		else
 		{
