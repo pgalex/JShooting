@@ -2,7 +2,7 @@ package com.jshooting.forms;
 
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.ShootingTrainingsModifier;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.ShootingTraining;
 import com.jshooting.model.ShootingTrainingType;
 import com.jshooting.model.Sportsman;
@@ -657,7 +657,7 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 			shootingTrainingModifier.addTraining(newTraining);
 			showAddingTrainingAnimation();
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			JOptionPane.showMessageDialog(null, "Невозможно добавить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 		}

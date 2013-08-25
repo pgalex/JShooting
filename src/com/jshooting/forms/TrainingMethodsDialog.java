@@ -59,7 +59,7 @@ public class TrainingMethodsDialog extends javax.swing.JDialog
 		}
 		else
 		{
-			componentsHighlighter.stopComponentHighlighting(jButtonAddTrainingMethod);
+			componentsHighlighter.stopObjectHighlighting(jButtonAddTrainingMethod);
 		}
 	}
 

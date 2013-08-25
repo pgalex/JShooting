@@ -59,7 +59,7 @@ public class TeamsDialog extends javax.swing.JDialog
 		}
 		else
 		{
-			componentsHighlighter.stopComponentHighlighting(jButtonAddTeam);
+			componentsHighlighter.stopObjectHighlighting(jButtonAddTeam);
 		}
 	}
 

@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.ShootingTraining;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 import java.util.List;
@@ -23,9 +23,9 @@ public class ShootingTrainingsGetter
 	 * Get all shoting trainings
 	 *
 	 * @return list of all shooting trainings
-	 * @throws ShootingLogicsException error while getting trainings
+	 * @throws ShootingLogicsErrorException error while getting trainings
 	 */
-	public List<ShootingTraining> getAllTrainings() throws ShootingLogicsException
+	public List<ShootingTraining> getAllTrainings() throws ShootingLogicsErrorException
 	{
 		try
 		{
@@ -33,7 +33,7 @@ public class ShootingTrainingsGetter
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 }

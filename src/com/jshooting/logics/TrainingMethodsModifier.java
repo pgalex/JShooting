@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.TrainingMethod;
 import com.jshooting.shootingDatabase.TrainingMethodsTable;
 import com.jshooting.shootingDatabase.exceptions.DatabaseErrorException;
@@ -37,9 +37,9 @@ public class TrainingMethodsModifier
 	/**
 	 * Add new training method with empty name
 	 *
-	 * @throws ShootingLogicsException error while adding
+	 * @throws ShootingLogicsErrorException error while adding
 	 */
-	public void addNewTrainingMethod() throws ShootingLogicsException
+	public void addNewTrainingMethod() throws ShootingLogicsErrorException
 	{
 		try
 		{
@@ -49,7 +49,7 @@ public class TrainingMethodsModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 
@@ -58,9 +58,9 @@ public class TrainingMethodsModifier
 	 *
 	 * @param trainingMethodToUpdate updating training method. Must be not null
 	 * @throws IllegalArgumentException trainingMethodToUpdate is null
-	 * @throws ShootingLogicsException error while updating
+	 * @throws ShootingLogicsErrorException error while updating
 	 */
-	public void updateTrainingMethod(TrainingMethod trainingMethodToUpdate) throws IllegalArgumentException, ShootingLogicsException
+	public void updateTrainingMethod(TrainingMethod trainingMethodToUpdate) throws IllegalArgumentException, ShootingLogicsErrorException
 	{
 		if (trainingMethodToUpdate == null)
 		{
@@ -73,7 +73,7 @@ public class TrainingMethodsModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 }

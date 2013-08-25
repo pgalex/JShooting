@@ -6,7 +6,7 @@ import com.jshooting.logics.PlacesGetter;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.SportsmansByTeamGetter;
 import com.jshooting.logics.TeamsGetter;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Place;
 import com.jshooting.model.ShootingTrainingType;
 import com.jshooting.model.ShootingTrainingsFilter;
@@ -119,7 +119,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 				placesComboBoxModel.addElement(place);
 			}
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			placesComboBoxModel.removeAllElements();
 		}
@@ -140,7 +140,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 				teamsComboBoxModel.addElement(team);
 			}
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			teamsComboBoxModel.removeAllElements();
 		}
@@ -160,7 +160,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 				sportsmansListModel.addElement(sportsman);
 			}
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			sportsmansListModel.removeAllElements();
 		}
@@ -547,7 +547,7 @@ public class ShootingTrainingsFilterDialog extends javax.swing.JDialog
 			return;
 		}
 
-		if (!jCheckBoxComplex.isSelected() || !jCheckBoxShooting.isSelected() || !jCheckBoxCompetition.isSelected())
+		if (!jCheckBoxComplex.isSelected() && !jCheckBoxShooting.isSelected() && !jCheckBoxCompetition.isSelected())
 		{
 			JOptionPane.showMessageDialog(null, "Не выбран тип тренировки", "Ошибка", JOptionPane.WARNING_MESSAGE);
 			componentsHighlighter.startObjectHightlighingForTime(new ComponentBackgroundHighlightingAdapter(jPanelTrainingsType),

@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 import java.util.List;
@@ -37,9 +37,9 @@ public class TeamsGetter
 	 * Get all teams
 	 *
 	 * @return list of all teams
-	 * @throws ShootingLogicsException error while getting teams
+	 * @throws ShootingLogicsErrorException error while getting teams
 	 */
-	public List<Team> getAllTeams() throws ShootingLogicsException
+	public List<Team> getAllTeams() throws ShootingLogicsErrorException
 	{
 		try
 		{
@@ -47,7 +47,7 @@ public class TeamsGetter
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 }

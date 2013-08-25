@@ -3,7 +3,7 @@ package com.jshooting.forms;
 import com.jshooting.objectsHighlighting.ColourObjectsHighlighter;
 import com.jshooting.logics.PlacesModifier;
 import com.jshooting.logics.ShootingLogicsFactory;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Place;
 import com.jshooting.objectsHighlighting.ComponentBackgroundHighlightingAdapter;
 import com.toedter.calendar.JTextFieldDateEditor;
@@ -76,7 +76,7 @@ public class PlacesDialog extends javax.swing.JDialog
 		}
 		else
 		{
-			componentsHighlighter.stopComponentHighlighting(jButtonAddPlace);
+			componentsHighlighter.stopObjectHighlighting(jButtonAddPlace);
 		}
 	}
 
@@ -168,7 +168,7 @@ public class PlacesDialog extends javax.swing.JDialog
 			{
 				placesModifier.addPlace(addPlaceDialog.getPlace());
 			}
-			catch (ShootingLogicsException ex)
+			catch (ShootingLogicsErrorException ex)
 			{
 				JOptionPane.showMessageDialog(null, "Не удалось добавить УТС: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 			}
@@ -196,7 +196,7 @@ public class PlacesDialog extends javax.swing.JDialog
 				{
 					placesModifier.updatePlace(editPlaceDialog.getPlace());
 				}
-				catch (ShootingLogicsException ex)
+				catch (ShootingLogicsErrorException ex)
 				{
 					JOptionPane.showMessageDialog(null, "Не удалось изменить УТС: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 				}

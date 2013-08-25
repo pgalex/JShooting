@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.TrainingMethod;
 import com.jshooting.shootingDatabase.TrainingMethodsTable;
 import java.util.List;
@@ -38,9 +38,9 @@ public class TrainingMethodsGetter
 	 * Get all training methods
 	 *
 	 * @return all training methods in table. Empty if there is no methods
-	 * @throws ShootingLogicsException error while getting methods
+	 * @throws ShootingLogicsErrorException error while getting methods
 	 */
-	public List<TrainingMethod> getAllTrainingMethods() throws ShootingLogicsException
+	public List<TrainingMethod> getAllTrainingMethods() throws ShootingLogicsErrorException
 	{
 		try
 		{
@@ -48,7 +48,7 @@ public class TrainingMethodsGetter
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 }

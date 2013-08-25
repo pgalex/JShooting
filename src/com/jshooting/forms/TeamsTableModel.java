@@ -3,7 +3,7 @@ package com.jshooting.forms;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.TeamsGetter;
 import com.jshooting.logics.TeamsModifier;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Team;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class TeamsTableModel extends AbstractTableModel
 		{
 			teams = teamsGetter.getAllTeams();
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			teams = new ArrayList<Team>();
 		}
@@ -122,7 +122,7 @@ public class TeamsTableModel extends AbstractTableModel
 				// do nothing
 			}
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			updateTeamsList();
 			
@@ -140,7 +140,7 @@ public class TeamsTableModel extends AbstractTableModel
 			updateTeamsList();
 			fireTableRowsInserted(teams.size() - 1, teams.size() - 1);
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			// do nothing
 		}

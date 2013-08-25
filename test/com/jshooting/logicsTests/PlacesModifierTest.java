@@ -1,7 +1,7 @@
 package com.jshooting.logicsTests;
 
 import com.jshooting.logics.PlacesModifier;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Place;
 import java.util.Date;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class PlacesModifierTest
 {
 	@Test
-	public void updatingPlaceWithNullBeginDate() throws ShootingLogicsException
+	public void updatingPlaceWithNullBeginDate() throws ShootingLogicsErrorException
 	{
 		try
 		{
@@ -34,7 +34,7 @@ public class PlacesModifierTest
 	}
 
 	@Test
-	public void updatingPlaceWithNullEndDate() throws ShootingLogicsException
+	public void updatingPlaceWithNullEndDate() throws ShootingLogicsErrorException
 	{
 		try
 		{
@@ -53,7 +53,7 @@ public class PlacesModifierTest
 	}
 
 	@Test
-	public void updatingPlaceBeginDateAfterEnd() throws ShootingLogicsException
+	public void updatingPlaceBeginDateAfterEnd() throws ShootingLogicsErrorException
 	{
 		try
 		{
@@ -72,7 +72,7 @@ public class PlacesModifierTest
 	}
 
 	@Test
-	public void updatingCorrectPlace() throws ShootingLogicsException
+	public void updatingCorrectPlace() throws ShootingLogicsErrorException
 	{
 		Place correctPlace = new Place();
 		correctPlace.setBeginDate(new Date(1000));

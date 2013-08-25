@@ -2,7 +2,7 @@ package com.jshooting.forms;
 
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.ShootingTrainingsGetter;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.ShootingTraining;
 import com.jshooting.model.ShootingTrainingType;
 import java.text.SimpleDateFormat;
@@ -68,7 +68,7 @@ public class ShootingTrainingsTableModel extends AbstractTableModel
 			trainings = shootingTrainingsGetter.getAllTrainings();
 			Collections.reverse(trainings); // последняя добавленная тренировка будет отображаться наверху
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			trainings = new ArrayList<ShootingTraining>();
 		}

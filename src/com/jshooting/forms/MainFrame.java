@@ -1,11 +1,12 @@
 package com.jshooting.forms;
 
+import com.jshooting.logics.ReportsMaker;
 import com.jshooting.support.UserSettings;
 import com.jshooting.objectsHighlighting.ColourObjectsHighlighter;
 import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.logics.exceptions.ShowingReportErrorException;
 import com.jshooting.model.ShootingTrainingsFilter;
 import com.jshooting.objectsHighlighting.ComponentBackgroundHighlightingAdapter;
-import com.jshooting.reports.CombinedReportJRDataSource;
 import com.jshooting.reports.IndividualReportJRDataSource;
 import com.jshooting.shootingDatabase.ShootingDatabase;
 import com.jshooting.shootingDatabase.ShootingDatabaseFactory;
@@ -49,6 +50,7 @@ public class MainFrame extends javax.swing.JFrame
 	 * Highlighter of dialog components
 	 */
 	private ColourObjectsHighlighter componentsHighlighter;
+	private ReportsMaker reportsMaker;
 
 	/**
 	 * Creates new form
@@ -57,6 +59,7 @@ public class MainFrame extends javax.swing.JFrame
 	{
 		shootingDatabase = null;
 		componentsHighlighter = new ColourObjectsHighlighter();
+		reportsMaker = new ReportsMaker();
 
 		initComponents();
 
@@ -182,8 +185,8 @@ public class MainFrame extends javax.swing.JFrame
 		}
 		else
 		{
-			componentsHighlighter.stopComponentHighlighting(jButtonOpenDatabase);
-			componentsHighlighter.stopComponentHighlighting(jButtonCreateDatabase);
+			componentsHighlighter.stopObjectHighlighting(jButtonOpenDatabase);
+			componentsHighlighter.stopObjectHighlighting(jButtonCreateDatabase);
 		}
 	}
 
@@ -512,31 +515,13 @@ public class MainFrame extends javax.swing.JFrame
 		if (filterDialog.isOKButtonPressed())
 		{
 			ShootingTrainingsFilter trainingsFilter = filterDialog.getFilter();
-			CombinedReportJRDataSource reportDataSource = new CombinedReportJRDataSource(trainingsFilter, shootingDatabase.getShootingTrainingsTable());
-
 			try
 			{
-				Map<String, Object> parametersMap = new HashMap<String, Object>();
-				DateFormat reportDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-				parametersMap.put("DATE_FROM", reportDateFormat.format(trainingsFilter.getDateFrom()));
-				parametersMap.put("DATE_TO", reportDateFormat.format(trainingsFilter.getDateTo()));
-				if (trainingsFilter.isPlaceUsedAsPeriod())
-				{
-					parametersMap.put("PLACE_NAME", trainingsFilter.getPlace().getName());
-				}
-				else
-				{
-					parametersMap.put("PLACE_NAME", "");
-				}
-
-				JasperDesign desing = JRXmlLoader.load("reports/combinedReport.jrxml");
-				JasperReport report = JasperCompileManager.compileReport(desing);
-				JasperPrint jasperPrint = JasperFillManager.fillReport(report, parametersMap, reportDataSource);
-				JasperViewer.viewReport(jasperPrint, false);
+				reportsMaker.showCombinedReportWithFilter(trainingsFilter, shootingDatabase.getShootingTrainingsTable());
 			}
-			catch (JRException ex)
+			catch (ShowingReportErrorException ex)
 			{
-				Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+				JOptionPane.showMessageDialog(null, "Невозможно отобразить отчет: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 			}
 		}
   }//GEN-LAST:event_jButtonCombinedActionPerformed
@@ -560,35 +545,13 @@ public class MainFrame extends javax.swing.JFrame
 		if (filterDialog.isOKButtonPressed())
 		{
 			ShootingTrainingsFilter trainingsFilter = filterDialog.getFilter();
-			IndividualReportJRDataSource reportDataSource = new IndividualReportJRDataSource(trainingsFilter,
-							shootingDatabase.getShootingTrainingsTable());
 			try
 			{
-				Map<String, Object> parametersMap = new HashMap<String, Object>();
-				DateFormat reportDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-				parametersMap.put("DATE_FROM", reportDateFormat.format(trainingsFilter.getDateFrom()));
-				parametersMap.put("DATE_TO", reportDateFormat.format(trainingsFilter.getDateTo()));
-				if (trainingsFilter.isPlaceUsedAsPeriod())
-				{
-					parametersMap.put("PLACE_NAME", trainingsFilter.getPlace().getName());
-				}
-				else
-				{
-					parametersMap.put("PLACE_NAME", "");
-				}
-				if (trainingsFilter.getSportsmans().size() > 0)
-				{
-					parametersMap.put("SPORTSMAN_NAME", trainingsFilter.getSportsmans().get(0).getName());
-				}
-
-				JasperDesign desing = JRXmlLoader.load("reports/individualReport.jrxml");
-				JasperReport report = JasperCompileManager.compileReport(desing);
-				JasperPrint jasperPrint = JasperFillManager.fillReport(report, parametersMap, reportDataSource);
-				JasperViewer.viewReport(jasperPrint, false);
+				reportsMaker.showIndividualReportWithFilter(trainingsFilter, shootingDatabase.getShootingTrainingsTable());
 			}
-			catch (JRException ex)
+			catch (ShowingReportErrorException ex)
 			{
-				Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+				JOptionPane.showMessageDialog(null, "Невозможно отобразить отчет: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 			}
 		}
   }//GEN-LAST:event_jButtonIndividualReportActionPerformed

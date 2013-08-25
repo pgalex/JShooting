@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Team;
 import com.jshooting.shootingDatabase.TeamsTable;
 
@@ -35,9 +35,9 @@ public class TeamsModifier
 	/**
 	 * Add new team with empty name
 	 *
-	 * @throws ShootingLogicsException error while adding
+	 * @throws ShootingLogicsErrorException error while adding
 	 */
-	public void addNewTeam() throws ShootingLogicsException
+	public void addNewTeam() throws ShootingLogicsErrorException
 	{
 		try
 		{
@@ -47,7 +47,7 @@ public class TeamsModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 
@@ -56,9 +56,9 @@ public class TeamsModifier
 	 *
 	 * @param teamToUpdate updating team. Must be not null
 	 * @throws IllegalArgumentException teamToUpdate is null
-	 * @throws ShootingLogicsException error while updating
+	 * @throws ShootingLogicsErrorException error while updating
 	 */
-	public void updateTeam(Team teamToUpdate) throws IllegalArgumentException, ShootingLogicsException
+	public void updateTeam(Team teamToUpdate) throws IllegalArgumentException, ShootingLogicsErrorException
 	{
 		if (teamToUpdate == null)
 		{
@@ -71,7 +71,7 @@ public class TeamsModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 }

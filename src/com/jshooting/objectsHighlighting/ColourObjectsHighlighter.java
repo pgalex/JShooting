@@ -229,7 +229,7 @@ public class ColourObjectsHighlighter
 				{
 					// do nothing
 				}
-				stopComponentHighlighting(colourObject);
+				stopObjectHighlighting(colourObject);
 			}
 		});
 		stoppingHighlightingThread.start();
@@ -242,7 +242,7 @@ public class ColourObjectsHighlighter
 	 * not null
 	 * @throws IllegalArgumentException colourObject is null
 	 */
-	public void stopComponentHighlighting(Object colourObject) throws IllegalArgumentException
+	public void stopObjectHighlighting(Object colourObject) throws IllegalArgumentException
 	{
 		if (colourObject == null)
 		{

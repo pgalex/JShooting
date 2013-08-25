@@ -3,7 +3,7 @@ package com.jshooting.forms;
 import com.jshooting.objectsHighlighting.ColourObjectsHighlighter;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.TeamsGetter;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Team;
 import com.jshooting.objectsHighlighting.ComponentBackgroundHighlightingAdapter;
 import java.awt.Window;
@@ -90,7 +90,7 @@ public class SportsmansDialog extends javax.swing.JDialog
 		}
 		else
 		{
-			componentsHighlighter.stopComponentHighlighting(jButtonEditTeams);
+			componentsHighlighter.stopObjectHighlighting(jButtonEditTeams);
 		}
 	}
 
@@ -106,7 +106,7 @@ public class SportsmansDialog extends javax.swing.JDialog
 		}
 		else
 		{
-			componentsHighlighter.stopComponentHighlighting(jButtonAddSportsman);
+			componentsHighlighter.stopObjectHighlighting(jButtonAddSportsman);
 		}
 	}
 
@@ -120,7 +120,7 @@ public class SportsmansDialog extends javax.swing.JDialog
 		{
 			teamsComboBoxModel = new DefaultComboBoxModel(teamsGetter.getAllTeams().toArray());
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			teamsComboBoxModel = new DefaultComboBoxModel();
 		}

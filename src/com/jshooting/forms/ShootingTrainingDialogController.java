@@ -7,7 +7,7 @@ import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.SportsmansByTeamGetter;
 import com.jshooting.logics.TeamsGetter;
 import com.jshooting.logics.TrainingMethodsGetter;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Sportsman;
 import com.jshooting.model.Team;
 import com.jshooting.model.TrainingMethod;
@@ -96,7 +96,7 @@ public class ShootingTrainingDialogController
 
 			return PlacesNamesListFormer.getPlacesNamesString(placesGetter.getPlacesByPeriod(periodDateFrom, periodDateTo));
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			return "";
 		}
@@ -117,7 +117,7 @@ public class ShootingTrainingDialogController
 				getTrainingMethodsComboBoxModel().addElement(trainingMethod);
 			}
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			getTrainingMethodsComboBoxModel().removeAllElements();
 		}
@@ -138,7 +138,7 @@ public class ShootingTrainingDialogController
 				getTeamsComboBoxModel().addElement(team);
 			}
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			getTeamsComboBoxModel().removeAllElements();
 		}
@@ -166,7 +166,7 @@ public class ShootingTrainingDialogController
 				}
 			}
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			getSportsmansComboBoxModel().removeAllElements();
 		}

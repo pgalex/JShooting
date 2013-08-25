@@ -3,7 +3,7 @@ package com.jshooting.forms;
 import com.jshooting.logics.DateModifier;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.ShootingTrainingsModifier;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import java.awt.Window;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -220,7 +220,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 			shootingTrainingsModifier.deleteTraining(shootingTrainingsTableModel.getShootingTrainingAtRow(jTableTrainings.getSelectedRow()));
 			shootingTrainingsTableModel.update();
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			JOptionPane.showMessageDialog(null, "Не удалось удалить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 		}
@@ -244,7 +244,7 @@ public class ShootingTrainingsDialog extends javax.swing.JDialog
 				shootingTrainingsModifier.updateTraining(editShootingTrainingDialog.getEditingShootingTraining());
 				shootingTrainingsTableModel.updateRow(jTableTrainings.getSelectedRow());
 			}
-			catch (ShootingLogicsException ex)
+			catch (ShootingLogicsErrorException ex)
 			{
 				JOptionPane.showMessageDialog(null, "Не удалось изменить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 			}

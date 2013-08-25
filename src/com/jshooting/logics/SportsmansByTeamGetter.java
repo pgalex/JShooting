@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Sportsman;
 import com.jshooting.model.Team;
 import com.jshooting.shootingDatabase.SportsmansTable;
@@ -56,9 +56,9 @@ public class SportsmansByTeamGetter
 	 *
 	 * @return list of sportsmans in filtering team. Empty if filtering team is
 	 * null
-	 * @throws ShootingLogicsException error while getting sportsmans
+	 * @throws ShootingLogicsErrorException error while getting sportsmans
 	 */
-	public List<Sportsman> getSportsmansInFilteringTeam() throws ShootingLogicsException
+	public List<Sportsman> getSportsmansInFilteringTeam() throws ShootingLogicsErrorException
 	{
 		try
 		{
@@ -73,7 +73,7 @@ public class SportsmansByTeamGetter
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 }

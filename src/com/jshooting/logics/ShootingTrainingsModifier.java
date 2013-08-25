@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.ShootingTraining;
 import com.jshooting.shootingDatabase.ShootingTrainingsTable;
 
@@ -39,9 +39,9 @@ public class ShootingTrainingsModifier
 	 * sportsman, date and training method must be not null
 	 * @throws IllegalArgumentException trainingToAdd or its sportsman, date or
 	 * training method is null
-	 * @throws ShootingLogicsException error while adding
+	 * @throws ShootingLogicsErrorException error while adding
 	 */
-	public void addTraining(ShootingTraining trainingToAdd) throws IllegalArgumentException, ShootingLogicsException
+	public void addTraining(ShootingTraining trainingToAdd) throws IllegalArgumentException, ShootingLogicsErrorException
 	{
 		if (trainingToAdd == null)
 		{
@@ -54,7 +54,7 @@ public class ShootingTrainingsModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 
@@ -63,9 +63,9 @@ public class ShootingTrainingsModifier
 	 *
 	 * @param trainingToDelete deleting training. Must be not null
 	 * @throws IllegalArgumentException trainingToDelete is null
-	 * @throws ShootingLogicsException error while deleting training
+	 * @throws ShootingLogicsErrorException error while deleting training
 	 */
-	public void deleteTraining(ShootingTraining trainingToDelete) throws IllegalArgumentException, ShootingLogicsException
+	public void deleteTraining(ShootingTraining trainingToDelete) throws IllegalArgumentException, ShootingLogicsErrorException
 	{
 		if (trainingToDelete == null)
 		{
@@ -78,7 +78,7 @@ public class ShootingTrainingsModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 
@@ -87,9 +87,9 @@ public class ShootingTrainingsModifier
 	 *
 	 * @param trainingToUpdate updating training. Must be not null
 	 * @throws IllegalArgumentException trainingToUpdate is null
-	 * @throws ShootingLogicsException error while updating
+	 * @throws ShootingLogicsErrorException error while updating
 	 */
-	public void updateTraining(ShootingTraining trainingToUpdate) throws IllegalArgumentException, ShootingLogicsException
+	public void updateTraining(ShootingTraining trainingToUpdate) throws IllegalArgumentException, ShootingLogicsErrorException
 	{
 		if (trainingToUpdate == null)
 		{
@@ -102,7 +102,7 @@ public class ShootingTrainingsModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 }

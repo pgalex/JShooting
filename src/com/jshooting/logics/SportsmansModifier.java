@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Sportsman;
 import com.jshooting.model.Team;
 import com.jshooting.shootingDatabase.SportsmansTable;
@@ -38,9 +38,9 @@ public class SportsmansModifier
 	 *
 	 * @param newSportsmanTeam team of new sportsmans. Must be not null
 	 * @throws IllegalArgumentException newSportsmanTeam is null
-	 * @throws ShootingLogicsException error while adding sportsman
+	 * @throws ShootingLogicsErrorException error while adding sportsman
 	 */
-	public void addNewSportsmanWithTeam(Team newSportsmanTeam) throws IllegalArgumentException, ShootingLogicsException
+	public void addNewSportsmanWithTeam(Team newSportsmanTeam) throws IllegalArgumentException, ShootingLogicsErrorException
 	{
 		if (newSportsmanTeam == null)
 		{
@@ -56,7 +56,7 @@ public class SportsmansModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 
@@ -66,9 +66,9 @@ public class SportsmansModifier
 	 * @param sportsmansToUpdate updating sportsman
 	 * @throws IllegalArgumentException sportsmansToUpdate is null or its team is
 	 * null
-	 * @throws ShootingLogicsException error while updating
+	 * @throws ShootingLogicsErrorException error while updating
 	 */
-	public void updateSportsman(Sportsman sportsmansToUpdate) throws IllegalArgumentException, ShootingLogicsException
+	public void updateSportsman(Sportsman sportsmansToUpdate) throws IllegalArgumentException, ShootingLogicsErrorException
 	{
 		if (sportsmansToUpdate == null)
 		{
@@ -85,7 +85,7 @@ public class SportsmansModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
 
@@ -37,9 +37,9 @@ public class PlacesModifier
 	 *
 	 * @param placeToAdd adding place. Must be not null and correct
 	 * @throws IllegalArgumentException placeToAdd is null or incorrect
-	 * @throws ShootingLogicsException error while adding
+	 * @throws ShootingLogicsErrorException error while adding
 	 */
-	public void addPlace(Place placeToAdd) throws IllegalArgumentException, ShootingLogicsException
+	public void addPlace(Place placeToAdd) throws IllegalArgumentException, ShootingLogicsErrorException
 	{
 		if (placeToAdd == null)
 		{
@@ -56,7 +56,7 @@ public class PlacesModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 
@@ -65,9 +65,9 @@ public class PlacesModifier
 	 *
 	 * @param placeToUpdate updating place. Must be not null, must be correct
 	 * @throws IllegalArgumentException placeToUpdate is null or incorrect
-	 * @throws ShootingLogicsException error while updating
+	 * @throws ShootingLogicsErrorException error while updating
 	 */
-	public void updatePlace(Place placeToUpdate) throws IllegalArgumentException, ShootingLogicsException
+	public void updatePlace(Place placeToUpdate) throws IllegalArgumentException, ShootingLogicsErrorException
 	{
 		if (placeToUpdate == null)
 		{
@@ -84,7 +84,7 @@ public class PlacesModifier
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 }

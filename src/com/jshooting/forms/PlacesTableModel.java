@@ -2,7 +2,7 @@ package com.jshooting.forms;
 
 import com.jshooting.logics.PlacesGetter;
 import com.jshooting.logics.ShootingLogicsFactory;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Place;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,7 +68,7 @@ public class PlacesTableModel extends AbstractTableModel
 		{
 			places = placesGetter.getAllPlaces();
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			places = new ArrayList<Place>();
 		}
@@ -108,7 +108,7 @@ public class PlacesTableModel extends AbstractTableModel
 		{
 			return placesGetter.getAllPlaces().size();
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			return 0;
 		}

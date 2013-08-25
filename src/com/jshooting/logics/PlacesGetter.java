@@ -1,6 +1,6 @@
 package com.jshooting.logics;
 
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.Place;
 import com.jshooting.shootingDatabase.PlacesTable;
 import java.util.Date;
@@ -38,9 +38,9 @@ public class PlacesGetter
 	 * Get all places
 	 *
 	 * @return list of all places
-	 * @throws ShootingLogicsException error while getting places
+	 * @throws ShootingLogicsErrorException error while getting places
 	 */
-	public List<Place> getAllPlaces() throws ShootingLogicsException
+	public List<Place> getAllPlaces() throws ShootingLogicsErrorException
 	{
 		try
 		{
@@ -48,7 +48,7 @@ public class PlacesGetter
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 
@@ -60,9 +60,9 @@ public class PlacesGetter
 	 * @return list of places exists in given period
 	 * @throws IllegalArgumentException periodDateFrom is null, periodDateTo is
 	 * null; periodDateFrom more than periodDateTo
-	 * @throws ShootingLogicsException error while getting
+	 * @throws ShootingLogicsErrorException error while getting
 	 */
-	public List<Place> getPlacesByPeriod(Date periodDateFrom, Date periodDateTo) throws IllegalArgumentException, ShootingLogicsException
+	public List<Place> getPlacesByPeriod(Date periodDateFrom, Date periodDateTo) throws IllegalArgumentException, ShootingLogicsErrorException
 	{
 		if (periodDateFrom == null)
 		{
@@ -83,7 +83,7 @@ public class PlacesGetter
 		}
 		catch (Exception ex)
 		{
-			throw new ShootingLogicsException(ex);
+			throw new ShootingLogicsErrorException(ex);
 		}
 	}
 }

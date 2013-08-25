@@ -3,7 +3,7 @@ package com.jshooting.forms;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.TrainingMethodsGetter;
 import com.jshooting.logics.TrainingMethodsModifier;
-import com.jshooting.logics.exceptions.ShootingLogicsException;
+import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
 import com.jshooting.model.TrainingMethod;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 		{
 			trainingMethods = trainingMethodsGetter.getAllTrainingMethods();
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			trainingMethods = new ArrayList<TrainingMethod>();
 		}
@@ -114,7 +114,7 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 				// do nothing
 			}
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			updateTrainingMethodsList();
 			fireTableCellUpdated(rowIndex, columnIndex);
@@ -133,7 +133,7 @@ public class TrainingMethodsTableModel extends AbstractTableModel
 			fireTableRowsInserted(trainingMethodsGetter.getAllTrainingMethods().size() - 1,
 							trainingMethodsGetter.getAllTrainingMethods().size() - 1);
 		}
-		catch (ShootingLogicsException ex)
+		catch (ShootingLogicsErrorException ex)
 		{
 			// do nothing
 		}
