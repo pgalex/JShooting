@@ -133,21 +133,26 @@ public class MainFrame extends javax.swing.JFrame
 	{
 		try
 		{
-			if (shootingDatabase != null)
-			{
-				UserSettings.getInstance().setDatabaseFileName(shootingDatabase.getFileName());
-			}
-			else
-			{
-				UserSettings.getInstance().setDatabaseFileName("");
-			}
-
-			UserSettings.getInstance().writeToFile(new File(USER_SETTINGS_FILE_NAME));
+			trySaveUserSettings();
 		}
 		catch (IOException ex)
 		{
 			Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
 		}
+	}
+
+	private void trySaveUserSettings() throws IOException
+	{
+		if (shootingDatabase != null)
+		{
+			UserSettings.getInstance().setDatabaseFileName(shootingDatabase.getFileName());
+		}
+		else
+		{
+			UserSettings.getInstance().setDatabaseFileName("");
+		}
+
+		UserSettings.getInstance().writeToFile(new File(USER_SETTINGS_FILE_NAME));
 	}
 
 	/**
@@ -189,6 +194,35 @@ public class MainFrame extends javax.swing.JFrame
 		else
 		{
 			jTextFieldDatabaseFileName.setText("");
+		}
+	}
+
+	private void tryShowCombinedReport() throws ShowingReportErrorException
+	{
+		ShootingTrainingsFilterDialog filterDialog = new ShootingTrainingsFilterDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+						new ShootingLogicsFactory(shootingDatabase));
+		filterDialog.setLocationRelativeTo(this);
+		filterDialog.setVisible(true);
+
+		if (filterDialog.isOKButtonPressed())
+		{
+			ShootingTrainingsFilter trainingsFilter = filterDialog.getFilter();
+			reportsMaker.showCombinedReportWithFilter(trainingsFilter, shootingDatabase.getShootingTrainingsTable());
+		}
+	}
+
+	private void tryShowIndividualReport() throws ShowingReportErrorException
+	{
+		ShootingTrainingsFilterDialog filterDialog = new ShootingTrainingsFilterDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
+						new ShootingLogicsFactory(shootingDatabase));
+		filterDialog.setOneSportsmanSelectingMode();
+		filterDialog.setLocationRelativeTo(this);
+		filterDialog.setVisible(true);
+
+		if (filterDialog.isOKButtonPressed())
+		{
+			ShootingTrainingsFilter trainingsFilter = filterDialog.getFilter();
+			reportsMaker.showIndividualReportWithFilter(trainingsFilter, shootingDatabase.getShootingTrainingsTable());
 		}
 	}
 
@@ -494,22 +528,13 @@ public class MainFrame extends javax.swing.JFrame
 
   private void jButtonCombinedActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCombinedActionPerformed
   {//GEN-HEADEREND:event_jButtonCombinedActionPerformed
-		ShootingTrainingsFilterDialog filterDialog = new ShootingTrainingsFilterDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
-						new ShootingLogicsFactory(shootingDatabase));
-		filterDialog.setLocationRelativeTo(this);
-		filterDialog.setVisible(true);
-
-		if (filterDialog.isOKButtonPressed())
+		try
 		{
-			ShootingTrainingsFilter trainingsFilter = filterDialog.getFilter();
-			try
-			{
-				reportsMaker.showCombinedReportWithFilter(trainingsFilter, shootingDatabase.getShootingTrainingsTable());
-			}
-			catch (ShowingReportErrorException ex)
-			{
-				JOptionPane.showMessageDialog(null, "Невозможно отобразить отчет: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
-			}
+			tryShowCombinedReport();
+		}
+		catch (ShowingReportErrorException ex)
+		{
+			JOptionPane.showMessageDialog(null, "Невозможно отобразить отчет: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 		}
   }//GEN-LAST:event_jButtonCombinedActionPerformed
 
@@ -523,23 +548,13 @@ public class MainFrame extends javax.swing.JFrame
 
   private void jButtonIndividualReportActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonIndividualReportActionPerformed
   {//GEN-HEADEREND:event_jButtonIndividualReportActionPerformed
-		ShootingTrainingsFilterDialog filterDialog = new ShootingTrainingsFilterDialog(this, Dialog.ModalityType.APPLICATION_MODAL,
-						new ShootingLogicsFactory(shootingDatabase));
-		filterDialog.setOneSportsmanSelectingMode();
-		filterDialog.setLocationRelativeTo(this);
-		filterDialog.setVisible(true);
-
-		if (filterDialog.isOKButtonPressed())
+		try
 		{
-			ShootingTrainingsFilter trainingsFilter = filterDialog.getFilter();
-			try
-			{
-				reportsMaker.showIndividualReportWithFilter(trainingsFilter, shootingDatabase.getShootingTrainingsTable());
-			}
-			catch (ShowingReportErrorException ex)
-			{
-				JOptionPane.showMessageDialog(null, "Невозможно отобразить отчет: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
-			}
+			tryShowIndividualReport();
+		}
+		catch (ShowingReportErrorException ex)
+		{
+			JOptionPane.showMessageDialog(null, "Невозможно отобразить отчет: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
 		}
   }//GEN-LAST:event_jButtonIndividualReportActionPerformed
 
