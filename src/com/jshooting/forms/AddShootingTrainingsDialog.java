@@ -80,6 +80,7 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 		});
 		hidingAnimationThread.start();
 	}
+	
 
 	/**
 	 * This method is called from within the constructor to initialize the form.

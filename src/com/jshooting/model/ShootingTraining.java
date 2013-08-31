@@ -138,6 +138,154 @@ public class ShootingTraining
 	 */
 	private byte[] missMarksStanding;
 
+	public boolean isValid()
+	{
+		return isSportsmanValid() && isTrainingMethodValid() && isDateValid()
+						&& isZeroingInValid() && isTrailValid() && isScattValid()
+						&& isTypeValid() && isNumLyingInRestValid() && isMissLyingInRestValid()
+						&& isNumLyingLoadingValid() && isMissLyingLoadingValid() && isNumLyingCompetitionValid()
+						&& isMissLyingCompetitionValid() && isNumStandingInRestValid() && isMissStandingInRestValid()
+						&& isNumStandingLoadingValid() && isMissStandingLoadingValid() && isNumStandingCompetitionValid()
+						&& isMissStandingCompetitionValid() && isFirstLyingLoadingValid() && isFirstLyingCompetitionValid()
+						&& isDelayLyingLoadingValid() && isDelayLyingCompetitionValid() && isFirstStandingLoadingValid()
+						&& isFirstStandingCompetitionValid() && isDelayStandingLoadingValid() && isDelayStandingCompetitionValid();
+	}
+
+	public boolean isSportsmanValid()
+	{
+		return sportsman != null;
+	}
+
+	public boolean isTrainingMethodValid()
+	{
+		return trainingMethod != null;
+	}
+
+	public boolean isDateValid()
+	{
+		return date != null;
+	}
+
+	public boolean isZeroingInValid()
+	{
+		return zeroingIn >= 0;
+	}
+
+	public boolean isTrailValid()
+	{
+		return trail >= 0;
+	}
+
+	public boolean isScattValid()
+	{
+		return scatt >= 0;
+	}
+
+	public boolean isTypeValid()
+	{
+		return type != null;
+	}
+
+	public boolean isNumLyingInRestValid()
+	{
+		return numLyingInRest >= 0;
+	}
+
+	public boolean isMissLyingInRestValid()
+	{
+		return missLyingInRest <= numLyingInRest;
+	}
+
+	public boolean isNumLyingLoadingValid()
+	{
+		return numLyingLoading >= 0;
+	}
+
+	public boolean isMissLyingLoadingValid()
+	{
+		return missLyingLoading <= numLyingLoading;
+	}
+
+	public boolean isNumLyingCompetitionValid()
+	{
+		return numLyingCompetition >= 0;
+	}
+
+	public boolean isMissLyingCompetitionValid()
+	{
+		return missLyingCompetition <= numLyingCompetition;
+	}
+
+	public boolean isNumStandingInRestValid()
+	{
+		return numStandingInRest >= 0;
+	}
+
+	public boolean isMissStandingInRestValid()
+	{
+		return missStandingInRest <= numStandingInRest;
+	}
+
+	public boolean isNumStandingLoadingValid()
+	{
+		return numStandingLoading >= 0;
+	}
+
+	public boolean isMissStandingLoadingValid()
+	{
+		return missStandingLoading <= numStandingLoading;
+	}
+
+	public boolean isNumStandingCompetitionValid()
+	{
+		return numStandingCompetition >= 0;
+	}
+
+	public boolean isMissStandingCompetitionValid()
+	{
+		return missStandingCompetition <= numStandingCompetition;
+	}
+
+	public boolean isFirstLyingLoadingValid()
+	{
+		return firstLyingLoading >= 0;
+	}
+
+	public boolean isFirstLyingCompetitionValid()
+	{
+		return firstLyingCompetition >= 0;
+	}
+
+	public boolean isDelayLyingLoadingValid()
+	{
+		return delayLyingLoading >= 0;
+	}
+
+	public boolean isDelayLyingCompetitionValid()
+	{
+		return delayLyingLoading >= 0;
+	}
+
+	public boolean isFirstStandingLoadingValid()
+	{
+		return firstStandingLoading >= 0;
+	}
+
+	public boolean isFirstStandingCompetitionValid()
+	{
+		return firstStandingCompetition >= 0;
+	}
+
+	public boolean isDelayStandingLoadingValid()
+	{
+		return delayStandingLoading >= 0;
+	}
+
+	public boolean isDelayStandingCompetitionValid()
+	{
+		return delayStandingCompetition >= 0;
+	}
+
 	/**
 	 * Id
 	 *
