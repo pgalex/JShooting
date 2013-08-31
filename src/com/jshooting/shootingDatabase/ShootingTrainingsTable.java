@@ -15,8 +15,8 @@ public interface ShootingTrainingsTable
 	/**
 	 * Update exists training
 	 *
-	 * @param trainingToUpdate updating training. Must be not null
-	 * @throws IllegalArgumentException trainingToUpdate is null
+	 * @param trainingToUpdate updating training. Must be not null and valid
+	 * @throws IllegalArgumentException trainingToUpdate is null or invalid
 	 * @throws DatabaseErrorException error while updating
 	 */
 	public void updateTraining(ShootingTraining trainingToUpdate) throws IllegalArgumentException, DatabaseErrorException;
@@ -26,8 +26,9 @@ public interface ShootingTrainingsTable
 	 *
 	 * @param trainingToDelete deleting training
 	 * @throws IllegalArgumentException trainingToDelete is null
+	 * @throws DatabaseErrorException error while deleting
 	 */
-	public void deleteTraining(ShootingTraining trainingToDelete) throws IllegalArgumentException;
+	public void deleteTraining(ShootingTraining trainingToDelete) throws IllegalArgumentException, DatabaseErrorException;
 
 	/**
 	 * Get all shoting trainings
@@ -41,10 +42,9 @@ public interface ShootingTrainingsTable
 	/**
 	 * Add new shooting training to database
 	 *
-	 * @param trainingToAdd adding shooting training. Must be not null; its
-	 * sportsman, date and training method must be not null
-	 * @throws IllegalArgumentException trainingToAdd or its sportsman, date or
-	 * training method is null
+	 * @param trainingToAdd adding shooting training. Must be not null; Must be
+	 * valid
+	 * @throws IllegalArgumentException trainingToAdd null or invalid
 	 * @throws DatabaseErrorException error while adding
 	 */
 	public void addTraining(ShootingTraining trainingToAdd) throws IllegalArgumentException, DatabaseErrorException;

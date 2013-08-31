@@ -35,10 +35,9 @@ public class ShootingTrainingsModifier
 	/**
 	 * Add shooting training
 	 *
-	 * @param trainingToAdd adding shooting training. Must be not null; its
-	 * sportsman, date and training method must be not null
-	 * @throws IllegalArgumentException trainingToAdd or its sportsman, date or
-	 * training method is null
+	 * @param trainingToAdd adding shooting training. Must be not null; Must be
+	 * valid
+	 * @throws IllegalArgumentException trainingToAdd is null or invalid
 	 * @throws ShootingLogicsErrorException error while adding
 	 */
 	public void addTraining(ShootingTraining trainingToAdd) throws IllegalArgumentException, ShootingLogicsErrorException
@@ -46,6 +45,10 @@ public class ShootingTrainingsModifier
 		if (trainingToAdd == null)
 		{
 			throw new IllegalArgumentException("trainingToAdd is null");
+		}
+		if (!trainingToAdd.isValid())
+		{
+			throw new IllegalArgumentException("trainingToAdd invalid");
 		}
 
 		try
@@ -85,8 +88,8 @@ public class ShootingTrainingsModifier
 	/**
 	 * Update exists training
 	 *
-	 * @param trainingToUpdate updating training. Must be not null
-	 * @throws IllegalArgumentException trainingToUpdate is null
+	 * @param trainingToUpdate updating training. Must be not null and valid
+	 * @throws IllegalArgumentException trainingToUpdate is null or invalid
 	 * @throws ShootingLogicsErrorException error while updating
 	 */
 	public void updateTraining(ShootingTraining trainingToUpdate) throws IllegalArgumentException, ShootingLogicsErrorException
@@ -94,6 +97,10 @@ public class ShootingTrainingsModifier
 		if (trainingToUpdate == null)
 		{
 			throw new IllegalArgumentException("trainingToUpdate is null");
+		}
+		if (!trainingToUpdate.isValid())
+		{
+			throw new IllegalArgumentException("trainingToUpdate invalid");
 		}
 
 		try

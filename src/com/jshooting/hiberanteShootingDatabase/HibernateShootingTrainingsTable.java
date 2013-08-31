@@ -43,18 +43,26 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 	 *
 	 * @param trainingToDelete deleting training
 	 * @throws IllegalArgumentException trainingToDelete is null
+	 * @throws DatabaseErrorException error while deleting
 	 */
 	@Override
-	public void deleteTraining(ShootingTraining trainingToDelete) throws IllegalArgumentException
+	public void deleteTraining(ShootingTraining trainingToDelete) throws IllegalArgumentException, DatabaseErrorException
 	{
 		if (trainingToDelete == null)
 		{
 			throw new IllegalArgumentException("trainingToDelete is null");
 		}
 
-		session.beginTransaction();
-		session.delete(trainingToDelete);
-		session.getTransaction().commit();
+		try
+		{
+			session.beginTransaction();
+			session.delete(trainingToDelete);
+			session.getTransaction().commit();
+		}
+		catch (Exception ex)
+		{
+			throw new DatabaseErrorException(ex);
+		}
 	}
 
 	/**
@@ -67,17 +75,23 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 	@Override
 	public List<ShootingTraining> getAllTrainings() throws DatabaseErrorException
 	{
-		List<ShootingTraining> trainings = session.createCriteria(ShootingTraining.class).list();
-		return trainings;
+		try
+		{
+			List<ShootingTraining> trainings = session.createCriteria(ShootingTraining.class).list();
+			return trainings;
+		}
+		catch (Exception ex)
+		{
+			throw new DatabaseErrorException(ex);
+		}
 	}
 
 	/**
 	 * Add new shooting training to database
 	 *
-	 * @param trainingToAdd adding shooting training. Must be not null; its
-	 * sportsman, date and training method must be not null
-	 * @throws IllegalArgumentException trainingToAdd or its sportsman, date or
-	 * training method is null
+	 * @param trainingToAdd adding shooting training. Must be not null; Must be
+	 * valid
+	 * @throws IllegalArgumentException trainingToAdd null or invalid
 	 * @throws DatabaseErrorException error while adding
 	 */
 	@Override
@@ -87,22 +101,21 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		{
 			throw new IllegalArgumentException("trainingToAdd is null");
 		}
-		if (trainingToAdd.getSportsman() == null)
+		if (!trainingToAdd.isValid())
 		{
-			throw new IllegalArgumentException("trainingToAdd sportsman is null");
-		}
-		if (trainingToAdd.getDate() == null)
-		{
-			throw new IllegalArgumentException("trainingToAdd date is null");
-		}
-		if (trainingToAdd.getTrainingMethod() == null)
-		{
-			throw new IllegalArgumentException("trainingToAdd training method is null");
+			throw new IllegalArgumentException("trainingToAdd invalid");
 		}
 
-		session.beginTransaction();
-		session.save(trainingToAdd);
-		session.getTransaction().commit();
+		try
+		{
+			session.beginTransaction();
+			session.save(trainingToAdd);
+			session.getTransaction().commit();
+		}
+		catch (Exception ex)
+		{
+			throw new DatabaseErrorException(ex);
+		}
 	}
 
 	/**
@@ -123,8 +136,15 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 			throw new IllegalArgumentException("filter is null");
 		}
 
-		Criteria criteria = createCriteriaByFilter(filter, session);
-		return criteria.list();
+		try
+		{
+			Criteria criteria = createCriteriaByFilter(filter, session);
+			return criteria.list();
+		}
+		catch (Exception ex)
+		{
+			throw new DatabaseErrorException(ex);
+		}
 	}
 
 	/**
@@ -158,8 +178,8 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 	/**
 	 * Update exists training
 	 *
-	 * @param trainingToUpdate updating training. Must be not null
-	 * @throws IllegalArgumentException trainingToUpdate is null
+	 * @param trainingToUpdate updating training. Must be not null and valid
+	 * @throws IllegalArgumentException trainingToUpdate is null or invalid
 	 * @throws DatabaseErrorException error while updating
 	 */
 	@Override
@@ -168,6 +188,10 @@ public class HibernateShootingTrainingsTable implements ShootingTrainingsTable
 		if (trainingToUpdate == null)
 		{
 			throw new IllegalArgumentException("trainingToUpdate is null");
+		}
+		if (!trainingToUpdate.isValid())
+		{
+			throw new IllegalArgumentException("trainingToUpdate invalid");
 		}
 
 		try

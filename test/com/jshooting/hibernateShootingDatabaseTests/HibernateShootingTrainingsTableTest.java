@@ -59,7 +59,7 @@ public class HibernateShootingTrainingsTableTest
 		shootingTraining.setTrainingMethod(trainingMethod);
 		shootingTraining.setType(ShootingTrainingType.COMPLEX);
 		shootingTraining.setWeather("waether");
-		
+
 		shootingTrainingsTable.addTraining(shootingTraining);
 		assertEquals(1, shootingTrainingsTable.getAllTrainings().size());
 		ShootingTraining deletingTraining = shootingTrainingsTable.getAllTrainings().get(0);
@@ -338,6 +338,7 @@ public class HibernateShootingTrainingsTableTest
 		shootingTraining.setScatt(20);
 		shootingTraining.setTrail(21);
 		shootingTraining.setZeroingIn(22);
+		shootingTraining.setNumLyingCompetition(23);
 
 		shootingTraining.setMissMarksLying(new byte[]
 		{
@@ -379,6 +380,7 @@ public class HibernateShootingTrainingsTableTest
 		assertEquals(20, allTrainings.get(0).getScatt());
 		assertEquals(21, allTrainings.get(0).getTrail());
 		assertEquals(22, allTrainings.get(0).getZeroingIn());
+		assertEquals(23, allTrainings.get(0).getNumLyingCompetition());
 		assertArrayEquals(new byte[]
 		{
 			1, 2, 3
