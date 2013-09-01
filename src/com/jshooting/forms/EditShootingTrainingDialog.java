@@ -7,7 +7,6 @@ import static com.jshooting.model.ShootingTrainingType.COMPLEX;
 import com.jshooting.model.Sportsman;
 import com.jshooting.model.TrainingMethod;
 import java.awt.Window;
-import javax.swing.JOptionPane;
 
 /**
  * Dialog for adding shooting training
@@ -118,30 +117,14 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 	}
 
 	/**
-	 * Get editing shooting training
-	 *
-	 * @return Shooting training editing with dialog
-	 * @throws NullPointerException sportsman or method not selected in dialog
+	 * Fill editing editingShootingTraining with values entered in dialog controls
 	 */
-	public ShootingTraining getEditingShootingTraining() throws NullPointerException
+	private void fillEditingShootingTrainingWithDialogContols()
 	{
-		Object selectedSportsmanItem = jComboBoxSportsman.getSelectedItem();
-		Object selectedMethodItem = jComboBoxTrainingMethod.getSelectedItem();
-		if (!(selectedSportsmanItem instanceof Sportsman))
-		{
-			JOptionPane.showMessageDialog(null, "Необходимо выбрать спортсмена", "Ошибка", JOptionPane.ERROR_MESSAGE);
-			throw new NullPointerException("sportsman not selected");
-		}
-		if (!(selectedMethodItem instanceof TrainingMethod))
-		{
-			JOptionPane.showMessageDialog(null, "Необходимо выбрать средство", "Ошибка", JOptionPane.ERROR_MESSAGE);
-			throw new NullPointerException("method not selected");
-		}
-
-		editingShootingTraining.setSportsman((Sportsman) selectedSportsmanItem);
+		editingShootingTraining.setSportsman((Sportsman) jComboBoxSportsman.getSelectedItem());
 		editingShootingTraining.setDate(jDateChooserTrainingDate.getDate());
 		editingShootingTraining.setType(ShootingTrainingType.values()[jComboBoxTrainingType.getSelectedIndex()]);
-		editingShootingTraining.setTrainingMethod((TrainingMethod) selectedMethodItem);
+		editingShootingTraining.setTrainingMethod((TrainingMethod) jComboBoxTrainingMethod.getSelectedItem());
 		editingShootingTraining.setWeather(jTextFieldWeather.getText());
 		editingShootingTraining.setComments(jTextFieldComments.getText());
 
@@ -172,7 +155,16 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 		editingShootingTraining.setZeroingIn((Integer) jSpinnerZeroingIn.getValue());
 		editingShootingTraining.setTrail((Integer) jSpinnerTrail.getValue());
 		editingShootingTraining.setScatt((Integer) jSpinnerScatt.getValue());
+	}
 
+	/**
+	 * Get editing shooting training
+	 *
+	 * @return Shooting training editing with dialog
+	 */
+	public ShootingTraining getEditingShootingTraining()
+	{
+		fillEditingShootingTrainingWithDialogContols();
 		return editingShootingTraining;
 	}
 
@@ -711,20 +703,16 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 
   private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOkActionPerformed
   {//GEN-HEADEREND:event_jButtonOkActionPerformed
-		if (!(jComboBoxSportsman.getSelectedItem() instanceof Sportsman))
+		fillEditingShootingTrainingWithDialogContols();
+		if (editingShootingTraining.isValid())
 		{
-			JOptionPane.showMessageDialog(null, "Необходимо выбрать спортсмена", "Ошибка", JOptionPane.ERROR_MESSAGE);
-			return;
+			okButtonPressed = true;
+			setVisible(false);
 		}
-
-		if (!(jComboBoxTrainingMethod.getSelectedItem() instanceof TrainingMethod))
+		else
 		{
-			JOptionPane.showMessageDialog(null, "Необходимо выбрать средство", "Ошибка", JOptionPane.ERROR_MESSAGE);
-			return;
+			dialogController.showShootingTrainingsErrors(editingShootingTraining, this);
 		}
-
-		okButtonPressed = true;
-		setVisible(false);
   }//GEN-LAST:event_jButtonOkActionPerformed
 
   private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelActionPerformed

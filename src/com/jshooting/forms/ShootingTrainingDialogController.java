@@ -8,12 +8,15 @@ import com.jshooting.logics.SportsmansByTeamGetter;
 import com.jshooting.logics.TeamsGetter;
 import com.jshooting.logics.TrainingMethodsGetter;
 import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
+import com.jshooting.model.ShootingTraining;
 import com.jshooting.model.Sportsman;
 import com.jshooting.model.Team;
 import com.jshooting.model.TrainingMethod;
+import java.awt.Component;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  * Cantains logics and common part of dialogs displaying and modifing shooting
@@ -73,6 +76,67 @@ public class ShootingTrainingDialogController
 		teamsComboBoxModel = new DefaultComboBoxModel();
 		sportsmansComboBoxModel = new DefaultComboBoxModel();
 		trainingMethodsComboBoxModel = new DefaultComboBoxModel();
+	}
+
+	/**
+	 * Show error messages for not valid data of shooting training
+	 *
+	 * @param shootingTraining shooting training to show error messages of. Must
+	 * be not null
+	 * @param errorMessageParent parent components of error message dialog
+	 * @throws IllegalArgumentException shootingTraining is null
+	 */
+	public void showShootingTrainingsErrors(ShootingTraining shootingTraining, Component errorMessageParent) throws IllegalArgumentException
+	{
+		if (shootingTraining == null)
+		{
+			throw new IllegalArgumentException("shootingTraining is null");
+		}
+
+		if (!shootingTraining.isSportsmanSet())
+		{
+			JOptionPane.showMessageDialog(errorMessageParent, "Необходимо выбрать спортсмена", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		if (!shootingTraining.isTrainingMethodSet())
+		{
+			JOptionPane.showMessageDialog(errorMessageParent, "Необходимо выбрать средство", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (!shootingTraining.isMissLyingCompetitionLessThanNum())
+		{
+			JOptionPane.showMessageDialog(errorMessageParent, "Количество промахов больше количества выстрелов", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (!shootingTraining.isMissLyingInRestLessThanNum())
+		{
+			JOptionPane.showMessageDialog(errorMessageParent, "Количество промахов больше количества выстрелов", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		if (!shootingTraining.isMissLyingLoadingLessThanNum())
+		{
+			JOptionPane.showMessageDialog(errorMessageParent, "Количество промахов больше количества выстрелов", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (!shootingTraining.isMissStandingCompetitionLessThanNum())
+		{
+			JOptionPane.showMessageDialog(errorMessageParent, "Количество промахов больше количества выстрелов", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (!shootingTraining.isMissStandingInRestLessThanNum())
+		{
+			JOptionPane.showMessageDialog(errorMessageParent, "Количество промахов больше количества выстрелов", "Ошибка", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (!shootingTraining.isMissStandingLoadingLessThanNum())
+		{
+			JOptionPane.showMessageDialog(errorMessageParent, "Количество промахов больше количества выстрелов", "Ошибка", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	/**

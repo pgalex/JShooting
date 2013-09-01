@@ -140,23 +140,23 @@ public class ShootingTraining
 
 	public boolean isValid()
 	{
-		return isSportsmanValid() && isTrainingMethodValid() && isDateValid()
+		return isSportsmanSet() && isTrainingMethodSet() && isDateValid()
 						&& isZeroingInValid() && isTrailValid() && isScattValid()
-						&& isTypeValid() && isNumLyingInRestValid() && isMissLyingInRestValid()
-						&& isNumLyingLoadingValid() && isMissLyingLoadingValid() && isNumLyingCompetitionValid()
-						&& isMissLyingCompetitionValid() && isNumStandingInRestValid() && isMissStandingInRestValid()
-						&& isNumStandingLoadingValid() && isMissStandingLoadingValid() && isNumStandingCompetitionValid()
-						&& isMissStandingCompetitionValid() && isFirstLyingLoadingValid() && isFirstLyingCompetitionValid()
+						&& isTypeValid() && isNumLyingInRestValid() && isMissLyingInRestLessThanNum()
+						&& isNumLyingLoadingValid() && isMissLyingLoadingLessThanNum() && isNumLyingCompetitionValid()
+						&& isMissLyingCompetitionLessThanNum() && isNumStandingInRestValid() && isMissStandingInRestLessThanNum()
+						&& isNumStandingLoadingValid() && isMissStandingLoadingLessThanNum() && isNumStandingCompetitionValid()
+						&& isMissStandingCompetitionLessThanNum() && isFirstLyingLoadingValid() && isFirstLyingCompetitionValid()
 						&& isDelayLyingLoadingValid() && isDelayLyingCompetitionValid() && isFirstStandingLoadingValid()
 						&& isFirstStandingCompetitionValid() && isDelayStandingLoadingValid() && isDelayStandingCompetitionValid();
 	}
 
-	public boolean isSportsmanValid()
+	public boolean isSportsmanSet()
 	{
 		return sportsman != null;
 	}
 
-	public boolean isTrainingMethodValid()
+	public boolean isTrainingMethodSet()
 	{
 		return trainingMethod != null;
 	}
@@ -191,7 +191,7 @@ public class ShootingTraining
 		return numLyingInRest >= 0;
 	}
 
-	public boolean isMissLyingInRestValid()
+	public boolean isMissLyingInRestLessThanNum()
 	{
 		return missLyingInRest <= numLyingInRest;
 	}
@@ -201,7 +201,7 @@ public class ShootingTraining
 		return numLyingLoading >= 0;
 	}
 
-	public boolean isMissLyingLoadingValid()
+	public boolean isMissLyingLoadingLessThanNum()
 	{
 		return missLyingLoading <= numLyingLoading;
 	}
@@ -211,7 +211,7 @@ public class ShootingTraining
 		return numLyingCompetition >= 0;
 	}
 
-	public boolean isMissLyingCompetitionValid()
+	public boolean isMissLyingCompetitionLessThanNum()
 	{
 		return missLyingCompetition <= numLyingCompetition;
 	}
@@ -221,7 +221,7 @@ public class ShootingTraining
 		return numStandingInRest >= 0;
 	}
 
-	public boolean isMissStandingInRestValid()
+	public boolean isMissStandingInRestLessThanNum()
 	{
 		return missStandingInRest <= numStandingInRest;
 	}
@@ -231,7 +231,7 @@ public class ShootingTraining
 		return numStandingLoading >= 0;
 	}
 
-	public boolean isMissStandingLoadingValid()
+	public boolean isMissStandingLoadingLessThanNum()
 	{
 		return missStandingLoading <= numStandingLoading;
 	}
@@ -241,7 +241,7 @@ public class ShootingTraining
 		return numStandingCompetition >= 0;
 	}
 
-	public boolean isMissStandingCompetitionValid()
+	public boolean isMissStandingCompetitionLessThanNum()
 	{
 		return missStandingCompetition <= numStandingCompetition;
 	}

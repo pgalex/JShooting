@@ -80,7 +80,51 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 		});
 		hidingAnimationThread.start();
 	}
-	
+
+	/**
+	 * Get shooting training with data fills by dialog controls value entered by
+	 * user
+	 */
+	private ShootingTraining getTrainingWithEnteringParameters()
+	{
+		ShootingTraining training = new ShootingTraining();
+		training.setSportsman((Sportsman) jComboBoxSportsman.getSelectedItem());
+		training.setDate(jDateChooserTrainingDate.getDate());
+		training.setType(ShootingTrainingType.values()[jComboBoxTrainingType.getSelectedIndex()]);
+		training.setTrainingMethod((TrainingMethod) jComboBoxTrainingMethod.getSelectedItem());
+		training.setWeather(jTextFieldWeather.getText());
+		training.setComments(jTextFieldComments.getText());
+
+		training.setNumLyingInRest((Integer) jSpinnerNumLyingInRest.getValue());
+		training.setMissLyingInRest((Integer) jSpinnerMissLyingInRest.getValue());
+		training.setNumLyingLoading((Integer) jSpinnerNumLyingLoading.getValue());
+		training.setMissLyingLoading((Integer) jSpinnerMissLyingLoading.getValue());
+		training.setNumLyingCompetition((Integer) jSpinnerNumLyingCompetition.getValue());
+		training.setMissLyingCompetition((Integer) jSpinnerMissLyingCompetition.getValue());
+
+		training.setNumStandingInRest((Integer) jSpinnerNumStandingInRest.getValue());
+		training.setMissStandingInRest(((Integer) jSpinnerMissStandingInRest.getValue()));
+		training.setNumStandingLoading((Integer) jSpinnerNumStandingLoading.getValue());
+		training.setMissStandingLoading((Integer) jSpinnerMissStandingLoading.getValue());
+		training.setNumStandingCompetition((Integer) jSpinnerNumStandingCompetition.getValue());
+		training.setMissStandingCompetition((Integer) jSpinnerMissStandingCompetition.getValue());
+
+		training.setFirstLyingLoading((Integer) jSpinnerFirstLyingLoading.getValue());
+		training.setFirstLyingCompetition((Integer) jSpinnerFirstLyingCompetition.getValue());
+		training.setDelayLyingLoading((Integer) jSpinnerDelayLyingLoading.getValue());
+		training.setDelayLyingCompetition((Integer) jSpinnerDelayLyingCompetition.getValue());
+
+		training.setFirstStandingLoading((Integer) jSpinnerFirstStandingLoading.getValue());
+		training.setFirstStandingCompetition((Integer) jSpinnerFirstStandingCompetition.getValue());
+		training.setDelayStandingLoading((Integer) jSpinnerDelayStandingLoading.getValue());
+		training.setDelayStandingCompetition((Integer) jSpinnerDelayStandingCompetition.getValue());
+
+		training.setZeroingIn((Integer) jSpinnerZeroingIn.getValue());
+		training.setTrail((Integer) jSpinnerTrail.getValue());
+		training.setScatt((Integer) jSpinnerScatt.getValue());
+
+		return training;
+	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -604,63 +648,22 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 
   private void jButtonAddTrainingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingActionPerformed
-		Object selectedSportsmanItem = jComboBoxSportsman.getSelectedItem();
-		Object selectedMethodItem = jComboBoxTrainingMethod.getSelectedItem();
-		if (!(selectedSportsmanItem instanceof Sportsman))
+		ShootingTraining newTraining = getTrainingWithEnteringParameters();
+		if (newTraining.isValid())
 		{
-			JOptionPane.showMessageDialog(null, "Необходимо выбрать спортсмена", "Ошибка", JOptionPane.ERROR_MESSAGE);
-			return;
+			try
+			{
+				shootingTrainingModifier.addTraining(newTraining);
+				showAddingTrainingAnimation();
+			}
+			catch (ShootingLogicsErrorException ex)
+			{
+				JOptionPane.showMessageDialog(this, "Невозможно добавить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+			}
 		}
-		if (!(selectedMethodItem instanceof TrainingMethod))
+		else
 		{
-			JOptionPane.showMessageDialog(null, "Необходимо выбрать средство", "Ошибка", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		
-		try
-		{
-			ShootingTraining newTraining = new ShootingTraining();
-			newTraining.setSportsman((Sportsman) selectedSportsmanItem);
-			newTraining.setDate(jDateChooserTrainingDate.getDate());
-			newTraining.setType(ShootingTrainingType.values()[jComboBoxTrainingType.getSelectedIndex()]);
-			newTraining.setTrainingMethod((TrainingMethod) selectedMethodItem);
-			newTraining.setWeather(jTextFieldWeather.getText());
-			newTraining.setComments(jTextFieldComments.getText());
-
-			newTraining.setNumLyingInRest((Integer) jSpinnerNumLyingInRest.getValue());
-			newTraining.setMissLyingInRest((Integer) jSpinnerMissLyingInRest.getValue());
-			newTraining.setNumLyingLoading((Integer) jSpinnerNumLyingLoading.getValue());
-			newTraining.setMissLyingLoading((Integer) jSpinnerMissLyingLoading.getValue());
-			newTraining.setNumLyingCompetition((Integer) jSpinnerNumLyingCompetition.getValue());
-			newTraining.setMissLyingCompetition((Integer) jSpinnerMissLyingCompetition.getValue());
-
-			newTraining.setNumStandingInRest((Integer) jSpinnerNumStandingInRest.getValue());
-			newTraining.setMissStandingInRest(((Integer) jSpinnerMissStandingInRest.getValue()));
-			newTraining.setNumStandingLoading((Integer) jSpinnerNumStandingLoading.getValue());
-			newTraining.setMissStandingLoading((Integer) jSpinnerMissStandingLoading.getValue());
-			newTraining.setNumStandingCompetition((Integer) jSpinnerNumStandingCompetition.getValue());
-			newTraining.setMissStandingCompetition((Integer) jSpinnerMissStandingCompetition.getValue());
-
-			newTraining.setFirstLyingLoading((Integer) jSpinnerFirstLyingLoading.getValue());
-			newTraining.setFirstLyingCompetition((Integer) jSpinnerFirstLyingCompetition.getValue());
-			newTraining.setDelayLyingLoading((Integer) jSpinnerDelayLyingLoading.getValue());
-			newTraining.setDelayLyingCompetition((Integer) jSpinnerDelayLyingCompetition.getValue());
-
-			newTraining.setFirstStandingLoading((Integer) jSpinnerFirstStandingLoading.getValue());
-			newTraining.setFirstStandingCompetition((Integer) jSpinnerFirstStandingCompetition.getValue());
-			newTraining.setDelayStandingLoading((Integer) jSpinnerDelayStandingLoading.getValue());
-			newTraining.setDelayStandingCompetition((Integer) jSpinnerDelayStandingCompetition.getValue());
-
-			newTraining.setZeroingIn((Integer) jSpinnerZeroingIn.getValue());
-			newTraining.setTrail((Integer) jSpinnerTrail.getValue());
-			newTraining.setScatt((Integer) jSpinnerScatt.getValue());
-
-			shootingTrainingModifier.addTraining(newTraining);
-			showAddingTrainingAnimation();
-		}
-		catch (ShootingLogicsErrorException ex)
-		{
-			JOptionPane.showMessageDialog(null, "Невозможно добавить тренировку: " + ex.getLocalizedMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+			dialogController.showShootingTrainingsErrors(newTraining, this);
 		}
   }//GEN-LAST:event_jButtonAddTrainingActionPerformed
   private void jDateChooserTrainingDatePropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_jDateChooserTrainingDatePropertyChange
