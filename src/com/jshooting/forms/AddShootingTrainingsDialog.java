@@ -195,6 +195,8 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
     jLabel26 = new javax.swing.JLabel();
     jSpinnerZeroingIn = new javax.swing.JSpinner();
     jSpinnerScatt = new javax.swing.JSpinner();
+    jToggleButton1 = new javax.swing.JToggleButton();
+    jToggleButton2 = new javax.swing.JToggleButton();
     jLabelAddingToDatabaseAnimation = new javax.swing.JLabel();
     jTextFieldPlaceName = new javax.swing.JTextField();
     jLabel28 = new javax.swing.JLabel();
@@ -364,6 +366,10 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 
     jSpinnerScatt.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
+    jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньЛежаМини.png"))); // NOI18N
+
+    jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньСтояМини.png"))); // NOI18N
+
     org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -462,13 +468,16 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
                   .add(jLabel25))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                  .add(jSpinnerZeroingIn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                  .add(jSpinnerTrail, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                  .add(jSpinnerTrail, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                  .add(jSpinnerZeroingIn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
               .add(jPanel1Layout.createSequentialGroup()
                 .add(jLabel26, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 81, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(jSpinnerScatt, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-            .add(0, 0, Short.MAX_VALUE)))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jToggleButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jToggleButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
     jPanel1Layout.setVerticalGroup(
@@ -503,7 +512,7 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
           .add(jSpinnerMissStandingInRest, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jSpinnerNumLyingInRest, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jSpinnerMissLyingInRest, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
             .add(jSpinnerFirstLyingLoading)
@@ -529,18 +538,22 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
             .add(org.jdesktop.layout.GroupLayout.LEADING, jSpinnerFirstStandingCompetition))
           .add(jLabel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .add(18, 18, 18)
-        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-          .add(jLabel25, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jSpinnerZeroingIn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-          .add(jLabel27, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jSpinnerTrail))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(jLabel26, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .add(jSpinnerScatt, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .add(jPanel1Layout.createSequentialGroup()
+            .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+              .add(jLabel25, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(jSpinnerZeroingIn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(7, 7, 7)
+            .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+              .add(jLabel27, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(jSpinnerTrail))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(jLabel26, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(jSpinnerScatt, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+          .add(jToggleButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jToggleButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap())
     );
 
     jLabelAddingToDatabaseAnimation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/ajax-loader.gif"))); // NOI18N
@@ -587,7 +600,7 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
             .add(0, 0, Short.MAX_VALUE))
           .add(layout.createSequentialGroup()
             .add(jLabel6)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 23, Short.MAX_VALUE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 37, Short.MAX_VALUE)
             .add(jTextFieldComments, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 803, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
@@ -736,5 +749,7 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
   private javax.swing.JTextField jTextFieldComments;
   private javax.swing.JTextField jTextFieldPlaceName;
   private javax.swing.JTextField jTextFieldWeather;
+  private javax.swing.JToggleButton jToggleButton1;
+  private javax.swing.JToggleButton jToggleButton2;
   // End of variables declaration//GEN-END:variables
 }
