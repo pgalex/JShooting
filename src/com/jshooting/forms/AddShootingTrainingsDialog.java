@@ -195,8 +195,8 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
     jLabel26 = new javax.swing.JLabel();
     jSpinnerZeroingIn = new javax.swing.JSpinner();
     jSpinnerScatt = new javax.swing.JSpinner();
-    jToggleButton1 = new javax.swing.JToggleButton();
-    jToggleButton2 = new javax.swing.JToggleButton();
+    jToggleButtonEditMissMarksLying = new javax.swing.JToggleButton();
+    jToggleButtonEditMissMarksStanding = new javax.swing.JToggleButton();
     jLabelAddingToDatabaseAnimation = new javax.swing.JLabel();
     jTextFieldPlaceName = new javax.swing.JTextField();
     jLabel28 = new javax.swing.JLabel();
@@ -366,9 +366,23 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 
     jSpinnerScatt.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
-    jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньЛежаМини.png"))); // NOI18N
+    jToggleButtonEditMissMarksLying.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньЛежаМини.png"))); // NOI18N
+    jToggleButtonEditMissMarksLying.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jToggleButtonEditMissMarksLyingActionPerformed(evt);
+      }
+    });
 
-    jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньСтояМини.png"))); // NOI18N
+    jToggleButtonEditMissMarksStanding.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньСтояМини.png"))); // NOI18N
+    jToggleButtonEditMissMarksStanding.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jToggleButtonEditMissMarksStandingActionPerformed(evt);
+      }
+    });
 
     org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
@@ -475,9 +489,9 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
                 .add(18, 18, 18)
                 .add(jSpinnerScatt, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jToggleButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(jToggleButtonEditMissMarksLying, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jToggleButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+            .add(jToggleButtonEditMissMarksStanding, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
     jPanel1Layout.setVerticalGroup(
@@ -551,8 +565,8 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
             .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
               .add(jLabel26, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
               .add(jSpinnerScatt, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-          .add(jToggleButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jToggleButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+          .add(jToggleButtonEditMissMarksLying, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jToggleButtonEditMissMarksStanding, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addContainerGap())
     );
 
@@ -686,6 +700,22 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 			jTextFieldPlaceName.setText(dialogController.findPlacesNamesByTrainingDate(jDateChooserTrainingDate.getDate()));
 		}
   }//GEN-LAST:event_jDateChooserTrainingDatePropertyChange
+
+  private void jToggleButtonEditMissMarksLyingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButtonEditMissMarksLyingActionPerformed
+  {//GEN-HEADEREND:event_jToggleButtonEditMissMarksLyingActionPerformed
+		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.LYING);
+		editMissMarksDialog.setLocationRelativeTo(this);
+		editMissMarksDialog.setVisible(true);
+		jToggleButtonEditMissMarksLying.setSelected(false);
+  }//GEN-LAST:event_jToggleButtonEditMissMarksLyingActionPerformed
+
+  private void jToggleButtonEditMissMarksStandingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButtonEditMissMarksStandingActionPerformed
+  {//GEN-HEADEREND:event_jToggleButtonEditMissMarksStandingActionPerformed
+		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.STANDING);
+		editMissMarksDialog.setLocationRelativeTo(this);
+		editMissMarksDialog.setVisible(true);
+		jToggleButtonEditMissMarksStanding.setSelected(false);
+  }//GEN-LAST:event_jToggleButtonEditMissMarksStandingActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddTraining;
   private javax.swing.JComboBox jComboBoxSportsman;
@@ -749,7 +779,7 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
   private javax.swing.JTextField jTextFieldComments;
   private javax.swing.JTextField jTextFieldPlaceName;
   private javax.swing.JTextField jTextFieldWeather;
-  private javax.swing.JToggleButton jToggleButton1;
-  private javax.swing.JToggleButton jToggleButton2;
+  private javax.swing.JToggleButton jToggleButtonEditMissMarksLying;
+  private javax.swing.JToggleButton jToggleButtonEditMissMarksStanding;
   // End of variables declaration//GEN-END:variables
 }

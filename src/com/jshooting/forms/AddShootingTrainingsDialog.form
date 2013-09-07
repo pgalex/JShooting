@@ -370,9 +370,9 @@
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jToggleButton1" min="-2" pref="97" max="-2" attributes="0"/>
+                          <Component id="jToggleButtonEditMissMarksLying" min="-2" pref="97" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jToggleButton2" min="-2" pref="97" max="-2" attributes="0"/>
+                          <Component id="jToggleButtonEditMissMarksStanding" min="-2" pref="97" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -466,8 +466,8 @@
                               <Component id="jSpinnerScatt" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jToggleButton1" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
-                      <Component id="jToggleButton2" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                      <Component id="jToggleButtonEditMissMarksLying" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                      <Component id="jToggleButtonEditMissMarksStanding" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -786,19 +786,25 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+        <Component class="javax.swing.JToggleButton" name="jToggleButtonEditMissMarksLying">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/jshooting/resources/&#x43c;&#x438;&#x448;&#x435;&#x43d;&#x44c;&#x41b;&#x435;&#x436;&#x430;&#x41c;&#x438;&#x43d;&#x438;.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButtonEditMissMarksLyingActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton2">
+        <Component class="javax.swing.JToggleButton" name="jToggleButtonEditMissMarksStanding">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/jshooting/resources/&#x43c;&#x438;&#x448;&#x435;&#x43d;&#x44c;&#x421;&#x442;&#x43e;&#x44f;&#x41c;&#x438;&#x43d;&#x438;.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButtonEditMissMarksStandingActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
