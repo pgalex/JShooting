@@ -1,6 +1,13 @@
 package com.jshooting.model;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Shooting training
@@ -925,5 +932,70 @@ public class ShootingTraining
 	public void setMissMarksStanding(byte[] missMarksStanding)
 	{
 		this.missMarksStanding = missMarksStanding;
+	}
+
+	public MissMarksArray getMissMarksArrayLying()
+	{
+		if (missMarksLying != null)
+		{
+			try
+			{
+				return tryReadMissMarksArray();
+			}
+			catch (IOException ex)
+			{
+				return new MissMarksArray();
+			}
+		}
+		else
+		{
+			return new MissMarksArray();
+		}
+	}
+
+	private MissMarksArray tryReadMissMarksArray() throws IOException
+	{
+		DataInputStream input = new DataInputStream(new ByteArrayInputStream(missMarksLying));
+		MissMarksArray missMarksArray = new MissMarksArray();
+		missMarksArray.readFromStream(input);
+		return missMarksArray;
+	}
+
+	public void setMissMarkArrayLying(MissMarksArray missMarksArray) throws IllegalArgumentException
+	{
+		if (missMarksArray == null)
+		{
+			throw new IllegalArgumentException("missMarksArray is null");
+		}
+
+		try
+		{
+			ByteArrayOutputStream bytesOutput = new ByteArrayOutputStream();
+			missMarksArray.writeToStream(new DataOutputStream(bytesOutput));
+			missMarksLying = bytesOutput.toByteArray();
+		}
+		catch (IOException ex)
+		{
+			missMarksLying = null;
+		}
+	}
+	
+	public void setMissMarkArrayStanding(MissMarksArray missMarksArray) throws IllegalArgumentException
+	{
+		if (missMarksArray == null)
+		{
+			throw new IllegalArgumentException("missMarksArray is null");
+		}
+
+		try
+		{
+			ByteArrayOutputStream bytesOutput = new ByteArrayOutputStream();
+			missMarksArray.writeToStream(new DataOutputStream(bytesOutput));
+			missMarksStanding = bytesOutput.toByteArray();
+		}
+		catch (IOException ex)
+		{
+			missMarksStanding = null;
+		}
 	}
 }

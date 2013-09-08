@@ -1,6 +1,9 @@
 package com.jshooting.model;
 
 import java.awt.geom.Point2D;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -15,7 +18,7 @@ public class MissMarksArray
 	 * Размер отметки промаха
 	 */
 	public static double MISS_MAKR_SIZE = 0;
-
+	
 	static
 	{
 		ImageIcon missMarkIcon = new javax.swing.ImageIcon(MissMarksArray.class.getClass().getResource("/com/jshooting/resources/отметкаПромаха.png"));
@@ -55,7 +58,7 @@ public class MissMarksArray
 		{
 			throw new IllegalArgumentException("index out of bounds");
 		}
-
+		
 		return missMarks.get(index);
 	}
 
@@ -79,7 +82,7 @@ public class MissMarksArray
 		{
 			throw new IllegalArgumentException("missMarkToAdd is null");
 		}
-
+		
 		missMarks.add(missMarkToAdd);
 	}
 
@@ -117,7 +120,39 @@ public class MissMarksArray
 				foundMissMarks.add(mark);
 			}
 		}
-
+		
 		return foundMissMarks;
+	}
+	
+	public void writeToStream(DataOutputStream outputStream) throws IllegalArgumentException, IOException
+	{
+		if (outputStream == null)
+		{
+			throw new IllegalArgumentException("outputStream is null");
+		}
+		
+		outputStream.writeInt(missMarks.size());
+		for (Point2D mark : missMarks)
+		{
+			outputStream.writeDouble(mark.getX());
+			outputStream.writeDouble(mark.getY());
+		}
+	}
+	
+	public void readFromStream(DataInputStream inputStream) throws IllegalArgumentException, IOException
+	{
+		if (inputStream == null)
+		{
+			throw new IllegalArgumentException("inputStream is null");
+		}
+		
+		int marksCount = inputStream.readInt();
+		missMarks = new ArrayList<Point2D>(marksCount);
+		for (int i = 0; i < marksCount; i++)
+		{
+			double missMarkX = inputStream.readDouble();
+			double missMarkY = inputStream.readDouble();
+			missMarks.add(new Point2D.Double(missMarkX, missMarkY));
+		}
 	}
 }

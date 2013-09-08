@@ -139,6 +139,13 @@ public class EditMissMarksDialog extends javax.swing.JDialog implements MissMark
     });
 
     jButtonClearAllMarks.setText("Стереть все");
+    jButtonClearAllMarks.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jButtonClearAllMarksActionPerformed(evt);
+      }
+    });
 
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -166,6 +173,12 @@ public class EditMissMarksDialog extends javax.swing.JDialog implements MissMark
 		editingMarksArray.add(new Point2D.Double(evt.getX(), evt.getY()));
 		jLabelTargetImage.repaint();
   }//GEN-LAST:event_jLabelTargetImageMouseReleased
+
+  private void jButtonClearAllMarksActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonClearAllMarksActionPerformed
+  {//GEN-HEADEREND:event_jButtonClearAllMarksActionPerformed
+		editingMarksArray.clear();
+		jLabelTargetImage.repaint();
+  }//GEN-LAST:event_jButtonClearAllMarksActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonClearAllMarks;
   private javax.swing.JLabel jLabelTargetImage;

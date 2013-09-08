@@ -27,6 +27,8 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 	 * Using to add trainings
 	 */
 	private ShootingTrainingsModifier shootingTrainingModifier;
+	private MissMarksArray missMarksArrayLying;
+	private MissMarksArray missMarksArrayStanding;
 
 	/**
 	 * Create new dialog
@@ -39,25 +41,28 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 	public AddShootingTrainingsDialog(Window parentWindow, ModalityType modalityType, ShootingLogicsFactory logicsFactory) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
-
+		
 		if (logicsFactory == null)
 		{
 			throw new IllegalArgumentException("logicsFactory is null");
 		}
-
+		
 		dialogController = new ShootingTrainingDialogController(logicsFactory);
 		shootingTrainingModifier = logicsFactory.createShootingTrainingsModifier();
-
+		missMarksArrayLying = new MissMarksArray();
+		missMarksArrayStanding = new MissMarksArray();
+		
+		
 		initComponents();
 		jLabelAddingToDatabaseAnimation.setVisible(false);
 		jDateChooserTrainingDate.setDate(new Date());
-
+		
 		dialogController.refillTeamsComboBoxModel();
 		dialogController.fillSportmanComboBoxByTeam(jComboBoxTeam.getSelectedItem());
 		dialogController.refillTrainingMethodComboBox();
 		jTextFieldPlaceName.setText(dialogController.findPlacesNamesByTrainingDate(jDateChooserTrainingDate.getDate()));
 	}
-
+	
 	private void showAddingTrainingAnimation()
 	{
 		jLabelAddingToDatabaseAnimation.setVisible(true);
@@ -95,35 +100,35 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 		training.setTrainingMethod((TrainingMethod) jComboBoxTrainingMethod.getSelectedItem());
 		training.setWeather(jTextFieldWeather.getText());
 		training.setComments(jTextFieldComments.getText());
-
+		
 		training.setNumLyingInRest((Integer) jSpinnerNumLyingInRest.getValue());
 		training.setMissLyingInRest((Integer) jSpinnerMissLyingInRest.getValue());
 		training.setNumLyingLoading((Integer) jSpinnerNumLyingLoading.getValue());
 		training.setMissLyingLoading((Integer) jSpinnerMissLyingLoading.getValue());
 		training.setNumLyingCompetition((Integer) jSpinnerNumLyingCompetition.getValue());
 		training.setMissLyingCompetition((Integer) jSpinnerMissLyingCompetition.getValue());
-
+		
 		training.setNumStandingInRest((Integer) jSpinnerNumStandingInRest.getValue());
 		training.setMissStandingInRest(((Integer) jSpinnerMissStandingInRest.getValue()));
 		training.setNumStandingLoading((Integer) jSpinnerNumStandingLoading.getValue());
 		training.setMissStandingLoading((Integer) jSpinnerMissStandingLoading.getValue());
 		training.setNumStandingCompetition((Integer) jSpinnerNumStandingCompetition.getValue());
 		training.setMissStandingCompetition((Integer) jSpinnerMissStandingCompetition.getValue());
-
+		
 		training.setFirstLyingLoading((Integer) jSpinnerFirstLyingLoading.getValue());
 		training.setFirstLyingCompetition((Integer) jSpinnerFirstLyingCompetition.getValue());
 		training.setDelayLyingLoading((Integer) jSpinnerDelayLyingLoading.getValue());
 		training.setDelayLyingCompetition((Integer) jSpinnerDelayLyingCompetition.getValue());
-
+		
 		training.setFirstStandingLoading((Integer) jSpinnerFirstStandingLoading.getValue());
 		training.setFirstStandingCompetition((Integer) jSpinnerFirstStandingCompetition.getValue());
 		training.setDelayStandingLoading((Integer) jSpinnerDelayStandingLoading.getValue());
 		training.setDelayStandingCompetition((Integer) jSpinnerDelayStandingCompetition.getValue());
-
+		
 		training.setZeroingIn((Integer) jSpinnerZeroingIn.getValue());
 		training.setTrail((Integer) jSpinnerTrail.getValue());
 		training.setScatt((Integer) jSpinnerScatt.getValue());
-
+		
 		return training;
 	}
 
@@ -673,10 +678,12 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
   {//GEN-HEADEREND:event_jComboBoxTeamActionPerformed
 		dialogController.fillSportmanComboBoxByTeam(jComboBoxTeam.getSelectedItem());
   }//GEN-LAST:event_jComboBoxTeamActionPerformed
-
+	
   private void jButtonAddTrainingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddTrainingActionPerformed
   {//GEN-HEADEREND:event_jButtonAddTrainingActionPerformed
 		ShootingTraining newTraining = getTrainingWithEnteringParameters();
+		newTraining.setMissMarkArrayLying(missMarksArrayLying);
+		newTraining.setMissMarkArrayStanding(missMarksArrayStanding);
 		if (newTraining.isValid())
 		{
 			try
@@ -693,6 +700,9 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 		{
 			dialogController.showShootingTrainingsErrors(newTraining, this);
 		}
+		
+		missMarksArrayLying.clear();
+		missMarksArrayStanding.clear();
   }//GEN-LAST:event_jButtonAddTrainingActionPerformed
   private void jDateChooserTrainingDatePropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_jDateChooserTrainingDatePropertyChange
   {//GEN-HEADEREND:event_jDateChooserTrainingDatePropertyChange
@@ -701,20 +711,18 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 			jTextFieldPlaceName.setText(dialogController.findPlacesNamesByTrainingDate(jDateChooserTrainingDate.getDate()));
 		}
   }//GEN-LAST:event_jDateChooserTrainingDatePropertyChange
-
+	
   private void jToggleButtonEditMissMarksLyingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButtonEditMissMarksLyingActionPerformed
   {//GEN-HEADEREND:event_jToggleButtonEditMissMarksLyingActionPerformed
-		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.LYING,
-						new MissMarksArray());
+		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.LYING, missMarksArrayLying);
 		editMissMarksDialog.setLocationRelativeTo(this);
 		editMissMarksDialog.setVisible(true);
 		jToggleButtonEditMissMarksLying.setSelected(false);
   }//GEN-LAST:event_jToggleButtonEditMissMarksLyingActionPerformed
-
+	
   private void jToggleButtonEditMissMarksStandingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButtonEditMissMarksStandingActionPerformed
   {//GEN-HEADEREND:event_jToggleButtonEditMissMarksStandingActionPerformed
-		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.STANDING,
-						new MissMarksArray());
+		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.STANDING, missMarksArrayStanding);
 		editMissMarksDialog.setLocationRelativeTo(this);
 		editMissMarksDialog.setVisible(true);
 		jToggleButtonEditMissMarksStanding.setSelected(false);
