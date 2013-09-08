@@ -3,6 +3,7 @@ package com.jshooting.forms;
 import com.jshooting.logics.ShootingLogicsFactory;
 import com.jshooting.logics.ShootingTrainingsModifier;
 import com.jshooting.logics.exceptions.ShootingLogicsErrorException;
+import com.jshooting.model.MissMarksArray;
 import com.jshooting.model.ShootingTraining;
 import com.jshooting.model.ShootingTrainingType;
 import com.jshooting.model.Sportsman;
@@ -703,7 +704,8 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 
   private void jToggleButtonEditMissMarksLyingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButtonEditMissMarksLyingActionPerformed
   {//GEN-HEADEREND:event_jToggleButtonEditMissMarksLyingActionPerformed
-		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.LYING);
+		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.LYING,
+						new MissMarksArray());
 		editMissMarksDialog.setLocationRelativeTo(this);
 		editMissMarksDialog.setVisible(true);
 		jToggleButtonEditMissMarksLying.setSelected(false);
@@ -711,7 +713,8 @@ public class AddShootingTrainingsDialog extends javax.swing.JDialog
 
   private void jToggleButtonEditMissMarksStandingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButtonEditMissMarksStandingActionPerformed
   {//GEN-HEADEREND:event_jToggleButtonEditMissMarksStandingActionPerformed
-		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.STANDING);
+		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.STANDING,
+						new MissMarksArray());
 		editMissMarksDialog.setLocationRelativeTo(this);
 		editMissMarksDialog.setVisible(true);
 		jToggleButtonEditMissMarksStanding.setSelected(false);

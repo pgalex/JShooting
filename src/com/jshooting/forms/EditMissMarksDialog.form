@@ -54,6 +54,12 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelTargetImageMouseReleased"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new MissMarksTargetLabel(this)"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonClearAllMarks">
       <Properties>

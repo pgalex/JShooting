@@ -2,30 +2,44 @@ package com.jshooting.forms;
 
 import static com.jshooting.forms.MissMarksDialogTargetType.LYING;
 import static com.jshooting.forms.MissMarksDialogTargetType.STANDING;
+import com.jshooting.model.MissMarksArray;
+import java.awt.Graphics;
 import java.awt.Window;
+import java.awt.geom.Point2D;
+import javax.swing.ImageIcon;
 
 /**
  * Диалог редактирования отметок промахов
  *
  * @author pgalex
  */
-public class EditMissMarksDialog extends javax.swing.JDialog
+public class EditMissMarksDialog extends javax.swing.JDialog implements MissMarksTargetPanelPaintDelegate
 {
+	private static ImageIcon MISS_MARKS_IMAGE = new javax.swing.ImageIcon(EditMissMarksDialog.class.getResource("/com/jshooting/resources/отметкаПромаха.png"));
+	private MissMarksArray editingMarksArray;
+
 	/**
 	 * Создать диалог
 	 *
 	 * @param parentWindow родительское окно
 	 * @param modalityType modality type диалога
 	 * @param targetType тип мишени. Должно быть не null
+	 * @param missMarksToEdit редактируемые отметки промахов. Должно быть не null
 	 * @throws IllegalArgumentException targetType is null
 	 */
-	public EditMissMarksDialog(Window parentWindow, ModalityType modalityType, MissMarksDialogTargetType targetType) throws IllegalArgumentException
+	public EditMissMarksDialog(Window parentWindow, ModalityType modalityType, MissMarksDialogTargetType targetType,
+					MissMarksArray missMarksToEdit) throws IllegalArgumentException
 	{
 		super(parentWindow, modalityType);
 		if (targetType == null)
 		{
 			throw new IllegalArgumentException("targetType is null");
 		}
+		if (missMarksToEdit == null)
+		{
+			throw new IllegalArgumentException("missMarksToEdit is null");
+		}
+		editingMarksArray = missMarksToEdit;
 
 		initComponents();
 
@@ -85,6 +99,19 @@ public class EditMissMarksDialog extends javax.swing.JDialog
 		}
 	}
 
+	@Override
+	public void paintOnTargetPanel(Graphics panelGraphics)
+	{
+		for (int i = 0; i < editingMarksArray.count(); i++)
+		{
+			Point2D missMark = editingMarksArray.get(i);
+
+			panelGraphics.drawImage(MISS_MARKS_IMAGE.getImage(),
+							(int) (missMark.getX() - MISS_MARKS_IMAGE.getIconWidth() / 2),
+							(int) (missMark.getY() - MISS_MARKS_IMAGE.getIconHeight() / 2), null);
+		}
+	}
+
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,7 +122,7 @@ public class EditMissMarksDialog extends javax.swing.JDialog
   private void initComponents()
   {
 
-    jLabelTargetImage = new javax.swing.JLabel();
+    jLabelTargetImage = new MissMarksTargetLabel(this);
     jButtonClearAllMarks = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -103,6 +130,13 @@ public class EditMissMarksDialog extends javax.swing.JDialog
 
     jLabelTargetImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньЛежа.png"))); // NOI18N
     jLabelTargetImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+    jLabelTargetImage.addMouseListener(new java.awt.event.MouseAdapter()
+    {
+      public void mouseReleased(java.awt.event.MouseEvent evt)
+      {
+        jLabelTargetImageMouseReleased(evt);
+      }
+    });
 
     jButtonClearAllMarks.setText("Стереть все");
 
@@ -126,6 +160,12 @@ public class EditMissMarksDialog extends javax.swing.JDialog
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
+
+  private void jLabelTargetImageMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabelTargetImageMouseReleased
+  {//GEN-HEADEREND:event_jLabelTargetImageMouseReleased
+		editingMarksArray.add(new Point2D.Double(evt.getX(), evt.getY()));
+		jLabelTargetImage.repaint();
+  }//GEN-LAST:event_jLabelTargetImageMouseReleased
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonClearAllMarks;
   private javax.swing.JLabel jLabelTargetImage;
