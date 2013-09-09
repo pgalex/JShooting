@@ -6,8 +6,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Shooting training
@@ -934,13 +932,13 @@ public class ShootingTraining
 		this.missMarksStanding = missMarksStanding;
 	}
 
-	public MissMarksArray getMissMarksArrayLying()
+	public MissMarksArray getMissMarksArrayStanding()
 	{
-		if (missMarksLying != null)
+		if (missMarksStanding != null)
 		{
 			try
 			{
-				return tryReadMissMarksArray();
+				return tryReadMissMarksArrayStanding();
 			}
 			catch (IOException ex)
 			{
@@ -953,7 +951,34 @@ public class ShootingTraining
 		}
 	}
 
-	private MissMarksArray tryReadMissMarksArray() throws IOException
+	private MissMarksArray tryReadMissMarksArrayStanding() throws IOException
+	{
+		DataInputStream input = new DataInputStream(new ByteArrayInputStream(missMarksStanding));
+		MissMarksArray missMarksArray = new MissMarksArray();
+		missMarksArray.readFromStream(input);
+		return missMarksArray;
+	}
+
+	public MissMarksArray getMissMarksArrayLying()
+	{
+		if (missMarksLying != null)
+		{
+			try
+			{
+				return tryReadMissMarksArrayLying();
+			}
+			catch (IOException ex)
+			{
+				return new MissMarksArray();
+			}
+		}
+		else
+		{
+			return new MissMarksArray();
+		}
+	}
+
+	private MissMarksArray tryReadMissMarksArrayLying() throws IOException
 	{
 		DataInputStream input = new DataInputStream(new ByteArrayInputStream(missMarksLying));
 		MissMarksArray missMarksArray = new MissMarksArray();
@@ -961,7 +986,7 @@ public class ShootingTraining
 		return missMarksArray;
 	}
 
-	public void setMissMarkArrayLying(MissMarksArray missMarksArray) throws IllegalArgumentException
+	public void setMissMarksArrayLying(MissMarksArray missMarksArray) throws IllegalArgumentException
 	{
 		if (missMarksArray == null)
 		{
@@ -979,8 +1004,8 @@ public class ShootingTraining
 			missMarksLying = null;
 		}
 	}
-	
-	public void setMissMarkArrayStanding(MissMarksArray missMarksArray) throws IllegalArgumentException
+
+	public void setMissMarksArrayStanding(MissMarksArray missMarksArray) throws IllegalArgumentException
 	{
 		if (missMarksArray == null)
 		{

@@ -1,6 +1,7 @@
 package com.jshooting.forms;
 
 import com.jshooting.logics.ShootingLogicsFactory;
+import com.jshooting.model.MissMarksArray;
 import com.jshooting.model.ShootingTraining;
 import com.jshooting.model.ShootingTrainingType;
 import static com.jshooting.model.ShootingTrainingType.COMPLEX;
@@ -16,13 +17,17 @@ import java.awt.Window;
 public class EditShootingTrainingDialog extends javax.swing.JDialog
 {
 	/**
+	 * Содержит часть логики работы диалога(общую с диалогом добавления).
 	 * Controller that contains work logics of dialog components
 	 */
 	private ShootingTrainingDialogController dialogController;
 	/**
-	 * Shooting training editing with dialog
+	 * Редактируемая тернировка. Используется чтобы сохранить id тренировки после
+	 * передачи ее в диалог. Shooting training editing with dialog
 	 */
 	private ShootingTraining editingShootingTraining;
+	private MissMarksArray missMarksLying;
+	private MissMarksArray missMarksStanding;
 	private boolean okButtonPressed;
 
 	/**
@@ -52,6 +57,8 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 		dialogController = new ShootingTrainingDialogController(logicsFactory);
 		editingShootingTraining = shootingTrainingToEdit;
 		okButtonPressed = false;
+		missMarksLying = shootingTrainingToEdit.getMissMarksArrayLying();
+		missMarksStanding = shootingTrainingToEdit.getMissMarksArrayStanding();
 
 		initComponents();
 
@@ -155,6 +162,9 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 		editingShootingTraining.setZeroingIn((Integer) jSpinnerZeroingIn.getValue());
 		editingShootingTraining.setTrail((Integer) jSpinnerTrail.getValue());
 		editingShootingTraining.setScatt((Integer) jSpinnerScatt.getValue());
+
+		editingShootingTraining.setMissMarksArrayLying(missMarksLying);
+		editingShootingTraining.setMissMarksArrayStanding(missMarksStanding);
 	}
 
 	/**
@@ -236,8 +246,8 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
     jLabel26 = new javax.swing.JLabel();
     jSpinnerZeroingIn = new javax.swing.JSpinner();
     jSpinnerScatt = new javax.swing.JSpinner();
-    jToggleButton1 = new javax.swing.JToggleButton();
-    jToggleButton2 = new javax.swing.JToggleButton();
+    jToggleButtonEditMissMarksLying = new javax.swing.JToggleButton();
+    jToggleButtonEditMissMarksStanding = new javax.swing.JToggleButton();
     jTextFieldPlaceName = new javax.swing.JTextField();
     jLabel28 = new javax.swing.JLabel();
     jButtonOk = new javax.swing.JButton();
@@ -398,9 +408,23 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 
     jSpinnerScatt.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
-    jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньЛежаМини.png"))); // NOI18N
+    jToggleButtonEditMissMarksLying.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньЛежаМини.png"))); // NOI18N
+    jToggleButtonEditMissMarksLying.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jToggleButtonEditMissMarksLyingActionPerformed(evt);
+      }
+    });
 
-    jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньСтояМини.png"))); // NOI18N
+    jToggleButtonEditMissMarksStanding.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/мишеньСтояМини.png"))); // NOI18N
+    jToggleButtonEditMissMarksStanding.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(java.awt.event.ActionEvent evt)
+      {
+        jToggleButtonEditMissMarksStandingActionPerformed(evt);
+      }
+    });
 
     org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
@@ -507,9 +531,9 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
                 .add(18, 18, 18)
                 .add(jSpinnerScatt, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jToggleButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(jToggleButtonEditMissMarksLying, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jToggleButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+            .add(jToggleButtonEditMissMarksStanding, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
     jPanel1Layout.setVerticalGroup(
@@ -586,8 +610,8 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
           .add(jPanel1Layout.createSequentialGroup()
             .add(0, 0, Short.MAX_VALUE)
             .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-              .add(jToggleButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-              .add(jToggleButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+              .add(jToggleButtonEditMissMarksLying, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .add(jToggleButtonEditMissMarksStanding, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 97, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -736,6 +760,22 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
 		okButtonPressed = false;
 		setVisible(false);
   }//GEN-LAST:event_jButtonCancelActionPerformed
+
+  private void jToggleButtonEditMissMarksLyingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButtonEditMissMarksLyingActionPerformed
+  {//GEN-HEADEREND:event_jToggleButtonEditMissMarksLyingActionPerformed
+		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.LYING, missMarksLying);
+		editMissMarksDialog.setLocationRelativeTo(this);
+		editMissMarksDialog.setVisible(true);
+		jToggleButtonEditMissMarksLying.setSelected(false);
+  }//GEN-LAST:event_jToggleButtonEditMissMarksLyingActionPerformed
+
+  private void jToggleButtonEditMissMarksStandingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButtonEditMissMarksStandingActionPerformed
+  {//GEN-HEADEREND:event_jToggleButtonEditMissMarksStandingActionPerformed
+		EditMissMarksDialog editMissMarksDialog = new EditMissMarksDialog(this, ModalityType.APPLICATION_MODAL, MissMarksDialogTargetType.STANDING, missMarksStanding);
+		editMissMarksDialog.setLocationRelativeTo(this);
+		editMissMarksDialog.setVisible(true);
+		jToggleButtonEditMissMarksStanding.setSelected(false);
+  }//GEN-LAST:event_jToggleButtonEditMissMarksStandingActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonCancel;
   private javax.swing.JButton jButtonOk;
@@ -799,7 +839,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
   private javax.swing.JTextField jTextFieldComments;
   private javax.swing.JTextField jTextFieldPlaceName;
   private javax.swing.JTextField jTextFieldWeather;
-  private javax.swing.JToggleButton jToggleButton1;
-  private javax.swing.JToggleButton jToggleButton2;
+  private javax.swing.JToggleButton jToggleButtonEditMissMarksLying;
+  private javax.swing.JToggleButton jToggleButtonEditMissMarksStanding;
   // End of variables declaration//GEN-END:variables
 }
