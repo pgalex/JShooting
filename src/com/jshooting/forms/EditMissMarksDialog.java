@@ -124,6 +124,7 @@ public class EditMissMarksDialog extends javax.swing.JDialog implements MissMark
 
     jLabelTargetImage = new MissMarksTargetLabel(this);
     jButtonClearAllMarks = new javax.swing.JButton();
+    jLabel1 = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setResizable(false);
@@ -147,6 +148,10 @@ public class EditMissMarksDialog extends javax.swing.JDialog implements MissMark
       }
     });
 
+    jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel1.setText("ЛКМ - установить точку; ПКМ - удалить точку");
+
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -156,13 +161,18 @@ public class EditMissMarksDialog extends javax.swing.JDialog implements MissMark
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonClearAllMarks)
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jLabelTargetImage)
       .add(layout.createSequentialGroup()
-        .addContainerGap()
-        .add(jButtonClearAllMarks))
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jLabelTargetImage)
+          .add(layout.createSequentialGroup()
+            .addContainerGap()
+            .add(jButtonClearAllMarks)))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(jLabel1))
     );
 
     pack();
@@ -181,6 +191,7 @@ public class EditMissMarksDialog extends javax.swing.JDialog implements MissMark
   }//GEN-LAST:event_jButtonClearAllMarksActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonClearAllMarks;
+  private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabelTargetImage;
   // End of variables declaration//GEN-END:variables
 }
