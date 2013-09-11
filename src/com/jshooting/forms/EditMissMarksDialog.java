@@ -5,6 +5,7 @@ import static com.jshooting.forms.MissMarksDialogTargetType.STANDING;
 import com.jshooting.model.MissMarksArray;
 import java.awt.Graphics;
 import java.awt.Window;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import javax.swing.ImageIcon;
 
@@ -180,7 +181,14 @@ public class EditMissMarksDialog extends javax.swing.JDialog implements MissMark
 
   private void jLabelTargetImageMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabelTargetImageMouseReleased
   {//GEN-HEADEREND:event_jLabelTargetImageMouseReleased
-		editingMarksArray.add(new Point2D.Double(evt.getX(), evt.getY()));
+		if (evt.getButton() == MouseEvent.BUTTON1)
+		{
+			editingMarksArray.add(new Point2D.Double(evt.getX(), evt.getY()));
+		}
+		else
+		{
+			editingMarksArray.deleteFirstMissMarkAtCoordinates(evt.getX(), evt.getY());
+		}
 		jLabelTargetImage.repaint();
   }//GEN-LAST:event_jLabelTargetImageMouseReleased
 

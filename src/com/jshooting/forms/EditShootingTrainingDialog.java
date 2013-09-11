@@ -254,7 +254,7 @@ public class EditShootingTrainingDialog extends javax.swing.JDialog
     jButtonCancel = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    setTitle("Добавить тренировку");
+    setTitle("Редактирование тренировки");
     setResizable(false);
 
     jLabel1.setText("Спортсмен");
