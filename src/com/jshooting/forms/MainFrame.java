@@ -266,9 +266,12 @@ public class MainFrame extends javax.swing.JFrame
     jTextFieldDatabaseFileName.setEditable(false);
     jTextFieldDatabaseFileName.setToolTipText("Пусть к открытой базе данных");
 
+    jButtonOpenDatabase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/openDatabaseIcon.png"))); // NOI18N
     jButtonOpenDatabase.setText("Открыть существующую");
     jButtonOpenDatabase.setToolTipText("Открыть существующую базу данных");
     jButtonOpenDatabase.setActionCommand("");
+    jButtonOpenDatabase.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jButtonOpenDatabase.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jButtonOpenDatabase.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -277,8 +280,11 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
+    jButtonCreateDatabase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/createDatabaseIcon.png"))); // NOI18N
     jButtonCreateDatabase.setText("Создать новую");
     jButtonCreateDatabase.setToolTipText("Создать новую базу данных");
+    jButtonCreateDatabase.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jButtonCreateDatabase.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jButtonCreateDatabase.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -299,27 +305,30 @@ public class MainFrame extends javax.swing.JFrame
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jTextFieldDatabaseFileName))
           .add(jPanelChooseDatabaseControlsLayout.createSequentialGroup()
-            .add(jButtonOpenDatabase)
+            .add(jButtonOpenDatabase, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 228, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jButtonCreateDatabase)
-            .add(0, 0, Short.MAX_VALUE)))
+            .add(jButtonCreateDatabase, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 228, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
     jPanelChooseDatabaseControlsLayout.setVerticalGroup(
       jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanelChooseDatabaseControlsLayout.createSequentialGroup()
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addContainerGap()
         .add(jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jLabelDatabaseFileName)
-          .add(jTextFieldDatabaseFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jButtonOpenDatabase)
-          .add(jButtonCreateDatabase)))
+          .add(jTextFieldDatabaseFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jLabelDatabaseFileName))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+        .add(jPanelChooseDatabaseControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+          .add(jButtonOpenDatabase, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+          .add(jButtonCreateDatabase, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
+    jButtonSportsmans.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/Спортсмены.png"))); // NOI18N
     jButtonSportsmans.setText("Спортсмены");
     jButtonSportsmans.setToolTipText(null);
+    jButtonSportsmans.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jButtonSportsmans.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jButtonSportsmans.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -368,7 +377,7 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
-    jButtonEditTrainings.setText("Просмотр и редактирование тренировок");
+    jButtonEditTrainings.setText("Редактировать тренировоки");
     jButtonEditTrainings.setToolTipText(null);
     jButtonEditTrainings.addActionListener(new java.awt.event.ActionListener()
     {
@@ -396,53 +405,54 @@ public class MainFrame extends javax.swing.JFrame
         .addContainerGap()
         .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(jPanelWorkingControlsLayout.createSequentialGroup()
-            .add(jButtonAddTrainings)
+            .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(jButtonSportsmans, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .add(jButtonPlaces, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jButtonEditTrainings))
-          .add(jPanelWorkingControlsLayout.createSequentialGroup()
-            .add(jButtonCombined)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jButtonIndividualReport))
-          .add(jPanelWorkingControlsLayout.createSequentialGroup()
-            .add(jButtonSportsmans)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jButtonPlaces)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jButtonTrainingMethods)))
-        .addContainerGap(38, Short.MAX_VALUE))
+            .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(jPanelWorkingControlsLayout.createSequentialGroup()
+                .add(jButtonEditTrainings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButtonIndividualReport, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+              .add(jPanelWorkingControlsLayout.createSequentialGroup()
+                .add(jButtonAddTrainings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButtonCombined, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+          .add(jButtonTrainingMethods, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanelWorkingControlsLayout.setVerticalGroup(
       jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanelWorkingControlsLayout.createSequentialGroup()
         .addContainerGap()
-        .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jButtonSportsmans)
-          .add(jButtonPlaces)
-          .add(jButtonTrainingMethods))
+        .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jButtonSportsmans, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jButtonAddTrainings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jButtonCombined, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jButtonAddTrainings)
-          .add(jButtonEditTrainings))
+        .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jButtonEditTrainings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+            .add(jButtonPlaces, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(jButtonIndividualReport, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jButtonCombined)
-          .add(jButtonIndividualReport))
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .add(jButtonTrainingMethods, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap(9, Short.MAX_VALUE))
     );
 
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelWorkingControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       .add(jPanelChooseDatabaseControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .add(jPanelWorkingControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
         .add(jPanelChooseDatabaseControls, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .add(18, 18, 18)
-        .add(jPanelWorkingControls, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+        .add(jPanelWorkingControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     pack();
