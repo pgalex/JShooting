@@ -347,8 +347,11 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
+    jButtonAddTrainings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/добавитьТренировки.png"))); // NOI18N
     jButtonAddTrainings.setText("Добавить тренировки");
     jButtonAddTrainings.setToolTipText(null);
+    jButtonAddTrainings.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jButtonAddTrainings.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jButtonAddTrainings.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
