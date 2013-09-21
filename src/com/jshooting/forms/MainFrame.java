@@ -380,8 +380,12 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
+    jButtonEditTrainings.setFont(new java.awt.Font("Lucida Grande", 0, 9)); // NOI18N
+    jButtonEditTrainings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jshooting/resources/редактироватьТренировки.png"))); // NOI18N
     jButtonEditTrainings.setText("Редактировать тренировоки");
     jButtonEditTrainings.setToolTipText(null);
+    jButtonEditTrainings.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jButtonEditTrainings.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jButtonEditTrainings.addActionListener(new java.awt.event.ActionListener()
     {
       public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -390,6 +394,7 @@ public class MainFrame extends javax.swing.JFrame
       }
     });
 
+    jButtonIndividualReport.setFont(new java.awt.Font("Lucida Grande", 0, 11)); // NOI18N
     jButtonIndividualReport.setText("Индивидуальный отчет");
     jButtonIndividualReport.setToolTipText(null);
     jButtonIndividualReport.addActionListener(new java.awt.event.ActionListener()
@@ -435,12 +440,11 @@ public class MainFrame extends javax.swing.JFrame
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(jButtonIndividualReport, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jPanelWorkingControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-            .add(jButtonPlaces, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .add(jButtonEditTrainings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+          .add(jButtonEditTrainings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jButtonPlaces, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jButtonTrainingMethods, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(9, Short.MAX_VALUE))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -455,7 +459,7 @@ public class MainFrame extends javax.swing.JFrame
       .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
         .add(jPanelChooseDatabaseControls, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-        .add(jPanelWorkingControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .add(jPanelWorkingControls, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
     );
 
     pack();
