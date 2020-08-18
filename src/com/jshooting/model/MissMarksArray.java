@@ -17,12 +17,12 @@ public class MissMarksArray
 	/**
 	 * Размер отметки промаха
 	 */
-	public static double MISS_MAKR_SIZE = 0;
+	public static double MISS_MAKR_SIZE = 6;
 	
 	static
 	{
-		ImageIcon missMarkIcon = new javax.swing.ImageIcon(MissMarksArray.class.getClass().getResource("/com/jshooting/resources/отметкаПромаха.png"));
-		MISS_MAKR_SIZE = (missMarkIcon.getIconWidth() + missMarkIcon.getIconHeight()) / 2.0;
+		//ImageIcon missMarkIcon = new javax.swing.ImageIcon(MissMarksArray.class.getClass().getResource("/com/jshooting/resources/отметкаПромаха.png"));
+		//MISS_MAKR_SIZE = (missMarkIcon.getIconWidth() + missMarkIcon.getIconHeight()) / 2.0;
 	}
 	private ArrayList<Point2D> missMarks;
 
